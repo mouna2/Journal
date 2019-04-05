@@ -37,6 +37,8 @@ public class Method {
 	Method meth =null; 
 	public  MethodList ExtendedCallees=null; 
 	public  MethodList ExtendedCallers=null; 
+	public  MethodList ExtendedCallersCallers=null; 
+
 	public  MethodList NewCallees2=new MethodList();
 	public  MethodList NewCallers2=new MethodList();
 	public String methodname;
@@ -692,7 +694,66 @@ return OuterCallees;
 	return ExtendedCallers; 
 }
 	/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+public MethodList getExtendedCallersCallers() {
 
+
+
+
+if(ExtendedCallersCallers!=null) {
+return ExtendedCallersCallers; 
+}
+
+else {
+ExtendedCallersCallers= new MethodList(); 
+MethodList TempCallers= new MethodList();
+
+TempCallers.addAll(this.Callers); 
+for(Method Caller: this.Callers) {
+	TempCallers.addAll(Caller.Callers); 
+}
+if(AlgoFinal.InterfaceImplementationFlag==true) {
+
+//case 20
+for(Method CallerInterface: this.Interfaces) {
+TempCallers.addAll(CallerInterface.Callers); 
+}
+//case 21
+for(Method CallerImplementation: this.Implementations) {
+TempCallers.addAll(CallerImplementation.Callers); 
+}
+//case 22
+for(Method Caller: this.Callers) {
+TempCallers.addAll(Caller.Interfaces); 
+
+}
+
+}
+if(AlgoFinal.InheritanceFlag==true) {
+//case 28
+for(Method mysuperclass: this.Superclasses) {
+TempCallers.addAll(mysuperclass.Callers); 
+}
+}
+if(AlgoFinal.RecursiveDescent==true) {
+for(Method caller: TempCallers) {
+if(!caller.Owner.ID.equals(this.Owner.ID)) {
+	ExtendedCallersCallers.add(caller); 
+}else {
+	ExtendedCallersCallers.addAll(caller.getExtendedCallersCallers()); 
+}
+}
+}else {
+	ExtendedCallersCallers=TempCallers; 
+}
+}
+
+
+
+
+return ExtendedCallersCallers; 
+}
+/////////////////////////////////////////////////////////////////////////
 private MethodList getInterfaceImplementationCallers(MethodList ExtendedCallers) {
 	// TODO Auto-generated method stub
 	MethodList InterfaceImplementationCallers= new MethodList();
@@ -772,8 +833,20 @@ private MethodList getInheritanceCallers(MethodList SuperclassCallers) {
 	
 	}
 
+	public MethodList getCallersCallersShell() {
+		// TODO Auto-generated method stub
 
+		// TODO Auto-generated method stub
+//		for(String key: DatabaseInput.MethodHashMap.keySet()) {
+//			DatabaseInput.MethodHashMap.get(key).VisitedFlag=false; 
+//		}
+		
+		MethodList Callers =getExtendedCallersCallers(); 
+//		this.FirstTimeCallers=true; 
+		return Callers; 
+	
+	}
 
-
+	
 
 }

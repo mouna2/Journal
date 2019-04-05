@@ -113,7 +113,30 @@ public class MethodList extends ArrayList<Method>{
 	
 	
 	
-	
+	public boolean AtLeast1E(Requirement requirement,  HashMap<java.lang.String, MethodTrace> methodtraces2HashMap) throws Exception {
+		// TODO Auto-generated method stub
+		if(!this.isEmpty()) {
+			for (Method method : this) {
+				String RequirementID = (String) requirement.ID; 
+				String MethodID = method.ID; 
+				String key = (String) (RequirementID + "-" + MethodID);
+				if (methodtraces2HashMap.get(key) == null) throw new Exception();
+					if (methodtraces2HashMap.get(key).getPrediction().equals("E")) 
+						return true; 
+
+				
+			}
+		}
+		
+
+		return false;
+		
+		
+		
+		
+		
+
+	}
 	
 	
 	
@@ -139,7 +162,26 @@ public class MethodList extends ArrayList<Method>{
 	}
 	
 	
-	
+	public boolean AllEs(Requirement requirement,  HashMap<java.lang.String, MethodTrace> methodtraces2HashMap) throws Exception {
+		// TODO Auto-generated method stub
+		if(!this.isEmpty()) {
+			for (Method method : this) {
+				String RequirementID = (String) requirement.ID;
+				String MethodID = method.ID; 
+				String key = (String) (RequirementID + "-" + MethodID);
+				if (methodtraces2HashMap.get(key) == null) throw new Exception();
+					if (!methodtraces2HashMap.get(key).getPrediction().equals("E")) return false; 
+
+				
+			}
+			return true;
+		}
+		
+		return false; 
+		
+
+		
+	}
 	
 	public boolean AllTs(Requirement requirement, HashMap<java.lang.String, MethodTrace> methodtraces2HashMap) throws Exception {
 		// TODO Auto-generated method stub
