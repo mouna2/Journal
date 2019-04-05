@@ -56,7 +56,7 @@ public class MethodCallsExecutedFormatter {
 			String calleeParamsNew = ""; 
 			for(String CalleeParamElement: calleeParamsArr) {
 				boolean entered=false; 
-				if(CalleeParamElement.matches("^(?:([\\[ZIJDFSB]+))$")){
+				if(CalleeParamElement.matches("^(?:([\\[ZICJDFSB]+))$")){
 					 System.out.println("PatternMatched");
 					 CalleeParamElement=CalleeParamElement.replaceAll("Z", "boolean;"); 
 					 CalleeParamElement=CalleeParamElement.replaceAll("I", "int;"); 
@@ -65,6 +65,7 @@ public class MethodCallsExecutedFormatter {
 					 CalleeParamElement=CalleeParamElement.replaceAll("F", "float;"); 
 					 CalleeParamElement=CalleeParamElement.replaceAll("S", "short;"); 
 					 CalleeParamElement=CalleeParamElement.replaceAll("B", "byte;"); 
+					 CalleeParamElement=CalleeParamElement.replaceAll("C", "char;"); 
 
 					 System.out.println(CalleeParamElement);
 					 System.out.println("ReplacementFinished");
@@ -86,7 +87,7 @@ public class MethodCallsExecutedFormatter {
 			String callerParamsNew = ""; 
 			for(String CallerParamElement: callerParamsArr) {
 				boolean entered=false; 
-				if(CallerParamElement.matches("^(?:([\\[ZIJDFSB]+))$")){
+				if(CallerParamElement.matches("^(?:([\\[ZICJDFSB]+))$")){
 					 System.out.println("PatternMatched");
 					 CallerParamElement=CallerParamElement.replaceAll("Z", "boolean;"); 
 					 CallerParamElement=CallerParamElement.replaceAll("I", "int;"); 
@@ -94,7 +95,9 @@ public class MethodCallsExecutedFormatter {
 					 CallerParamElement=CallerParamElement.replaceAll("D", "double;"); 
 					 CallerParamElement=CallerParamElement.replaceAll("F", "float;"); 
 					 CallerParamElement=CallerParamElement.replaceAll("S", "short;"); 
-					 CallerParamElement=CallerParamElement.replaceAll("B", "byte;"); 
+					 CallerParamElement=CallerParamElement.replaceAll("B", "byte;");
+					 CallerParamElement=CallerParamElement.replaceAll("C", "char;");
+
 
 					 System.out.println(CallerParamElement);
 					 System.out.println("ReplacementFinished");

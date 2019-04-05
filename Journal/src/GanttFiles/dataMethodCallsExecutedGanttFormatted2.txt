@@ -3707,7 +3707,7 @@
 "net.sourceforge.ganttproject.io.GanttXMLOpen.-init-(net/sourceforge/ganttproject/task/TaskManager;)--- "net.sourceforge.ganttproject.language.GanttLanguage.getInstance()
 "net.sourceforge.ganttproject.io.GanttXMLOpen.-init-(net/sourceforge/ganttproject/task/TaskManager;)--- "net.sourceforge.ganttproject.parser.ParsingContext.-init-()
 "net.sourceforge.ganttproject.io.GanttXMLOpen.load(java/io/File;)--- "net.sourceforge.ganttproject.io.GanttXMLOpen$GanttXMLParser.-init-(net/sourceforge/ganttproject/io/GanttXMLOpen;)
-"net.sourceforge.ganttproject.io.GanttXMLOpen.load(java/io/File;)--- "net.sourceforge.ganttproject.io.GanttXMLOpen$GanttXMLParser.characters(CII[];)
+"net.sourceforge.ganttproject.io.GanttXMLOpen.load(java/io/File;)--- "net.sourceforge.ganttproject.io.GanttXMLOpen$GanttXMLParser.characters(char[];int;int;)
 "net.sourceforge.ganttproject.io.GanttXMLOpen.load(java/io/File;)--- "net.sourceforge.ganttproject.io.GanttXMLOpen$GanttXMLParser.endDocument()
 "net.sourceforge.ganttproject.io.GanttXMLOpen.load(java/io/File;)--- "net.sourceforge.ganttproject.io.GanttXMLOpen$GanttXMLParser.endElement(java/lang/String;java/lang/String;java/lang/String;)
 "net.sourceforge.ganttproject.io.GanttXMLOpen.load(java/io/File;)--- "net.sourceforge.ganttproject.io.GanttXMLOpen$GanttXMLParser.startDocument()
