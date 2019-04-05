@@ -1,4 +1,4 @@
-package Gantt;
+package iTrust;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -15,9 +15,9 @@ public class MethodCallsExecutedFormatter {
 
 	
 	public static void main (String [] args) throws IOException {
-		BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\mouna\\git\\Journal\\Journal\\src\\GanttFiles\\dataMethodCallsExecutedGantt.txt"));
+		BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\mouna\\git\\Journal\\Journal\\src\\iTrustFiles\\dataMethodCallsExecutediTrust.txt"));
 		String line = reader.readLine(); 
-		File myfile3 = new File("C:\\Users\\mouna\\git\\Journal\\Journal\\src\\GanttFiles\\dataMethodCallsExecutedGanttFormatted2.txt");
+		File myfile3 = new File("C:\\Users\\mouna\\git\\Journal\\Journal\\src\\iTrustFiles\\dataMethodCallsExecutediTrustFormatted2.txt");
 		FileOutputStream myFileOutputStream3 = new FileOutputStream(myfile3);
 		 BufferedWriter bwWriter = new BufferedWriter(new OutputStreamWriter(myFileOutputStream3));
 		 int counter=1; 
