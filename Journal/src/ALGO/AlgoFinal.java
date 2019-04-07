@@ -69,6 +69,11 @@ public class AlgoFinal extends JFrame {
 	
 	public static boolean AtLeast2FlagOnStep3=false; 
 	public static boolean InheritanceRecursion=false; 
+	
+	
+	
+	public static boolean AchrafTechnique=true; 
+	public static boolean MounaTechnique=false; 
 
 	/**
 	 * Run a SQL command which does not return a recordset:
@@ -254,137 +259,176 @@ public class AlgoFinal extends JFrame {
 	int counter=0;
 		for (MethodTrace methodtrace : MethodTracesHashmapValues) {
 			//INNER NODE 
-			if(!methodtrace.Method.getCallersShell().isEmpty() 
-			&& !methodtrace.Method.getCalleesShell().isEmpty()) {
-				if (
-						
-						methodtrace.Method.getCallersShell().AtLeast1T(methodtrace.Requirement, methodtraces2HashMap)
-						&& 	methodtrace.Method.getCalleesShell().AtLeast1T(methodtrace.Requirement, methodtraces2HashMap)
+			String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
+			MethodList Callers = new MethodList(); 
+			MethodList Callees = new MethodList(); 
+			MethodList CallersCallers = new MethodList(); 
+			if(MounaTechnique==true) {
+					Callers = methodtrace.Method.getCallersShell(); 
+					Callees = methodtrace.Method.getCalleesShell(); 
+					CallersCallers= methodtrace.Method.getCallersCallersShell(); 
 
-				)
-
-				{
-					
-					if(!methodtrace.Method.getCallersShell().AllNs(methodtrace.Requirement, methodtraces2HashMap)
-					&& !methodtrace.Method.getCalleesShell().AllNs(methodtrace.Requirement, methodtraces2HashMap)
-					&& !methodtrace.Method.getCallersShell().AllEs(methodtrace.Requirement, methodtraces2HashMap)
-					&& !methodtrace.Method.getCalleesShell().AllEs(methodtrace.Requirement, methodtraces2HashMap)) {
-						
-						methodtrace.SetPrediction(LogInfoHashMap,"T", "T,Pure");
-					
-				}else {
-					methodtrace.SetPrediction(LogInfoHashMap,"T", "T,Mixed");
-
-				}
-				
-			}else if (
-					
-					methodtrace.Method.getCallersShell().AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)
-					&& 	methodtrace.Method.getCalleesShell().AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)
-
-			)
-
-			{
-				
-				if(!methodtrace.Method.getCallersShell().AllTs(methodtrace.Requirement, methodtraces2HashMap)
-				&& !methodtrace.Method.getCalleesShell().AllTs(methodtrace.Requirement, methodtraces2HashMap)
-				&& !methodtrace.Method.getCallersShell().AllEs(methodtrace.Requirement, methodtraces2HashMap)
-				&& !methodtrace.Method.getCalleesShell().AllEs(methodtrace.Requirement, methodtraces2HashMap)) {
-					
-					methodtrace.SetPrediction(LogInfoHashMap,"N", "N,Pure");
-				
+			}else if(AchrafTechnique==true) {
+				 	Callers = methodtrace.Method.getCallersExecuted(); 
+				 	Callees = methodtrace.Method.getCalleesExecuted(); 
+				 	CallersCallers= methodtrace.Method.getCallersCallersExecuted(); 
 			}
-				if(methodtrace.Method.getCallersShell().AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) 
-				&& methodtrace.Method.getCalleesShell().AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) ) {
+					//INNER METHOD 
+					if(!Callers.isEmpty() 
+					&& !Callees.isEmpty()) {
+						if (
+								
+								Callers.AtLeast1T(methodtrace.Requirement, methodtraces2HashMap)
+								&& 	Callees.AtLeast1T(methodtrace.Requirement, methodtraces2HashMap)
+
+						)
+
+						{
 							
+							if(!Callers.AllNs(methodtrace.Requirement, methodtraces2HashMap)
+							&& !Callees.AllNs(methodtrace.Requirement, methodtraces2HashMap)
+							&& !Callers.AllEs(methodtrace.Requirement, methodtraces2HashMap)
+							&& !Callees.AllEs(methodtrace.Requirement, methodtraces2HashMap)) {
+								
+								methodtrace.SetPrediction(LogInfoHashMap,"T", "T,Pure");
+							
+						}else {
+							methodtrace.SetPrediction(LogInfoHashMap,"T", "T,Mixed");
+
+						}
+						
+					}else if (
+							
+							Callers.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)
+							&& 	Callees.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)
+
+					)
+
+					{
+						
+						if(!Callers.AllTs(methodtrace.Requirement, methodtraces2HashMap)
+						&& !Callees.AllTs(methodtrace.Requirement, methodtraces2HashMap)
+						&& !Callers.AllEs(methodtrace.Requirement, methodtraces2HashMap)
+						&& !Callees.AllEs(methodtrace.Requirement, methodtraces2HashMap)) {
+							
+							methodtrace.SetPrediction(LogInfoHashMap,"N", "N,Pure");
+						
+					}
+						else if(Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) 
+						&& Callees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) ) {
+									
+							methodtrace.SetPrediction(LogInfoHashMap,"E", "E,Incomplete");
+								
+						}
+						
+						else {
+						methodtrace.SetPrediction(LogInfoHashMap,"N", "N,Mixed");
+
+					}
+					
+				}else if(Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)
+						|| Callees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)) {
 					methodtrace.SetPrediction(LogInfoHashMap,"E", "E,Incomplete");
-						
-				}
-				
-				else {
-				methodtrace.SetPrediction(LogInfoHashMap,"N", "N,Mixed");
 
-			}
-			
-		}else if(methodtrace.Method.getCallersShell().AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)
-				|| methodtrace.Method.getCalleesShell().AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)) {
-			methodtrace.SetPrediction(LogInfoHashMap,"E", "E,Incomplete");
-
-		}else {
-			methodtrace.SetPrediction(LogInfoHashMap,"E", "E,Boundary");
-
-		}
-			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			//LEAF NODE 
-			
-			else if(!methodtrace.Method.getCallersShell().isEmpty() 
-					&& methodtrace.Method.getCalleesShell().isEmpty()) {
-				if (
-						
-						methodtrace.Method.getCallersShell().AtLeast1T(methodtrace.Requirement, methodtraces2HashMap)
-						
-
-				)
-
-				{
-					
-					if(!methodtrace.Method.getCallersCallersShell().AllNs(methodtrace.Requirement, methodtraces2HashMap)
-					&& !methodtrace.Method.getCallersCallersShell().AllEs(methodtrace.Requirement, methodtraces2HashMap)
-				
-					) {
-						
-						methodtrace.SetPrediction(LogInfoHashMap,"T", "T,PureLeaf");
-					
 				}else {
-					methodtrace.SetPrediction(LogInfoHashMap,"T", "T,MixedLeaf");
+					methodtrace.SetPrediction(LogInfoHashMap,"E", "E,Boundary");
 
 				}
-				
-			}else if (
+					}
 					
-					methodtrace.Method.getCallersCallersShell().AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)
-
-			)
-
-			{
-				
-				if(!methodtrace.Method.getCallersCallersShell().AllTs(methodtrace.Requirement, methodtraces2HashMap)
-				&& !methodtrace.Method.getCallersCallersShell().AllEs(methodtrace.Requirement, methodtraces2HashMap)
-				) {
 					
-					methodtrace.SetPrediction(LogInfoHashMap,"N", "N,PureLeaf");
-				
-			}
-				if(methodtrace.Method.getCallersCallersShell().AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) 
-				&& methodtrace.Method.getCallersCallersShell().AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) ) {
+					
+					
+					
+					
+					
+					
+					
+					
+					//LEAF METHOD  
+					
+					else if(!Callers.isEmpty() 
+							&& Callees.isEmpty()) {
+						if (
+								
+								Callers.AtLeast1T(methodtrace.Requirement, methodtraces2HashMap)
+								&& 	CallersCallers.AtLeast1T(methodtrace.Requirement, methodtraces2HashMap)
+
+
+						)
+
+						{
 							
-					methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteLeaf");
+							if(!CallersCallers.AllNs(methodtrace.Requirement, methodtraces2HashMap)
+							&& !CallersCallers.AllEs(methodtrace.Requirement, methodtraces2HashMap)
+							&& !Callers.AllNs(methodtrace.Requirement, methodtraces2HashMap)
+							&& !Callers.AllEs(methodtrace.Requirement, methodtraces2HashMap)
 						
+							
+							) {
+								
+								methodtrace.SetPrediction(LogInfoHashMap,"T", "T,PureLeaf");
+							
+						}else {
+							methodtrace.SetPrediction(LogInfoHashMap,"T", "T,MixedLeaf");
+
+						}
+						
+					}else if (
+							
+							CallersCallers.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)
+						&&	Callers.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)
+
+					)
+
+					{
+						
+						if(!CallersCallers.AllTs(methodtrace.Requirement, methodtraces2HashMap)
+						&& !CallersCallers.AllEs(methodtrace.Requirement, methodtraces2HashMap)
+						&& !Callers.AllTs(methodtrace.Requirement, methodtraces2HashMap)
+						&& !Callers.AllEs(methodtrace.Requirement, methodtraces2HashMap)
+						) {
+							
+							methodtrace.SetPrediction(LogInfoHashMap,"N", "N,PureLeaf");
+						
+					}
+						else if(CallersCallers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) 
+						&& Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) ) {
+									
+							methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteLeaf");
+								
+						}
+						
+						else {
+						methodtrace.SetPrediction(LogInfoHashMap,"N", "N,MixedLeaf");
+
+					}
+					
+				}else if(CallersCallers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) 
+						
+						|| Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) 
+						) {
+					methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteLeaf");
+
+				}else {
+					methodtrace.SetPrediction(LogInfoHashMap,"E", "E,BoundaryLeaf");
+
 				}
-				
-				else {
-				methodtrace.SetPrediction(LogInfoHashMap,"N", "N,MixedLeaf");
-
-			}
-			
-		}else if(methodtrace.Method.getCallersCallersShell().AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)
-				) {
-			methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteLeaf");
-
-		}else {
-			methodtrace.SetPrediction(LogInfoHashMap,"E", "E,BoundaryLeaf");
-
+					}
 		}
+		
+		
+		for (MethodTrace methodtrace : MethodTracesHashmapValues) {
+			System.out.println(methodtrace.Requirement.ID+"-"+methodtrace.Method.ID);
+			System.out.println(methodtrace.getGold());
+			System.out.println(methodtrace.getPrediction());
+			if(!methodtrace.getPrediction().equals(methodtrace.goldfinal)) {
+				
+				if(methodtrace.getPrediction().equals("T") && methodtrace.getGold().equals("N")) {
+					System.out.println("False positive");
+				}else if(methodtrace.getPrediction().equals("N") && methodtrace.getGold().equals("T")) {
+					System.out.println("False Negative");
+				}
 			}
 		}
 		System.out.println(counter);

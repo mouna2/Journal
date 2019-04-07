@@ -46,8 +46,14 @@ public class Method {
 	public Clazz Owner= new Clazz(); 
 	public MethodList Callees= new MethodList(); 
 	public MethodList Callers= new MethodList(); 
+	
 	public MethodList CallersExecuted= new MethodList(); 
 	public MethodList CalleesExecuted= new MethodList(); 
+	public MethodList CallersCallersExecuted= null; 
+	public MethodList CalleesCalleesExecuted= null; 
+	
+
+
 	public MethodList CallersofCallers= new MethodList(); 
 	public MethodList CalleesofCallees= new MethodList(); 
 	public MethodList CalleesImplementations= new MethodList(); 
@@ -65,10 +71,53 @@ public class Method {
 	//	public List<RequirementGold> requirementsGold= new ArrayList<RequirementGold>(); 
 	//	public List<Requirement2> requirements= new ArrayList<Requirement2>(); 
 	//	public	HashMap<Requirement2, String> FinalMethodHashMap= new HashMap<Requirement2, String>(); 
+	public MethodList getCallersCallersExecuted() {
+		if(CallersCallersExecuted!=null) {
+			return CallersCallersExecuted;
 
+		}else {
+			CallersCallersExecuted= new MethodList(); 
+			for(Method CallerExec:this.getCallersExecuted()) {
+				CallersCallersExecuted.addAll(CallerExec.getCallersExecuted()); 
+			}
+			return CallersCallersExecuted; 
+		}
+	}
+	
+	public MethodList getCalleesCalleesExecuted() {
+		if(CalleesCalleesExecuted!=null) {
+			return CalleesCalleesExecuted;
+
+		}else {
+			CalleesCalleesExecuted= new MethodList(); 
+			for(Method CalleeExec:this.getCalleesExecuted()) {
+				CalleesCalleesExecuted.addAll(CalleeExec.getCalleesExecuted()); 
+			}
+			return CalleesCalleesExecuted; 
+		}
+	}
+	public void setCallersCallersExecuted(MethodList callersCallersExecuted) {
+		CallersCallersExecuted = callersCallersExecuted;
+	}
+	
+	public void setCalleesCalleesExecuted(MethodList calleesCalleesExecuted) {
+		CalleesCalleesExecuted = calleesCalleesExecuted;
+	}
 
 	public Clazz getOwner() {
 		return Owner;
+	}
+	public MethodList getCallersExecuted() {
+		return CallersExecuted;
+	}
+	public void setCallersExecuted(MethodList callersExecuted) {
+		CallersExecuted = callersExecuted;
+	}
+	public MethodList getCalleesExecuted() {
+		return CalleesExecuted;
+	}
+	public void setCalleesExecuted(MethodList calleesExecuted) {
+		CalleesExecuted = calleesExecuted;
 	}
 	public MethodList getCallersofCallers() {
 		return CallersofCallers;
@@ -847,6 +896,6 @@ private MethodList getInheritanceCallers(MethodList SuperclassCallers) {
 	
 	}
 
-	
+
 
 }

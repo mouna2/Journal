@@ -439,7 +439,7 @@ public class DBDemo3iTrust2 {
         	
         	
         	
-      //  	BUILD CLASSES TABLE 
+//      //  	BUILD CLASSES TABLE 
 //        	for(CtType<?> clazz : classFactory.getAll()) {
 //        		
 //        	
@@ -448,14 +448,17 @@ public class DBDemo3iTrust2 {
 //    			
 //    				for(CtType<?> mynested: nested) {
 //    					System.out.println(mynested.getQualifiedName());
-//    					st.executeUpdate("INSERT INTO `classes`(`classname`) VALUES ('"+mynested.getQualifiedName()+"');");
+//    					String shortclassname= mynested.getQualifiedName().substring(mynested.getQualifiedName().lastIndexOf(".")+1, mynested.getQualifiedName().length()); 
+//    					st.executeUpdate("INSERT INTO `classes`(`classname`,`shortclassname`) VALUES ('"+mynested.getQualifiedName()+"','"+shortclassname+"')");
 //    					
 //    					
 //    					
 //    					Set<CtType<?>> nested2 = mynested.getNestedTypes();
 //    					for(CtType<?> mynested2: nested2) {
 //    						System.out.println(mynested2.getQualifiedName());
-//    						st.executeUpdate("INSERT INTO `classes`(`classname`) VALUES ('"+mynested2.getQualifiedName()+"');");
+//        					 shortclassname= mynested2.getQualifiedName().substring(mynested2.getQualifiedName().lastIndexOf(".")+1, mynested2.getQualifiedName().length()); 
+//
+//    						st.executeUpdate("INSERT INTO `classes`(`classname`,`shortclassname`) VALUES ('"+mynested2.getQualifiedName()+"','"+shortclassname+"')");
 //    						
 //    						
 //    						}
@@ -465,10 +468,11 @@ public class DBDemo3iTrust2 {
 //    		
 //    			String FullClassName= clazz.getPackage()+"."+clazz.getSimpleName(); 
 //    			System.out.println(FullClassName);
-//    			st.executeUpdate("INSERT INTO `classes`(`classname`) VALUES ('"+FullClassName+"');");
+//				String shortclassname= FullClassName.substring(FullClassName.lastIndexOf(".")+1, FullClassName.length()); 
+//
+//    			st.executeUpdate("INSERT INTO `classes`(`classname`,`shortclassname`) VALUES ('"+FullClassName+"','"+shortclassname+"')");
 //    				
-//       		
-//        		
+//   
 //        				
 //        	
 //       
@@ -542,144 +546,144 @@ public class DBDemo3iTrust2 {
 //////////////            /*********************************************************************************************************************************************************************************/	
 ////////////        	  	
 //////////         	//BUILD INTERFACES TABLE 
-        	 
-
-        	List<String> mylist2 = new ArrayList<String>(); 
-        	for(CtType clazz : classFactory.getAll(true)) {
-        		
-        		if(clazz instanceof CtClass) {
-        			String myinterfaceclassid = null;
-            		String myinterfacename = null;
-            		String myclassid = null;
-            		String myclassname = null;
-            		
-        			String FullClassName= clazz.getQualifiedName(); 
-        			Set<CtTypeReference<?>> interfaces = clazz.getSuperInterfaces(); 
-
-        			for(CtTypeReference<?> inter: interfaces) {
-        			
-        					
-        				
-        		
-        					
-        				ResultSet interfacesnames = st.executeQuery("SELECT * from classes where classname='"+inter+"'"); 
-    					while(interfacesnames.next()){
-    						myinterfacename= interfacesnames.getString("classname"); 
-    						myinterfaceclassid= interfacesnames.getString("id"); 
-
-    			   		   }
-    					if(myinterfaceclassid==null) {
-    						String interclassname = inter.toString().replaceAll("\\.(?!.*\\.)","\\$");
-    						 interfacesnames = st.executeQuery("SELECT * from classes where classname='"+interclassname+"'"); 
-        					while(interfacesnames.next()){
-        						myinterfacename= interfacesnames.getString("classname"); 
-        						myinterfaceclassid= interfacesnames.getString("id"); 
-
-        			   		   }
-    					}
-    					
-    					
-    					ResultSet classesnames= st.executeQuery("SELECT * from classes where classname='"+FullClassName+"'"); 
-    					while(classesnames.next()){
-    						myclassname= classesnames.getString("classname"); 
-    						myclassid= classesnames.getString("id"); 
-
-    			   		   }
-        					String interface1= myinterfaceclassid+ myinterfacename;  
-        					String implementation1= myclassid+ myclassname; 
-        					
-        						System.out.println("INTERRRR "+inter.getQualifiedName());
-        						System.out.println("CLAZZZZ "+clazz.getQualifiedName());
-        					
-        		
-        		
-    					
-    					
-    					if(myinterfaceclassid!=null && !mylist2.contains(interface1+implementation1) ) {
-    		    			st.executeUpdate("INSERT INTO `interfaces`(`interfaceclassid`,`interfacename`,`ownerclassid`, `classname`) VALUES ('"+myinterfaceclassid +"','" +myinterfacename+"','" +myclassid+"','" +myclassname+"')");
-    		    			mylist2.add(interface1+implementation1); 
-    					}
-        			}
-
-    					
-    				
-    					
-    					
-    					
-    			
-    				
-    				
-    				
-    			}
-    			
-        		
-           	List<String> mylist = new ArrayList<String>(); 
-
-         		if(clazz instanceof CtInterface) {
-        			String myinterfaceclassid = null;
-            		String myinterfacename = null;
-            		String myclassid = null;
-            		String myclassname = null;
-            		
-        			String FullClassName= clazz.getQualifiedName(); 
-        			Set<CtTypeReference<?>> interfaces = clazz.getSuperInterfaces(); 
-
-        			for(CtTypeReference<?> inter: interfaces) {
-        			
-        				ResultSet interfacesnames = st.executeQuery("SELECT classname from classes where classname='"+inter+"'"); 
-    					while(interfacesnames.next()){
-    						myinterfacename= interfacesnames.getString("classname"); 
-    			   		   }
-    					
-    					ResultSet interfacesclasses = st.executeQuery("SELECT id from classes where classname='"+inter+"'"); 
-    					while(interfacesclasses.next()){
-    						myinterfaceclassid= interfacesclasses.getString("id"); 
-    			   		   }
-    					
-    					ResultSet classesnames= st.executeQuery("SELECT classname from classes where classname='"+FullClassName+"'"); 
-    					while(classesnames.next()){
-    						myclassname= classesnames.getString("classname"); 
-    			   		   }
-    					
-    					ResultSet interfacesname = st.executeQuery("SELECT id from classes where classname='"+FullClassName+"'"); 
-    					while(interfacesname.next()){
-    						myclassid= interfacesname.getString("id"); 
-    			   		   }
-    					String interface1= myinterfaceclassid+ myinterfacename;  
-    					String implementation1= myclassid+ myclassname; 
-        				
-        		
-        					
-        				
-        					
-        					
-        						System.out.println("INTERRRR2 "+inter.getQualifiedName());
-        						System.out.println("CLAZZZZ2 "+clazz.getQualifiedName());
-        					
-        		
-        		
-    					
-    					
-    					if(myinterfaceclassid!=null && !mylist.contains(interface1+implementation1) ) {
-    		    			st.executeUpdate("INSERT INTO `superclasses`(`superclassid`, `superclassname`, `ownerclassid`, `childclassname`) VALUES ('"+myinterfaceclassid +"','" +myinterfacename+"','" +myclassid+"','" +myclassname+"')");
-    		    			mylist.add(interface1+implementation1); 
-    					}
-        			}
-
-    					
-    				
-    					
-    					
-    					
-    			
-    				
-    				
-    				
-    			}
-        		
-
-        	}
-
+//        	 
+//
+//        	List<String> mylist2 = new ArrayList<String>(); 
+//        	for(CtType clazz : classFactory.getAll(true)) {
+//        		
+//        		if(clazz instanceof CtClass) {
+//        			String myinterfaceclassid = null;
+//            		String myinterfacename = null;
+//            		String myclassid = null;
+//            		String myclassname = null;
+//            		
+//        			String FullClassName= clazz.getQualifiedName(); 
+//        			Set<CtTypeReference<?>> interfaces = clazz.getSuperInterfaces(); 
+//
+//        			for(CtTypeReference<?> inter: interfaces) {
+//        			
+//        					
+//        				
+//        		
+//        					
+//        				ResultSet interfacesnames = st.executeQuery("SELECT * from classes where classname='"+inter+"'"); 
+//    					while(interfacesnames.next()){
+//    						myinterfacename= interfacesnames.getString("classname"); 
+//    						myinterfaceclassid= interfacesnames.getString("id"); 
+//
+//    			   		   }
+//    					if(myinterfaceclassid==null) {
+//    						String interclassname = inter.toString().replaceAll("\\.(?!.*\\.)","\\$");
+//    						 interfacesnames = st.executeQuery("SELECT * from classes where classname='"+interclassname+"'"); 
+//        					while(interfacesnames.next()){
+//        						myinterfacename= interfacesnames.getString("classname"); 
+//        						myinterfaceclassid= interfacesnames.getString("id"); 
+//
+//        			   		   }
+//    					}
+//    					
+//    					
+//    					ResultSet classesnames= st.executeQuery("SELECT * from classes where classname='"+FullClassName+"'"); 
+//    					while(classesnames.next()){
+//    						myclassname= classesnames.getString("classname"); 
+//    						myclassid= classesnames.getString("id"); 
+//
+//    			   		   }
+//        					String interface1= myinterfaceclassid+ myinterfacename;  
+//        					String implementation1= myclassid+ myclassname; 
+//        					
+//        						System.out.println("INTERRRR "+inter.getQualifiedName());
+//        						System.out.println("CLAZZZZ "+clazz.getQualifiedName());
+//        					
+//        		
+//        		
+//    					
+//    					
+//    					if(myinterfaceclassid!=null && !mylist2.contains(interface1+implementation1) ) {
+//    		    			st.executeUpdate("INSERT INTO `interfaces`(`interfaceclassid`,`interfacename`,`ownerclassid`, `classname`) VALUES ('"+myinterfaceclassid +"','" +myinterfacename+"','" +myclassid+"','" +myclassname+"')");
+//    		    			mylist2.add(interface1+implementation1); 
+//    					}
+//        			}
+//
+//    					
+//    				
+//    					
+//    					
+//    					
+//    			
+//    				
+//    				
+//    				
+//    			}
+//    			
+//        		
+//           	List<String> mylist = new ArrayList<String>(); 
+//
+//         		if(clazz instanceof CtInterface) {
+//        			String myinterfaceclassid = null;
+//            		String myinterfacename = null;
+//            		String myclassid = null;
+//            		String myclassname = null;
+//            		
+//        			String FullClassName= clazz.getQualifiedName(); 
+//        			Set<CtTypeReference<?>> interfaces = clazz.getSuperInterfaces(); 
+//
+//        			for(CtTypeReference<?> inter: interfaces) {
+//        			
+//        				ResultSet interfacesnames = st.executeQuery("SELECT classname from classes where classname='"+inter+"'"); 
+//    					while(interfacesnames.next()){
+//    						myinterfacename= interfacesnames.getString("classname"); 
+//    			   		   }
+//    					
+//    					ResultSet interfacesclasses = st.executeQuery("SELECT id from classes where classname='"+inter+"'"); 
+//    					while(interfacesclasses.next()){
+//    						myinterfaceclassid= interfacesclasses.getString("id"); 
+//    			   		   }
+//    					
+//    					ResultSet classesnames= st.executeQuery("SELECT classname from classes where classname='"+FullClassName+"'"); 
+//    					while(classesnames.next()){
+//    						myclassname= classesnames.getString("classname"); 
+//    			   		   }
+//    					
+//    					ResultSet interfacesname = st.executeQuery("SELECT id from classes where classname='"+FullClassName+"'"); 
+//    					while(interfacesname.next()){
+//    						myclassid= interfacesname.getString("id"); 
+//    			   		   }
+//    					String interface1= myinterfaceclassid+ myinterfacename;  
+//    					String implementation1= myclassid+ myclassname; 
+//        				
+//        		
+//        					
+//        				
+//        					
+//        					
+//        						System.out.println("INTERRRR2 "+inter.getQualifiedName());
+//        						System.out.println("CLAZZZZ2 "+clazz.getQualifiedName());
+//        					
+//        		
+//        		
+//    					
+//    					
+//    					if(myinterfaceclassid!=null && !mylist.contains(interface1+implementation1) ) {
+//    		    			st.executeUpdate("INSERT INTO `superclasses`(`superclassid`, `superclassname`, `ownerclassid`, `childclassname`) VALUES ('"+myinterfaceclassid +"','" +myinterfacename+"','" +myclassid+"','" +myclassname+"')");
+//    		    			mylist.add(interface1+implementation1); 
+//    					}
+//        			}
+//
+//    					
+//    				
+//    					
+//    					
+//    					
+//    			
+//    				
+//    				
+//    				
+//    			}
+//        		
+//
+//        	}
+//
 
 //////////////////////        	
 //    ////////////////////    
@@ -1864,6 +1868,87 @@ public class DBDemo3iTrust2 {
 
 
 	//end patterns 
+        	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
+
+///////////////*********************************************************************************************************************************************************************************/	
+/////////////*********************************************************************************************************************************************************************************/	
+/////////////*********************************************************************************************************************************************************************************/   
+//////////////CREATE METHOD CALLS EXECUTED TABLE 
+////////////
+File file = new File("C:\\Users\\mouna\\git\\Journal\\Journal\\src\\iTrustFiles\\dataMethodCallsExecutediTrustFormatted2.txt");
+FileReader fileReader = new FileReader(file);
+BufferedReader bufferedReader = new BufferedReader(fileReader);
+StringBuffer stringBuffer = new StringBuffer();
+
+try {
+
+
+String line="";
+int  counter=0; 
+while ((line = bufferedReader.readLine()) != null) {
+String CallerExecutedClassID=null; 
+String  CallerExecutedMethodID=null; 
+String CalleeExecutedClassID = null; 
+String  CalleeExecutedMethodID=null; 
+System.out.println(line);
+String[] lines = line.split("---"); 
+String Caller= lines[0]; 
+String Callee= lines[1]; 
+String CallerNonParameters = Caller.substring(0, Caller.indexOf("(")).trim(); 
+String CallerParameters = Caller.substring(Caller.indexOf("("), Caller.length()).trim(); 
+
+
+String CalleeNonParameters = Callee.substring(0, Callee.indexOf("(")).trim(); 
+String CalleeParameters = Callee.substring(Callee.indexOf("("), Callee.length()).trim(); 
+
+
+String CallerClass=  CallerNonParameters.substring(0, CallerNonParameters.lastIndexOf(".")).trim(); 
+String CallerMethod=  CallerNonParameters.substring(CallerNonParameters.lastIndexOf(".")+1, CallerNonParameters.length())+CallerParameters.trim(); 
+String CalleeClass=  CalleeNonParameters.substring(0, CalleeNonParameters.lastIndexOf(".")).trim(); 
+String CalleeMethod=  CalleeNonParameters.substring(CalleeNonParameters.lastIndexOf(".")+1, CalleeNonParameters.length())+CalleeParameters.trim(); 
+System.out.println("yes");
+
+ResultSet rs= st.executeQuery("SELECT * from classes where classes.shortclassname='"+CallerClass+"'"); 
+while(rs.next()) {
+CallerExecutedClassID= rs.getString("ID"); 
+}
+rs= st.executeQuery("SELECT * from methods inner join classes where methods.methodname='"+CallerMethod+"' and classes.shortclassname='"+CallerClass+"'"); 
+while(rs.next()) {
+CallerExecutedMethodID= rs.getString("ID"); 
+}
+rs= st.executeQuery("SELECT * from classes where classes.shortclassname='"+CalleeClass+"'"); 
+while(rs.next()) {
+CalleeExecutedClassID= rs.getString("ID"); 
+}
+rs= st.executeQuery("SELECT * from methods inner join classes where methods.methodname='"+CalleeMethod+"' and classes.shortclassname='"+CalleeClass+"'"); 
+while(rs.next()) {
+CalleeExecutedMethodID= rs.getString("ID"); 
+}
+String fullcaller = CallerClass+"."+CallerMethod; 
+String fullcallee =  CalleeClass+"."+CalleeMethod; 
+if(CallerExecutedClassID!=null && CallerExecutedMethodID!=null && CalleeExecutedClassID!=null && CalleeExecutedMethodID!=null) {
+String statement = "INSERT INTO `methodcallsexecuted`(`callermethodid`,  `callername`,  `callerclass`, `callerclassid`,`fullcaller`,`calleemethodid`,  `calleename`, `calleeclass`,  `calleeclassid`,  `fullcallee`) VALUES "
++ "('"+CallerExecutedMethodID +"','" +CallerMethod+"','" +CallerClass+"','" +CalleeExecutedClassID+"','" +fullcaller+"','" +CalleeExecutedMethodID+"','" +CalleeMethod+"','" +CalleeClass+"','" +CalleeExecutedClassID+"','" +fullcallee+"')";
+//
+st.executeUpdate(statement);
+}
+
+System.out.println("yes");
+counter++; 
+}
+
+
+
+
+}
+
+catch (IOException e) {
+// TODO Auto-generated catch block
+e.printStackTrace();
+}
+
 	}
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
 	

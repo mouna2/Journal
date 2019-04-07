@@ -1685,122 +1685,330 @@ public class DBDemo3JHotDraw2 {
 //
 //////////////CREATE TRACES TABLE 
 //////////
+//
+//
+//HashMap<String, String> RequirementIDNameHashMap=new HashMap<String, String> (); 
+//RequirementIDNameHashMap.put("1", "01: Paint figures and connections"); 
+//RequirementIDNameHashMap.put("2", "02: Create figures and connections"); 
+//RequirementIDNameHashMap.put("3", "03: Delete figures"); 
+//RequirementIDNameHashMap.put("4", "04: Delete connections"); 
+//RequirementIDNameHashMap.put("5", "05: Select and deselect figures"); 
+//RequirementIDNameHashMap.put("6", "06: Move- scale- or rotate figures"); 
+//RequirementIDNameHashMap.put("7", "07: Change properties of figures"); 
+//RequirementIDNameHashMap.put("8", "08: Edit  text in figures"); 
+//RequirementIDNameHashMap.put("9", "09: Align figures"); 
+//RequirementIDNameHashMap.put("10", "10: Change z-ordering"); 
+//RequirementIDNameHashMap.put("11", "11: Grouping and ungrouping figures"); 
+//RequirementIDNameHashMap.put("12", "12: Launch the application"); 
+//RequirementIDNameHashMap.put("13", "13: Open an existing drawing"); 
+//RequirementIDNameHashMap.put("14", "14: Save a drawing"); 
+//RequirementIDNameHashMap.put("15", "15: Scalability:  Drawings should be as large as possible"); 
+//RequirementIDNameHashMap.put("16", "16: Performance: Quickly redraw figures if changed"); 
+//RequirementIDNameHashMap.put("17", "17: Performance: Quickly locate figures based on x-y coordinates"); 
+//RequirementIDNameHashMap.put("18", "18: Interoperability: Support data exchange via the clipboard"); 
+//RequirementIDNameHashMap.put("19", "19: Usability: Support operating system specific user interfaces"); 
+//RequirementIDNameHashMap.put("20", "20: Performance: Strive for a short startup latency"); 
+//RequirementIDNameHashMap.put("21", "21: Recoverability: periodic auto-save"); 
+//
+//
+//List<String> mylist = new ArrayList<String>(); 
+//HashMap<String, SubjectTSubjectNObject> myhashmap= new HashMap<String, SubjectTSubjectNObject>() ; 
+//
+//try {
+//	File file = new File("C:\\Users\\mouna\\new_workspace\\TracePredictor\\src\\JHotDrawFiles\\JHotDrawMethodsFormatted.txt");
+//	FileReader fileReader = new FileReader(file);
+//	BufferedReader bufferedReader = new BufferedReader(fileReader);
+//	StringBuffer stringBuffer = new StringBuffer();
+//	String line;
+//	line = bufferedReader.readLine(); 
+//
+//	while ((line = bufferedReader.readLine()) != null) {
+//		String[] splittedline = line.split(","); 
+//	
+//		stringBuffer.append(line);
+//		stringBuffer.append("\n");
+//		  int counter = 1; 
+//		for(int j=1; j<splittedline.length-1; j+=2) {
+//			SubjectTSubjectNObject SubjectTSubjectNObj = new SubjectTSubjectNObject(); 
+//			String methodname2= splittedline[0]; 
+//			methodname2=methodname2.replaceAll("::", "."); 
+//			methodname2=methodname2.replaceAll("constructor", "-init-"); 
+//			methodname2=Pattern.compile("[{}<>]").matcher(methodname2).replaceAll(""); 
+//			methodname2="org.jhotdraw."+methodname2; 
+//			String RequirementID= ""+counter;
+//			String SubjectT= splittedline[j];
+//			String SubjectN= splittedline[j+1]; 
+//			SubjectTSubjectNObj.setMethodName(methodname2);
+//			SubjectTSubjectNObj.setRequirementID(RequirementID);
+//			SubjectTSubjectNObj.setSubjectT(SubjectT);
+//			SubjectTSubjectNObj.setSubjectN(SubjectN);
+//			counter++; 
+//			String reqMethod=RequirementID+"-"+methodname2; 
+//			myhashmap.put(reqMethod,SubjectTSubjectNObj); 
+//			mylist.add(reqMethod); 
+//		}
+//	
+//	}
+//	fileReader.close();
+//	int count=1;
+//
+//
+////	System.out.println(stringBuffer.toString());
+//} catch (IOException e) {
+//	e.printStackTrace();
+//}
+//
+//ResultSet mymeths = st2.executeQuery("SELECT methods.* from methods"); 
+//while(mymeths.next()){
+//String methodid = mymeths.getString("id"); 
+//String method = mymeths.getString("methodabbreviation"); 
+//String methodname = mymeths.getString("methodname"); 
+//String fullmethod = mymeths.getString("fullmethod"); 
+//
+//String classname = mymeths.getString("classname"); 
+//String classid = mymeths.getString("classid"); 
+//
+//// TODO Auto-generated method stub
+//
+//
+//
+//
+//
+//
+////st.executeUpdate("SELECT * FROM `traces` where method LIKE `% %`"); 
+//
+//
+//
+//for(String key: RequirementIDNameHashMap.keySet()) {
+//tracesmethods tr= new tracesmethods(key, methodid,  classid); 
+//SubjectTSubjectNObject entry = myhashmap.get(tr.getRequirementid()+"-"+method); 
+////System.out.println(tr.getRequirementid());
+////System.out.println(method);
+//
+//if(entry!=null) {
+//String	goldfinal= PredictGoldUnionFinal(Integer.parseInt(entry.SubjectT), Integer.parseInt(entry.SubjectN)); 
+//
+//
+//	String statement = "INSERT INTO `traces`(`requirement`, `requirementid`, `method`, `methodname`, `fullmethod`,  `methodid`,`classname`, `classid`,`goldfinal`,`SubjectT`,`SubjectN`) VALUES ('"+RequirementIDNameHashMap.get(tr.getRequirementid())+"','" +tr.getRequirementid()+"','" +method+"','" +methodname+"','" +fullmethod+"','" +methodid+"','"+classname +"','" +classid
+//			+"','" +goldfinal+"','"+entry.SubjectT +"','" +entry.SubjectN+"')";		
+//			st.executeUpdate(statement);	
+//			mylist.remove(tr.getRequirementid()+"-"+method); 
+//}
+//else {
+//	String statement = "INSERT INTO `traces`(`requirement`, `requirementid`, `method`, `methodname`, `fullmethod`,  `methodid`,`classname`, `classid`,`goldfinal`,`SubjectT`,`SubjectN`) VALUES ('"+RequirementIDNameHashMap.get(tr.getRequirementid())+"','" +tr.getRequirementid()+"','" +method+"','" +methodname+"','" +fullmethod+"','" +methodid+"','"+classname +"','" +classid
+//			+"','" + "E" +"','"+ "0"  +"','" + "0"+"')";		
+//			st.executeUpdate(statement);	
+//}
+//
+//
+//}
+//
+//
+//
+//
+//}
+//
+//
+//for(String s: mylist) {
+//	System.out.println(s);
+//}
+//System.out.println("OVER");
+//
+//
+//
+//
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+///////////////////*********************************************************************************************************************************************************************************/   
+//////
+//////////////////CREATE TRACES CLASSES TABLE 
+//////////////
+//FileReader fileReader = new FileReader("C:\\Users\\mouna\\new_workspace\\TracePredictor\\src\\JHotDrawFiles\\TracesClassesNEW.txt");
+//BufferedReader bufferedReader = new BufferedReader(fileReader);
+//HashMap<String,  String> ReqClassHashMap= new HashMap<String,  String> (); 
+//String line = null;
+//line = bufferedReader.readLine(); 
+//String[] requirements = line.split(","); 
+//List<String> TraceClassList = new ArrayList<String>(); 
+//while((line = bufferedReader.readLine()) != null) {
+////    System.out.println(line);
+//	 String[] splitted = line.split("\\,", -1);
+//    
+//    for(int k=1; k<splitted.length; k++) {
+//    	
+//    	if(splitted[k].equals("x")) {
+//    		ReqClassHashMap.put(k+"-"+splitted[0], "T"); 
+//    	}else {
+//    		ReqClassHashMap.put(k+"-"+splitted[0], "N"); 
+//    	}
+//    	
+//    	TraceClassList.add(k+"-"+splitted[0]); 
+//    	
+//    }
+////    System.out.println(line);
+//}   
+//
+//// Always close files.
+//bufferedReader.close();         
+//
+//Hashtable<String,List<String>> RequirementClassHashMapUnionGold=new Hashtable<String,List<String>>(); 
+//List<String> ListUnionGold= new ArrayList<String>(); 
+//mylist = new ArrayList<String>(); 
+//ResultSet traces = st.executeQuery("SELECT traces.* from traces "); 
+//while(traces.next()){		
+//	//THIS IS GOLD 2
+//	String requirementid=traces.getString("requirementid").trim(); 
+//	String classid=traces.getString("classid").trim(); 
+//
+//	String ReqClass=requirementid+"-"+classid; 
+//	
+//	String goldfinal=traces.getString("goldfinal").trim(); 
+//	if(RequirementClassHashMapUnionGold.get(ReqClass)==null) {
+//		ListUnionGold= new ArrayList<String>(); 
+//		ListUnionGold.add(goldfinal); 
+//		RequirementClassHashMapUnionGold.put(ReqClass, ListUnionGold); 
+//	}else {
+//		ListUnionGold = RequirementClassHashMapUnionGold.get(ReqClass); 
+//		ListUnionGold.add(goldfinal); 
+//		RequirementClassHashMapUnionGold.put(ReqClass, ListUnionGold); 
+//	}
+//	
+//	
+//	   }
+//HashMap <String, String > RequirementClassHashMap= new HashMap <String, String > (); 
+//
+//String classname=""; 
+//String classid=""; 
+//String requirementname=""; 
+//String requirementid="";
+//ResultSet Traces = st.executeQuery("SELECT classes.* from classes "); 
+//while(Traces.next()){
+//classname = Traces.getString("classname"); 
+//classid = Traces.getString("id"); 
+//for(String keyreq: RequirementIDNameHashMap.keySet()) {
+//	String key= keyreq+"/"+classid; 
+//	String val= keyreq+"/"+RequirementIDNameHashMap.get(keyreq)+"/"+classid+"/"+classname; 
+//
+//	RequirementClassHashMap.put(key, val); 
+//}
+//
+//
+//
+//
+//
+//}
+//
+//
+//
+//
+//
+//for(Entry<String, String> entry :RequirementClassHashMap.entrySet()) {
+//String myvalue = entry.getValue(); 
+//String[] myvalues = myvalue.split("/"); 
+////System.out.println(myvalues[1]);
+////System.out.println(myvalues[0]);
+////System.out.println(myvalues[3]);
+////System.out.println(myvalues[2]);
+//int CountT=0, CountN=0, CountE=0; 
+//List<String> list = RequirementClassHashMapUnionGold.get(myvalues[0]+"-"+myvalues[2]); 
+//CountTNE count=ComputeProportions(list, CountT, CountN, CountE); 
+//
+//String SubjectGeneralization=ComputeSubjectGeneralization(count);
+//String reqclassValue = ReqClassHashMap.get(myvalues[0]+"-"+myvalues[3]); 
+//if(reqclassValue!=null) {
+//	String statement8= "INSERT INTO `tracesclasses`(`requirement`, `requirementid`,  `classname`, `classid`,`SubjectGold`,`goldfinal`) VALUES ('"+myvalues[1]+"','" +myvalues[0]+"','"  +myvalues[3]+"','" +myvalues[2]
+//			+"','"  +SubjectGeneralization+"','"  +reqclassValue+"')";	
+//	st2.executeUpdate(statement8);
+//	TraceClassList.remove(myvalues[0]+"-"+myvalues[3]); 
+//}else {
+//	String statement8= "INSERT INTO `tracesclasses`(`requirement`, `requirementid`,  `classname`, `classid`,`SubjectGold`,`goldfinal`) VALUES ('"+myvalues[1]+"','" +myvalues[0]+"','"  +myvalues[3]+"','" +myvalues[2]
+//			+"','"  +SubjectGeneralization+"','"  +"E"+"')";	
+//	st2.executeUpdate(statement8);
+//}
+//
+//}
+//
+//
+//
+//for(String s: TraceClassList) {
+//	System.out.println(s);
+//}
+//System.out.println("OVER");
 
 
-HashMap<String, String> RequirementIDNameHashMap=new HashMap<String, String> (); 
-RequirementIDNameHashMap.put("1", "01: Paint figures and connections"); 
-RequirementIDNameHashMap.put("2", "02: Create figures and connections"); 
-RequirementIDNameHashMap.put("3", "03: Delete figures"); 
-RequirementIDNameHashMap.put("4", "04: Delete connections"); 
-RequirementIDNameHashMap.put("5", "05: Select and deselect figures"); 
-RequirementIDNameHashMap.put("6", "06: Move- scale- or rotate figures"); 
-RequirementIDNameHashMap.put("7", "07: Change properties of figures"); 
-RequirementIDNameHashMap.put("8", "08: Edit  text in figures"); 
-RequirementIDNameHashMap.put("9", "09: Align figures"); 
-RequirementIDNameHashMap.put("10", "10: Change z-ordering"); 
-RequirementIDNameHashMap.put("11", "11: Grouping and ungrouping figures"); 
-RequirementIDNameHashMap.put("12", "12: Launch the application"); 
-RequirementIDNameHashMap.put("13", "13: Open an existing drawing"); 
-RequirementIDNameHashMap.put("14", "14: Save a drawing"); 
-RequirementIDNameHashMap.put("15", "15: Scalability:  Drawings should be as large as possible"); 
-RequirementIDNameHashMap.put("16", "16: Performance: Quickly redraw figures if changed"); 
-RequirementIDNameHashMap.put("17", "17: Performance: Quickly locate figures based on x-y coordinates"); 
-RequirementIDNameHashMap.put("18", "18: Interoperability: Support data exchange via the clipboard"); 
-RequirementIDNameHashMap.put("19", "19: Usability: Support operating system specific user interfaces"); 
-RequirementIDNameHashMap.put("20", "20: Performance: Strive for a short startup latency"); 
-RequirementIDNameHashMap.put("21", "21: Recoverability: periodic auto-save"); 
 
 
-List<String> mylist = new ArrayList<String>(); 
-HashMap<String, SubjectTSubjectNObject> myhashmap= new HashMap<String, SubjectTSubjectNObject>() ; 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+
+
+///////////////*********************************************************************************************************************************************************************************/	
+/////////////*********************************************************************************************************************************************************************************/	
+/////////////*********************************************************************************************************************************************************************************/   
+//////////////CREATE METHOD CALLS EXECUTED TABLE 
+////////////
+File file = new File("C:\\Users\\mouna\\git\\Journal\\Journal\\src\\JHotDrawFiles\\dataMethodCallsExecutedJHotDrawFormatted2.txt");
+FileReader fileReader = new FileReader(file);
+BufferedReader bufferedReader = new BufferedReader(fileReader);
+StringBuffer stringBuffer = new StringBuffer();
 
 try {
-	File file = new File("C:\\Users\\mouna\\new_workspace\\TracePredictor\\src\\JHotDrawFiles\\JHotDrawMethodsFormatted.txt");
-	FileReader fileReader = new FileReader(file);
-	BufferedReader bufferedReader = new BufferedReader(fileReader);
-	StringBuffer stringBuffer = new StringBuffer();
-	String line;
-	line = bufferedReader.readLine(); 
 
-	while ((line = bufferedReader.readLine()) != null) {
-		String[] splittedline = line.split(","); 
-	
-		stringBuffer.append(line);
-		stringBuffer.append("\n");
-		  int counter = 1; 
-		for(int j=1; j<splittedline.length-1; j+=2) {
-			SubjectTSubjectNObject SubjectTSubjectNObj = new SubjectTSubjectNObject(); 
-			String methodname2= splittedline[0]; 
-			methodname2=methodname2.replaceAll("::", "."); 
-			methodname2=methodname2.replaceAll("constructor", "-init-"); 
-			methodname2=Pattern.compile("[{}<>]").matcher(methodname2).replaceAll(""); 
-			methodname2="org.jhotdraw."+methodname2; 
-			String RequirementID= ""+counter;
-			String SubjectT= splittedline[j];
-			String SubjectN= splittedline[j+1]; 
-			SubjectTSubjectNObj.setMethodName(methodname2);
-			SubjectTSubjectNObj.setRequirementID(RequirementID);
-			SubjectTSubjectNObj.setSubjectT(SubjectT);
-			SubjectTSubjectNObj.setSubjectN(SubjectN);
-			counter++; 
-			String reqMethod=RequirementID+"-"+methodname2; 
-			myhashmap.put(reqMethod,SubjectTSubjectNObj); 
-			mylist.add(reqMethod); 
-		}
-	
+
+String line="";
+int  counter=0; 
+while ((line = bufferedReader.readLine()) != null) {
+String CallerExecutedClassID=null; 
+String  CallerExecutedMethodID=null; 
+String CalleeExecutedClassID = null; 
+String  CalleeExecutedMethodID=null; 
+System.out.println(line);
+String[] lines = line.split("---"); 
+String Caller= lines[0]; 
+String Callee= lines[1]; 
+String CallerNonParameters = Caller.substring(0, Caller.indexOf("(")).trim(); 
+String CallerParameters = Caller.substring(Caller.indexOf("("), Caller.length()).trim(); 
+
+
+String CalleeNonParameters = Callee.substring(0, Callee.indexOf("(")).trim(); 
+String CalleeParameters = Callee.substring(Callee.indexOf("("), Callee.length()).trim(); 
+
+
+String CallerClass=  CallerNonParameters.substring(0, CallerNonParameters.lastIndexOf(".")).trim(); 
+String CallerMethod=  CallerNonParameters.substring(CallerNonParameters.lastIndexOf(".")+1, CallerNonParameters.length())+CallerParameters.trim(); 
+String CalleeClass=  CalleeNonParameters.substring(0, CalleeNonParameters.lastIndexOf(".")).trim(); 
+String CalleeMethod=  CalleeNonParameters.substring(CalleeNonParameters.lastIndexOf(".")+1, CalleeNonParameters.length())+CalleeParameters.trim(); 
+System.out.println("yes");
+
+ResultSet rs= st.executeQuery("SELECT * from classes where classes.classname='"+CallerClass+"'"); 
+while(rs.next()) {
+CallerExecutedClassID= rs.getString("ID"); 
+}
+rs= st.executeQuery("SELECT * from methods where methods.methodname='"+CallerMethod+"' and methods.classname='"+CallerClass+"'"); 
+while(rs.next()) {
+CallerExecutedMethodID= rs.getString("ID"); 
+}
+rs= st.executeQuery("SELECT * from classes where classes.classname='"+CalleeClass+"'"); 
+while(rs.next()) {
+CalleeExecutedClassID= rs.getString("ID"); 
+}
+rs= st.executeQuery("SELECT * from methods where methods.methodname='"+CalleeMethod+"' and methods.classname='"+CalleeClass+"'"); 
+while(rs.next()) {
+CalleeExecutedMethodID= rs.getString("ID"); 
+}
+String fullcaller = CallerClass+"."+CallerMethod; 
+String fullcallee =  CalleeClass+"."+CalleeMethod; 
+if(CalleeExecutedClassID!=null && CallerExecutedMethodID!=null   && CallerExecutedClassID!=null && CalleeExecutedClassID!=null && CallerExecutedMethodID!=null && CalleeExecutedMethodID!=null ) {
+	if( !CalleeExecutedClassID.equals("null") && !CallerExecutedMethodID.equals("null")   
+&& !CallerExecutedClassID.equals("null") && !CalleeExecutedClassID.equals("null") && !CalleeExecutedMethodID.equals("null") && !CallerExecutedMethodID.equals("null")) {
+		String statement = "INSERT INTO `methodcallsexecuted`(`callermethodid`,  `callername`,  `callerclass`, `callerclassid`,`fullcaller`,`calleemethodid`,  `calleename`, `calleeclass`,  `calleeclassid`,  `fullcallee`) VALUES "
+				+ "('"+CallerExecutedMethodID +"','" +CallerMethod+"','" +CallerClass+"','" +CalleeExecutedClassID+"','" +fullcaller+"','" +CalleeExecutedMethodID+"','" +CalleeMethod+"','" +CalleeClass+"','" +CalleeExecutedClassID+"','" +fullcallee+"')";
+				//
+				st.executeUpdate(statement);
 	}
-	fileReader.close();
-	int count=1;
 
-
-//	System.out.println(stringBuffer.toString());
-} catch (IOException e) {
-	e.printStackTrace();
 }
 
-ResultSet mymeths = st2.executeQuery("SELECT methods.* from methods"); 
-while(mymeths.next()){
-String methodid = mymeths.getString("id"); 
-String method = mymeths.getString("methodabbreviation"); 
-String methodname = mymeths.getString("methodname"); 
-String fullmethod = mymeths.getString("fullmethod"); 
-
-String classname = mymeths.getString("classname"); 
-String classid = mymeths.getString("classid"); 
-
-// TODO Auto-generated method stub
-
-
-
-
-
-
-//st.executeUpdate("SELECT * FROM `traces` where method LIKE `% %`"); 
-
-
-
-for(String key: RequirementIDNameHashMap.keySet()) {
-tracesmethods tr= new tracesmethods(key, methodid,  classid); 
-SubjectTSubjectNObject entry = myhashmap.get(tr.getRequirementid()+"-"+method); 
-//System.out.println(tr.getRequirementid());
-//System.out.println(method);
-
-if(entry!=null) {
-String	goldfinal= PredictGoldUnionFinal(Integer.parseInt(entry.SubjectT), Integer.parseInt(entry.SubjectN)); 
-
-
-	String statement = "INSERT INTO `traces`(`requirement`, `requirementid`, `method`, `methodname`, `fullmethod`,  `methodid`,`classname`, `classid`,`goldfinal`,`SubjectT`,`SubjectN`) VALUES ('"+RequirementIDNameHashMap.get(tr.getRequirementid())+"','" +tr.getRequirementid()+"','" +method+"','" +methodname+"','" +fullmethod+"','" +methodid+"','"+classname +"','" +classid
-			+"','" +goldfinal+"','"+entry.SubjectT +"','" +entry.SubjectN+"')";		
-			st.executeUpdate(statement);	
-			mylist.remove(tr.getRequirementid()+"-"+method); 
-}
-else {
-	String statement = "INSERT INTO `traces`(`requirement`, `requirementid`, `method`, `methodname`, `fullmethod`,  `methodid`,`classname`, `classid`,`goldfinal`,`SubjectT`,`SubjectN`) VALUES ('"+RequirementIDNameHashMap.get(tr.getRequirementid())+"','" +tr.getRequirementid()+"','" +method+"','" +methodname+"','" +fullmethod+"','" +methodid+"','"+classname +"','" +classid
-			+"','" + "E" +"','"+ "0"  +"','" + "0"+"')";		
-			st.executeUpdate(statement);	
-}
-
-
+System.out.println("yes");
+counter++; 
 }
 
 
@@ -1808,135 +2016,14 @@ else {
 
 }
 
-
-for(String s: mylist) {
-	System.out.println(s);
+catch (IOException e) {
+//TODO Auto-generated catch block
+e.printStackTrace();
 }
-System.out.println("OVER");
-
-
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
-/////////////////*********************************************************************************************************************************************************************************/   
-////
-////////////////CREATE TRACES CLASSES TABLE 
-////////////
-FileReader fileReader = new FileReader("C:\\Users\\mouna\\new_workspace\\TracePredictor\\src\\JHotDrawFiles\\TracesClassesNEW.txt");
-BufferedReader bufferedReader = new BufferedReader(fileReader);
-HashMap<String,  String> ReqClassHashMap= new HashMap<String,  String> (); 
-String line = null;
-line = bufferedReader.readLine(); 
-String[] requirements = line.split(","); 
-List<String> TraceClassList = new ArrayList<String>(); 
-while((line = bufferedReader.readLine()) != null) {
-//    System.out.println(line);
-	 String[] splitted = line.split("\\,", -1);
-    
-    for(int k=1; k<splitted.length; k++) {
-    	
-    	if(splitted[k].equals("x")) {
-    		ReqClassHashMap.put(k+"-"+splitted[0], "T"); 
-    	}else {
-    		ReqClassHashMap.put(k+"-"+splitted[0], "N"); 
-    	}
-    	
-    	TraceClassList.add(k+"-"+splitted[0]); 
-    	
-    }
-//    System.out.println(line);
-}   
-
-// Always close files.
-bufferedReader.close();         
-
-Hashtable<String,List<String>> RequirementClassHashMapUnionGold=new Hashtable<String,List<String>>(); 
-List<String> ListUnionGold= new ArrayList<String>(); 
-mylist = new ArrayList<String>(); 
-ResultSet traces = st.executeQuery("SELECT traces.* from traces "); 
-while(traces.next()){		
-	//THIS IS GOLD 2
-	String requirementid=traces.getString("requirementid").trim(); 
-	String classid=traces.getString("classid").trim(); 
-
-	String ReqClass=requirementid+"-"+classid; 
-	
-	String goldfinal=traces.getString("goldfinal").trim(); 
-	if(RequirementClassHashMapUnionGold.get(ReqClass)==null) {
-		ListUnionGold= new ArrayList<String>(); 
-		ListUnionGold.add(goldfinal); 
-		RequirementClassHashMapUnionGold.put(ReqClass, ListUnionGold); 
-	}else {
-		ListUnionGold = RequirementClassHashMapUnionGold.get(ReqClass); 
-		ListUnionGold.add(goldfinal); 
-		RequirementClassHashMapUnionGold.put(ReqClass, ListUnionGold); 
-	}
-	
-	
-	   }
-HashMap <String, String > RequirementClassHashMap= new HashMap <String, String > (); 
-
-String classname=""; 
-String classid=""; 
-String requirementname=""; 
-String requirementid="";
-ResultSet Traces = st.executeQuery("SELECT classes.* from classes "); 
-while(Traces.next()){
-classname = Traces.getString("classname"); 
-classid = Traces.getString("id"); 
-for(String keyreq: RequirementIDNameHashMap.keySet()) {
-	String key= keyreq+"/"+classid; 
-	String val= keyreq+"/"+RequirementIDNameHashMap.get(keyreq)+"/"+classid+"/"+classname; 
-
-	RequirementClassHashMap.put(key, val); 
-}
-
-
-
-
-
-}
-
-
-
-
-
-for(Entry<String, String> entry :RequirementClassHashMap.entrySet()) {
-String myvalue = entry.getValue(); 
-String[] myvalues = myvalue.split("/"); 
-//System.out.println(myvalues[1]);
-//System.out.println(myvalues[0]);
-//System.out.println(myvalues[3]);
-//System.out.println(myvalues[2]);
-int CountT=0, CountN=0, CountE=0; 
-List<String> list = RequirementClassHashMapUnionGold.get(myvalues[0]+"-"+myvalues[2]); 
-CountTNE count=ComputeProportions(list, CountT, CountN, CountE); 
-
-String SubjectGeneralization=ComputeSubjectGeneralization(count);
-String reqclassValue = ReqClassHashMap.get(myvalues[0]+"-"+myvalues[3]); 
-if(reqclassValue!=null) {
-	String statement8= "INSERT INTO `tracesclasses`(`requirement`, `requirementid`,  `classname`, `classid`,`SubjectGold`,`goldfinal`) VALUES ('"+myvalues[1]+"','" +myvalues[0]+"','"  +myvalues[3]+"','" +myvalues[2]
-			+"','"  +SubjectGeneralization+"','"  +reqclassValue+"')";	
-	st2.executeUpdate(statement8);
-	TraceClassList.remove(myvalues[0]+"-"+myvalues[3]); 
-}else {
-	String statement8= "INSERT INTO `tracesclasses`(`requirement`, `requirementid`,  `classname`, `classid`,`SubjectGold`,`goldfinal`) VALUES ('"+myvalues[1]+"','" +myvalues[0]+"','"  +myvalues[3]+"','" +myvalues[2]
-			+"','"  +SubjectGeneralization+"','"  +"E"+"')";	
-	st2.executeUpdate(statement8);
-}
-
-}
-
-
-
-for(String s: TraceClassList) {
-	System.out.println(s);
-}
-System.out.println("OVER");
-
 	}
 	
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
 	
 	static String PredictGoldUnionFinal(int SubjectT, int SubjectN) {
 		String goldUnion=null; 
