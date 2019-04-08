@@ -1174,7 +1174,7 @@ public class LogInfo {
 
 				}
 				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
-						&& methodTraceHashMap.get(mykey).isSubjectDeveloperEqualityFlag()
+//						&& methodTraceHashMap.get(mykey).isSubjectDeveloperEqualityFlag()
 						&& !methodTrace.isTraceSet() ) {
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().trim());
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
@@ -1237,7 +1237,7 @@ public class LogInfo {
 			
 			if(ProgramName.equals("gantt")|| ProgramName.equals("jhotdraw")){
 				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
-						&& methodTraceHashMap.get(mykey).isSubjectDeveloperEqualityFlag()
+//						&& methodTraceHashMap.get(mykey).isSubjectDeveloperEqualityFlag()
 						) {
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().trim());
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);

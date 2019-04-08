@@ -540,7 +540,11 @@ public static void CreateRequirementsHashMap(Connection conn) throws SQLExceptio
 			MethodTrace.setRequirement(requirement);
 
 			//checking whether the method is present in the superclasses
-			
+			if(AlgoFinal.ProgramName.equals("gantt")|| AlgoFinal.ProgramName.equals("jhotdraw")) {
+				MethodTrace.setSubjectT(myresults.getString("SubjectT"));
+				MethodTrace.setSubjectN(myresults.getString("SubjectN"));
+			}
+		
 
 			MethodTrace.setGold(myresults.getString("goldfinal"));
 			String reqMethod=MethodTrace.Requirement.ID+"-"+MethodTrace.Method.ID; 

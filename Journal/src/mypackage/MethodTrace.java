@@ -30,6 +30,8 @@ public final class MethodTrace {
 
 	public boolean TraceSet; 
 
+	public String SubjectT; 
+	public String SubjectN; 
 	
 
 
@@ -42,6 +44,22 @@ public final class MethodTrace {
 	
 	
 	
+
+	public String getSubjectT() {
+		return SubjectT;
+	}
+
+	public void setSubjectT(String subjectT) {
+		SubjectT = subjectT;
+	}
+
+	public String getSubjectN() {
+		return SubjectN;
+	}
+
+	public void setSubjectN(String subjectN) {
+		SubjectN = subjectN;
+	}
 
 	public boolean isSubjectDeveloperEqualityFlag() {
 		return SubjectDeveloperEqualityFlag;
@@ -139,7 +157,7 @@ public final class MethodTrace {
 			
 			{
 
-		if(this.prediction.trim().equals("E")) {
+//		if(this.prediction.trim().equals("E")) {
 			
 		
 			this.prediction=Pred; 
@@ -147,7 +165,7 @@ public final class MethodTrace {
 			modified=true; 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(reason);
 			
-		}
+//		}
 
 
 		

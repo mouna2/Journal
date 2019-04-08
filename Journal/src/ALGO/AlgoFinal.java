@@ -54,7 +54,7 @@ import mypackage.MethodTrace;
 import mypackage.Requirement;
 
 
-public class AlgoFinal extends JFrame {
+public class AlgoFinal  {
 	public static String ProgramName=""; 
 	public static boolean InheritanceFlag=true; 
 	public static boolean InterfaceImplementationFlag=true; 
@@ -71,6 +71,12 @@ public class AlgoFinal extends JFrame {
 	public static boolean InheritanceRecursion=false; 
 	
 	
+	
+	
+	
+	public static boolean ErrorSeeding=false; 
+	public static boolean IncompletenessSeeding=false; 
+	public static boolean NoSeeding=true; 
 	
 	public static boolean AchrafTechnique=true; 
 	public static boolean MounaTechnique=false; 
@@ -241,8 +247,25 @@ public class AlgoFinal extends JFrame {
 
 	
 		MethodTracesHashmapValues = methodtraces2HashMap.values();
-		LogInfoHashMap=InitializeHashMapWithPrecisionRecall(MethodTracesHashmapValues, LogInfoHashMap);
-	
+		List<MethodTrace> MethodTracesList = new ArrayList<MethodTrace>(MethodTracesHashmapValues); 
+		
+		
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//			THREE DIFFERENT METHODS TO INITIALIZE THE INPUT HASHMAP //////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		if(AlgoFinal.ErrorSeeding==true) {
+			LogInfoHashMap=InitializeInputHashMapErrorSeeding(MethodTracesList, LogInfoHashMap);
+
+		}
+		else if(AlgoFinal.IncompletenessSeeding==true) {
+			LogInfoHashMap=InitializeInputHashMapIncompleteness(MethodTracesList, LogInfoHashMap);
+
+		}else if(AlgoFinal.NoSeeding==true) {
+			LogInfoHashMap=InitializeInputHashMapNoSeeding(MethodTracesList, LogInfoHashMap); 
+
+		}
 		
 
 	
@@ -257,7 +280,7 @@ public class AlgoFinal extends JFrame {
 			//////////////////////////////////////////////////////////////////////////////////////////
 			//////////////////////////////////////////////////////////////////////////////////////////
 	int counter=0;
-		for (MethodTrace methodtrace : MethodTracesHashmapValues) {
+		for (MethodTrace methodtrace : MethodTracesList) {
 			//INNER NODE 
 			String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
 			MethodList Callers = new MethodList(); 
@@ -418,7 +441,7 @@ public class AlgoFinal extends JFrame {
 		}
 		
 		
-		for (MethodTrace methodtrace : MethodTracesHashmapValues) {
+		for (MethodTrace methodtrace : MethodTracesList) {
 			System.out.println(methodtrace.Requirement.ID+"-"+methodtrace.Method.ID);
 			System.out.println(methodtrace.getGold());
 			System.out.println(methodtrace.getPrediction());
@@ -432,7 +455,7 @@ public class AlgoFinal extends JFrame {
 			}
 		}
 		System.out.println(counter);
-		SetSubjectGoldDeveloperGoldEqualityFlag(methodtraces2HashMap, TotalPattern, LogInfoHashMap, ProgramName); 
+//		SetSubjectGoldDeveloperGoldEqualityFlag(methodtraces2HashMap, TotalPattern, LogInfoHashMap, ProgramName); 
 			
 
 			LogInfo.ComputePrecisionAndRecallNONCUMULATIVE(methodtraces2HashMap,TotalPattern, ProgramName, OwnerClassPredictionValues, LogInfoHashMap);
@@ -449,10 +472,10 @@ public class AlgoFinal extends JFrame {
 
 
 		
-		ComputeStepResults(Step4Pattern, Step4PredictionValues, LogInfoHashMap, ProgramName, "Step 4", "Step 4 Prediction Values", Step3PredictionValues); 
-
-				
-		ComputeStepResults2(Step4PatternCumulative, Step4PredictionValues, LogInfoHashMap, ProgramName, "Step 4 Cumulative", "Step 4 Prediction Values Cumulative", zeroPred); 
+//		ComputeStepResults(Step4Pattern, Step4PredictionValues, LogInfoHashMap, ProgramName, "Step 4", "Step 4 Prediction Values", Step3PredictionValues); 
+//
+//				
+//		ComputeStepResults2(Step4PatternCumulative, Step4PredictionValues, LogInfoHashMap, ProgramName, "Step 4 Cumulative", "Step 4 Prediction Values Cumulative", zeroPred); 
 			
 		LogInfo.CheckCallersCalleesSymmetry(); 
 				
@@ -679,14 +702,71 @@ public class AlgoFinal extends JFrame {
 
 	/************************************************************************************************************************************************/
 	/************************************************************************************************************************************************/
-	private LinkedHashMap<String, LogInfo> InitializeHashMapWithPrecisionRecall(
-			Collection<MethodTrace> methodTracesHashmapValues, LinkedHashMap<String, LogInfo> logHashMapRemaining) {
+	private LinkedHashMap<String, LogInfo> InitializeInputHashMapErrorSeeding(
+			List<MethodTrace> methodTracesHashmapValues, LinkedHashMap<String, LogInfo> logHashMapRemaining) {
 		// TODO Auto-generated method stub
+		int ErrorSeedingPercentage=(int)(Math.random() * 100 + 1);
+		int AmountofSeededErrors= ErrorSeedingPercentage*methodTracesHashmapValues.size()/100; 
+		int i=0; 
+		while(i<AmountofSeededErrors) {
+			int random = (int)(Math.random() * methodTracesHashmapValues.size());
+			if(methodTracesHashmapValues.get(random).getGold().equals("T")) {
+				methodTracesHashmapValues.get(random).setPrediction("N");
+			}else if(methodTracesHashmapValues.get(random).getGold().equals("N")) {
+				methodTracesHashmapValues.get(random).setPrediction("T");
+			}
+			i++; 
+		}
 		
 		for (MethodTrace methodtrace : methodTracesHashmapValues) {
 			
+			if(methodtrace.getPrediction().equals("E")) {
+				methodtrace.setPrediction(methodtrace.getGold());
+
+			}
 			
-			methodtrace.setPrediction(methodtrace.getGold());
+		}
+	
+		return logHashMapRemaining;
+	}
+
+	
+	/************************************************************************************************************************************************/
+	/************************************************************************************************************************************************/
+	private LinkedHashMap<String, LogInfo> InitializeInputHashMapIncompleteness(
+			List<MethodTrace> methodTracesHashmapValues, LinkedHashMap<String, LogInfo> logHashMapRemaining) {
+		// TODO Auto-generated method stub
+		for (MethodTrace methodtrace : methodTracesHashmapValues) {
+				methodtrace.setPrediction(methodtrace.getGold());
+		}
+		
+		
+		int IncompletenessSeedingPercentage=(int)(Math.random() * 100 + 1);
+		int AmountofSeededIncompleteness= IncompletenessSeedingPercentage*methodTracesHashmapValues.size()/100; 
+		int i=0; 
+		while(i<AmountofSeededIncompleteness) {
+			int random = (int)(Math.random() * methodTracesHashmapValues.size());	
+			methodTracesHashmapValues.get(random).setPrediction("E");
+			i++; 
+		}
+		
+		
+	
+		return logHashMapRemaining;
+	}
+
+	/************************************************************************************************************************************************/
+	/************************************************************************************************************************************************/
+	private LinkedHashMap<String, LogInfo> InitializeInputHashMapNoSeeding(
+			List<MethodTrace> methodTracesHashmapValues, LinkedHashMap<String, LogInfo> logHashMapRemaining) {
+		// TODO Auto-generated method stub
+		
+		
+		for (MethodTrace methodtrace : methodTracesHashmapValues) {
+			
+				methodtrace.setPrediction(methodtrace.getGold());
+
+			
 			
 		}
 	
@@ -832,30 +912,32 @@ public class AlgoFinal extends JFrame {
 	 * @throws Exception **********************************************************************************************************************************************/
 	public static void main(String[] args) throws Exception {
 		
-		
-		String ProgramName = "chess";
-		AlgoFinal frame = new AlgoFinal(
-				ProgramName);
+		for(int i=0; i<1; i++) {
+			System.out.println("========================> RUN "+i);
+			String ProgramName = "chess";
+			AlgoFinal frame = new AlgoFinal(
+					ProgramName);
 
-		String ProgramName2 = "gantt";
-			 frame = new AlgoFinal(ProgramName2);
-////		
-//////		String ProgramName2 = "dummy";
-//////		AlgoFinal	 frame = new AlgoFinal(ProgramName2);
-////
-		String ProgramName3 = "itrust";
-			 frame = new AlgoFinal(ProgramName3);
+			String ProgramName2 = "gantt";
+				 frame = new AlgoFinal(ProgramName2);
+////			
+//////			String ProgramName2 = "dummy";
+//////			AlgoFinal	 frame = new AlgoFinal(ProgramName2);
+	////
+			String ProgramName3 = "itrust";
+				 frame = new AlgoFinal(ProgramName3);
 
-			 //ooo
-			 
-		String ProgramName4 = "jhotdraw";
-			frame = new AlgoFinal(ProgramName4);
+				 //ooo
+				 
+			String ProgramName4 = "jhotdraw";
+				frame = new AlgoFinal(ProgramName4);
+				
+			}
+		}
 		
 		
-		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		frame.pack();
-		frame.setVisible(true);
-	}
+		
+		
 
 
 
