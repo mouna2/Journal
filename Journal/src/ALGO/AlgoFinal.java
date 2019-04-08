@@ -74,9 +74,9 @@ public class AlgoFinal  {
 	
 	
 	
-	public static boolean ErrorSeeding=false; 
+	public static boolean ErrorSeeding=true; 
 	public static boolean IncompletenessSeeding=false; 
-	public static boolean NoSeeding=true; 
+	public static boolean NoSeeding=false; 
 	
 	public static boolean AchrafTechnique=true; 
 	public static boolean MounaTechnique=false; 
@@ -564,7 +564,7 @@ public class AlgoFinal  {
 
 		 
 		 
-	 LogInfo.updateTableLog(ProgramName, MethodTracesHashmapValues, LogInfoHashMap);
+//	 LogInfo.updateTableLog(ProgramName, MethodTracesHashmapValues, LogInfoHashMap);
 
 		 System.out.println("YES6");
 		 LogInfo.closeLogFile(); 
@@ -588,7 +588,7 @@ public class AlgoFinal  {
 		PredictionValues SubstractedPredictionValues = new PredictionValues(); 
 		 SubstractedPredictionValues = SubstractPredictionValues(step2PredictionValues, step1PredictionValues); 
 
-		LogInfo.updateResultsLog(step2Pattern2, SubstractedPredictionValues, ProgramName, Step, PredictionValues, "INDIVIDUAL");
+//		LogInfo.updateResultsLog(step2Pattern2, SubstractedPredictionValues, ProgramName, Step, PredictionValues, "INDIVIDUAL");
 	}
 	
 	
@@ -912,7 +912,7 @@ public class AlgoFinal  {
 	 * @throws Exception **********************************************************************************************************************************************/
 	public static void main(String[] args) throws Exception {
 		
-		for(int i=0; i<1; i++) {
+		for(int i=0; i<2; i++) {
 			System.out.println("========================> RUN "+i);
 			String ProgramName = "chess";
 			AlgoFinal frame = new AlgoFinal(

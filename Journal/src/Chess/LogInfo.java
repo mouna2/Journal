@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintStream;
@@ -1011,7 +1012,7 @@ public class LogInfo {
 		}
 		return LogInfoHashMap;
 	}
-	public  static void CreateLogFiles(String ProgramName) throws FileNotFoundException {
+	public  static void CreateLogFiles(String ProgramName) throws IOException {
 		// TODO Auto-generated method stub
 		
 	
@@ -1022,9 +1023,10 @@ public class LogInfo {
 			bwfileChess = new BufferedWriter(new OutputStreamWriter(fosfilChess));
 			
 		
-			 File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallChess.txt");
-				FileOutputStream fosfila1 = new FileOutputStream(file1log);
-				bwfile1 = new BufferedWriter(new OutputStreamWriter(fosfila1));
+//			 File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallChess.txt");
+//				FileOutputStream fosfila1 = new FileOutputStream(file1log);
+//				bwfile1 = new BufferedWriter(new OutputStreamWriter(fosfila1));
+			  bwfile1 = new BufferedWriter( new FileWriter("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallChess.txt", true));  //Set true for append mode
 				
 				File  file2log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallChessCumulative.txt");
 				FileOutputStream	 fosfila2 = new FileOutputStream(file2log);
@@ -1056,13 +1058,14 @@ public class LogInfo {
 			File filelog2 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TableLogGantt.txt");
 			FileOutputStream fosfila2 = new FileOutputStream(filelog2);
 			bwfile2 = new BufferedWriter(new OutputStreamWriter(fosfila2));
-			
-		
-			 File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallGantt.txt");
-				FileOutputStream fosfila1 = new FileOutputStream(file1log);
-				bwfile1 = new BufferedWriter(new OutputStreamWriter(fosfila1));
 
-				
+		
+//			 File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallGantt.txt");
+//				FileOutputStream fosfila1 = new FileOutputStream(file1log);
+//				bwfile1 = new BufferedWriter(new OutputStreamWriter(fosfila1));
+
+				  bwfile1 = new BufferedWriter( new FileWriter("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallGantt.txt", true));  //Set true for append mode
+
 				File mytraceClass = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TracesClassesGantt.txt");
 				FileOutputStream fosTraceClass = new FileOutputStream(mytraceClass);
 				bwTraceClass = new BufferedWriter(new OutputStreamWriter(fosTraceClass));
@@ -1090,9 +1093,10 @@ public class LogInfo {
 			
 			
 			
-			File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecalliTrust.txt");
-			FileOutputStream fosfila1 = new FileOutputStream(file1log);
-			bwfile1 = new BufferedWriter(new OutputStreamWriter(fosfila1));
+//			File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecalliTrust.txt");
+//			FileOutputStream fosfila1 = new FileOutputStream(file1log);
+//			bwfile1 = new BufferedWriter(new OutputStreamWriter(fosfila1));
+			  bwfile1 = new BufferedWriter( new FileWriter("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecalliTrust.txt", true));  //Set true for append mode
 
 			
 			File mytraceClass = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TracesClassesiTrust.txt");
@@ -1121,11 +1125,12 @@ public class LogInfo {
 			
 				
 				
-				File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallJHotDraw.txt");
-				FileOutputStream fosfila1 = new FileOutputStream(file1log);
-				bwfile1 = new BufferedWriter(new OutputStreamWriter(fosfila1));
+//				File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallJHotDraw.txt");
+//				FileOutputStream fosfila1 = new FileOutputStream(file1log);
+//				bwfile1 = new BufferedWriter(new OutputStreamWriter(fosfila1));
 
-				
+				  bwfile1 = new BufferedWriter( new FileWriter("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallJHotDraw.txt", true));  //Set true for append mode
+
 				File mytraceClass = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TracesClassesJHotDraw.txt");
 				FileOutputStream fosTraceClass = new FileOutputStream(mytraceClass);
 				bwTraceClass = new BufferedWriter(new OutputStreamWriter(fosTraceClass));
@@ -1292,7 +1297,7 @@ public class LogInfo {
 
 		
 			if(Type.equals("CUMULATIVE")) {
-				LogInfo.bwfile1.newLine();
+//				LogInfo.bwfile1.newLine();
 			}
 			
 		

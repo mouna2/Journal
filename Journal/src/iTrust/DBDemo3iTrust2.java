@@ -1892,7 +1892,7 @@ String CallerExecutedClassID=null;
 String  CallerExecutedMethodID=null; 
 String CalleeExecutedClassID = null; 
 String  CalleeExecutedMethodID=null; 
-System.out.println(line);
+//System.out.println(line);
 String[] lines = line.split("---"); 
 String Caller= lines[0]; 
 String Callee= lines[1]; 
@@ -1908,7 +1908,7 @@ String CallerClass=  CallerNonParameters.substring(0, CallerNonParameters.lastIn
 String CallerMethod=  CallerNonParameters.substring(CallerNonParameters.lastIndexOf(".")+1, CallerNonParameters.length())+CallerParameters.trim(); 
 String CalleeClass=  CalleeNonParameters.substring(0, CalleeNonParameters.lastIndexOf(".")).trim(); 
 String CalleeMethod=  CalleeNonParameters.substring(CalleeNonParameters.lastIndexOf(".")+1, CalleeNonParameters.length())+CalleeParameters.trim(); 
-System.out.println("yes");
+//System.out.println("yes");
 
 ResultSet rs= st.executeQuery("SELECT * from classes where classes.shortclassname='"+CallerClass+"'"); 
 while(rs.next()) {
@@ -1933,9 +1933,11 @@ String statement = "INSERT INTO `methodcallsexecuted`(`callermethodid`,  `caller
 + "('"+CallerExecutedMethodID +"','" +CallerMethod+"','" +CallerClass+"','" +CalleeExecutedClassID+"','" +fullcaller+"','" +CalleeExecutedMethodID+"','" +CalleeMethod+"','" +CalleeClass+"','" +CalleeExecutedClassID+"','" +fullcallee+"')";
 //
 st.executeUpdate(statement);
+}else {
+	System.out.println(line);
 }
 
-System.out.println("yes");
+//System.out.println("yes");
 counter++; 
 }
 
