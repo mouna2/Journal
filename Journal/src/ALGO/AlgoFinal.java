@@ -74,12 +74,16 @@ public class AlgoFinal  {
 	
 	
 	
-	public static boolean ErrorSeeding=true; 
+	public static boolean ErrorSeeding=false; 
 	public static boolean IncompletenessSeeding=false; 
-	public static boolean NoSeeding=false; 
+	public static boolean NoSeeding=true; 
 	
-	public static boolean AchrafTechnique=true; 
-	public static boolean MounaTechnique=false; 
+	public static boolean ExecutedCallsTechnique=false; 
+	public static boolean XCallsTechnique=true; 
+	public static boolean BasicTechnique=false; 
+	
+	public static boolean ClassLevelTraces=true; 
+	public static boolean MethodLevelTraces=false; 
 
 	/**
 	 * Run a SQL command which does not return a recordset:
@@ -121,7 +125,7 @@ public class AlgoFinal  {
 	
 	static List<MethodTrace> methodtraces = new ArrayList<MethodTrace>();
 	HashMap<String, List<String>> classMethodsHashMap = new HashMap<String, List<String>>();
-	public static HashMap<String, MethodTrace> methodtraces2HashMap = new HashMap<String, MethodTrace>();
+	public static LinkedHashMap<String, MethodTrace> methodtraces2HashMap = new LinkedHashMap<String, MethodTrace>();
 	LinkedHashMap<String, ClassTrace2> methodtracesRequirementClass = new LinkedHashMap<String, ClassTrace2>();
 
 
@@ -180,7 +184,7 @@ public class AlgoFinal  {
 		BufferedWriter bwfile1 =null; 
 		BufferedWriter bwfile2 = null ; 
 		BufferedWriter bwfile3 = null ; 
-		
+		BufferedWriter bwfile1itrust =null; 
 	if(ProgramName.equals("chess")) {
 		File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\InterfacesNewRule.txt");
 		FileOutputStream fosfila1 = new FileOutputStream(file1log);
@@ -198,7 +202,11 @@ public class AlgoFinal  {
 		LogInfo.CreateLogFiles(ProgramName);
 
 		
-		
+		if(ProgramName.equals("itrust")) {
+			File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\iTrustMethodCallsComparison.txt");
+			FileOutputStream fosfila1 = new FileOutputStream(file1log);
+			 bwfile1itrust = new BufferedWriter(new OutputStreamWriter(fosfila1));
+		}
 
 	
 		
@@ -235,7 +243,8 @@ public class AlgoFinal  {
 		LogInfo.bwTraceClass.write("BEFORE PATTERN 0 "+PredictionClassTraceBefore.toString());
 		LogInfo.bwTraceClass.newLine();
 
-		 
+//		ResetAllTraceSetFlags(methodtraces2HashMap);
+
 
 		
 		CountTracesClassesValues(PredictionClassTraceAfter, methodtraces2HashMap);
@@ -267,8 +276,6 @@ public class AlgoFinal  {
 
 		}
 		
-
-	
 		
 		//////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////////////////////////
@@ -276,25 +283,43 @@ public class AlgoFinal  {
 		//////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////////////////////////
-			//////////////////////////////////////////////////////////////////////////////////////////
-			//////////////////////////////////////////////////////////////////////////////////////////
-			//////////////////////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////////////////////
 	int counter=0;
 		for (MethodTrace methodtrace : MethodTracesList) {
 			//INNER NODE 
+			
 			String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
 			MethodList Callers = new MethodList(); 
 			MethodList Callees = new MethodList(); 
 			MethodList CallersCallers = new MethodList(); 
-			if(MounaTechnique==true) {
+			if(XCallsTechnique==true) {
 					Callers = methodtrace.Method.getCallersShell(); 
 					Callees = methodtrace.Method.getCalleesShell(); 
 					CallersCallers= methodtrace.Method.getCallersCallersShell(); 
-
-			}else if(AchrafTechnique==true) {
+					
+					CallersCallers= MethodList.removeDuplicatesMethods(CallersCallers); 
+					Callees= MethodList.removeDuplicatesMethods(Callees); 
+					Callers= MethodList.removeDuplicatesMethods(Callers); 
+			}else if(ExecutedCallsTechnique==true) {
 				 	Callers = methodtrace.Method.getCallersExecuted(); 
 				 	Callees = methodtrace.Method.getCalleesExecuted(); 
 				 	CallersCallers= methodtrace.Method.getCallersCallersExecuted(); 
+				 	
+				 	CallersCallers= MethodList.removeDuplicatesMethods(CallersCallers); 
+					Callees= MethodList.removeDuplicatesMethods(Callees); 
+					Callers= MethodList.removeDuplicatesMethods(Callers); 
+
+			}else if(BasicTechnique==true) {
+				Callers = methodtrace.Method.Callers; 
+			 	Callees = methodtrace.Method.Callees; 
+			 	CallersCallers= methodtrace.Method.CallersofCallers; 
+			 	
+			 	CallersCallers= MethodList.removeDuplicatesMethods(CallersCallers); 
+				Callees= MethodList.removeDuplicatesMethods(Callees); 
+				Callers= MethodList.removeDuplicatesMethods(Callers); 
+			
 			}
 					//INNER METHOD 
 					if(!Callers.isEmpty() 
@@ -308,15 +333,16 @@ public class AlgoFinal  {
 
 						{
 							
-							if(!Callers.AllNs(methodtrace.Requirement, methodtraces2HashMap)
-							&& !Callees.AllNs(methodtrace.Requirement, methodtraces2HashMap)
-							&& !Callers.AllEs(methodtrace.Requirement, methodtraces2HashMap)
-							&& !Callees.AllEs(methodtrace.Requirement, methodtraces2HashMap)) {
+							if(!Callers.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)
+							&& !Callees.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)
+							&& !Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)
+							&& !Callees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)
+							) {
 								
-								methodtrace.SetPrediction(LogInfoHashMap,"T", "T,Pure");
+								methodtrace.SetPrediction(LogInfoHashMap,"T", "T,PureT");
 							
 						}else {
-							methodtrace.SetPrediction(LogInfoHashMap,"T", "T,Mixed");
+							methodtrace.SetPrediction(LogInfoHashMap,"T", "T,MixedT");
 
 						}
 						
@@ -324,37 +350,40 @@ public class AlgoFinal  {
 							
 							Callers.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)
 							&& 	Callees.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)
-
+							
 					)
 
 					{
 						
-						if(!Callers.AllTs(methodtrace.Requirement, methodtraces2HashMap)
-						&& !Callees.AllTs(methodtrace.Requirement, methodtraces2HashMap)
-						&& !Callers.AllEs(methodtrace.Requirement, methodtraces2HashMap)
-						&& !Callees.AllEs(methodtrace.Requirement, methodtraces2HashMap)) {
+						if(!Callers.AtLeast1T(methodtrace.Requirement, methodtraces2HashMap)
+						&& !Callees.AtLeast1T(methodtrace.Requirement, methodtraces2HashMap)
+						&& !Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)
+						&& !Callees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)
+					) {
 							
-							methodtrace.SetPrediction(LogInfoHashMap,"N", "N,Pure");
+							methodtrace.SetPrediction(LogInfoHashMap,"N", "N,PureN");
 						
 					}
 						else if(Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) 
-						&& Callees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) ) {
+						&& Callees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) 
+						) {
 									
-							methodtrace.SetPrediction(LogInfoHashMap,"E", "E,Incomplete");
+							methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteE");
 								
 						}
 						
 						else {
-						methodtrace.SetPrediction(LogInfoHashMap,"N", "N,Mixed");
+						methodtrace.SetPrediction(LogInfoHashMap,"N", "N,MixedN");
 
 					}
 					
 				}else if(Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)
-						|| Callees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)) {
-					methodtrace.SetPrediction(LogInfoHashMap,"E", "E,Incomplete");
+						|| Callees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)
+						) {
+					methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteE");
 
 				}else {
-					methodtrace.SetPrediction(LogInfoHashMap,"E", "E,Boundary");
+					methodtrace.SetPrediction(LogInfoHashMap,"E", "E,BoundaryE");
 
 				}
 					}
@@ -371,7 +400,7 @@ public class AlgoFinal  {
 					//LEAF METHOD  
 					
 					else if(!Callers.isEmpty() 
-							&& Callees.isEmpty()) {
+							&& Callees.isEmpty() && !CallersCallers.isEmpty()) {
 						if (
 								
 								Callers.AtLeast1T(methodtrace.Requirement, methodtraces2HashMap)
@@ -382,18 +411,18 @@ public class AlgoFinal  {
 
 						{
 							
-							if(!CallersCallers.AllNs(methodtrace.Requirement, methodtraces2HashMap)
-							&& !CallersCallers.AllEs(methodtrace.Requirement, methodtraces2HashMap)
-							&& !Callers.AllNs(methodtrace.Requirement, methodtraces2HashMap)
-							&& !Callers.AllEs(methodtrace.Requirement, methodtraces2HashMap)
+							if(!CallersCallers.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)
+							&& !CallersCallers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)
+							&& !Callers.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)
+							&& !Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)
 						
 							
 							) {
 								
-								methodtrace.SetPrediction(LogInfoHashMap,"T", "T,PureLeaf");
+								methodtrace.SetPrediction(LogInfoHashMap,"T", "T,PureLeafT");
 							
 						}else {
-							methodtrace.SetPrediction(LogInfoHashMap,"T", "T,MixedLeaf");
+							methodtrace.SetPrediction(LogInfoHashMap,"T", "T,MixedLeafT");
 
 						}
 						
@@ -406,24 +435,24 @@ public class AlgoFinal  {
 
 					{
 						
-						if(!CallersCallers.AllTs(methodtrace.Requirement, methodtraces2HashMap)
-						&& !CallersCallers.AllEs(methodtrace.Requirement, methodtraces2HashMap)
-						&& !Callers.AllTs(methodtrace.Requirement, methodtraces2HashMap)
-						&& !Callers.AllEs(methodtrace.Requirement, methodtraces2HashMap)
+						if(!CallersCallers.AtLeast1T(methodtrace.Requirement, methodtraces2HashMap)
+						&& !CallersCallers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)
+						&& !Callers.AtLeast1T(methodtrace.Requirement, methodtraces2HashMap)
+						&& !Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)
 						) {
 							
-							methodtrace.SetPrediction(LogInfoHashMap,"N", "N,PureLeaf");
+							methodtrace.SetPrediction(LogInfoHashMap,"N", "N,PureLeafN");
 						
 					}
 						else if(CallersCallers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) 
 						&& Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) ) {
 									
-							methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteLeaf");
+							methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteLeafE");
 								
 						}
 						
 						else {
-						methodtrace.SetPrediction(LogInfoHashMap,"N", "N,MixedLeaf");
+						methodtrace.SetPrediction(LogInfoHashMap,"N", "N,MixedLeafN");
 
 					}
 					
@@ -431,13 +460,17 @@ public class AlgoFinal  {
 						
 						|| Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) 
 						) {
-					methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteLeaf");
+					methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteLeafE");
 
 				}else {
-					methodtrace.SetPrediction(LogInfoHashMap,"E", "E,BoundaryLeaf");
+					methodtrace.SetPrediction(LogInfoHashMap,"E", "E,BoundaryLeafE");
 
 				}
 					}
+					
+//					else {
+//						methodtrace.SetPrediction(LogInfoHashMap,"E", "E");
+//					}
 		}
 		
 		
@@ -468,7 +501,7 @@ public class AlgoFinal  {
 		int ITERATION = 0;
 	//	MethodTracesHashmapValues=methodtraces2HashMap.values(); 
 
-		ComputeStepResults2(Step2PatternCumulative, OwnerClassPredictionValues, LogInfoHashMap, ProgramName, "Step 1 Cumulative", "Step 1 Prediction Values Cumulative", zeroPred); 
+//		ComputeStepResults2(Step2PatternCumulative, OwnerClassPredictionValues, LogInfoHashMap, ProgramName, "Step 1 Cumulative", "Step 1 Prediction Values Cumulative", zeroPred); 
 
 
 		
@@ -481,13 +514,13 @@ public class AlgoFinal  {
 				
 				int counter2=0; 
 				
-				for (MethodTrace methodtrace : MethodTracesHashmapValues) {
-					
-						methodtrace.UpdateCallersCallees(LogInfoHashMap);
-						counter2++; 
-						System.out.println("COUNTER2  "+counter2);
-				}	
-	
+//				for (MethodTrace methodtrace : MethodTracesHashmapValues) {
+//					
+//						methodtrace.UpdateCallersCallees(LogInfoHashMap);
+//						counter2++; 
+//						System.out.println("COUNTER2  "+counter2);
+//				}	
+//	
 				
 					
 					
@@ -556,15 +589,14 @@ public class AlgoFinal  {
 		
 
 		 LogInfo.updateInheritanceLogs(ProgramName, MethodTracesHashmapValues, LogInfoHashMap); 
-		ResetAllTraceSetFlags(methodtraces2HashMap);
 		 System.out.println("YES2");
-			ComputeStepResults(TotalPattern, TotalPredictionValues, LogInfoHashMap, ProgramName, "TOTAL  PREDICTION", "total prediction values", zeroPred); 
+//			ComputeStepResults(TotalPattern, TotalPredictionValues, LogInfoHashMap, ProgramName, "TOTAL  PREDICTION", "total prediction values", zeroPred); 
 
 		 
 
 		 
 		 
-//	 LogInfo.updateTableLog(ProgramName, MethodTracesHashmapValues, LogInfoHashMap);
+	 LogInfo.updateTableLog(ProgramName, MethodTracesHashmapValues, LogInfoHashMap);
 
 		 System.out.println("YES6");
 		 LogInfo.closeLogFile(); 
@@ -703,7 +735,7 @@ public class AlgoFinal  {
 	/************************************************************************************************************************************************/
 	/************************************************************************************************************************************************/
 	private LinkedHashMap<String, LogInfo> InitializeInputHashMapErrorSeeding(
-			List<MethodTrace> methodTracesHashmapValues, LinkedHashMap<String, LogInfo> logHashMapRemaining) {
+			List<MethodTrace> methodTracesHashmapValues, LinkedHashMap<String, LogInfo> LogInfoHashMap) {
 		// TODO Auto-generated method stub
 		int ErrorSeedingPercentage=(int)(Math.random() * 100 + 1);
 		int AmountofSeededErrors= ErrorSeedingPercentage*methodTracesHashmapValues.size()/100; 
@@ -712,8 +744,12 @@ public class AlgoFinal  {
 			int random = (int)(Math.random() * methodTracesHashmapValues.size());
 			if(methodTracesHashmapValues.get(random).getGold().equals("T")) {
 				methodTracesHashmapValues.get(random).setPrediction("N");
+				LogInfoHashMap.get(methodTracesHashmapValues.get(random).Requirement.ID+"-"+methodTracesHashmapValues.get(random).Method.ID).setPrediction("N");
 			}else if(methodTracesHashmapValues.get(random).getGold().equals("N")) {
 				methodTracesHashmapValues.get(random).setPrediction("T");
+				LogInfoHashMap.get(methodTracesHashmapValues.get(random).Requirement.ID+"-"+methodTracesHashmapValues.get(random).Method.ID).setPrediction("T");
+
+				
 			}
 			i++; 
 		}
@@ -722,22 +758,25 @@ public class AlgoFinal  {
 			
 			if(methodtrace.getPrediction().equals("E")) {
 				methodtrace.setPrediction(methodtrace.getGold());
+				LogInfoHashMap.get(methodtrace.Requirement.ID+"-"+methodtrace.Method.ID).setPrediction("E");
+
 
 			}
 			
 		}
 	
-		return logHashMapRemaining;
+		return LogInfoHashMap;
 	}
 
 	
 	/************************************************************************************************************************************************/
 	/************************************************************************************************************************************************/
 	private LinkedHashMap<String, LogInfo> InitializeInputHashMapIncompleteness(
-			List<MethodTrace> methodTracesHashmapValues, LinkedHashMap<String, LogInfo> logHashMapRemaining) {
+			List<MethodTrace> methodTracesHashmapValues, LinkedHashMap<String, LogInfo> LogInfoHashMap) {
 		// TODO Auto-generated method stub
 		for (MethodTrace methodtrace : methodTracesHashmapValues) {
 				methodtrace.setPrediction(methodtrace.getGold());
+				LogInfoHashMap.get(methodtrace.Requirement.ID+"-"+methodtrace.Method.ID).setPrediction(methodtrace.getGold());
 		}
 		
 		
@@ -747,30 +786,32 @@ public class AlgoFinal  {
 		while(i<AmountofSeededIncompleteness) {
 			int random = (int)(Math.random() * methodTracesHashmapValues.size());	
 			methodTracesHashmapValues.get(random).setPrediction("E");
+			LogInfoHashMap.get(methodTracesHashmapValues.get(random).Requirement.ID+"-"+methodTracesHashmapValues.get(random).Method.ID).setPrediction("E");
 			i++; 
 		}
 		
 		
 	
-		return logHashMapRemaining;
+		return LogInfoHashMap;
 	}
 
 	/************************************************************************************************************************************************/
 	/************************************************************************************************************************************************/
 	private LinkedHashMap<String, LogInfo> InitializeInputHashMapNoSeeding(
-			List<MethodTrace> methodTracesHashmapValues, LinkedHashMap<String, LogInfo> logHashMapRemaining) {
+			List<MethodTrace> methodTracesHashmapValues, LinkedHashMap<String, LogInfo> LogInfoHashMap) {
 		// TODO Auto-generated method stub
 		
 		
 		for (MethodTrace methodtrace : methodTracesHashmapValues) {
 			
 				methodtrace.setPrediction(methodtrace.getGold());
+				LogInfoHashMap.get(methodtrace.Requirement.ID+"-"+methodtrace.Method.ID).setPrediction(methodtrace.getGold());
 
 			
 			
 		}
 	
-		return logHashMapRemaining;
+		return LogInfoHashMap;
 	}
 
 	/************************************************************************************************************************************************/
@@ -896,7 +937,13 @@ public class AlgoFinal  {
 	
 	
 	
-	
+	public ArrayList<Method> intersection( MethodList callersShell, MethodList callersExecuted) {   
+	    ArrayList<Method> result = new ArrayList<Method>(callersShell);
+
+	    result.retainAll(callersExecuted);
+
+	    return result;
+	}
 	
 
 	
@@ -912,20 +959,20 @@ public class AlgoFinal  {
 	 * @throws Exception **********************************************************************************************************************************************/
 	public static void main(String[] args) throws Exception {
 		
-		for(int i=0; i<2; i++) {
+		for(int i=0; i<1; i++) {
 			System.out.println("========================> RUN "+i);
 			String ProgramName = "chess";
 			AlgoFinal frame = new AlgoFinal(
 					ProgramName);
-
+//
 			String ProgramName2 = "gantt";
-				 frame = new AlgoFinal(ProgramName2);
-////			
-//////			String ProgramName2 = "dummy";
-//////			AlgoFinal	 frame = new AlgoFinal(ProgramName2);
+			 frame = new AlgoFinal(ProgramName2);
+//			
+////			String ProgramName2 = "dummy";
+////			AlgoFinal	 frame = new AlgoFinal(ProgramName2);
 	////
 			String ProgramName3 = "itrust";
-				 frame = new AlgoFinal(ProgramName3);
+			 frame = new AlgoFinal(ProgramName3);
 
 				 //ooo
 				 

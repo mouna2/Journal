@@ -19,7 +19,7 @@ import static java.util.stream.Collectors.toCollection;
 
 import java.awt.Component;
 import java.lang.invoke.MethodHandle;
-public class Method {
+public class Method implements Comparable<Method>{
 	 boolean FirstTimeCallers=false; 
 	 boolean FirstTimeCallees=false; 
 	 public boolean VisitedFlag=false; 
@@ -894,6 +894,11 @@ private MethodList getInheritanceCallers(MethodList SuperclassCallers) {
 //		this.FirstTimeCallers=true; 
 		return Callers; 
 	
+	}
+
+	public int compareTo(Method o) {
+		// TODO Auto-generated method stub
+		return Integer.parseInt(this.ID)-Integer.parseInt(o.ID); 
 	}
 
 

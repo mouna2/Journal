@@ -20,7 +20,7 @@ import spoon.pattern.internal.SubstitutionRequestProvider;
 
 public class DatabaseInput {
 	
-	public static HashMap<String, Method> MethodHashMap = new HashMap<String, Method>();
+	public static LinkedHashMap<String, Method> MethodHashMap = new LinkedHashMap<String, Method>();
 
 	static HashMap<String, Clazz> ClassHashMap = new HashMap<String, Clazz>();
 	static HashMap<String, Requirement> RequirementHashMap = new HashMap<String, Requirement>();
@@ -247,7 +247,8 @@ public static void CreateMethodCallsExecutedHashMap(Connection conn) throws SQLE
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 	public static void CreateMethodHashMap(Connection conn) throws SQLException {
 		Statement st = conn.createStatement();
-		
+		int count=0; 
+		MethodHashMap = new LinkedHashMap<String, Method>();
 		ResultSet methods = st.executeQuery("select methods.* from methods ");
 		while (methods.next()) {
 
@@ -266,7 +267,8 @@ public static void CreateMethodCallsExecutedHashMap(Connection conn) throws SQLE
 			method.setOwner(clazz);
 			clazz.methods.add(method); 
 			MethodHashMap.put(methodid, method);
-		
+			count++; 
+			
 		}
 	for(Method method : MethodHashMap.values()) {
 		Clazz clazz=method.Owner;
@@ -309,7 +311,7 @@ public static void CreateMethodCallsExecutedHashMap(Connection conn) throws SQLE
 
 	public static void CreateClassHashMap(Connection conn) throws SQLException {
 		Statement st = conn.createStatement();
-
+		ClassHashMap= new HashMap<String, Clazz>();
 		ResultSet classes = st.executeQuery("select classes.* from classes ");
 		while (classes.next()) {
 
@@ -335,7 +337,7 @@ public static void CreateMethodCallsExecutedHashMap(Connection conn) throws SQLE
 
 public static void CreateRequirementsHashMap(Connection conn) throws SQLException {
 				Statement st = conn.createStatement();
-				
+				RequirementHashMap = new HashMap<String, Requirement>();
 				ResultSet requirements = st.executeQuery("select requirements.* from requirements ");
 				while (requirements.next()) {
 				
@@ -361,7 +363,7 @@ public static void CreateRequirementsHashMap(Connection conn) throws SQLExceptio
 		
 		//CLASSESHASHMAP
 		Statement st = conn.createStatement();
-	
+		classTraceHashMap=  new HashMap<String, ClassTrace2>();
 		
 		
 		 ResultSet myresults = st.executeQuery("SELECT tracesclasses.* from tracesclasses"); 
@@ -526,7 +528,8 @@ public static void CreateRequirementsHashMap(Connection conn) throws SQLExceptio
 		
 
 		Statement st = conn.createStatement();
-
+		OwnerTraceHashMap=new LinkedHashMap<String, String>();
+		SubjectTraceHashMap=  new LinkedHashMap<String, String>(); 
 		ResultSet myresults = st.executeQuery("SELECT traces.* from traces");
 
 		while (myresults.next()) {
@@ -545,12 +548,12 @@ public static void CreateRequirementsHashMap(Connection conn) throws SQLExceptio
 				MethodTrace.setSubjectN(myresults.getString("SubjectN"));
 			}
 		
-
 			MethodTrace.setGold(myresults.getString("goldfinal"));
 			String reqMethod=MethodTrace.Requirement.ID+"-"+MethodTrace.Method.ID; 
 			String reqClass=MethodTrace.Requirement.ID+"-"+MethodTrace.Method.Owner.ID;  
 
 			MethodTrace.Method.Owner.DeveloperGold=classTraceHashMap.get(reqClass).DeveloperGold; 
+			MethodTrace.setClassLevelGold(classTraceHashMap.get(reqClass).DeveloperGold);
 
 
 			

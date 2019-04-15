@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import mypackage.*;
-public class MethodList extends ArrayList<Method>{
+public class MethodList extends ArrayList<Method> {
 
 	
 	public OwnerClassList OwnerClasses= new OwnerClassList(); 
@@ -19,7 +19,7 @@ public class MethodList extends ArrayList<Method>{
 
 
 	
-
+	
 	
 	
 
@@ -245,7 +245,12 @@ public class MethodList extends ArrayList<Method>{
   
         // return the new list 
         return newList; 
-    } 
+    }
+
+
+
+
+	
 
 
 

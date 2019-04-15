@@ -779,74 +779,166 @@ public class LogInfo {
 //		System.out.println(MethodName);
 		MethodName=MethodName.replaceAll(",", "/"); 
 		RequirementName=RequirementName.replaceAll(",", "/"); 
-		String CallersList=toString3(Callers); 
-		String CallersOwnersList=toString3(CallersOwners); 
-		String CallersPredictionsList=toString3(CallersPredictions); 
-		String CalleesList=toString3(Callees); 
-		String CalleesOwnersList=toString3(CalleesOwners); 
-		String CalleesPredictionsList=toString3(CalleesPredictions); 
+		String CalleesList=""; 
+		String CalleesOwnersList=""; 
+		String CalleesPredictionsList=""; 
+		String CallersList=""; 
+		String CallersOwnersList=""; 
+		String CallersPredictionsList=""; 
+		String InterfaceCallerList=""; 
+		String InterfaceCallerOwnerList=""; 
+		String InterfaceCallerPredictionList=""; 
+		String ImplementationCallerList=""; 
+		String ImplementationCallerOwnerList=""; 
+		String ImplementationCallerPredictionList=""; 
+		String ChildrenCallerList=""; 
+		String ChildrenCallerOwnerList=""; 
+		String ChildrenCallerPredictionList=""; 
+		String ImplementationCalleeList=""; 
+		String ImplementationCalleeOwnerList=""; 
+		String ImplementationCalleePredictionList=""; 
+		String SuperclassCallerList=""; 
+		String SuperclassCallerOwnerList=""; 
+		String SuperclassCallerPredictionList=""; 
+		String ChildrenCalleesList=""; 
+		String ChildrenCalleeOwnerList=""; 
+		String	ChildrenCalleePredictionList=""; 
+		String SuperclassCalleesList=""; 
+		String SuperclassCalleesOwnerList=""; 
+		String SuperclassCalleesPredictionList=""; 
+		String ExtendedCalleesList=""; 
+		String ExtendedCalleesOwnerList=""; 
+		if(Callers!=null) {
+			 CallersList=toString3(Callers); 
+			 CallersOwnersList=toString3(CallersOwners); 
+			 CallersPredictionsList=toString3(CallersPredictions); 
+		}
+	if(Callees!=null) {
+		 CalleesList=toString3(Callees); 
+		 CalleesOwnersList=toString3(CalleesOwners); 
+		 CalleesPredictionsList=toString3(CalleesPredictions); 
+		
+	}
+	
+		if(InterfaceCallers!=null) {
+			 InterfaceCallerList=toString3(InterfaceCallers); 
+			 InterfaceCallerOwnerList=toString3(InterfaceCallersOwners); 
+			 InterfaceCallerPredictionList=toString3(InterfaceCallerPredictions); 
+		}
+		
+		if(ImplementationCallers!=null) {
+			 ImplementationCallerList=toString3(ImplementationCallers); 
+			 ImplementationCallerOwnerList=toString3(ImplementationCallersOwners); 
+			 ImplementationCallerPredictionList=toString3(ImplementationCallerPredictions); 
+			
+		}
+		
+		if(ChildrenCallers!=null) {
+			 ChildrenCallerList=toString3(ChildrenCallers); 
+			 ChildrenCallerOwnerList=toString3(ChildrenCallersOwners); 
+			 ChildrenCallerPredictionList=toString3(ChildrenCallerPredictions); 
+		}
 		
 		
-		String InterfaceCallerList=toString3(InterfaceCallers); 
-		String InterfaceCallerOwnerList=toString3(InterfaceCallersOwners); 
-		String InterfaceCallerPredictionList=toString3(InterfaceCallerPredictions); 
-		
-		String ImplementationCallerList=toString3(ImplementationCallers); 
-		String ImplementationCallerOwnerList=toString3(ImplementationCallersOwners); 
-		String ImplementationCallerPredictionList=toString3(ImplementationCallerPredictions); 
+		if(ImplementationCallees!=null) {
+			 ImplementationCalleeList=toString3(ImplementationCallees); 
+			 ImplementationCalleeOwnerList=toString3(ImplementationCalleesOwners); 
+			 ImplementationCalleePredictionList=toString3(ImplementationCalleePredictions); 
+		}
 		
 		
-		String ChildrenCallerList=toString3(ChildrenCallers); 
-		String ChildrenCallerOwnerList=toString3(ChildrenCallersOwners); 
-		String ChildrenCallerPredictionList=toString3(ChildrenCallerPredictions); 
+		if(SuperclassCallers!=null) {
+			 SuperclassCallerList=toString3(SuperclassCallers); 
+			 SuperclassCallerOwnerList=toString3(SuperclassCallersOwners); 
+			 SuperclassCallerPredictionList=toString3(SuperclassCallerPredictions); 
+		}
 		
+		if(ChildrenCallees!=null) {
+			 ChildrenCalleesList=toString3(ChildrenCallees); 
+			 ChildrenCalleeOwnerList=toString3(ChildrenCalleesOwners); 
+			 ChildrenCalleePredictionList=toString3(ChildrenCalleePredictions); 
+		}
 		
-		String ImplementationCalleeList=toString3(ImplementationCallees); 
-		String ImplementationCalleeOwnerList=toString3(ImplementationCalleesOwners); 
-		String ImplementationCalleePredictionList=toString3(ImplementationCalleePredictions); 
+		if(SuperclassCallees!=null) {
+			 SuperclassCalleesList=toString3(SuperclassCallees); 
+			 SuperclassCalleesOwnerList=toString3(SuperclassCalleesOwners); 
+			 SuperclassCalleesPredictionList=toString3(SuperclassCalleePredictions); 
+		}
 		
-		
-		String SuperclassCallerList=toString3(SuperclassCallers); 
-		String SuperclassCallerOwnerList=toString3(SuperclassCallersOwners); 
-		String SuperclassCallerPredictionList=toString3(SuperclassCallerPredictions); 
-		
-		String ChildrenCalleesList=toString3(ChildrenCallees); 
-		String ChildrenCalleeOwnerList=toString3(ChildrenCalleesOwners); 
-		String ChildrenCalleePredictionList=toString3(ChildrenCalleePredictions); 
-		
-		String SuperclassCalleesList=toString3(SuperclassCallees); 
-		String SuperclassCalleesOwnerList=toString3(SuperclassCalleesOwners); 
-		String SuperclassCalleesPredictionList=toString3(SuperclassCalleePredictions); 
-		
-		
-		String ExtendedCalleesList=toString3(ExtendedCalleesFinal); 
-		String ExtendedCalleesPredictionsList=toString3(ExtendedCalleesPredictionsFinal); 
-		String ExtendedCallersList=toString3(ExtendedCallersFinal); 
-		String ExtendedCallersPredictionsList=toString3(ExtendedCallersPredictionsFinal); 
-		String ExtendedOwnerCalleesList=toString3(ExtendedOwnerCalleesFinal); 
-		String ExtendedOwnerCallersList=toString3(ExtendedOwnerCallersFinal); 
-		
-		String CalleesCalleesInterfaceInheritanceList=toString3(CalleesCalleesInterfaceInheritance); 
-		String CalleesCalleesInterfaceInheritanceOwnersList		 =toString3(CalleesCalleesInterfaceInheritanceOwners); 
-		String CalleesCalleesInterfaceInheritancePredictionsList       =toString3(CalleesCalleesInterfaceInheritancePredictions); 
-		String ExecutedCalleesList=toString3(ExecutedCallees); 
-		String ExecutedCalleesPredictionsList=toString3(ExecutedCalleesPredictions); 
-		String ExecutedCallersList=toString3(ExecutedCallers); 
-		String ExecutedCallersPredictionsList=toString3(ExecutedCallersPredictions); 
-		String ExecutedOwnerCalleesList=toString3(ExecutedOwnerCallees); 
-		String ExecutedOwnerCallersList=toString3(ExecutedOwnerCallers); 
+		String ExtendedCalleesPredictionsList=""; 
+		if(ExtendedCalleesFinal!=null) {
+			 ExtendedCalleesList=toString3(ExtendedCalleesFinal); 
+			 ExtendedCalleesPredictionsList=toString3(ExtendedCalleesPredictionsFinal); 
+		}
+		String ExtendedCallersList=""; 
+		String ExtendedCallersPredictionsList=""; 
+		if(ExtendedCallersFinal!=null) {
+		 ExtendedCallersList=toString3(ExtendedCallersFinal); 
+		 ExtendedCallersPredictionsList=toString3(ExtendedCallersPredictionsFinal); 
+		}
+		String ExtendedOwnerCalleesList=""; 
+		String ExtendedOwnerCallersList=""; 
+		if(ExtendedOwnerCalleesFinal!=null) {
+			 ExtendedOwnerCalleesList=toString3(ExtendedOwnerCalleesFinal); 
+			 ExtendedOwnerCallersList=toString3(ExtendedOwnerCallersFinal); 
+		}
+		String CalleesCalleesInterfaceInheritanceList=""; 
+		String CalleesCalleesInterfaceInheritanceOwnersList=""; 
+		String CalleesCalleesInterfaceInheritancePredictionsList=""; 
+		if(CalleesCalleesInterfaceInheritance!=null) {
+			 CalleesCalleesInterfaceInheritanceList=toString3(CalleesCalleesInterfaceInheritance); 
+			 CalleesCalleesInterfaceInheritanceOwnersList		 =toString3(CalleesCalleesInterfaceInheritanceOwners); 
+			 CalleesCalleesInterfaceInheritancePredictionsList       =toString3(CalleesCalleesInterfaceInheritancePredictions); 
+		}
+		String ExecutedCalleesList=""; 
+		String ExecutedCalleesPredictionsList=""; 
+	if(ExecutedCallees!=null) {
+		 ExecutedCalleesList=toString3(ExecutedCallees); 
+		 ExecutedCalleesPredictionsList=toString3(ExecutedCalleesPredictions); 
+	}
+	String ExecutedCallersList=""; 
+	String ExecutedCallersPredictionsList=""; 
+	if(ExecutedCallers!=null) {
+		 ExecutedCallersList=toString3(ExecutedCallers); 
+		 ExecutedCallersPredictionsList=toString3(ExecutedCallersPredictions); 
+	}
+	String ExecutedOwnerCalleesList=""; 
+		if(ExecutedOwnerCallees!=null) {
+			 ExecutedOwnerCalleesList=toString3(ExecutedOwnerCallees); 
+
+		}
+		String ExecutedOwnerCallersList=""; 
+		if(ExecutedOwnerCallers!=null) {
+		 ExecutedOwnerCallersList=toString3(ExecutedOwnerCallers); 
+		}
 		String reqClass= RequirementID+"-"+ClassID; 
-		String iterfaces= toString3(Interfaces); 
-		
-		
-		String parentsList = toString3(Parents); 
-		String parentsPredictionList = toString3(ParentsPredictions); 
-		String childrenList = toString3(Children); 
-		String childrenPredictionList = toString3(ChildrenPredictions); 
-		String interfaceList = toString3(Interfaces); 
-		String interfacePredictionList = toString3(InterfacesPredictions); 
-		String implementationList = toString3(Implementations); 
-		String implementationPredictionList = toString3(ImplementationPredictions); 
+		String iterfaces=""; 
+		if(Interfaces!=null)
+		 iterfaces= toString3(Interfaces); 
+		String parentsList=""; 
+		if(Parents!=null)
+		 parentsList = toString3(Parents);
+		String parentsPredictionList=""; 
+		if(ParentsPredictions!=null)
+		 parentsPredictionList = toString3(ParentsPredictions); 
+		String childrenList=""; 
+		if(Children!=null)
+		 childrenList = toString3(Children); 
+		String childrenPredictionList=""; 
+		if(ChildrenPredictions!=null)
+		 childrenPredictionList = toString3(ChildrenPredictions); 
+		String interfaceList=""; 
+		if(Interfaces!=null)
+		 interfaceList = toString3(Interfaces); 
+		String interfacePredictionList=""; 
+		if(InterfacesPredictions!=null)
+		 interfacePredictionList = toString3(InterfacesPredictions); 
+		String implementationList=""; 
+		if(Implementations!=null)
+		 implementationList = toString3(Implementations); 
+		String implementationPredictionList=""; 
+		if(ImplementationPredictions!=null)
+		 implementationPredictionList = toString3(ImplementationPredictions); 
 
 		
 		
@@ -1168,52 +1260,58 @@ public class LogInfo {
 			PredictionEvaluation Pattern, String ProgramName,  PredictionValues ownerClassPredictionValues, LinkedHashMap<String, LogInfo> logInfoHashMap) throws SQLException {
 		// TODO Auto-generated method stub
 	Pattern.ResetCounters(Pattern);
-
+int count=0; 
 		for (String mykey : methodTraceHashMap.keySet()) {
 			MethodTrace methodTrace = methodTraceHashMap.get(mykey);
 			
-			if(ProgramName.equals("gantt")|| ProgramName.equals("jhotdraw")){
-				if(methodTrace.isTraceSet()) {
-					String Result="E"; 
-					Pattern.UpdateCounters(Result, Pattern);
-
-				}
+			if((ProgramName.equals("gantt")|| ProgramName.equals("jhotdraw") )&& AlgoFinal.MethodLevelTraces==true){
+				
 				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
-//						&& methodTraceHashMap.get(mykey).isSubjectDeveloperEqualityFlag()
-						&& !methodTrace.isTraceSet() ) {
+						&& methodTrace.isTraceSet() ) {
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().trim());
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
 					
-					if(!Result.equals("E")) {
-						methodTrace.setTraceSet(true);
-					}
+					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getPrediction().trim());
+
 
 				}
 				
-				ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getPrediction().trim());
 
-			}else if(ProgramName.equals("chess")|| ProgramName.equals("itrust") ) {
-				if(methodTrace.isTraceSet()) {
-					String Result="E"; 
+			}
+			else if((ProgramName.equals("gantt")|| ProgramName.equals("jhotdraw")) && AlgoFinal.ClassLevelTraces==true){
+				System.out.println(mykey+" "+methodTrace.getClassLevelGold());
+				
+				if (methodTrace.getClassLevelGold() != null && methodTrace.getPrediction() != null 
+						&& methodTrace.isTraceSet() ) {
+					String Result = Pattern.ComparePredictionToGold(methodTrace.getClassLevelGold().trim(),methodTrace.getPrediction().trim());
+					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
+					
+					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getPrediction().trim());
+
 
 				}
+				
+
+			}
+			
+			
+			
+			else if(ProgramName.equals("chess")|| ProgramName.equals("itrust") ) {
+				
 				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
-						&& !methodTrace.isTraceSet()) {
+						&& methodTrace.isTraceSet()) {
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),
 							methodTrace.getPrediction().trim());
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
-					if(!Result.equals("E")) {
-						methodTrace.setTraceSet(true);
-
-					}
-				
+					
+					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getPrediction().trim());
+					
 
 
 				}
-				ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getPrediction().trim());
 
 			}
 
@@ -1224,7 +1322,8 @@ public class LogInfo {
 
 		}
 		System.out.println(Pattern.toString());
-
+		System.out.println(count);
+		System.out.println(count);
 	}
 	
 	
@@ -1783,19 +1882,31 @@ public class LogInfo {
 	}
 	public static void CheckCallersCalleesSymmetry() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub
+		boolean XCallers=false; 
+		boolean ExecutedCallers=true; 
+		boolean BasicCallers=false; 
 		HashMap<Method, List<Method>>	CallerHashMap= new HashMap<Method, List<Method>>(); 
 		HashMap<Method, List<Method>>	CalleeHashMap= new HashMap<Method, List<Method>>(); 
 		for (String methodKey : DatabaseInput.MethodHashMap.keySet()) {
 			Method method = DatabaseInput.MethodHashMap.get(methodKey); 
-			CallerHashMap.put(method, method.getCallersShell()); 
-			CalleeHashMap.put(method, method.getCalleesShell()); 	
-		}	
+			if(XCallers==true) {
+				CallerHashMap.put(method, method.getCallersShell()); 
+				CalleeHashMap.put(method, method.getCalleesShell()); 	
+			}
+			else if(ExecutedCallers==true) {
+				CallerHashMap.put(method, method.getCallersExecuted()); 
+				CalleeHashMap.put(method, method.getCalleesExecuted()); 	
+			
+			}	else if(BasicCallers==true) {
+				CallerHashMap.put(method, method.Callers); 
+				CalleeHashMap.put(method, method.Callees); 	
+			}
 		for(Method calleekey: CallerHashMap.keySet()){
 			List<Method> callermethods = CallerHashMap.get(calleekey); 
 			for(Method caller: callermethods) {
 				if(caller!=null && calleekey!=null && CalleeHashMap.get(caller)!=null && !CalleeHashMap.isEmpty()) {
 					if(CalleeHashMap.get(caller).contains(calleekey)) {
-						System.out.println("yes");
+//						System.out.println("yes");
 					}else {
 						System.out.println("no");
 					}
@@ -1805,6 +1916,6 @@ public class LogInfo {
 		}
 	}
 
-
+	}
 
 }

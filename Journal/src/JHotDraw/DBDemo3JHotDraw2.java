@@ -133,7 +133,7 @@ public class DBDemo3JHotDraw2 {
 		Properties connectionProps = new Properties();
 		connectionProps.put("root", this.userName);
 		connectionProps.put("123456", this.password);
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/databasejhotdraw","root","123456");
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/databasejhotdraw?useLegacyDatetimeCode=false&serverTimezone=UTC","root","123456");
 
 		return conn;
 	}
@@ -1960,7 +1960,7 @@ String CallerExecutedClassID=null;
 String  CallerExecutedMethodID=null; 
 String CalleeExecutedClassID = null; 
 String  CalleeExecutedMethodID=null; 
-System.out.println(line);
+//System.out.println(line);
 String[] lines = line.split("---"); 
 String Caller= lines[0]; 
 String Callee= lines[1]; 
@@ -1976,7 +1976,7 @@ String CallerClass=  CallerNonParameters.substring(0, CallerNonParameters.lastIn
 String CallerMethod=  CallerNonParameters.substring(CallerNonParameters.lastIndexOf(".")+1, CallerNonParameters.length())+CallerParameters.trim(); 
 String CalleeClass=  CalleeNonParameters.substring(0, CalleeNonParameters.lastIndexOf(".")).trim(); 
 String CalleeMethod=  CalleeNonParameters.substring(CalleeNonParameters.lastIndexOf(".")+1, CalleeNonParameters.length())+CalleeParameters.trim(); 
-System.out.println("yes");
+//System.out.println("yes");
 
 ResultSet rs= st.executeQuery("SELECT * from classes where classes.classname='"+CallerClass+"'"); 
 while(rs.next()) {
@@ -2005,9 +2005,13 @@ if(CalleeExecutedClassID!=null && CallerExecutedMethodID!=null   && CallerExecut
 				st.executeUpdate(statement);
 	}
 
+}else {
+	System.out.println("CALLER === "+CallerClass+" "+CallerMethod);
+	System.out.println("CALLEE ==="+CalleeClass+" "+CalleeMethod);
+	System.out.println();
 }
 
-System.out.println("yes");
+//System.out.println("yes");
 counter++; 
 }
 

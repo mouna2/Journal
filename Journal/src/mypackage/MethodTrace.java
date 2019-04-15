@@ -26,9 +26,9 @@ public final class MethodTrace {
 	public String likelihood;
 	public String why;
 	boolean SubjectDeveloperEqualityFlag;
-	
+	public String  ClassLevelGold; 
 
-	public boolean TraceSet; 
+	public boolean TraceSet=false; 
 
 	public String SubjectT; 
 	public String SubjectN; 
@@ -44,6 +44,14 @@ public final class MethodTrace {
 	
 	
 	
+
+	public String getClassLevelGold() {
+		return ClassLevelGold;
+	}
+
+	public void setClassLevelGold(String classLevelGold) {
+		ClassLevelGold = classLevelGold;
+	}
 
 	public String getSubjectT() {
 		return SubjectT;
@@ -151,8 +159,9 @@ public final class MethodTrace {
 
 
 	/************************************************************************************************************************************************/
-	/************************************************************************************************************************************************/
-	public void SetPrediction(LinkedHashMap<String, LogInfo> LogInfoHashMap, String Pred, String reason)
+	/**
+	 * @throws CloneNotSupportedException **********************************************************************************************************************************************/
+	public void SetPrediction(LinkedHashMap<String, LogInfo> LogInfoHashMap, String Pred, String reason) throws CloneNotSupportedException
 			
 			
 			{
@@ -161,10 +170,11 @@ public final class MethodTrace {
 			
 		
 			this.prediction=Pred; 
-
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(Pred);
 			modified=true; 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(reason);
-			
+			this.TraceSet=true; 
+			this.UpdateCallersCallees(LogInfoHashMap);
 //		}
 
 
@@ -349,7 +359,7 @@ public final class MethodTrace {
 //		}
 		
 		
-		
+		setPrediction(this.prediction);
 		////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////
@@ -376,8 +386,8 @@ public final class MethodTrace {
 		////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////
 		//EXECUTED CALLERS 
-		if(AlgoFinal.ProgramName.equals("chess")) {
-		for(Method ExecutedCaller: this.Method.CallersExecuted) {
+//		if(AlgoFinal.ProgramName.equals("chess")) {
+		for(Method ExecutedCaller: this.Method.getCallersExecuted()) {
 			if(ExecutedCaller!=null) {
 				ExecutedCallers.add(ExecutedCaller.toString()); 
 				SetPredictionsSetOwners(ExecutedCaller, this, ExecutedCallersPredictions, ExecutedCallersOwners); 
@@ -385,14 +395,14 @@ public final class MethodTrace {
 			
 			
 			
-		}
+//		}
 		////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////
 		
 			
 		
 		//EXECUTED CALLEES
-		for(Method ExecutedCallee: this.Method.CalleesExecuted) {
+		for(Method ExecutedCallee: this.Method.getCalleesExecuted()) {
 			if(ExecutedCallee!=null) {
 				ExecutedCallees.add(ExecutedCallee.toString()); 
 				SetPredictionsSetOwners(ExecutedCallee, this, ExecutedCalleesPredictions, ExecutedCalleesOwners); 
