@@ -14,6 +14,7 @@ import ALGO.DatabaseInput;
 import ALGO.MethodList;
 import ALGO.OwnerClassList;
 import Chess.LogInfo;
+import Chess.PredictionEvaluation;
 import spoon.pattern.internal.SubstitutionRequestProvider;
 
 public final class MethodTrace {
@@ -32,7 +33,8 @@ public final class MethodTrace {
 
 	public String SubjectT; 
 	public String SubjectN; 
-	
+	public PredictionEvaluation PredictionEvaluation= new PredictionEvaluation(); 
+	public ALGO.PredictionValues PredictionValues= new ALGO.PredictionValues(); 
 
 
 	
@@ -168,13 +170,14 @@ public final class MethodTrace {
 
 //		if(this.prediction.trim().equals("E")) {
 			
-		
+			
 			this.prediction=Pred; 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(Pred);
 			modified=true; 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(reason);
 			this.TraceSet=true; 
 			this.UpdateCallersCallees(LogInfoHashMap);
+			
 //		}
 
 

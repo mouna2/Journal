@@ -6,7 +6,49 @@ public class PredictionEvaluation {
 	public int FalsePositive=0; 
 	public int FalseNegative=0;
 	public int E=0; 
+	public boolean TPMixed=false; 
+	public boolean TNMixed=false; 
+	public boolean FPMixed=false; 
+	public boolean FNMixed=false;
+	public boolean EBoundary=false; 
+	public boolean TPMixedLeaf=false; 
+	public boolean TNMixedLeaf=false; 
+	public boolean FPMixedLeaf=false; 
+	public boolean FNMixedLeaf=false;
+	public boolean EIncomplete=false; 
 	
+	public boolean TPPure=false; 
+	public boolean TNPure=false; 
+	public boolean FPPure=false; 
+	public boolean FNPure=false;
+	public boolean EBoundaryLeaf=false; 
+	public boolean TPPureLeaf=false; 
+	public boolean TNPureLeaf=false; 
+	public boolean FPPureLeaf=false; 
+	public boolean FNPureLeaf=false;
+	public boolean EIncompleteLeaf=false; 
+	
+	public int TPMixedCount=0; 
+	public int TNMixedCount=0; 
+	public int FPMixedCount=0; 
+	public int FNMixedCount=0;
+	public int EBoundaryCount=0; 
+	public int TPMixedLeafCount=0; 
+	public int TNMixedLeafCount=0; 
+	public int FPMixedLeafCount=0; 
+	public int FNMixedLeafCount=0;
+	public int EIncompleteCount=0; 
+	
+	public int TPPureCount=0; 
+	public int TNPureCount=0; 
+	public int FPPureCount=0; 
+	public int FNPureCount=0;
+	public int EBoundaryLeafCount=0; 
+	public int TPPureLeafCount=0; 
+	public int TNPureLeafCount=0; 
+	public int FPPureLeafCount=0; 
+	public int FNPureLeafCount=0;
+	public int EIncompleteLeafCount=0; 
 	
 	public int getE() {
 		return E;
