@@ -331,15 +331,15 @@ public class PrecisionRecallComparisonExecCallsXCalls {
 				
 				for(Method XCalleesExecCallee: XCalleesExecCallees) {
 					if(XCallees.contains(XCalleesExecCallee) && CalleesExecuted.contains(XCalleesExecCallee)) {
-						bwfile1chessXCalleesExecCallees.write(method+"/"+XCalleesExecCallee+"/"+"TP/"+XCalleesExecCallee+"/"); 
+						bwfile1chessXCalleesExecCallees.write(method+"/"+"TP/"+XCalleesExecCallee+"/"); 
 					}else if(XCallees.contains(XCalleesExecCallee) && !CalleesExecuted.contains(XCalleesExecCallee)) {
-						bwfile1chessXCalleesExecCallees.write(method+"/"+XCalleesExecCallee+"/"+"FP/"+XCalleesExecCallee+"/"); 
+						bwfile1chessXCalleesExecCallees.write(method+"/"+"FP/"+XCalleesExecCallee+"/"); 
 
 					}else if(!XCallees.contains(XCalleesExecCallee) && CalleesExecuted.contains(XCalleesExecCallee)) {
-						bwfile1chessXCalleesExecCallees.write(method+"/"+XCalleesExecCallee+"/"+"FN/"+XCalleesExecCallee+"/"); 
+						bwfile1chessXCalleesExecCallees.write(method+"/"+"FN/"+XCalleesExecCallee+"/"); 
 
 					}else if(!XCallees.contains(XCalleesExecCallee) && !CalleesExecuted.contains(XCalleesExecCallee)) {
-						bwfile1chessXCalleesExecCallees.write(method+"/"+XCalleesExecCallee+"/"+"TN/"+XCalleesExecCallee+"/"); 
+						bwfile1chessXCalleesExecCallees.write(method+"/"+"TN/"+XCalleesExecCallee+"/"); 
 
 					}
 					bwfile1chessXCalleesExecCallees.newLine();
@@ -360,15 +360,15 @@ public class PrecisionRecallComparisonExecCallsXCalls {
 				
 				for(Method BasicCalleesExecCallee: BasicCalleesExecCallees) {
 					if(BasicCallees.contains(BasicCalleesExecCallee) && CalleesExecuted.contains(BasicCalleesExecCallee)) {
-						bwfile1chessCalleesExecCallees.write(method+"/"+BasicCalleesExecCallee+"/"+"TP/"+BasicCalleesExecCallee+"/"); 
+						bwfile1chessCalleesExecCallees.write(method+"/"+"TP/"+BasicCalleesExecCallee+"/"); 
 					}else if(BasicCallees.contains(BasicCalleesExecCallee) && !CalleesExecuted.contains(BasicCalleesExecCallee)) {
-						bwfile1chessCalleesExecCallees.write(method+"/"+BasicCalleesExecCallee.ID+"/"+"FP/"+BasicCalleesExecCallee+"/"); 
+						bwfile1chessCalleesExecCallees.write(method+"/"+"FP/"+BasicCalleesExecCallee+"/"); 
 
 					}else if(!BasicCallees.contains(BasicCalleesExecCallee) && CalleesExecuted.contains(BasicCalleesExecCallee)) {
-						bwfile1chessCalleesExecCallees.write(method+"/"+BasicCalleesExecCallee+"/"+"FN/"+BasicCalleesExecCallee+"/"); 
+						bwfile1chessCalleesExecCallees.write(method+"/"+"FN/"+BasicCalleesExecCallee+"/"); 
 
 					}else if(!BasicCallees.contains(BasicCalleesExecCallee) && !CalleesExecuted.contains(BasicCalleesExecCallee)) {
-						bwfile1chessCalleesExecCallees.write(method+"/"+BasicCalleesExecCallee+"/"+"TN/"+BasicCalleesExecCallee+"/"); 
+						bwfile1chessCalleesExecCallees.write(method+"/"+"TN/"+BasicCalleesExecCallee+"/"); 
 
 					}
 					bwfile1chessCalleesExecCallees.newLine();
@@ -421,15 +421,15 @@ public class PrecisionRecallComparisonExecCallsXCalls {
 					
 					for(Method XCalleesExecCallee: XCalleesExecCallees) {
 						if(XCallees.contains(XCalleesExecCallee) && CalleesExecuted.contains(XCalleesExecCallee)) {
-							bwfile1ganttXCalleesExecCallees.write(method+"/"+XCalleesExecCallee+"/"+"TP/"+XCalleesExecCallee+"/"); 
+							bwfile1ganttXCalleesExecCallees.write(method+"/"+"TP/"+XCalleesExecCallee+"/"); 
 						}else if(XCallees.contains(XCalleesExecCallee) && !CalleesExecuted.contains(XCalleesExecCallee)) {
-							bwfile1ganttXCalleesExecCallees.write(method+"/"+XCalleesExecCallee+"/"+"FP/"+XCalleesExecCallee+"/"); 
+							bwfile1ganttXCalleesExecCallees.write(method+"/"+"FP/"+XCalleesExecCallee+"/"); 
 
 						}else if(!XCallees.contains(XCalleesExecCallee) && CalleesExecuted.contains(XCalleesExecCallee)) {
-							bwfile1ganttXCalleesExecCallees.write(method+"/"+XCalleesExecCallee+"/"+"FN/"+XCalleesExecCallee+"/"); 
+							bwfile1ganttXCalleesExecCallees.write(method+"/"+"FN/"+XCalleesExecCallee+"/"); 
 
 						}else if(!XCallees.contains(XCalleesExecCallee) && !CalleesExecuted.contains(XCalleesExecCallee)) {
-							bwfile1ganttXCalleesExecCallees.write(method+"/"+XCalleesExecCallee+"/"+"TN/"+XCalleesExecCallee+"/"); 
+							bwfile1ganttXCalleesExecCallees.write(method+"/"+"TN/"+XCalleesExecCallee+"/"); 
 
 						}
 						bwfile1ganttXCalleesExecCallees.newLine();
@@ -449,15 +449,15 @@ public class PrecisionRecallComparisonExecCallsXCalls {
 					
 					for(Method BasicCalleesExecCallee: BasicCalleesExecCallees) {
 						if(BasicCallees.contains(BasicCalleesExecCallee) && CalleesExecuted.contains(BasicCalleesExecCallee)) {
-							bwfile1ganttCalleesExecCallees.write(method+"/"+BasicCalleesExecCallee+"/"+"TP/"+BasicCalleesExecCallee+"/"); 
+							bwfile1ganttCalleesExecCallees.write(method+"/"+"TP/"+BasicCalleesExecCallee+"/"); 
 						}else if(BasicCallees.contains(BasicCalleesExecCallee) && !CalleesExecuted.contains(BasicCalleesExecCallee)) {
-							bwfile1ganttCalleesExecCallees.write(method+"/"+BasicCalleesExecCallee+"/"+"FP/"+BasicCalleesExecCallee+"/"); 
+							bwfile1ganttCalleesExecCallees.write(method+"/"+"FP/"+BasicCalleesExecCallee+"/"); 
 
 						}else if(!BasicCallees.contains(BasicCalleesExecCallee) && CalleesExecuted.contains(BasicCalleesExecCallee)) {
-							bwfile1ganttCalleesExecCallees.write(method+"/"+BasicCalleesExecCallee+"/"+"FN/"+BasicCalleesExecCallee+"/"); 
+							bwfile1ganttCalleesExecCallees.write(method+"/"+"FN/"+BasicCalleesExecCallee+"/"); 
 
 						}else if(!BasicCallees.contains(BasicCalleesExecCallee) && !CalleesExecuted.contains(BasicCalleesExecCallee)) {
-							bwfile1ganttCalleesExecCallees.write(method+"/"+BasicCalleesExecCallee+"/"+"TN/"+BasicCalleesExecCallee+"/"); 
+							bwfile1ganttCalleesExecCallees.write(method+"/"+"TN/"+BasicCalleesExecCallee+"/"); 
 
 						}
 						bwfile1ganttCalleesExecCallees.newLine();
@@ -509,15 +509,15 @@ public class PrecisionRecallComparisonExecCallsXCalls {
 						
 						for(Method XCalleesExecCallee: XCalleesExecCallees) {
 							if(XCallees.contains(XCalleesExecCallee) && CalleesExecuted.contains(XCalleesExecCallee)) {
-								bwfile1jhotdrawXCalleesExecCallees.write(method+"/"+XCalleesExecCallee+"/"+"TP/"+XCalleesExecCallee+"/"); 
+								bwfile1jhotdrawXCalleesExecCallees.write(method+"/"+"TP/"+XCalleesExecCallee+"/"); 
 							}else if(XCallees.contains(XCalleesExecCallee) && !CalleesExecuted.contains(XCalleesExecCallee)) {
-								bwfile1jhotdrawXCalleesExecCallees.write(method+"/"+XCalleesExecCallee+"/"+"FP/"+XCalleesExecCallee+"/"); 
+								bwfile1jhotdrawXCalleesExecCallees.write(method+"/"+"FP/"+XCalleesExecCallee+"/"); 
 
 							}else if(!XCallees.contains(XCalleesExecCallee) && CalleesExecuted.contains(XCalleesExecCallee)) {
-								bwfile1jhotdrawXCalleesExecCallees.write(method+"/"+XCalleesExecCallee+"/"+"FN/"+XCalleesExecCallee+"/"); 
+								bwfile1jhotdrawXCalleesExecCallees.write(method+"/"+"FN/"+XCalleesExecCallee+"/"); 
 
 							}else if(!XCallees.contains(XCalleesExecCallee) && !CalleesExecuted.contains(XCalleesExecCallee)) {
-								bwfile1jhotdrawXCalleesExecCallees.write(method+"/"+XCalleesExecCallee+"/"+"TN/"+XCalleesExecCallee+"/"); 
+								bwfile1jhotdrawXCalleesExecCallees.write(method+"/"+"TN/"+XCalleesExecCallee+"/"); 
 
 							}
 							bwfile1jhotdrawXCalleesExecCallees.newLine();
@@ -537,15 +537,15 @@ public class PrecisionRecallComparisonExecCallsXCalls {
 						
 						for(Method BasicCalleesExecCallee: BasicCalleesExecCallees) {
 							if(BasicCallees.contains(BasicCalleesExecCallee) && CalleesExecuted.contains(BasicCalleesExecCallee)) {
-								bwfile1jhotdrawCalleesExecCallees.write(method+"/"+BasicCalleesExecCallee+"/"+"TP/"+BasicCalleesExecCallee+"/"); 
+								bwfile1jhotdrawCalleesExecCallees.write(method+"/"+"TP/"+BasicCalleesExecCallee+"/"); 
 							}else if(BasicCallees.contains(BasicCalleesExecCallee) && !CalleesExecuted.contains(BasicCalleesExecCallee)) {
-								bwfile1jhotdrawCalleesExecCallees.write(method+"/"+BasicCalleesExecCallee+"/"+"FP/"+BasicCalleesExecCallee+"/"); 
+								bwfile1jhotdrawCalleesExecCallees.write(method+"/"+"FP/"+BasicCalleesExecCallee+"/"); 
 
 							}else if(!BasicCallees.contains(BasicCalleesExecCallee) && CalleesExecuted.contains(BasicCalleesExecCallee)) {
-								bwfile1jhotdrawCalleesExecCallees.write(method+"/"+BasicCalleesExecCallee+"/"+"FN/"+BasicCalleesExecCallee+"/"); 
+								bwfile1jhotdrawCalleesExecCallees.write(method+"/"+"FN/"+BasicCalleesExecCallee+"/"); 
 
 							}else if(!BasicCallees.contains(BasicCalleesExecCallee) && !CalleesExecuted.contains(BasicCalleesExecCallee)) {
-								bwfile1jhotdrawCalleesExecCallees.write(method+"/"+BasicCalleesExecCallee+"/"+"TN/"+BasicCalleesExecCallee+"/"); 
+								bwfile1jhotdrawCalleesExecCallees.write(method+"/"+"TN/"+BasicCalleesExecCallee+"/"); 
 
 							}
 							bwfile1jhotdrawCalleesExecCallees.newLine();
@@ -595,15 +595,15 @@ public class PrecisionRecallComparisonExecCallsXCalls {
 							
 							for(Method XCalleesExecCallee: XCalleesExecCallees) {
 								if(XCallees.contains(XCalleesExecCallee) && CalleesExecuted.contains(XCalleesExecCallee)) {
-									bwfile1itrustXCalleesExecCallees.write(method+"/"+XCalleesExecCallee+"/"+"TP/"+XCalleesExecCallee+"/"); 
+									bwfile1itrustXCalleesExecCallees.write(method+"/"+"TP/"+XCalleesExecCallee+"/"); 
 								}else if(XCallees.contains(XCalleesExecCallee) && !CalleesExecuted.contains(XCalleesExecCallee)) {
-									bwfile1itrustXCalleesExecCallees.write(method+"/"+XCalleesExecCallee+"/"+"FP/"+XCalleesExecCallee+"/"); 
+									bwfile1itrustXCalleesExecCallees.write(method+"/"+"FP/"+XCalleesExecCallee+"/"); 
 
 								}else if(!XCallees.contains(XCalleesExecCallee) && CalleesExecuted.contains(XCalleesExecCallee)) {
-									bwfile1itrustXCalleesExecCallees.write(method+"/"+XCalleesExecCallee+"/"+"FN/"+XCalleesExecCallee+"/"); 
+									bwfile1itrustXCalleesExecCallees.write(method+"/"+"FN/"+XCalleesExecCallee+"/"); 
 
 								}else if(!XCallees.contains(XCalleesExecCallee) && !CalleesExecuted.contains(XCalleesExecCallee)) {
-									bwfile1itrustXCalleesExecCallees.write(method+"/"+XCalleesExecCallee+"/"+"TN/"+XCalleesExecCallee+"/"); 
+									bwfile1itrustXCalleesExecCallees.write(method+"/"+"TN/"+XCalleesExecCallee+"/"); 
 
 								}
 								bwfile1itrustXCalleesExecCallees.newLine();
@@ -623,15 +623,15 @@ public class PrecisionRecallComparisonExecCallsXCalls {
 							
 							for(Method BasicCalleesExecCallee: BasicCalleesExecCallees) {
 								if(BasicCallees.contains(BasicCalleesExecCallee) && CalleesExecuted.contains(BasicCalleesExecCallee)) {
-									bwfile1itrustCalleesExecCallees.write(method+"/"+BasicCalleesExecCallee+"/"+"TP/"+BasicCalleesExecCallee+"/"); 
+									bwfile1itrustCalleesExecCallees.write(method+"/"+"TP/"+BasicCalleesExecCallee+"/"); 
 								}else if(BasicCallees.contains(BasicCalleesExecCallee) && !CalleesExecuted.contains(BasicCalleesExecCallee)) {
-									bwfile1itrustCalleesExecCallees.write(method+"/"+BasicCalleesExecCallee+"/"+"FP/"+BasicCalleesExecCallee+"/"); 
+									bwfile1itrustCalleesExecCallees.write(method+"/"+"FP/"+BasicCalleesExecCallee+"/"); 
 
 								}else if(!BasicCallees.contains(BasicCalleesExecCallee) && CalleesExecuted.contains(BasicCalleesExecCallee)) {
-									bwfile1itrustCalleesExecCallees.write(method+"/"+BasicCalleesExecCallee+"/"+"FN/"+BasicCalleesExecCallee+"/"); 
+									bwfile1itrustCalleesExecCallees.write(method+"/"+"FN/"+BasicCalleesExecCallee+"/"); 
 
 								}else if(!BasicCallees.contains(BasicCalleesExecCallee) && !CalleesExecuted.contains(BasicCalleesExecCallee)) {
-									bwfile1itrustCalleesExecCallees.write(method+"/"+BasicCalleesExecCallee+"/"+"TN/"+BasicCalleesExecCallee+"/"); 
+									bwfile1itrustCalleesExecCallees.write(method+"/"+"TN/"+BasicCalleesExecCallee+"/"); 
 
 								}
 								bwfile1itrustCalleesExecCallees.newLine();
