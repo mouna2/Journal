@@ -1253,11 +1253,12 @@ public class LogInfo {
 	 * @param ownerClassPredictionValues 
 	 * @param logInfoHashMap 
 	 * @param string2 
-	 * @param string **********************************************************************************************************************************************/
+	 * @param string 
+	 * @throws CloneNotSupportedException **********************************************************************************************************************************************/
 
 	public static void ComputePrecisionAndRecallNONCUMULATIVE(
 			HashMap<String, MethodTrace> methodTraceHashMap,
-			PredictionEvaluation Pattern, String ProgramName,  PredictionValues ownerClassPredictionValues, LinkedHashMap<String, LogInfo> logInfoHashMap) throws SQLException {
+			PredictionEvaluation Pattern, String ProgramName,  PredictionValues ownerClassPredictionValues, LinkedHashMap<String, LogInfo> logInfoHashMap) throws SQLException, CloneNotSupportedException {
 		// TODO Auto-generated method stub
 	Pattern.ResetCounters(Pattern);
 int count=0; 
@@ -1267,7 +1268,11 @@ int count=0;
 			if((ProgramName.equals("gantt")|| ProgramName.equals("jhotdraw") )&& AlgoFinal.MethodLevelTraces==true){
 				
 				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
-						&& methodTrace.isTraceSet() ) {
+						&& methodTrace.isTraceSet() 
+					
+						
+						
+						) {
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().trim());
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
@@ -1283,7 +1288,8 @@ int count=0;
 				System.out.println(mykey+" "+methodTrace.getClassLevelGold());
 				
 				if (methodTrace.getClassLevelGold() != null && methodTrace.getPrediction() != null 
-						&& methodTrace.isTraceSet() ) {
+						&& methodTrace.isTraceSet()
+					) {
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getClassLevelGold().trim(),methodTrace.getPrediction().trim());
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
@@ -1302,7 +1308,8 @@ int count=0;
 			else if(ProgramName.equals("chess")|| ProgramName.equals("itrust") ) {
 				
 				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
-						&& methodTrace.isTraceSet()) {
+						&& methodTrace.isTraceSet()
+						) {
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),
 							methodTrace.getPrediction().trim());
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
@@ -1327,6 +1334,7 @@ int count=0;
 		System.out.println(count);
 		System.out.println(count);
 	}
+	
 	
 	
 	

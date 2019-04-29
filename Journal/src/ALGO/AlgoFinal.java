@@ -78,9 +78,9 @@ public class AlgoFinal  {
 	public static boolean IncompletenessSeeding=false; 
 	public static boolean NoSeeding=true; 
 	
-	public static boolean ExecutedCallsTechnique=false; 
+	public static boolean ExecutedCallsTechnique=true; 
 	public static boolean XCallsTechnique=false; 
-	public static boolean BasicTechnique=true; 
+	public static boolean BasicTechnique=false; 
 	
 	public static boolean ClassLevelTraces=false; 
 	public static boolean MethodLevelTraces=true; 
@@ -629,7 +629,7 @@ public class AlgoFinal  {
 	
 	
 
-	private void ComputeStepResults(PredictionEvaluation step2Pattern2, PredictionValues step2PredictionValues, LinkedHashMap<String, LogInfo> LogInfoHashMap, String ProgramName, String Step, String PredictionValues, PredictionValues step1PredictionValues) throws IOException, SQLException {
+	private void ComputeStepResults(PredictionEvaluation step2Pattern2, PredictionValues step2PredictionValues, LinkedHashMap<String, LogInfo> LogInfoHashMap, String ProgramName, String Step, String PredictionValues, PredictionValues step1PredictionValues) throws IOException, SQLException, CloneNotSupportedException {
 		// TODO Auto-generated method stub
 		LogInfo.ComputePrecisionAndRecallNONCUMULATIVE(methodtraces2HashMap, step2Pattern2, ProgramName, step2PredictionValues, LogInfoHashMap);
 		System.out.println("RemainingpredictionValues"+TotalPattern);
