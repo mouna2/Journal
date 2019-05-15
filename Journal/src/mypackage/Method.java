@@ -617,9 +617,26 @@ return OuterCallees;
 					
 				}
 				if(AlgoFinal.InheritanceFlag==true) {
-					//case 12
 					for(Method callee: this.Callees) {
+						//case 12 , callee is a superclass
+
 						TempCallees.AddAll(callee.Children); 
+						//---------------------------------------------//
+						//ADDED THIS CODE 
+							for(Clazz ChildrenOwners:callee.Owner.Children) {
+								for(Clazz impl: ChildrenOwners.Implementations) {
+									for(Method ImplMethod: impl.methods) {
+										if(ImplMethod.methodname.equals(callee.methodname)) {
+											TempCallees.add(ImplMethod); 
+
+										}
+									}
+								}
+							}
+							
+					
+							//END OF ADDED CODE 
+							//---------------------------------------------//
 					}
 				}
 
@@ -690,7 +707,6 @@ return OuterCallees;
 
 	
 		
-		
 		if(ExtendedCallers!=null) {
 			return ExtendedCallers; 
 		}
@@ -702,10 +718,27 @@ return OuterCallees;
 			TempCallers.addAll(this.Callers); 
 			
 			if(AlgoFinal.InterfaceImplementationFlag==true) {
-
+				//---------------------------------------------//
+				//ADDED THIS CODE 
+					for(Clazz CallerInterfaceParentOwner : this.Owner.Interfaces) {
+						for(Clazz ParentMethod: CallerInterfaceParentOwner.Parents) {
+							for(Method ImplMethod: ParentMethod.methods) {
+								if(ImplMethod.methodname.equals(this.methodname)) {
+									TempCallers.addAll(ImplMethod.Callers); 
+								}
+								}
+							}
+						}
+					
+		
+			
+					//END OF ADDED CODE 
+					//---------------------------------------------//
 					//case 20
 					for(Method CallerInterface: this.Interfaces) {
 						TempCallers.addAll(CallerInterface.Callers); 
+						
+						
 					}
 					//case 21
 					for(Method CallerImplementation: this.Implementations) {
@@ -714,7 +747,7 @@ return OuterCallees;
 					//case 22
 					for(Method Caller: this.Callers) {
 						TempCallers.addAll(Caller.Interfaces); 
-
+						
 					}
 					
 				}

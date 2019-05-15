@@ -140,7 +140,7 @@ public class DBDemo3Chess2 {
 		Properties connectionProps = new Properties();
 		connectionProps.put("root", this.userName);
 		connectionProps.put("123456", this.password);
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/databasechess","root","123456");
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/databasechess"+"?useLegacyDatetimeCode=false&serverTimezone=UTC","root","123456");
 
 		return conn;
 	}
@@ -1913,7 +1913,7 @@ public class DBDemo3Chess2 {
         /////////////*********************************************************************************************************************************************************************************/   
         //////////////CREATE METHOD CALLS EXECUTED TABLE 
         ////////////
-       File  file = new File("C:\\Users\\mouna\\new_workspace\\TraceGenerator\\src\\ChessFiles\\methodcallsExecutedFormatted.txt");
+       File  file = new File("C:\\Users\\mouna\\git\\Journal\\Journal\\src\\ChessFiles\\methodcallsExecutedFormatted.txt");
          FileReader fileReader = new FileReader(file);
          BufferedReader bufferedReader = new BufferedReader(fileReader);
          StringBuffer stringBuffer = new StringBuffer();
@@ -1928,7 +1928,7 @@ public class DBDemo3Chess2 {
 		    String  CallerExecutedMethodID=null; 
 		    String CalleeExecutedClassID = null; 
 		    String  CalleeExecutedMethodID=null; 
-        System.out.println(line);
+//        System.out.println(line);
         String[] lines = line.split("---"); 
         String Caller= lines[0]; 
         String Callee= lines[1]; 
@@ -1944,7 +1944,7 @@ public class DBDemo3Chess2 {
        String CallerMethod=  CallerNonParameters.substring(CallerNonParameters.lastIndexOf(".")+1, CallerNonParameters.length())+CallerParameters.trim(); 
        String CalleeClass=  CalleeNonParameters.substring(0, CalleeNonParameters.lastIndexOf(".")).trim(); 
        String CalleeMethod=  CalleeNonParameters.substring(CalleeNonParameters.lastIndexOf(".")+1, CalleeNonParameters.length())+CalleeParameters.trim(); 
-       System.out.println("yes");
+//       System.out.println("yes");
        
        ResultSet rs= st.executeQuery("SELECT * from classes where classes.classname='"+CallerClass+"'"); 
        while(rs.next()) {
@@ -1967,11 +1967,13 @@ public class DBDemo3Chess2 {
        if(CallerExecutedClassID!=null && CallerExecutedMethodID!=null && CalleeExecutedClassID!=null && CalleeExecutedMethodID!=null) {
     	   String statement = "INSERT INTO `methodcallsexecuted`(`callermethodid`,  `callername`,  `callerclass`, `callerclassid`,`fullcaller`,`calleemethodid`,  `calleename`, `calleeclass`,  `calleeclassid`,  `fullcallee`) VALUES "
     	   		+ "('"+CallerExecutedMethodID +"','" +CallerMethod+"','" +CallerClass+"','" +CalleeExecutedClassID+"','" +fullcaller+"','" +CalleeExecutedMethodID+"','" +CalleeMethod+"','" +CalleeClass+"','" +CalleeExecutedClassID+"','" +fullcallee+"')";
-//			
+	
 			st.executeUpdate(statement);
+       }else {
+    	   System.out.println(line);
        }
     
-       System.out.println("yes");
+//       System.out.println("yes");
        counter++; 
         }
         

@@ -121,10 +121,16 @@ public static void CreateInterfacesImplementations(Connection conn) throws SQLEx
 		mypackage.Clazz myinterface= ClassHashMap.get(interfaceclassid); 
 		mypackage.Clazz implementation = ClassHashMap.get(ownerclassid); 
 		
+		
+		
 		myinterface.Implementations.add(implementation); 
 		implementation.Interfaces.add(myinterface); 
 						
-	
+//		for(Clazz Parent : myinterface.Parents) {
+//			if(!implementation.Interfaces.contains(Parent))
+//			implementation.Interfaces.add(Parent); 
+//
+//		}
 	}
 
 	

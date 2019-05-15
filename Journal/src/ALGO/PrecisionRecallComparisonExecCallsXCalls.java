@@ -319,7 +319,7 @@ public class PrecisionRecallComparisonExecCallsXCalls {
 
 				
 				MethodList XCallees =method.getCalleesShell(); 
-			
+				MethodList XCallers =method.getCallersShell(); 
 				MethodList CalleesExecuted =method.getCalleesExecuted();
 				
 				MethodList BasicCallees =method.Callees; 
