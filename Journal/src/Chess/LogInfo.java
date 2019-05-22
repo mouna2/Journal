@@ -1278,7 +1278,7 @@ int count=0;
 					Pattern.UpdateCounters(Result, Pattern);
 					
 					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getPrediction().trim());
-					UpdateCategoryCounters(Result, methodTrace, Pattern, ownerClassPredictionValues); 
+					UpdateCategoryCounters(Result, methodTrace, Pattern, ownerClassPredictionValues, mykey, logInfoHashMap); 
 
 				}
 				
@@ -1295,7 +1295,7 @@ int count=0;
 					Pattern.UpdateCounters(Result, Pattern);
 					
 					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getPrediction().trim());
-					UpdateCategoryCounters(Result, methodTrace, Pattern, ownerClassPredictionValues); 
+					UpdateCategoryCounters(Result, methodTrace, Pattern, ownerClassPredictionValues, mykey, logInfoHashMap); 
 
 
 				}
@@ -1316,7 +1316,7 @@ int count=0;
 					Pattern.UpdateCounters(Result, Pattern);
 					
 					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getPrediction().trim());
-					UpdateCategoryCounters(Result, methodTrace, Pattern, ownerClassPredictionValues); 
+					UpdateCategoryCounters(Result, methodTrace, Pattern, ownerClassPredictionValues, mykey, logInfoHashMap); 
 
 
 
@@ -1340,13 +1340,15 @@ int count=0;
 	
 	
 	
-	private static void UpdateCategoryCounters(String result, MethodTrace methodTrace, PredictionEvaluation pattern, PredictionValues ownerClassPredictionValues) {
+	private static void UpdateCategoryCounters(String result, MethodTrace methodTrace, PredictionEvaluation pattern, PredictionValues ownerClassPredictionValues, String mykey, LinkedHashMap<String, LogInfo> logInfoHashMap) {
 		// TODO Auto-generated method stub
-		if(result.equals("TP") && methodTrace.PredictionValues.TMixedT==true) {
+		
+		int IterationsSize= logInfoHashMap.get(mykey).IterationValues.size(); 
+		if(result.equals("TP") && methodTrace.PredictionValues.TMixedTInner==true) {
 			pattern.TPMixedCount++; 
-		}else if(result.equals("TP") && methodTrace.PredictionValues.TPureT==true) {
+		}else if(result.equals("TP") && methodTrace.PredictionValues.TPureTInner==true) {
 			pattern.TPPureCount++; 
-		}else if(result.equals("TN") && methodTrace.PredictionValues.NPureN==true) {
+		}else if(result.equals("TN") && methodTrace.PredictionValues.NPureNInner==true) {
 			pattern.TNPureCount++; 
 		}else if(result.equals("TN") && methodTrace.PredictionValues.NPureNLeaf==true) {
 			pattern.TNPureLeafCount++; 
@@ -1354,13 +1356,25 @@ int count=0;
 			pattern.TPPureLeafCount++; 
 		}else if(result.equals("TN") && methodTrace.PredictionValues.NMixedNLeaf==true) {
 			pattern.TNMixedLeafCount++; 
-		}else if(result.equals("TN") && methodTrace.PredictionValues.NMixedN==true) {
+		}else if(result.equals("TN") && methodTrace.PredictionValues.NMixedNInner==true) {
 			pattern.TNMixedCount++; 
 		}else if(result.equals("TP") && methodTrace.PredictionValues.TMixedTLeaf==true) {
 			pattern.TPMixedLeafCount++; 
-		}else if(result.equals("E") && methodTrace.PredictionValues.EBoundary==true) {
+		}else if(result.equals("TN") && methodTrace.PredictionValues.NPureNRoot==true) {
+			pattern.TNPureRootCount++; 
+		}else if(result.equals("TP") && methodTrace.PredictionValues.TPureTRoot==true) {
+			pattern.TPPureRootCount++; 
+		}else if(result.equals("TN") && methodTrace.PredictionValues.NMixedNRoot==true) {
+			pattern.TNMixedRootCount++; 
+		}else if(result.equals("TP") && methodTrace.PredictionValues.TMixedTRoot==true) {
+			pattern.TPMixedRootCount++; 
+		}else if(result.equals("E") && methodTrace.PredictionValues.EBoundaryRoot==true) {
+			pattern.EBoundaryRootCount++; 
+		}else if(result.equals("E") && methodTrace.PredictionValues.EIncompleteRoot==true) {
+			pattern.EIncompleteRootCount++; 
+		}else if(result.equals("E") && methodTrace.PredictionValues.EBoundaryInner==true) {
 			pattern.EBoundaryCount++; 
-		}else if(result.equals("E") && methodTrace.PredictionValues.EIncomplete==true) {
+		}else if(result.equals("E") && methodTrace.PredictionValues.EIncompleteInner==true) {
 			pattern.EIncompleteCount++; 
 		}else if(result.equals("E") && methodTrace.PredictionValues.EBoundaryLeaf==true) {
 			pattern.EBoundaryLeafCount++; 
@@ -1370,22 +1384,34 @@ int count=0;
 		
 		
 		/*********************************************************************************************/
-		if( methodTrace.PredictionValues.TMixedT==true) {
+		
+		
+		if( methodTrace.PredictionValues.TMixedTInner==true ) {
 			ownerClassPredictionValues.TMixedTCount++; 
-		}else if( methodTrace.PredictionValues.TPureT==true) {
+		}else if( methodTrace.PredictionValues.TPureTInner==true ) {
 			ownerClassPredictionValues.TPureTCount++; 
-		}else if( methodTrace.PredictionValues.NPureN==true) {
+		}else if( methodTrace.PredictionValues.NPureNInner==true ) {
 			ownerClassPredictionValues.NPureNCount++; 
 		}else if( methodTrace.PredictionValues.NPureNLeaf==true) {
 			ownerClassPredictionValues.NPureNLeafCount++;  
-		}else if( methodTrace.PredictionValues.TPureTLeaf==true) {
+		}else if( methodTrace.PredictionValues.TPureTLeaf==true ) {
 			ownerClassPredictionValues.TPureTLeafCount++;  
-		}else if( methodTrace.PredictionValues.NMixedNLeaf==true) {
+		}else if( methodTrace.PredictionValues.NMixedNLeaf==true ) {
 			ownerClassPredictionValues.NMixedNLeafCount++;  
-		}else if( methodTrace.PredictionValues.NMixedN==true) {
+		}else if( methodTrace.PredictionValues.NMixedNInner==true) {
 			ownerClassPredictionValues.NMixedNCount++;  
 		}else if( methodTrace.PredictionValues.TMixedTLeaf==true) {
 			ownerClassPredictionValues.TMixedTLeafCount++;  
+		}else if( methodTrace.PredictionValues.EBoundaryLeaf==true) {
+			ownerClassPredictionValues.EBoundaryLeafCount++;  
+		}else if( methodTrace.PredictionValues.EIncompleteLeaf==true) {
+			ownerClassPredictionValues.EIncompleteLeafCount++;  
+		}else if( methodTrace.PredictionValues.EBoundaryInner==true) {
+			ownerClassPredictionValues.EBoundaryCount++;  
+		}else if( methodTrace.PredictionValues.EIncompleteInner==true) {
+			ownerClassPredictionValues.EIncompleteCount++;  
+		}else if( methodTrace.PredictionValues.EIsolated==true) {
+			ownerClassPredictionValues.EOutOfScopeCount++; 
 		}
 	}
 	public static void ComputePrecisionAndRecallCUMULATIVE(
@@ -1448,42 +1474,28 @@ int count=0;
 		
 		//CODE  TO PASTE INTO EXCEL SPREADSHEET 
 		if(Type.equals("INDIVIDUAL") || Type.equals("CUMULATIVE") ) {
-			LogInfo.bwfile1.write(""+"/"+TotalPattern.EIncompleteCount);
-			LogInfo.bwfile1.newLine(); 
-			LogInfo.bwfile1.write(""+"/"+TotalPattern.EBoundaryCount);
-			LogInfo.bwfile1.newLine(); 
-			int sum=TotalPattern.EBoundaryCount+TotalPattern.EIncompleteCount; 
-			LogInfo.bwfile1.write(""+"/"+sum);
-			LogInfo.bwfile1.newLine(); 
-			LogInfo.bwfile1.write(TotalPattern.TNMixedCount+"/"+ownerClassPredictionValues.NMixedNCount);
-			LogInfo.bwfile1.newLine(); 
-			LogInfo.bwfile1.write(TotalPattern.TPMixedCount+"/"+ownerClassPredictionValues.TMixedTCount);
-			LogInfo.bwfile1.newLine(); 
-			LogInfo.bwfile1.write(TotalPattern.TNPureCount+"/"+ownerClassPredictionValues.NPureNCount);
-			LogInfo.bwfile1.newLine(); 
-			LogInfo.bwfile1.write(TotalPattern.TPPureCount+"/"+ownerClassPredictionValues.TPureTCount);
-			LogInfo.bwfile1.newLine();
-			LogInfo.bwfile1.write(""+"/"+TotalPattern.EIncompleteLeafCount);
-			LogInfo.bwfile1.newLine(); 
-			LogInfo.bwfile1.write(""+"/"+TotalPattern.EBoundaryLeafCount);
-			LogInfo.bwfile1.newLine(); 
-			int sum2=TotalPattern.EBoundaryLeafCount+TotalPattern.EIncompleteLeafCount; 
-			LogInfo.bwfile1.write(""+"/"+sum2);
-			LogInfo.bwfile1.newLine(); 
-			LogInfo.bwfile1.write(TotalPattern.TNMixedLeafCount+"/"+ownerClassPredictionValues.NMixedNLeafCount);
-			LogInfo.bwfile1.newLine(); 
-			LogInfo.bwfile1.write(TotalPattern.TPMixedLeafCount+"/"+ownerClassPredictionValues.TMixedTLeafCount);
-			LogInfo.bwfile1.newLine(); 
-			LogInfo.bwfile1.write(TotalPattern.TNPureLeafCount+"/"+ownerClassPredictionValues.NPureNLeafCount);
-			LogInfo.bwfile1.newLine(); 
-			LogInfo.bwfile1.write(TotalPattern.TPPureLeafCount+"/"+ownerClassPredictionValues.TPureTLeafCount);
-			LogInfo.bwfile1.newLine();
-			LogInfo.bwfile1.newLine();
-			LogInfo.bwfile1.newLine();
-
 			
-			LogInfo.bwfile1.write(TotalPattern.TruePositive+","+TotalPattern.TrueNegative+","+TotalPattern.FalsePositive+","+TotalPattern.FalseNegative+","+TotalPattern.E+","+ownerClassPredictionValues.T+","+ownerClassPredictionValues.N+","+ownerClassPredictionValues.E);
-			LogInfo.bwfile1.newLine();
+			
+			LogInfo.bwfile1.write(ownerClassPredictionValues.TPureTCount+"/"+ownerClassPredictionValues.NPureNCount+"/"+ownerClassPredictionValues.EIncompleteCount+"/"+ownerClassPredictionValues.EBoundaryCount+"/"+ownerClassPredictionValues.EOutOfScopeCount
+					+"/"+TotalPattern.TPPureCount+"/"+TotalPattern.TNPureCount+"/"+TotalPattern.FPPureCount+"/"+TotalPattern.FNPureCount);
+			LogInfo.bwfile1.newLine(); 
+			LogInfo.bwfile1.write(ownerClassPredictionValues.TMixedTCount+"/"+ownerClassPredictionValues.NMixedNCount+"/"+ownerClassPredictionValues.EIncompleteCount+"/"+ownerClassPredictionValues.EBoundaryCount+"/"+ownerClassPredictionValues.EOutOfScopeCount
+					+"/"+TotalPattern.TPMixedCount+"/"+TotalPattern.TNMixedCount+"/"+TotalPattern.FPMixedCount+"/"+TotalPattern.FNMixedCount);
+			LogInfo.bwfile1.newLine(); 
+			LogInfo.bwfile1.newLine(); 
+
+			LogInfo.bwfile1.write(ownerClassPredictionValues.TPureTLeafCount+"/"+ownerClassPredictionValues.NPureNLeafCount+"/"+ownerClassPredictionValues.EIncompleteLeafCount+"/"+ownerClassPredictionValues.EBoundaryLeafCount+"/"+ownerClassPredictionValues.EOutOfScopeCount
+					+"/"+TotalPattern.TPPureLeafCount+"/"+TotalPattern.TNPureLeafCount+"/"+TotalPattern.FPPureLeafCount+"/"+TotalPattern.FNPureLeafCount);
+			LogInfo.bwfile1.newLine(); 
+			LogInfo.bwfile1.write(ownerClassPredictionValues.TMixedTLeafCount+"/"+ownerClassPredictionValues.NMixedNLeafCount+"/"+ownerClassPredictionValues.EIncompleteLeafCount+"/"+ownerClassPredictionValues.EBoundaryLeafCount+"/"+ownerClassPredictionValues.EOutOfScopeCount
+					+"/"+TotalPattern.TPMixedLeafCount+"/"+TotalPattern.TNMixedLeafCount+"/"+TotalPattern.FPMixedLeafCount+"/"+TotalPattern.FNMixedLeafCount);
+		
+			LogInfo.bwfile1.newLine(); 
+
+	
+	
+			
+			
 		
 			if(Type.equals("CUMULATIVE")) {
 //				LogInfo.bwfile1.newLine();

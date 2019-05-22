@@ -169,7 +169,7 @@ public final class MethodTrace {
 			{
 
 //		if(this.prediction.trim().equals("E")) {
-			
+			String reqMethod=this.Requirement.ID+"-"+this.Method.ID; 
 			
 			this.prediction=Pred; 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(Pred);

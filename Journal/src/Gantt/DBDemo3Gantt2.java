@@ -134,7 +134,7 @@ public class DBDemo3Gantt2 {
 		Properties connectionProps = new Properties();
 		connectionProps.put("root", this.userName);
 		connectionProps.put("123456", this.password);
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/databasegantt","root","123456");
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/databasegantt"+"?useLegacyDatetimeCode=false&serverTimezone=UTC","root","123456");
 
 		return conn;
 	}
@@ -2015,7 +2015,7 @@ public class DBDemo3Gantt2 {
 		    String  CallerExecutedMethodID=null; 
 		    String CalleeExecutedClassID = null; 
 		    String  CalleeExecutedMethodID=null; 
-        System.out.println(line);
+//        System.out.println(line);
         String[] lines = line.split("---"); 
         String Caller= lines[0]; 
         String Callee= lines[1]; 
@@ -2031,7 +2031,7 @@ public class DBDemo3Gantt2 {
        String CallerMethod=  CallerNonParameters.substring(CallerNonParameters.lastIndexOf(".")+1, CallerNonParameters.length())+CallerParameters.trim(); 
        String CalleeClass=  CalleeNonParameters.substring(0, CalleeNonParameters.lastIndexOf(".")).trim(); 
        String CalleeMethod=  CalleeNonParameters.substring(CalleeNonParameters.lastIndexOf(".")+1, CalleeNonParameters.length())+CalleeParameters.trim(); 
-       System.out.println("yes");
+//       System.out.println("yes");
        
        ResultSet rs= st.executeQuery("SELECT * from classes where classes.classname='"+CallerClass+"'"); 
        while(rs.next()) {
@@ -2056,9 +2056,11 @@ public class DBDemo3Gantt2 {
     	   		+ "('"+CallerExecutedMethodID +"','" +CallerMethod+"','" +CallerClass+"','" +CalleeExecutedClassID+"','" +fullcaller+"','" +CalleeExecutedMethodID+"','" +CalleeMethod+"','" +CalleeClass+"','" +CalleeExecutedClassID+"','" +fullcallee+"')";
 //			
 			st.executeUpdate(statement);
+       }else {
+    	   System.out.println(line);
        }
     
-       System.out.println("yes");
+//       System.out.println("yes");
        counter++; 
         }
         

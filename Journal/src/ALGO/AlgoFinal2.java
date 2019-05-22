@@ -54,7 +54,7 @@ import mypackage.MethodTrace;
 import mypackage.Requirement;
 
 
-public class AlgoFinal  {
+public class AlgoFinal2  {
 	public static String ProgramName=""; 
 	public static boolean InheritanceFlag=true; 
 	public static boolean InterfaceImplementationFlag=true; 
@@ -79,11 +79,11 @@ public class AlgoFinal  {
 	public static boolean NoSeeding=true; 
 	
 	public static boolean ExecutedCallsTechnique=false; 
-	public static boolean XCallsTechnique=true; 
-	public static boolean BasicTechnique=false; 
+	public static boolean XCallsTechnique=false; 
+	public static boolean BasicTechnique=true; 
 	
-	public static boolean ClassLevelTraces=true; 
-	public static boolean MethodLevelTraces=false; 
+	public static boolean ClassLevelTraces=false; 
+	public static boolean MethodLevelTraces=true; 
 
 	/**
 	 * Run a SQL command which does not return a recordset:
@@ -160,9 +160,9 @@ public class AlgoFinal  {
 		CalleeMethodListFinal = calleeMethodListFinal;
 	}
 
-	public AlgoFinal(String ProgramName) throws Exception {
+	public AlgoFinal2(String ProgramName) throws Exception {
 
-		AlgoFinal.ProgramName=ProgramName; 
+		AlgoFinal2.ProgramName=ProgramName; 
 //		List<MethodTrace> methodtracesNew = InitializePredictionsHashMap2(methodtraces2);
 		TracePredictionFunction( ProgramName);
 
@@ -264,202 +264,19 @@ public class AlgoFinal  {
 		//			THREE DIFFERENT METHODS TO INITIALIZE THE INPUT HASHMAP //////////////////////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		if(AlgoFinal.ErrorSeeding==true) {
+		if(AlgoFinal2.ErrorSeeding==true) {
 			LogInfoHashMap=InitializeInputHashMapErrorSeeding(MethodTracesList, LogInfoHashMap);
 
 		}
-		else if(AlgoFinal.IncompletenessSeeding==true) {
+		else if(AlgoFinal2.IncompletenessSeeding==true) {
 			LogInfoHashMap=InitializeInputHashMapIncompleteness(MethodTracesList, LogInfoHashMap);
 
-		}else if(AlgoFinal.NoSeeding==true) {
+		}else if(AlgoFinal2.NoSeeding==true) {
 			LogInfoHashMap=InitializeInputHashMapNoSeeding(MethodTracesList, LogInfoHashMap); 
 
 		}
 		
 		
-//		//////////////////////////////////////////////////////////////////////////////////////////
-//		//////////////////////////////////////////////////////////////////////////////////////////
-//		//STEP 1
-//		//////////////////////////////////////////////////////////////////////////////////////////
-//		//////////////////////////////////////////////////////////////////////////////////////////
-//		//////////////////////////////////////////////////////////////////////////////////////////
-//		//////////////////////////////////////////////////////////////////////////////////////////
-//		//////////////////////////////////////////////////////////////////////////////////////////
-//		//////////////////////////////////////////////////////////////////////////////////////////
-//	int counter=0;
-//		for (MethodTrace methodtrace : MethodTracesList) {
-//			//INNER NODE 
-//			
-//			String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
-//
-//			
-//			CallTypes CallTypes = new CallTypes(); 
-//			ComputeCallersCallees(CallTypes, methodtrace); 
-//			MethodList Callers = CallTypes.Callers;
-//			MethodList Callees = CallTypes.Callees;
-//			MethodList CallersCallers = CallTypes.CallersCallers; 
-//					//INNER METHOD 
-//					if(!Callers.isEmpty() && !Callees.isEmpty())
-//					 {
-//								if (Callers.AtLeast1T(methodtrace.Requirement, methodtraces2HashMap) &&
-//								    Callees.AtLeast1T(methodtrace.Requirement, methodtraces2HashMap))
-//								{
-//									if(Callers.NoNs(methodtrace.Requirement, methodtraces2HashMap) &&
-//									   Callees.NoNs(methodtrace.Requirement, methodtraces2HashMap) &&
-//									   Callers.NoEs(methodtrace.Requirement, methodtraces2HashMap) &&
-//									   Callees.NoEs(methodtrace.Requirement, methodtraces2HashMap)) 
-//									{
-//										
-//										methodtrace.SetPrediction(LogInfoHashMap,"T", "T,PureT");
-//										methodtrace.PredictionValues.TPureT=true; 
-//									}
-//									else 
-//									{
-//										methodtrace.SetPrediction(LogInfoHashMap,"T", "T,MixedT");
-//										methodtrace.PredictionValues.TMixedT=true; 
-//									}
-//						
-//					}else if (Callers.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap) &&
-//							 Callees.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap))
-//
-//					{
-//						
-//								if(Callers.NoTs(methodtrace.Requirement, methodtraces2HashMap) && 
-//								   Callees.NoTs(methodtrace.Requirement, methodtraces2HashMap) &&
-//								   Callers.NoEs(methodtrace.Requirement, methodtraces2HashMap) && 
-//								   Callees.NoEs(methodtrace.Requirement, methodtraces2HashMap))
-//								{
-//									
-//									methodtrace.SetPrediction(LogInfoHashMap,"N", "N,PureN");
-//									methodtrace.PredictionValues.NPureN=true; 
-//								}
-//								else if(Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) && 
-//										Callees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) ) 
-//								{
-//											
-//									methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteE");
-//									methodtrace.PredictionValues.EIncomplete=true; 
-//		
-//								}
-//								
-//								else if(Callers.NoTs(methodtrace.Requirement, methodtraces2HashMap) && 
-//										Callees.NoTs(methodtrace.Requirement, methodtraces2HashMap))
-//								{	
-//								methodtrace.SetPrediction(LogInfoHashMap,"N", "N,MixedN");
-//								methodtrace.PredictionValues.NMixedN=true; 
-//		
-//								}
-//					
-//				}else if(Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)||
-//						 Callees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap))
-//						 {
-//								methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteE");
-//								methodtrace.PredictionValues.EIncomplete=true; 
-//
-//				}else {
-//								methodtrace.SetPrediction(LogInfoHashMap,"E", "E,BoundaryE");
-//								methodtrace.PredictionValues.EBoundary=true; 
-//
-//				}
-//			}
-//					
-//					
-//					
-//					
-//					
-//					
-//					
-//					
-//					
-//					
-//					//LEAF METHOD  
-//					
-//					else if(!Callers.isEmpty() && Callees.isEmpty() ) 
-//					{
-//						if (Callers.AtLeast1T(methodtrace.Requirement, methodtraces2HashMap) && 	
-//							CallersCallers.AtLeast1T(methodtrace.Requirement, methodtraces2HashMap))
-//							{
-//											if(CallersCallers.NoNs(methodtrace.Requirement, methodtraces2HashMap)&& 
-//											   CallersCallers.NoEs(methodtrace.Requirement, methodtraces2HashMap)&& 
-//											   Callers.NoNs(methodtrace.Requirement, methodtraces2HashMap)&& 
-//											   Callers.NoEs(methodtrace.Requirement, methodtraces2HashMap)) 
-//											{
-//												
-//												methodtrace.SetPrediction(LogInfoHashMap,"T", "T,PureLeafT");
-//												methodtrace.PredictionValues.TPureTLeaf=true; 
-//				
-//											
-//											}else {
-//												methodtrace.SetPrediction(LogInfoHashMap,"T", "T,MixedLeafT");
-//												methodtrace.PredictionValues.TMixedTLeaf=true; 
-//		
-//											}
-//								
-//							}else if (CallersCallers.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap) &&	
-//									  Callers.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap)) 
-//							{
-//
-//												if(CallersCallers.NoTs(methodtrace.Requirement, methodtraces2HashMap)&& 
-//												   CallersCallers.NoEs(methodtrace.Requirement, methodtraces2HashMap)&& 
-//												   Callers.NoTs(methodtrace.Requirement, methodtraces2HashMap)&& 
-//											       Callers.NoEs(methodtrace.Requirement, methodtraces2HashMap))
-//												 {
-//															methodtrace.SetPrediction(LogInfoHashMap,"N", "N,PureLeafN");
-//															methodtrace.PredictionValues.NPureNLeaf=true; 
-//												 }
-//								
-//												else if(CallersCallers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) && 
-//													    Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)) 
-//												 {
-//											
-//															methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteLeafE");
-//															methodtrace.PredictionValues.EIncompleteLeaf=true; 
-//		
-//												 }
-//						
-//												else if(CallersCallers.NoTs(methodtrace.Requirement, methodtraces2HashMap) && 
-//														Callers.NoTs(methodtrace.Requirement, methodtraces2HashMap)){
-//														methodtrace.SetPrediction(LogInfoHashMap,"N", "N,MixedLeafN");
-//														methodtrace.PredictionValues.NMixedNLeaf=true; 
-//						
-//												}
-//					
-//						}else if(CallersCallers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)|| 
-//								 Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)) 
-//						{
-//										methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteLeafE");
-//										methodtrace.PredictionValues.EIncompleteLeaf=true; 
-//						}
-//						else 
-//						{			
-//										methodtrace.SetPrediction(LogInfoHashMap,"E", "E,BoundaryLeafE");
-//										methodtrace.PredictionValues.EBoundaryLeaf=true; 			
-//						}
-//					}else {
-//						methodtrace.SetPrediction(LogInfoHashMap,"E", "E,OutOfScope");
-//						methodtrace.PredictionValues.EIsolated=true; 		
-//					
-//					}
-//					
-//
-//		}
-		
-		
-//		for (MethodTrace methodtrace : MethodTracesList) {
-//			System.out.println(methodtrace.Requirement.ID+"-"+methodtrace.Method.ID);
-//			System.out.println(methodtrace.getGold());
-//			System.out.println(methodtrace.getPrediction());
-//			if(!methodtrace.getPrediction().equals(methodtrace.goldfinal)) {
-//				
-//				if(methodtrace.getPrediction().equals("T") && methodtrace.getGold().equals("N")) {
-//					System.out.println("False positive");
-//				}else if(methodtrace.getPrediction().equals("N") && methodtrace.getGold().equals("T")) {
-//					System.out.println("False Negative");
-//				}
-//			}
-//		}
-//		System.out.println(counter);
-//		SetSubjectGoldDeveloperGoldEqualityFlag(methodtraces2HashMap, TotalPattern, LogInfoHashMap, ProgramName); 
 		//////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////////////////////////
 		//STEP 1
@@ -495,7 +312,7 @@ public class AlgoFinal  {
 									   Callees.NoEs(methodtrace.Requirement, methodtraces2HashMap)) 
 									{
 										
-										methodtrace.SetPrediction(LogInfoHashMap,"T", "T,PureInnerT");
+										methodtrace.SetPrediction(LogInfoHashMap,"T", "T,PureT");
 										methodtrace.PredictionValues.TPureTInner=true; 
 									}
 									
@@ -511,14 +328,14 @@ public class AlgoFinal  {
 								   Callees.NoEs(methodtrace.Requirement, methodtraces2HashMap))
 								{
 									
-									methodtrace.SetPrediction(LogInfoHashMap,"N", "N,PureInnerN");
+									methodtrace.SetPrediction(LogInfoHashMap,"N", "N,PureN");
 									methodtrace.PredictionValues.NPureNInner=true; 
 								}
 								else if(Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) && 
 										Callees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) ) 
 								{
 											
-									methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteInnerE");
+									methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteE");
 									methodtrace.PredictionValues.EIncompleteInner=true; 
 		
 								}
@@ -528,11 +345,11 @@ public class AlgoFinal  {
 				}else if(Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)||
 						 Callees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap))
 						 {
-								methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteInnerE");
+								methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteE");
 								methodtrace.PredictionValues.EIncompleteInner=true; 
 
 				}else {
-								methodtrace.SetPrediction(LogInfoHashMap,"E", "E,BoundaryInnerE");
+								methodtrace.SetPrediction(LogInfoHashMap,"E", "E,BoundaryE");
 								methodtrace.PredictionValues.EBoundaryInner=true; 
 
 				}
@@ -606,8 +423,8 @@ public class AlgoFinal  {
 												   Callees.NoEs(methodtrace.Requirement, methodtraces2HashMap)) 
 												{
 													
-													methodtrace.SetPrediction(LogInfoHashMap,"T", "T,PureRootT");
-													methodtrace.PredictionValues.TPureTRoot=true; 
+													methodtrace.SetPrediction(LogInfoHashMap,"T", "T,PureLeafT");
+													methodtrace.PredictionValues.TPureTLeaf=true; 
 					
 												
 												}
@@ -621,16 +438,16 @@ public class AlgoFinal  {
 													   Callees.NoTs(methodtrace.Requirement, methodtraces2HashMap)&& 
 												       Callees.NoEs(methodtrace.Requirement, methodtraces2HashMap))
 													 {
-																methodtrace.SetPrediction(LogInfoHashMap,"N", "N,PureRootN");
-																methodtrace.PredictionValues.NPureNRoot=true; 
+																methodtrace.SetPrediction(LogInfoHashMap,"N", "N,PureLeafN");
+																methodtrace.PredictionValues.NPureNLeaf=true; 
 													 }
 									
 													else if(CalleesCallees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap) && 
 														    Callees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)) 
 													 {
 												
-																methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteRootE");
-																methodtrace.PredictionValues.EIncompleteRoot=true; 
+																methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteLeafE");
+																methodtrace.PredictionValues.EIncompleteLeaf=true; 
 			
 													 }
 							
@@ -639,13 +456,13 @@ public class AlgoFinal  {
 							}else if(CalleesCallees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)|| 
 									 Callees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)) 
 							{
-											methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteRootE");
-											methodtrace.PredictionValues.EIncompleteRoot=true; 
+											methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteLeafE");
+											methodtrace.PredictionValues.EIncompleteLeaf=true; 
 							}
 							else 
 							{			
-											methodtrace.SetPrediction(LogInfoHashMap,"E", "E,BoundaryRootE");
-											methodtrace.PredictionValues.EBoundaryRoot=true; 			
+											methodtrace.SetPrediction(LogInfoHashMap,"E", "E,BoundaryLeafE");
+											methodtrace.PredictionValues.EBoundaryLeaf=true; 			
 							}
 						}
 					
@@ -661,13 +478,18 @@ public class AlgoFinal  {
 					
 					
 					
-
+					
+					
+//					else {
+//						methodtrace.SetPrediction(LogInfoHashMap,"E", "E,Isolated");
+//						methodtrace.PredictionValues.EIsolated=true; 		
+//					
+//					}
 					
 
 		}
-		int iteration=0; 
+		
 		while (MethodTrace.modified) {
-			System.out.println("iteration "+iteration);
 			MethodTrace.modified = false;
 			for (MethodTrace methodtrace : MethodTracesList) {
 				
@@ -682,7 +504,7 @@ public class AlgoFinal  {
 				MethodList CalleesCallees = CallTypes.CalleesCallees; 
 
 						//INNER METHOD 
-						if(!Callers.isEmpty() && !Callees.isEmpty() )
+						if(!Callers.isEmpty() && !Callees.isEmpty())
 						 {
 									if (Callers.AtLeast1T(methodtrace.Requirement, methodtraces2HashMap) &&
 									    Callees.AtLeast1T(methodtrace.Requirement, methodtraces2HashMap) )
@@ -692,19 +514,17 @@ public class AlgoFinal  {
 										   !Callers.NoEs(methodtrace.Requirement, methodtraces2HashMap) ||
 										   !Callees.NoEs(methodtrace.Requirement, methodtraces2HashMap)) {
 											
-												methodtrace.SetPrediction(LogInfoHashMap,"T", "T,MixedInnerT");
+												methodtrace.SetPrediction(LogInfoHashMap,"T", "T,MixedT");
 												methodtrace.PredictionValues.TMixedTInner=true; 
-										} 
-									}
-									
-											if (Callers.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap) &&
-											 Callees.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap) &&
-											 Callers.NoTs(methodtrace.Requirement, methodtraces2HashMap) && 
-											 Callees.NoTs(methodtrace.Requirement, methodtraces2HashMap))
+										}else if (Callers.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap) &&
+												 Callees.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap) &&
+												 Callers.NoTs(methodtrace.Requirement, methodtraces2HashMap) && 
+												 Callees.NoTs(methodtrace.Requirement, methodtraces2HashMap))
 
-									{
-										methodtrace.SetPrediction(LogInfoHashMap,"N", "N,MixedInnerN");
-										methodtrace.PredictionValues.NMixedNInner=true; 
+										{
+											methodtrace.SetPrediction(LogInfoHashMap,"N", "N,MixedN");
+											methodtrace.PredictionValues.NMixedNInner=true; 
+										}
 									}
 							}
 						//LEAF METHOD 
@@ -713,24 +533,22 @@ public class AlgoFinal  {
 									if (CallersCallers.AtLeast1T(methodtrace.Requirement, methodtraces2HashMap) &&
 									    Callers.AtLeast1T(methodtrace.Requirement, methodtraces2HashMap) )
 									{
-											if(!CallersCallers.NoNs(methodtrace.Requirement, methodtraces2HashMap) ||
+										if(!CallersCallers.NoNs(methodtrace.Requirement, methodtraces2HashMap) ||
 										   !Callers.NoNs(methodtrace.Requirement, methodtraces2HashMap) ||
 										   !CallersCallers.NoEs(methodtrace.Requirement, methodtraces2HashMap) ||
 										   !Callers.NoEs(methodtrace.Requirement, methodtraces2HashMap)) {
 											
-												methodtrace.SetPrediction(LogInfoHashMap,"T", "T,MixedLeafT");
-												methodtrace.PredictionValues.TMixedTLeaf=true; 
-										}
-									
-									}
-											if (CallersCallers.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap) &&
-											 Callers.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap) &&
-											 CallersCallers.NoTs(methodtrace.Requirement, methodtraces2HashMap) && 
-											 Callers.NoTs(methodtrace.Requirement, methodtraces2HashMap))
+												methodtrace.SetPrediction(LogInfoHashMap,"T", "T,MixedT");
+												methodtrace.PredictionValues.TMixedTInner=true; 
+										}else if (CallersCallers.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap) &&
+												 Callers.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap) &&
+												 CallersCallers.NoTs(methodtrace.Requirement, methodtraces2HashMap) && 
+												 Callers.NoTs(methodtrace.Requirement, methodtraces2HashMap))
 
-									{
-										methodtrace.SetPrediction(LogInfoHashMap,"N", "N,MixedLeafN");
-										methodtrace.PredictionValues.NMixedNLeaf=true; 
+										{
+											methodtrace.SetPrediction(LogInfoHashMap,"N", "N,MixedN");
+											methodtrace.PredictionValues.NMixedNInner=true; 
+										}
 									}
 							}
 						//ROOT METHOD 
@@ -744,42 +562,26 @@ public class AlgoFinal  {
 										   !CalleesCallees.NoEs(methodtrace.Requirement, methodtraces2HashMap) ||
 										   !Callees.NoEs(methodtrace.Requirement, methodtraces2HashMap)) {
 											
-												methodtrace.SetPrediction(LogInfoHashMap,"T", "T,MixedRootT");
-												methodtrace.PredictionValues.TMixedTRoot=true; 
-										}
-										
-									}
-											if (CalleesCallees.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap) &&
-											 Callees.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap) &&
-											 CalleesCallees.NoTs(methodtrace.Requirement, methodtraces2HashMap) && 
-											 Callees.NoTs(methodtrace.Requirement, methodtraces2HashMap))
+												methodtrace.SetPrediction(LogInfoHashMap,"T", "T,MixedT");
+												methodtrace.PredictionValues.TMixedTInner=true; 
+										}else if (CalleesCallees.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap) &&
+												 Callees.AtLeast1N(methodtrace.Requirement, methodtraces2HashMap) &&
+												 CalleesCallees.NoTs(methodtrace.Requirement, methodtraces2HashMap) && 
+												 Callees.NoTs(methodtrace.Requirement, methodtraces2HashMap))
 
-									{
-										methodtrace.SetPrediction(LogInfoHashMap,"N", "N,MixedRootN");
-										methodtrace.PredictionValues.NMixedNRoot=true; 
+										{
+											methodtrace.SetPrediction(LogInfoHashMap,"N", "N,MixedN");
+											methodtrace.PredictionValues.NMixedNInner=true; 
+										}
 									}
 							}
 				}
 		
-		iteration++; 
+		
 		}
-
-		
-		
-		for (MethodTrace methodtrace : MethodTracesList) {	
-			String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
 
 			
-			CallTypes CallTypes = new CallTypes(); 
-			ComputeCallersCallees(CallTypes, methodtrace); 
-			MethodList Callers = CallTypes.Callers;
-			MethodList Callees = CallTypes.Callees;
-	
 
-			if(Callers.isEmpty() && Callees.isEmpty()) {
-				methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IsolatedE");
-			}		
-		}
 			LogInfo.ComputePrecisionAndRecallNONCUMULATIVE(methodtraces2HashMap,TotalPattern, ProgramName, OwnerClassPredictionValues, LogInfoHashMap);
 
 			LogInfo.updateResultsLog(TotalPattern, OwnerClassPredictionValues, ProgramName, "OWNER CLASS PRED", "owner class prediction values", "INDIVIDUAL");
@@ -913,13 +715,15 @@ public class AlgoFinal  {
 			callTypes.Callers = methodtrace.Method.getCallersShell(); 
 			callTypes.Callees = methodtrace.Method.getCalleesShell(); 
 			callTypes.CallersCallers= methodtrace.Method.getCallersCallersShell(); 
-			
+			callTypes.CalleesCallees= methodtrace.Method.getCalleesCalleesShell(); 
+
 			
 	}else if(ExecutedCallsTechnique==true) {
 			callTypes.Callers = methodtrace.Method.getCallersExecuted(); 
 			callTypes.Callees = methodtrace.Method.getCalleesExecuted(); 
 			callTypes.CallersCallers= methodtrace.Method.getCallersCallersExecuted(); 
-		 	
+			callTypes.CalleesCallees= methodtrace.Method.getCalleesCalleesExecuted(); 
+
 
 		 	
 		 
@@ -928,7 +732,8 @@ public class AlgoFinal  {
 		callTypes.Callers = methodtrace.Method.Callers; 
 		callTypes.Callees = methodtrace.Method.Callees; 
 		callTypes.CallersCallers= methodtrace.Method.getBasicCallersCallers(); 
-	 	
+		callTypes.CalleesCallees= methodtrace.Method.getBasicCalleesCallees(); 
+
 	 	
 	
 	}
@@ -1318,12 +1123,12 @@ public class AlgoFinal  {
 		
 		for(int i=0; i<1; i++) {
 			System.out.println("========================> RUN "+i);
-//			String ProgramName = "chess";
-//			AlgoFinal frame = new AlgoFinal(
-//					ProgramName);
-
-			String ProgramName2 = "gantt";
-			AlgoFinal frame = new AlgoFinal(ProgramName2);
+			String ProgramName = "chess";
+			AlgoFinal2 frame = new AlgoFinal2(
+					ProgramName);
+//
+//			String ProgramName2 = "gantt";
+//			AlgoFinal frame = new AlgoFinal(ProgramName2);
 ////			
 ////////			String ProgramName2 = "dummy";
 ////////			AlgoFinal	 frame = new AlgoFinal(ProgramName2);

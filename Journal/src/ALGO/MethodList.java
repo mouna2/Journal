@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -248,10 +249,67 @@ public class MethodList extends ArrayList<Method> {
     }
 
 
+	public boolean NoNs(Requirement requirement, LinkedHashMap<String, MethodTrace> methodtraces2HashMap) throws Exception {
+		// TODO Auto-generated method stub
+		if(!this.isEmpty()) {
+			for (Method method : this) {
+				String RequirementID = (String) requirement.ID; 
+				String MethodID = method.ID; 
+				String key = (String) (RequirementID + "-" + MethodID);
+				if (methodtraces2HashMap.get(key) == null) throw new Exception();
+					if (methodtraces2HashMap.get(key).getPrediction().equals("N")) 
+						return false; 
+
+				
+			}
+		}
+		
+
+		return true;
+		
+		}
+
+	public boolean NoTs(Requirement requirement, LinkedHashMap<String, MethodTrace> methodtraces2HashMap) throws Exception {
+		// TODO Auto-generated method stub
+		if(!this.isEmpty()) {
+			for (Method method : this) {
+				String RequirementID = (String) requirement.ID; 
+				String MethodID = method.ID; 
+				String key = (String) (RequirementID + "-" + MethodID);
+				if (methodtraces2HashMap.get(key) == null) throw new Exception();
+					if (methodtraces2HashMap.get(key).getPrediction().equals("T")) 
+						return false; 
+
+				
+			}
+		}
+		
+
+		return true;
+		
+		}
 
 
 	
+	public boolean NoEs(Requirement requirement, LinkedHashMap<String, MethodTrace> methodtraces2HashMap) throws Exception {
+		// TODO Auto-generated method stub
+		if(!this.isEmpty()) {
+			for (Method method : this) {
+				String RequirementID = (String) requirement.ID; 
+				String MethodID = method.ID; 
+				String key = (String) (RequirementID + "-" + MethodID);
+				if (methodtraces2HashMap.get(key) == null) throw new Exception();
+					if (methodtraces2HashMap.get(key).getPrediction().equals("E")) 
+						return false; 
 
+				
+			}
+		}
+		
+
+		return true;
+		
+		}
 
 
 

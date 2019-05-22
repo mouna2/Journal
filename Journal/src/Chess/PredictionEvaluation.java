@@ -38,7 +38,8 @@ public class PredictionEvaluation {
 	public int FPMixedLeafCount=0; 
 	public int FNMixedLeafCount=0;
 	public int EIncompleteCount=0; 
-	
+	public int EOutOfScopeCount=0; 
+
 	public int TPPureCount=0; 
 	public int TNPureCount=0; 
 	public int FPPureCount=0; 
@@ -49,6 +50,14 @@ public class PredictionEvaluation {
 	public int FPPureLeafCount=0; 
 	public int FNPureLeafCount=0;
 	public int EIncompleteLeafCount=0; 
+	public int EBoundaryRootCount=0; 
+	public int TPPureRootCount=0; 
+	public int TNPureRootCount=0; 
+	public int FPPureRootCount=0; 
+	public int FNPureRootCount=0;
+	public int EIncompleteRootCount=0; 
+	public int TPMixedRootCount=0; 
+	public int TNMixedRootCount=0; 
 	
 	public int getE() {
 		return E;

@@ -38,7 +38,8 @@ public class Method implements Comparable<Method>{
 	public  MethodList ExtendedCallees=null; 
 	public  MethodList ExtendedCallers=null; 
 	public  MethodList ExtendedCallersCallers=null; 
-	
+	public  MethodList ExtendedCalleesCallees=null; 
+
 	public  MethodList NewCallees2=new MethodList();
 	public  MethodList NewCallers2=new MethodList();
 	public String methodname;
@@ -50,11 +51,11 @@ public class Method implements Comparable<Method>{
 	public MethodList CallersExecuted= new MethodList(); 
 	public MethodList CalleesExecuted= new MethodList(); 
 	public MethodList CallersCallersExecuted= null; 
-	public MethodList CalleesCalleesExecuted= null; 
+	public MethodList CalleesCalleesExecuted= new MethodList(); 
 	
 
 
-	public MethodList CallersofCallers= new MethodList(); 
+	public MethodList CallersofCallers= null; 
 	public MethodList CalleesofCallees= new MethodList(); 
 	public MethodList CalleesImplementations= new MethodList(); 
 	public MethodList CallersInterfaces= new MethodList(); 
@@ -621,22 +622,22 @@ return OuterCallees;
 						//case 12 , callee is a superclass
 
 						TempCallees.AddAll(callee.Children); 
-						//---------------------------------------------//
-						//ADDED THIS CODE 
-							for(Clazz ChildrenOwners:callee.Owner.Children) {
-								for(Clazz impl: ChildrenOwners.Implementations) {
-									for(Method ImplMethod: impl.methods) {
-										if(ImplMethod.methodname.equals(callee.methodname)) {
-											TempCallees.add(ImplMethod); 
-
-										}
-									}
-								}
-							}
-							
-					
-							//END OF ADDED CODE 
-							//---------------------------------------------//
+//						//---------------------------------------------//
+//						//ADDED THIS CODE 
+//							for(Clazz ChildrenOwners:callee.Owner.Children) {
+//								for(Clazz impl: ChildrenOwners.Implementations) {
+//									for(Method ImplMethod: impl.methods) {
+//										if(ImplMethod.methodname.equals(callee.methodname)) {
+//											TempCallees.add(ImplMethod); 
+//
+//										}
+//									}
+//								}
+//							}
+//							
+//					
+//							//END OF ADDED CODE 
+//							//---------------------------------------------//
 					}
 				}
 
@@ -718,22 +719,22 @@ return OuterCallees;
 			TempCallers.addAll(this.Callers); 
 			
 			if(AlgoFinal.InterfaceImplementationFlag==true) {
-				//---------------------------------------------//
-				//ADDED THIS CODE 
-					for(Clazz CallerInterfaceParentOwner : this.Owner.Interfaces) {
-						for(Clazz ParentMethod: CallerInterfaceParentOwner.Parents) {
-							for(Method ImplMethod: ParentMethod.methods) {
-								if(ImplMethod.methodname.equals(this.methodname)) {
-									TempCallers.addAll(ImplMethod.Callers); 
-								}
-								}
-							}
-						}
-					
-		
-			
-					//END OF ADDED CODE 
-					//---------------------------------------------//
+//				//---------------------------------------------//
+//				//ADDED THIS CODE 
+//					for(Clazz CallerInterfaceParentOwner : this.Owner.Interfaces) {
+//						for(Clazz ParentMethod: CallerInterfaceParentOwner.Parents) {
+//							for(Method ImplMethod: ParentMethod.methods) {
+//								if(ImplMethod.methodname.equals(this.methodname)) {
+//									TempCallers.addAll(ImplMethod.Callers); 
+//								}
+//								}
+//							}
+//						}
+//					
+//		
+//			
+//					//END OF ADDED CODE 
+//					//---------------------------------------------//
 					//case 20
 					for(Method CallerInterface: this.Interfaces) {
 						TempCallers.addAll(CallerInterface.Callers); 
@@ -778,62 +779,31 @@ return OuterCallees;
 	/////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 public MethodList getExtendedCallersCallers() {
+	if(ExtendedCallersCallers!=null) {
+		return ExtendedCallersCallers;
 
-
-
-
-if(ExtendedCallersCallers!=null) {
-return ExtendedCallersCallers; 
+	}else {
+		ExtendedCallersCallers= new MethodList(); 
+		for(Method CallerCaller:this.getExtendedCallers()) {
+			ExtendedCallersCallers.addAll(CallerCaller.getExtendedCallers()); 
+		}
+		return ExtendedCallersCallers; 
+	}
 }
 
-else {
-ExtendedCallersCallers= new MethodList(); 
-MethodList TempCallers= new MethodList();
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+public MethodList getExtendedCalleesCallees() throws CloneNotSupportedException {
+if(ExtendedCalleesCallees!=null) {
+return ExtendedCalleesCallees;
 
-TempCallers.addAll(this.Callers); 
-for(Method Caller: this.Callers) {
-	TempCallers.addAll(Caller.Callers); 
-}
-if(AlgoFinal.InterfaceImplementationFlag==true) {
-
-//case 20
-for(Method CallerInterface: this.Interfaces) {
-TempCallers.addAll(CallerInterface.Callers); 
-}
-//case 21
-for(Method CallerImplementation: this.Implementations) {
-TempCallers.addAll(CallerImplementation.Callers); 
-}
-//case 22
-for(Method Caller: this.Callers) {
-TempCallers.addAll(Caller.Interfaces); 
-
-}
-
-}
-if(AlgoFinal.InheritanceFlag==true) {
-//case 28
-for(Method mysuperclass: this.Superclasses) {
-TempCallers.addAll(mysuperclass.Callers); 
-}
-}
-if(AlgoFinal.RecursiveDescent==true) {
-for(Method caller: TempCallers) {
-if(!caller.Owner.ID.equals(this.Owner.ID)) {
-	ExtendedCallersCallers.add(caller); 
 }else {
-	ExtendedCallersCallers.addAll(caller.getExtendedCallersCallers()); 
+	ExtendedCalleesCallees= new MethodList(); 
+for(Method CalleeCallee:this.getExtendedCallees()) {
+	ExtendedCalleesCallees.addAll(CalleeCallee.getExtendedCallees()); 
 }
+return ExtendedCalleesCallees; 
 }
-}else {
-	ExtendedCallersCallers=TempCallers; 
-}
-}
-
-
-
-
-return ExtendedCallersCallers; 
 }
 /////////////////////////////////////////////////////////////////////////
 private MethodList getInterfaceImplementationCallers(MethodList ExtendedCallers) {
@@ -916,22 +886,50 @@ private MethodList getInheritanceCallers(MethodList SuperclassCallers) {
 	}
 
 	public MethodList getCallersCallersShell() {
-		// TODO Auto-generated method stub
 
-		// TODO Auto-generated method stub
-//		for(String key: DatabaseInput.MethodHashMap.keySet()) {
-//			DatabaseInput.MethodHashMap.get(key).VisitedFlag=false; 
-//		}
-		
 		MethodList Callers =getExtendedCallersCallers(); 
-//		this.FirstTimeCallers=true; 
 		return Callers; 
+	
+	}
+	
+	public MethodList getCalleesCalleesShell() throws CloneNotSupportedException {
+
+		
+		MethodList CalleesCallees =getExtendedCalleesCallees(); 
+		return CalleesCallees; 
 	
 	}
 
 	public int compareTo(Method o) {
 		// TODO Auto-generated method stub
 		return Integer.parseInt(this.ID)-Integer.parseInt(o.ID); 
+	}
+
+	public MethodList getBasicCallersCallers() {
+		if(CallersofCallers!=null) {
+			return CallersofCallers;
+
+		}else {
+			CallersofCallers= new MethodList(); 
+			for(Method Caller:this.Callers) {
+				CallersofCallers.addAll(Caller.Callers); 
+			}
+			return CallersofCallers; 
+		}
+	}
+
+	public MethodList getBasicCalleesCallees() {
+
+		if(CalleesofCallees!=null) {
+			return CalleesofCallees;
+
+		}else {
+			CalleesofCallees= new MethodList(); 
+			for(Method Callee:this.Callees) {
+				CalleesofCallees.addAll(Callee.Callees); 
+			}
+			return CalleesofCallees; 
+		}
 	}
 
 

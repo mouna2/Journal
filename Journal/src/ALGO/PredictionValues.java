@@ -6,18 +6,26 @@ public class PredictionValues {
 		public int T=0; 
 		public int N=0; 
 		public int E=0;
-		public boolean TPureT=false; 
-		public boolean NPureN=false; 
-		public boolean TMixedT=false; 
-		public boolean NMixedN=false; 
+		public boolean TPureTInner=false; 
+		public boolean NPureNInner=false; 
+		public boolean TMixedTInner=false; 
+		public boolean NMixedNInner=false; 
 		public boolean TPureTLeaf=false; 
 		public boolean NPureNLeaf=false; 
 		public boolean TMixedTLeaf=false; 
 		public boolean NMixedNLeaf=false; 
-		public boolean EIncomplete=false; 
-		public boolean EBoundary=false; 
+		public boolean EIncompleteInner=false; 
+		public boolean EBoundaryInner=false; 
 		public boolean EIncompleteLeaf=false; 
 		public boolean EBoundaryLeaf=false; 
+		public boolean EIsolated=false; 
+
+		public boolean TPureTRoot=false; 
+		public boolean NPureNRoot=false; 
+		public boolean TMixedTRoot=false; 
+		public boolean NMixedNRoot=false; 
+		public boolean EIncompleteRoot=false; 
+		public boolean EBoundaryRoot=false; 
 		
 		public int TPureTCount=0; 
 		public int NPureNCount=0; 
@@ -31,6 +39,18 @@ public class PredictionValues {
 		public int EBoundaryCount=0; 
 		public int EIncompleteLeafCount=0; 
 		public int EBoundaryLeafCount=0; 
+		public int EOutOfScopeCount=0; 
+
+		public int TPureTRootCount=0; 
+		public int NPureNRootCount=0; 
+		public int TMixedTRootCount=0; 
+		public int NMixedNRootCount=0; 
+		public int EIncompleteRootCount=0; 
+		public int EBoundaryRootCount=0; 
+		
+		
+		
+		
 		
 		public int getT() {
 			return T;
