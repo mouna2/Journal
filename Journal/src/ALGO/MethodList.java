@@ -61,7 +61,7 @@ public class MethodList extends ArrayList<Method> {
 
 
 
-	public boolean AtLeast1T(Requirement requirement,  HashMap<java.lang.String, MethodTrace> methodtraces2HashMap) throws Exception {
+	public boolean AtLeast1T(Requirement requirement,  HashMap<java.lang.String, MethodTrace> methodtraces2HashMap, boolean GoldFlag) throws Exception {
 		// TODO Auto-generated method stub
 		if(!this.isEmpty()) {
 		for (Method method : this) {
@@ -69,8 +69,41 @@ public class MethodList extends ArrayList<Method> {
 			String MethodID = method.ID; 
 			String key = (String) (RequirementID + "-" + MethodID);
 			if (methodtraces2HashMap.get(key) == null) throw new Exception();
+			if(!GoldFlag) {
 				if (methodtraces2HashMap.get(key).getPrediction().equals("T")) 
-					return true; 
+					return true;
+			}else {
+				if (methodtraces2HashMap.get(key).getGold().equals("T")) 
+					return true;
+			}
+
+			
+		}
+		}
+		return false;
+		
+		
+		
+		
+		
+
+	}
+	
+	public boolean AtLeast1E(Requirement requirement,  HashMap<java.lang.String, MethodTrace> methodtraces2HashMap, boolean GoldFlag) throws Exception {
+		// TODO Auto-generated method stub
+		if(!this.isEmpty()) {
+		for (Method method : this) {
+			String RequirementID = (String) requirement.ID; 
+			String MethodID = method.ID; 
+			String key = (String) (RequirementID + "-" + MethodID);
+			if (methodtraces2HashMap.get(key) == null) throw new Exception();
+			if(!GoldFlag) {
+				if (methodtraces2HashMap.get(key).getPrediction().equals("E")) 
+					return true;
+			}else {
+				if (methodtraces2HashMap.get(key).getGold().equals("E")) 
+					return true;
+			}
 
 			
 		}
@@ -85,9 +118,7 @@ public class MethodList extends ArrayList<Method> {
 	}
 	
 	
-	
-	
-	public boolean AtLeast1N(Requirement requirement,  HashMap<java.lang.String, MethodTrace> methodtraces2HashMap) throws Exception {
+	public boolean AtLeast1N(Requirement requirement,  HashMap<java.lang.String, MethodTrace> methodtraces2HashMap, boolean GoldFlag) throws Exception {
 		// TODO Auto-generated method stub
 		if(!this.isEmpty()) {
 			for (Method method : this) {
@@ -95,8 +126,14 @@ public class MethodList extends ArrayList<Method> {
 				String MethodID = method.ID; 
 				String key = (String) (RequirementID + "-" + MethodID);
 				if (methodtraces2HashMap.get(key) == null) throw new Exception();
+				if(!GoldFlag) {
 					if (methodtraces2HashMap.get(key).getPrediction().equals("N")) 
-						return true; 
+						return true;
+				}else {
+					if (methodtraces2HashMap.get(key).getGold().equals("N")) 
+						return true;
+				}
+				 
 
 				
 			}
@@ -140,8 +177,7 @@ public class MethodList extends ArrayList<Method> {
 	}
 	
 	
-	
-	public boolean AllNs(Requirement requirement,  HashMap<java.lang.String, MethodTrace> methodtraces2HashMap) throws Exception {
+	public boolean AllNs(Requirement requirement,  HashMap<java.lang.String, MethodTrace> methodtraces2HashMap, boolean GoldFlag) throws Exception {
 		// TODO Auto-generated method stub
 		if(!this.isEmpty()) {
 			for (Method method : this) {
@@ -149,7 +185,39 @@ public class MethodList extends ArrayList<Method> {
 				String MethodID = method.ID; 
 				String key = (String) (RequirementID + "-" + MethodID);
 				if (methodtraces2HashMap.get(key) == null) throw new Exception();
+
+				if(!GoldFlag) {
 					if (!methodtraces2HashMap.get(key).getPrediction().equals("N")) return false; 
+				}else {
+					if (!methodtraces2HashMap.get(key).getGold().equals("N")) return false; 
+				}
+				
+
+				
+			}
+			return true;
+		}
+		
+		return false; 
+		
+
+		
+	}
+	public boolean AllTs(Requirement requirement,  HashMap<java.lang.String, MethodTrace> methodtraces2HashMap, boolean GoldFlag) throws Exception {
+		// TODO Auto-generated method stub
+		if(!this.isEmpty()) {
+			for (Method method : this) {
+				String RequirementID = (String) requirement.ID;
+				String MethodID = method.ID; 
+				String key = (String) (RequirementID + "-" + MethodID);
+				if (methodtraces2HashMap.get(key) == null) throw new Exception();
+
+				if(!GoldFlag) {
+					if (!methodtraces2HashMap.get(key).getPrediction().equals("T")) return false; 
+				}else {
+					if (!methodtraces2HashMap.get(key).getGold().equals("T")) return false; 
+				}
+				
 
 				
 			}
@@ -162,8 +230,7 @@ public class MethodList extends ArrayList<Method> {
 		
 	}
 	
-	
-	public boolean AllEs(Requirement requirement,  HashMap<java.lang.String, MethodTrace> methodtraces2HashMap) throws Exception {
+	public boolean AllEs(Requirement requirement,  HashMap<java.lang.String, MethodTrace> methodtraces2HashMap, boolean GoldFlag) throws Exception {
 		// TODO Auto-generated method stub
 		if(!this.isEmpty()) {
 			for (Method method : this) {
@@ -171,7 +238,13 @@ public class MethodList extends ArrayList<Method> {
 				String MethodID = method.ID; 
 				String key = (String) (RequirementID + "-" + MethodID);
 				if (methodtraces2HashMap.get(key) == null) throw new Exception();
+
+				if(!GoldFlag) {
 					if (!methodtraces2HashMap.get(key).getPrediction().equals("E")) return false; 
+				}else {
+					if (!methodtraces2HashMap.get(key).getGold().equals("E")) return false; 
+				}
+				
 
 				
 			}
@@ -249,7 +322,7 @@ public class MethodList extends ArrayList<Method> {
     }
 
 
-	public boolean NoNs(Requirement requirement, LinkedHashMap<String, MethodTrace> methodtraces2HashMap) throws Exception {
+	public boolean NoNs(Requirement requirement, LinkedHashMap<String, MethodTrace> methodtraces2HashMap, boolean GoldFlag) throws Exception {
 		// TODO Auto-generated method stub
 		if(!this.isEmpty()) {
 			for (Method method : this) {
@@ -257,8 +330,13 @@ public class MethodList extends ArrayList<Method> {
 				String MethodID = method.ID; 
 				String key = (String) (RequirementID + "-" + MethodID);
 				if (methodtraces2HashMap.get(key) == null) throw new Exception();
+				if(!GoldFlag) {
 					if (methodtraces2HashMap.get(key).getPrediction().equals("N")) 
-						return false; 
+						return false;
+				}else {
+					if (methodtraces2HashMap.get(key).getGold().equals("N")) 
+						return false;
+				}
 
 				
 			}
@@ -269,7 +347,7 @@ public class MethodList extends ArrayList<Method> {
 		
 		}
 
-	public boolean NoTs(Requirement requirement, LinkedHashMap<String, MethodTrace> methodtraces2HashMap) throws Exception {
+	public boolean NoTs(Requirement requirement, LinkedHashMap<String, MethodTrace> methodtraces2HashMap, boolean GoldFlag) throws Exception {
 		// TODO Auto-generated method stub
 		if(!this.isEmpty()) {
 			for (Method method : this) {
@@ -277,8 +355,13 @@ public class MethodList extends ArrayList<Method> {
 				String MethodID = method.ID; 
 				String key = (String) (RequirementID + "-" + MethodID);
 				if (methodtraces2HashMap.get(key) == null) throw new Exception();
+				if(!GoldFlag) {
 					if (methodtraces2HashMap.get(key).getPrediction().equals("T")) 
-						return false; 
+						return false;
+				}else {
+					if (methodtraces2HashMap.get(key).getGold().equals("T")) 
+						return false;
+				}
 
 				
 			}
@@ -291,7 +374,7 @@ public class MethodList extends ArrayList<Method> {
 
 
 	
-	public boolean NoEs(Requirement requirement, LinkedHashMap<String, MethodTrace> methodtraces2HashMap) throws Exception {
+	public boolean NoEs(Requirement requirement, LinkedHashMap<String, MethodTrace> methodtraces2HashMap, boolean GoldFlag) throws Exception {
 		// TODO Auto-generated method stub
 		if(!this.isEmpty()) {
 			for (Method method : this) {
@@ -299,8 +382,13 @@ public class MethodList extends ArrayList<Method> {
 				String MethodID = method.ID; 
 				String key = (String) (RequirementID + "-" + MethodID);
 				if (methodtraces2HashMap.get(key) == null) throw new Exception();
+				if(!GoldFlag) {
 					if (methodtraces2HashMap.get(key).getPrediction().equals("E")) 
-						return false; 
+						return false;
+				}else {
+					if (methodtraces2HashMap.get(key).getGold().equals("E")) 
+						return false;
+				}
 
 				
 			}

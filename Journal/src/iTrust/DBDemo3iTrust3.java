@@ -416,7 +416,7 @@ public class DBDemo3iTrust3 {
 	Statement st4= conn.createStatement();
 	Statement st5= conn.createStatement();
 		SpoonAPI spoon = new Launcher();
-    	spoon.addInputResource("C:\\Users\\mouna\\ownCloud\\Share\\iTrust");
+    	spoon.addInputResource("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\iTrust");
     	
     	
     

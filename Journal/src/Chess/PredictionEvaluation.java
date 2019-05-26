@@ -28,36 +28,38 @@ public class PredictionEvaluation {
 	public boolean FNPureLeaf=false;
 	public boolean EIncompleteLeaf=false; 
 	
-	public int TPMixedCount=0; 
-	public int TNMixedCount=0; 
-	public int FPMixedCount=0; 
-	public int FNMixedCount=0;
-	public int EBoundaryCount=0; 
+	public int TPMixedInnerCount=0; 
+	public int TNMixedInnerCount=0; 
+	public int FPMixedInnerCount=0; 
+	public int FNMixedInnerCount=0;
 	public int TPMixedLeafCount=0; 
 	public int TNMixedLeafCount=0; 
 	public int FPMixedLeafCount=0; 
 	public int FNMixedLeafCount=0;
-	public int EIncompleteCount=0; 
+	public int EUndecidableInnerCount=0; 
 	public int EOutOfScopeCount=0; 
 
-	public int TPPureCount=0; 
-	public int TNPureCount=0; 
-	public int FPPureCount=0; 
-	public int FNPureCount=0;
+	public int TPPureInnerCount=0; 
+	public int TNPureInnerCount=0; 
+	public int FPPureInnerCount=0; 
+	public int FNPureInnerCount=0;
 	public int EBoundaryLeafCount=0; 
 	public int TPPureLeafCount=0; 
 	public int TNPureLeafCount=0; 
 	public int FPPureLeafCount=0; 
 	public int FNPureLeafCount=0;
-	public int EIncompleteLeafCount=0; 
+	public int EUndecidableLeafCount=0; 
 	public int EBoundaryRootCount=0; 
 	public int TPPureRootCount=0; 
 	public int TNPureRootCount=0; 
 	public int FPPureRootCount=0; 
 	public int FNPureRootCount=0;
-	public int EIncompleteRootCount=0; 
+	public int EUndecidableRootCount=0; 
 	public int TPMixedRootCount=0; 
 	public int TNMixedRootCount=0; 
+	public int EIsolatedECount=0; 
+	public int FPMixedRootCount=0; 
+	public int FNMixedRootCount=0; 
 	
 	public int getE() {
 		return E;
@@ -116,6 +118,7 @@ public class PredictionEvaluation {
 		else {
 			return "E"; 
 		}
+		
 	}
 	
 	public void UpdateCounters(String value, PredictionEvaluation predictionEvaluation) {

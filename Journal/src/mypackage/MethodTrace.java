@@ -22,6 +22,8 @@ public final class MethodTrace {
 	public Method Method= new Method();
 	public Requirement Requirement=new Requirement();
 	public String gold;
+	public String goldCopy;
+
 	public String prediction; 
 	public String goldfinal;
 	public String likelihood;
@@ -46,6 +48,14 @@ public final class MethodTrace {
 	
 	
 	
+
+	public String getGoldCopy() {
+		return goldCopy;
+	}
+
+	public void setGoldCopy(String goldCopy) {
+		this.goldCopy = goldCopy;
+	}
 
 	public String getClassLevelGold() {
 		return ClassLevelGold;
@@ -167,8 +177,8 @@ public final class MethodTrace {
 			
 			
 			{
-
 		if(this.prediction.trim().equals("E")) {
+
 			String reqMethod=this.Requirement.ID+"-"+this.Method.ID; 
 			
 			this.prediction=Pred; 

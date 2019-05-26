@@ -445,9 +445,9 @@ public class DBDemo3JHotDraw2 {
 	Statement st5= conn.createStatement();
 	    
 		SpoonAPI spoon = new Launcher();
-    	spoon.addInputResource("C:\\Users\\mouna\\ownCloud\\Share\\src_jhotdraw");
-    	//spoon.addInputResource("C:\\Users\\mouna\\ownCloud\\Share\\src_jhotdraw\\samples\\mini\\ConnectingFiguresSample.java");
-    	//spoon.getEnvironment().setSourceClasspath("C:\\Users\\mouna\\ownCloud\\Share\\src_jhotdraw");
+    	spoon.addInputResource("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\src_jhotdraw");
+    	//spoon.addInputResource("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\src_jhotdraw\\samples\\mini\\ConnectingFiguresSample.java");
+    	//spoon.getEnvironment().setSourceClasspath("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\src_jhotdraw");
 
     	
     	spoon.getEnvironment().setAutoImports(true);

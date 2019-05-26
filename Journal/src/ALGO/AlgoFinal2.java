@@ -186,15 +186,15 @@ public class AlgoFinal2  {
 		BufferedWriter bwfile3 = null ; 
 		BufferedWriter bwfile1itrust =null; 
 	if(ProgramName.equals("chess")) {
-		File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\InterfacesNewRule.txt");
+		File file1log = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\InterfacesNewRule.txt");
 		FileOutputStream fosfila1 = new FileOutputStream(file1log);
 		 bwfile1 = new BufferedWriter(new OutputStreamWriter(fosfila1));
 		
-		File file2log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\LogFileUnderstandFP.txt");
+		File file2log = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\LogFileUnderstandFP.txt");
 		FileOutputStream fosfila2 = new FileOutputStream(file2log);
 		 bwfile2 = new BufferedWriter(new OutputStreamWriter(fosfila2));
 		 
-			File file3log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\LogFileUnderstandFN.txt");
+			File file3log = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\LogFileUnderstandFN.txt");
 			FileOutputStream fosfila3 = new FileOutputStream(file3log);
 			 bwfile3 = new BufferedWriter(new OutputStreamWriter(fosfila3));
 	}
@@ -203,7 +203,7 @@ public class AlgoFinal2  {
 
 		
 		if(ProgramName.equals("itrust")) {
-			File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\iTrustMethodCallsComparison.txt");
+			File file1log = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\iTrustMethodCallsComparison.txt");
 			FileOutputStream fosfila1 = new FileOutputStream(file1log);
 			 bwfile1itrust = new BufferedWriter(new OutputStreamWriter(fosfila1));
 		}
@@ -336,7 +336,7 @@ public class AlgoFinal2  {
 								{
 											
 									methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteE");
-									methodtrace.PredictionValues.EIncompleteInner=true; 
+									methodtrace.PredictionValues.EUndecidableInner=true; 
 		
 								}
 								
@@ -346,7 +346,7 @@ public class AlgoFinal2  {
 						 Callees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap))
 						 {
 								methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteE");
-								methodtrace.PredictionValues.EIncompleteInner=true; 
+								methodtrace.PredictionValues.EUndecidableInner=true; 
 
 				}else {
 								methodtrace.SetPrediction(LogInfoHashMap,"E", "E,BoundaryE");
@@ -393,7 +393,7 @@ public class AlgoFinal2  {
 												 {
 											
 															methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteLeafE");
-															methodtrace.PredictionValues.EIncompleteLeaf=true; 
+															methodtrace.PredictionValues.EUndecidableLeaf=true; 
 		
 												 }
 						
@@ -403,7 +403,7 @@ public class AlgoFinal2  {
 								 Callers.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)) 
 						{
 										methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteLeafE");
-										methodtrace.PredictionValues.EIncompleteLeaf=true; 
+										methodtrace.PredictionValues.EUndecidableLeaf=true; 
 						}
 						else 
 						{			
@@ -447,7 +447,7 @@ public class AlgoFinal2  {
 													 {
 												
 																methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteLeafE");
-																methodtrace.PredictionValues.EIncompleteLeaf=true; 
+																methodtrace.PredictionValues.EUndecidableLeaf=true; 
 			
 													 }
 							
@@ -457,7 +457,7 @@ public class AlgoFinal2  {
 									 Callees.AtLeast1E(methodtrace.Requirement, methodtraces2HashMap)) 
 							{
 											methodtrace.SetPrediction(LogInfoHashMap,"E", "E,IncompleteLeafE");
-											methodtrace.PredictionValues.EIncompleteLeaf=true; 
+											methodtrace.PredictionValues.EUndecidableLeaf=true; 
 							}
 							else 
 							{			

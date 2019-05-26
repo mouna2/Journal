@@ -127,34 +127,34 @@ public class UnitedComparisonMethodInterfacesFinal2 {
 		BufferedWriter bwfile5 = null ; 
 		BufferedWriter bwfile2= null ; 
 		if(ProgramName.equals("Chess")) {
-			File fout1 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildrenChess_COUNTS.txt");
+			File fout1 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildrenChess_COUNTS.txt");
 			FileOutputStream fos = new FileOutputStream(fout1);
 			 bwfile2 = new BufferedWriter(new OutputStreamWriter(fos));
-			File fout5 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonInterfacesImpChess_COUNTS.txt");
+			File fout5 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\ComparisonInterfacesImpChess_COUNTS.txt");
 			FileOutputStream fos5 = new FileOutputStream(fout5);
 			 bwfile5 = new BufferedWriter(new OutputStreamWriter(fos5));
 		}
 		if(ProgramName.equals("iTrust")) {
-			File fout1 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildreniTrust_COUNTS.txt");
+			File fout1 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildreniTrust_COUNTS.txt");
 			FileOutputStream fos = new FileOutputStream(fout1);
 			 bwfile2 = new BufferedWriter(new OutputStreamWriter(fos));
-			File fout5 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonInterfacesImpiTrust_COUNTS.txt");
+			File fout5 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\ComparisonInterfacesImpiTrust_COUNTS.txt");
 			FileOutputStream fos5 = new FileOutputStream(fout5);
 			 bwfile5 = new BufferedWriter(new OutputStreamWriter(fos5));
 		}
 		if(ProgramName.equals("Gantt")) {
-			File fout1 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildrenGantt_COUNTS.txt");
+			File fout1 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildrenGantt_COUNTS.txt");
 			FileOutputStream fos = new FileOutputStream(fout1);
 			 bwfile2 = new BufferedWriter(new OutputStreamWriter(fos));
-			File fout5 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonInterfacesImpGantt_COUNTS.txt");
+			File fout5 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\ComparisonInterfacesImpGantt_COUNTS.txt");
 			FileOutputStream fos5 = new FileOutputStream(fout5);
 			 bwfile5 = new BufferedWriter(new OutputStreamWriter(fos5));
 		}
 		if(ProgramName.equals("JHotDraw")) {
-			File fout1 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildrenJHotDraw_COUNTS.txt");
+			File fout1 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildrenJHotDraw_COUNTS.txt");
 			FileOutputStream fos = new FileOutputStream(fout1);
 			 bwfile2 = new BufferedWriter(new OutputStreamWriter(fos));
-			File fout5 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonInterfacesImpJHotDraw_COUNTS.txt");
+			File fout5 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\ComparisonInterfacesImpJHotDraw_COUNTS.txt");
 			FileOutputStream fos5 = new FileOutputStream(fout5);
 			 bwfile5 = new BufferedWriter(new OutputStreamWriter(fos5));
 		}

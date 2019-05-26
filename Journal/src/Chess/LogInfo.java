@@ -1110,32 +1110,32 @@ public class LogInfo {
 	
 
 		if (ProgramName.equals("chess")) {
-			File filelogChess = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TableLogChess.txt");
+			File filelogChess = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\TableLogChess.txt");
 			FileOutputStream fosfilChess = new FileOutputStream(filelogChess);
 			bwfileChess = new BufferedWriter(new OutputStreamWriter(fosfilChess));
 			
 		
-//			 File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallChess.txt");
+//			 File file1log = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\PrecisionRecallChess.txt");
 //				FileOutputStream fosfila1 = new FileOutputStream(file1log);
 //				bwfile1 = new BufferedWriter(new OutputStreamWriter(fosfila1));
-			  bwfile1 = new BufferedWriter( new FileWriter("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallChess.txt", true));  //Set true for append mode
+			  bwfile1 = new BufferedWriter( new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\PrecisionRecallChess.txt", true));  //Set true for append mode
 				
-				File  file2log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallChessCumulative.txt");
+				File  file2log = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\PrecisionRecallChessCumulative.txt");
 				FileOutputStream	 fosfila2 = new FileOutputStream(file2log);
 					bwfileCumulative = new BufferedWriter(new OutputStreamWriter(fosfila2));
 
 				
-				File mytraceClass = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TracesClassesChess.txt");
+				File mytraceClass = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\TracesClassesChess.txt");
 				FileOutputStream fosTraceClass = new FileOutputStream(mytraceClass);
 				bwTraceClass = new BufferedWriter(new OutputStreamWriter(fosTraceClass));
 				
 				
-				File myfile = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonInterfacesImplementationsChess.txt");
+				File myfile = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\ComparisonInterfacesImplementationsChess.txt");
 				FileOutputStream myFileOutputStream = new FileOutputStream(myfile);
 				bwInterfacesImpChess = new BufferedWriter(new OutputStreamWriter(myFileOutputStream));
 				
 				
-				File myfile2 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildrenChess.txt");
+				File myfile2 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildrenChess.txt");
 				FileOutputStream myFileOutputStream2 = new FileOutputStream(myfile2);
 				bwSuperclassesChildrenChess = new BufferedWriter(new OutputStreamWriter(myFileOutputStream2));
 				
@@ -1147,27 +1147,27 @@ public class LogInfo {
 		}
 
 		if (ProgramName.equals("gantt")) {
-			File filelog2 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TableLogGantt.txt");
+			File filelog2 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\TableLogGantt.txt");
 			FileOutputStream fosfila2 = new FileOutputStream(filelog2);
 			bwfile2 = new BufferedWriter(new OutputStreamWriter(fosfila2));
 
 		
-//			 File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallGantt.txt");
+//			 File file1log = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\PrecisionRecallGantt.txt");
 //				FileOutputStream fosfila1 = new FileOutputStream(file1log);
 //				bwfile1 = new BufferedWriter(new OutputStreamWriter(fosfila1));
 
-				  bwfile1 = new BufferedWriter( new FileWriter("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallGantt.txt", true));  //Set true for append mode
+				  bwfile1 = new BufferedWriter( new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\PrecisionRecallGantt.txt", true));  //Set true for append mode
 
-				File mytraceClass = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TracesClassesGantt.txt");
+				File mytraceClass = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\TracesClassesGantt.txt");
 				FileOutputStream fosTraceClass = new FileOutputStream(mytraceClass);
 				bwTraceClass = new BufferedWriter(new OutputStreamWriter(fosTraceClass));
 		
-				File myfile = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonInterfacesImplementationsGantt.txt");
+				File myfile = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\ComparisonInterfacesImplementationsGantt.txt");
 				FileOutputStream myFileOutputStream = new FileOutputStream(myfile);
 				bwInterfacesImpGantt = new BufferedWriter(new OutputStreamWriter(myFileOutputStream));
 				
 				
-				File myfile2 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildrenGantt.txt");
+				File myfile2 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildrenGantt.txt");
 				FileOutputStream myFileOutputStream2 = new FileOutputStream(myfile2);
 				bwSuperclassesChildrenGantt = new BufferedWriter(new OutputStreamWriter(myFileOutputStream2));
 		
@@ -1178,29 +1178,29 @@ public class LogInfo {
 		}
 
 		if (ProgramName.equals("itrust")) {
-			File filelog3 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TableLogiTrust.txt");
+			File filelog3 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\TableLogiTrust.txt");
 			FileOutputStream fosfila5 = new FileOutputStream(filelog3);
 			bwfile3 = new BufferedWriter(new OutputStreamWriter(fosfila5));
 			
 			
 			
 			
-//			File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecalliTrust.txt");
+//			File file1log = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\PrecisionRecalliTrust.txt");
 //			FileOutputStream fosfila1 = new FileOutputStream(file1log);
 //			bwfile1 = new BufferedWriter(new OutputStreamWriter(fosfila1));
-			  bwfile1 = new BufferedWriter( new FileWriter("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecalliTrust.txt", true));  //Set true for append mode
+			  bwfile1 = new BufferedWriter( new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\PrecisionRecalliTrust.txt", true));  //Set true for append mode
 
 			
-			File mytraceClass = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TracesClassesiTrust.txt");
+			File mytraceClass = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\TracesClassesiTrust.txt");
 			FileOutputStream fosTraceClass = new FileOutputStream(mytraceClass);
 			bwTraceClass = new BufferedWriter(new OutputStreamWriter(fosTraceClass));
 			
-			File myfile = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonInterfacesImplementationsiTrust.txt");
+			File myfile = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\ComparisonInterfacesImplementationsiTrust.txt");
 			FileOutputStream myFileOutputStream = new FileOutputStream(myfile);
 			bwInterfacesImpiTrust = new BufferedWriter(new OutputStreamWriter(myFileOutputStream));
 			
 			
-			File myfile2 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildreniTrust.txt");
+			File myfile2 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildreniTrust.txt");
 			FileOutputStream myFileOutputStream2 = new FileOutputStream(myfile2);
 			bwSuperclassesChildreniTrust = new BufferedWriter(new OutputStreamWriter(myFileOutputStream2));
 			
@@ -1210,30 +1210,30 @@ public class LogInfo {
 		}
 
 		if (ProgramName.equals("jhotdraw")) {
-			File filelog4 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TableLogJHotDraw.txt");
+			File filelog4 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\TableLogJHotDraw.txt");
 			FileOutputStream fosfila4 = new FileOutputStream(filelog4);
 			bwfile4 = new BufferedWriter(new OutputStreamWriter(fosfila4));
 			
 			
 				
 				
-//				File file1log = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallJHotDraw.txt");
+//				File file1log = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\PrecisionRecallJHotDraw.txt");
 //				FileOutputStream fosfila1 = new FileOutputStream(file1log);
 //				bwfile1 = new BufferedWriter(new OutputStreamWriter(fosfila1));
 
-				  bwfile1 = new BufferedWriter( new FileWriter("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\PrecisionRecallJHotDraw.txt", true));  //Set true for append mode
+				  bwfile1 = new BufferedWriter( new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\PrecisionRecallJHotDraw.txt", true));  //Set true for append mode
 
-				File mytraceClass = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TracesClassesJHotDraw.txt");
+				File mytraceClass = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\TracesClassesJHotDraw.txt");
 				FileOutputStream fosTraceClass = new FileOutputStream(mytraceClass);
 				bwTraceClass = new BufferedWriter(new OutputStreamWriter(fosTraceClass));
 				
 				
-				File myfile = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonInterfacesImplementationsJHotDraw.txt");
+				File myfile = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\ComparisonInterfacesImplementationsJHotDraw.txt");
 				FileOutputStream myFileOutputStream = new FileOutputStream(myfile);
 				bwInterfacesImpJHotDraw = new BufferedWriter(new OutputStreamWriter(myFileOutputStream));
 				
 				
-				File myfile2 = new File("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildrenJHotDraw.txt");
+				File myfile2 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\ComparisonSuperclassesChildrenJHotDraw.txt");
 				FileOutputStream myFileOutputStream2 = new FileOutputStream(myfile2);
 				bwSuperclassesChildrenJHotDraw = new BufferedWriter(new OutputStreamWriter(myFileOutputStream2));
 			
@@ -1344,23 +1344,56 @@ int count=0;
 		// TODO Auto-generated method stub
 		
 		int IterationsSize= logInfoHashMap.get(mykey).IterationValues.size(); 
-		if(result.equals("TP") && methodTrace.PredictionValues.TMixedTInner==true) {
-			pattern.TPMixedCount++; 
-		}else if(result.equals("TP") && methodTrace.PredictionValues.TPureTInner==true) {
-			pattern.TPPureCount++; 
+		if(result.equals("TP") && methodTrace.PredictionValues.TPureTInner==true) {
+			pattern.TPPureInnerCount++; 
 		}else if(result.equals("TN") && methodTrace.PredictionValues.NPureNInner==true) {
-			pattern.TNPureCount++; 
-		}else if(result.equals("TN") && methodTrace.PredictionValues.NPureNLeaf==true) {
-			pattern.TNPureLeafCount++; 
-		}else if(result.equals("TP") && methodTrace.PredictionValues.TPureTLeaf==true) {
+			pattern.TNPureInnerCount++; 
+		}else if(result.equals("TP") && methodTrace.PredictionValues.TMixedTInner==true) {
+			pattern.TPMixedInnerCount++; 
+		} 
+		else if(result.equals("TN") && methodTrace.PredictionValues.NMixedNInner==true) {
+			pattern.TNMixedInnerCount++; 
+		}
+		else if(result.equals("FP") && methodTrace.PredictionValues.TPureTInner==true) {
+			pattern.FPPureInnerCount++; 
+		}else if(result.equals("FN") && methodTrace.PredictionValues.NPureNInner==true) {
+			pattern.FNPureInnerCount++; 
+		}else if(result.equals("FP") && methodTrace.PredictionValues.TMixedTInner==true) {
+			pattern.FPMixedInnerCount++; 
+		} 
+		else if(result.equals("FN") && methodTrace.PredictionValues.NMixedNInner==true) {
+			pattern.FNMixedInnerCount++; 
+		}
+		
+		
+		/*****************************************************************************/
+		else if(result.equals("TP") && methodTrace.PredictionValues.TPureTLeaf==true) {
 			pattern.TPPureLeafCount++; 
-		}else if(result.equals("TN") && methodTrace.PredictionValues.NMixedNLeaf==true) {
-			pattern.TNMixedLeafCount++; 
-		}else if(result.equals("TN") && methodTrace.PredictionValues.NMixedNInner==true) {
-			pattern.TNMixedCount++; 
+		}
+		else if(result.equals("TN") && methodTrace.PredictionValues.NPureNLeaf==true) {
+			pattern.TNPureLeafCount++; 
 		}else if(result.equals("TP") && methodTrace.PredictionValues.TMixedTLeaf==true) {
 			pattern.TPMixedLeafCount++; 
-		}else if(result.equals("TN") && methodTrace.PredictionValues.NPureNRoot==true) {
+		}
+		else if(result.equals("TN") && methodTrace.PredictionValues.NMixedNLeaf==true) {
+			pattern.TNMixedLeafCount++; 
+		}
+		else if(result.equals("FP") && methodTrace.PredictionValues.TPureTLeaf==true) {
+			pattern.FPPureLeafCount++; 
+		}
+		else if(result.equals("FN") && methodTrace.PredictionValues.NPureNLeaf==true) {
+			pattern.FNPureLeafCount++; 
+		}else if(result.equals("FP") && methodTrace.PredictionValues.TMixedTLeaf==true) {
+			pattern.FPMixedLeafCount++; 
+		}
+		else if(result.equals("FN") && methodTrace.PredictionValues.NMixedNLeaf==true) {
+			pattern.FNMixedLeafCount++; 
+		}
+		
+		/*****************************************************************************/
+
+		
+		else if(result.equals("TN") && methodTrace.PredictionValues.NPureNRoot==true) {
 			pattern.TNPureRootCount++; 
 		}else if(result.equals("TP") && methodTrace.PredictionValues.TPureTRoot==true) {
 			pattern.TPPureRootCount++; 
@@ -1368,50 +1401,88 @@ int count=0;
 			pattern.TNMixedRootCount++; 
 		}else if(result.equals("TP") && methodTrace.PredictionValues.TMixedTRoot==true) {
 			pattern.TPMixedRootCount++; 
-		}else if(result.equals("E") && methodTrace.PredictionValues.EBoundaryRoot==true) {
-			pattern.EBoundaryRootCount++; 
-		}else if(result.equals("E") && methodTrace.PredictionValues.EIncompleteRoot==true) {
-			pattern.EIncompleteRootCount++; 
-		}else if(result.equals("E") && methodTrace.PredictionValues.EBoundaryInner==true) {
-			pattern.EBoundaryCount++; 
-		}else if(result.equals("E") && methodTrace.PredictionValues.EIncompleteInner==true) {
-			pattern.EIncompleteCount++; 
-		}else if(result.equals("E") && methodTrace.PredictionValues.EBoundaryLeaf==true) {
-			pattern.EBoundaryLeafCount++; 
-		}else if(result.equals("E") && methodTrace.PredictionValues.EIncompleteLeaf==true) {
-			pattern.EIncompleteLeafCount++; 
+		}
+		else if(result.equals("FN") && methodTrace.PredictionValues.NPureNRoot==true) {
+			pattern.FNPureRootCount++; 
+		}else if(result.equals("FP") && methodTrace.PredictionValues.TPureTRoot==true) {
+			pattern.FPPureRootCount++; 
+		}else if(result.equals("FN") && methodTrace.PredictionValues.NMixedNRoot==true) {
+			pattern.FNMixedRootCount++; 
+		}else if(result.equals("FP") && methodTrace.PredictionValues.TMixedTRoot==true) {
+			pattern.FPMixedRootCount++; 
 		}
 		
+		/*****************************************************************************/
+
+		
+		else if(result.equals("E") && methodTrace.PredictionValues.EBoundaryRoot==true) {
+			pattern.EBoundaryRootCount++; 
+		}else if(result.equals("E") && methodTrace.PredictionValues.EUndecidableRoot==true) {
+			pattern.EUndecidableRootCount++; 
+		}else if(result.equals("E") && methodTrace.PredictionValues.EBoundaryInner==true) {
+			pattern.EUndecidableInnerCount++; 
+		}else if(result.equals("E") && methodTrace.PredictionValues.EUndecidableInner==true) {
+			pattern.EUndecidableInnerCount++; 
+		}else if(result.equals("E") && methodTrace.PredictionValues.EBoundaryLeaf==true) {
+			pattern.EBoundaryLeafCount++; 
+		}else if(result.equals("E") && methodTrace.PredictionValues.EUndecidableLeaf==true) {
+			pattern.EUndecidableLeafCount++; 
+		}
+		else if(result.equals("E") && methodTrace.PredictionValues.EIsolatedE==true) {
+			pattern.EIsolatedECount++; 
+		}
 		
 		/*********************************************************************************************/
 		
 		
 		if( methodTrace.PredictionValues.TMixedTInner==true ) {
-			ownerClassPredictionValues.TMixedTCount++; 
+			ownerClassPredictionValues.TMixedTInnerCount++; 
 		}else if( methodTrace.PredictionValues.TPureTInner==true ) {
-			ownerClassPredictionValues.TPureTCount++; 
+			ownerClassPredictionValues.TPureTInnerCount++; 
 		}else if( methodTrace.PredictionValues.NPureNInner==true ) {
-			ownerClassPredictionValues.NPureNCount++; 
-		}else if( methodTrace.PredictionValues.NPureNLeaf==true) {
+			ownerClassPredictionValues.NPureNInnerCount++; 
+		}else if( methodTrace.PredictionValues.NMixedNInner==true) {
+			ownerClassPredictionValues.NMixedNInnerCount++;  
+		}
+		
+		else if( methodTrace.PredictionValues.NPureNLeaf==true) {
 			ownerClassPredictionValues.NPureNLeafCount++;  
 		}else if( methodTrace.PredictionValues.TPureTLeaf==true ) {
 			ownerClassPredictionValues.TPureTLeafCount++;  
 		}else if( methodTrace.PredictionValues.NMixedNLeaf==true ) {
 			ownerClassPredictionValues.NMixedNLeafCount++;  
-		}else if( methodTrace.PredictionValues.NMixedNInner==true) {
-			ownerClassPredictionValues.NMixedNCount++;  
 		}else if( methodTrace.PredictionValues.TMixedTLeaf==true) {
 			ownerClassPredictionValues.TMixedTLeafCount++;  
-		}else if( methodTrace.PredictionValues.EBoundaryLeaf==true) {
+		}
+		
+		else if( methodTrace.PredictionValues.NPureNRoot==true) {
+			ownerClassPredictionValues.NPureNRootCount++;  
+		}else if( methodTrace.PredictionValues.TPureTRoot==true ) {
+			ownerClassPredictionValues.TPureTRootCount++;  
+		}else if( methodTrace.PredictionValues.NMixedNRoot==true ) {
+			ownerClassPredictionValues.NMixedNRootCount++;  
+		}else if( methodTrace.PredictionValues.TMixedTRoot==true) {
+			ownerClassPredictionValues.TMixedTRootCount++;  
+		}
+		
+		
+		
+		else if( methodTrace.PredictionValues.EBoundaryLeaf==true) {
 			ownerClassPredictionValues.EBoundaryLeafCount++;  
-		}else if( methodTrace.PredictionValues.EIncompleteLeaf==true) {
-			ownerClassPredictionValues.EIncompleteLeafCount++;  
+		}else if( methodTrace.PredictionValues.EUndecidableLeaf==true) {
+			ownerClassPredictionValues.EUndecidableLeafCount++;  
 		}else if( methodTrace.PredictionValues.EBoundaryInner==true) {
-			ownerClassPredictionValues.EBoundaryCount++;  
-		}else if( methodTrace.PredictionValues.EIncompleteInner==true) {
-			ownerClassPredictionValues.EIncompleteCount++;  
-		}else if( methodTrace.PredictionValues.EIsolated==true) {
-			ownerClassPredictionValues.EOutOfScopeCount++; 
+			ownerClassPredictionValues.EBoundaryInnerCount++;  
+		}else if( methodTrace.PredictionValues.EUndecidableInner==true) {
+			ownerClassPredictionValues.EUndecidableInnerCount++;  
+		}
+		else if( methodTrace.PredictionValues.EBoundaryRoot==true) {
+			ownerClassPredictionValues.EBoundaryRootCount++;  
+		}else if( methodTrace.PredictionValues.EUndecidableRoot==true) {
+			ownerClassPredictionValues.EUndecidableRootCount++;  
+		}
+		else if( methodTrace.PredictionValues.EIsolatedE==true) {
+			ownerClassPredictionValues.EIsolatedECount++; 
 		}
 	}
 	public static void ComputePrecisionAndRecallCUMULATIVE(
@@ -1475,26 +1546,39 @@ int count=0;
 		//CODE  TO PASTE INTO EXCEL SPREADSHEET 
 		if(Type.equals("INDIVIDUAL") || Type.equals("CUMULATIVE") ) {
 			
-			
-			LogInfo.bwfile1.write(ownerClassPredictionValues.TPureTCount+"/"+ownerClassPredictionValues.NPureNCount+"/"+ownerClassPredictionValues.EIncompleteCount+"/"+ownerClassPredictionValues.EBoundaryCount+"/"+ownerClassPredictionValues.EOutOfScopeCount
-					+"/"+TotalPattern.TPPureCount+"/"+TotalPattern.TNPureCount+"/"+TotalPattern.FPPureCount+"/"+TotalPattern.FNPureCount);
+			//PURE 
+			LogInfo.bwfile1.write(ownerClassPredictionValues.TPureTInnerCount+"/"+ownerClassPredictionValues.NPureNInnerCount+"/"+ownerClassPredictionValues.EUndecidableInnerCount+"/"+ownerClassPredictionValues.EBoundaryInnerCount+"/"+
+					
+					ownerClassPredictionValues.EIsolatedECount
+					+"/"+TotalPattern.TPPureInnerCount+"/"+TotalPattern.TNPureInnerCount+"/"+TotalPattern.FPPureInnerCount+"/"+TotalPattern.FNPureInnerCount);
 			LogInfo.bwfile1.newLine(); 
-			LogInfo.bwfile1.write(ownerClassPredictionValues.TMixedTCount+"/"+ownerClassPredictionValues.NMixedNCount+"/"+ownerClassPredictionValues.EIncompleteCount+"/"+ownerClassPredictionValues.EBoundaryCount+"/"+ownerClassPredictionValues.EOutOfScopeCount
-					+"/"+TotalPattern.TPMixedCount+"/"+TotalPattern.TNMixedCount+"/"+TotalPattern.FPMixedCount+"/"+TotalPattern.FNMixedCount);
+			//MIXED 
+			LogInfo.bwfile1.write(ownerClassPredictionValues.TMixedTInnerCount+"/"+ownerClassPredictionValues.NMixedNInnerCount+"/"+ownerClassPredictionValues.EUndecidableInnerCount+"/"+ownerClassPredictionValues.EBoundaryInnerCount+"/"+ownerClassPredictionValues.EIsolatedECount
+					+"/"+TotalPattern.TPMixedInnerCount+"/"+TotalPattern.TNMixedInnerCount+"/"+TotalPattern.FPMixedInnerCount+"/"+TotalPattern.FNMixedInnerCount);
 			LogInfo.bwfile1.newLine(); 
 			LogInfo.bwfile1.newLine(); 
-
-			LogInfo.bwfile1.write(ownerClassPredictionValues.TPureTLeafCount+"/"+ownerClassPredictionValues.NPureNLeafCount+"/"+ownerClassPredictionValues.EIncompleteLeafCount+"/"+ownerClassPredictionValues.EBoundaryLeafCount+"/"+ownerClassPredictionValues.EOutOfScopeCount
+			//PURE 
+			LogInfo.bwfile1.write(ownerClassPredictionValues.TPureTLeafCount+"/"+ownerClassPredictionValues.NPureNLeafCount+"/"+ownerClassPredictionValues.EUndecidableLeafCount+"/"+ownerClassPredictionValues.EBoundaryLeafCount+"/"+ownerClassPredictionValues.EIsolatedECount
 					+"/"+TotalPattern.TPPureLeafCount+"/"+TotalPattern.TNPureLeafCount+"/"+TotalPattern.FPPureLeafCount+"/"+TotalPattern.FNPureLeafCount);
 			LogInfo.bwfile1.newLine(); 
-			LogInfo.bwfile1.write(ownerClassPredictionValues.TMixedTLeafCount+"/"+ownerClassPredictionValues.NMixedNLeafCount+"/"+ownerClassPredictionValues.EIncompleteLeafCount+"/"+ownerClassPredictionValues.EBoundaryLeafCount+"/"+ownerClassPredictionValues.EOutOfScopeCount
+			//MIXED 
+			LogInfo.bwfile1.write(ownerClassPredictionValues.TMixedTLeafCount+"/"+ownerClassPredictionValues.NMixedNLeafCount+"/"+ownerClassPredictionValues.EUndecidableLeafCount+"/"+ownerClassPredictionValues.EBoundaryLeafCount+"/"+ownerClassPredictionValues.EIsolatedECount
 					+"/"+TotalPattern.TPMixedLeafCount+"/"+TotalPattern.TNMixedLeafCount+"/"+TotalPattern.FPMixedLeafCount+"/"+TotalPattern.FNMixedLeafCount);
 		
 			LogInfo.bwfile1.newLine(); 
-
-	
+			LogInfo.bwfile1.newLine(); 
+			//PURE 
+			LogInfo.bwfile1.write(ownerClassPredictionValues.TPureTRootCount+"/"+ownerClassPredictionValues.NPureNRootCount+"/"+ownerClassPredictionValues.EUndecidableRootCount+"/"+ownerClassPredictionValues.EBoundaryRootCount+"/"+ownerClassPredictionValues.EIsolatedECount
+					+"/"+TotalPattern.TPPureRootCount+"/"+TotalPattern.TNPureRootCount+"/"+TotalPattern.FPPureRootCount+"/"+TotalPattern.FNPureRootCount);
+			LogInfo.bwfile1.newLine(); 
+			//MIXED 
+			LogInfo.bwfile1.write(ownerClassPredictionValues.TMixedTRootCount+"/"+ownerClassPredictionValues.NMixedNRootCount+"/"+ownerClassPredictionValues.EUndecidableRootCount+"/"+ownerClassPredictionValues.EBoundaryRootCount+"/"+ownerClassPredictionValues.EIsolatedECount
+					+"/"+TotalPattern.TPMixedRootCount+"/"+TotalPattern.TNMixedRootCount+"/"+TotalPattern.FPMixedRootCount+"/"+TotalPattern.FNMixedRootCount);
 	
 			
+			LogInfo.bwfile1.newLine(); 
+			LogInfo.bwfile1.newLine(); 
+			LogInfo.bwfile1.newLine(); 
 			
 		
 			if(Type.equals("CUMULATIVE")) {
@@ -1632,7 +1716,7 @@ int count=0;
 			
 
 			 // Create a new file output stream.
-            PrintStream fileOut = new PrintStream("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\LatestLogFiles\\TableLogiTrust.txt");
+            PrintStream fileOut = new PrintStream("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\TableLogiTrust.txt");
             
             // Redirect standard out to file.
 //            System.setOut(fileOut);

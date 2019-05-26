@@ -27,10 +27,10 @@ public class MethodCallsComparisonWithAchraf {
 		HashMap<String,List<String>> ExtendedHashMap = new HashMap <String, List<String>>(); 
 		HashMap<String,List<String>> ExecutedHashMap = new HashMap <String, List<String>>(); 
 		if(chessFlag==true) {
-			 wr = new FileWriter("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\NEW_DATA\\CHESSComparisonMethodCalls.txt");
+			 wr = new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\NEW_DATA\\CHESSComparisonMethodCalls.txt");
 
 		}else if(GanttFlag==true) {
-			 wr = new FileWriter("C:\\Users\\mouna\\ownCloud\\Share\\dumps\\NEW_DATA\\GANTTComparisonMethodCalls.txt");
+			 wr = new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\NEW_DATA\\GANTTComparisonMethodCalls.txt");
 		}
 
 		try {
