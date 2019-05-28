@@ -50,6 +50,8 @@ public class PredictionEvaluation {
 	public int FNPureLeafCount=0;
 	public int EUndecidableLeafCount=0; 
 	public int EBoundaryRootCount=0; 
+	public int EBoundaryInnerCount=0; 
+
 	public int TPPureRootCount=0; 
 	public int TNPureRootCount=0; 
 	public int FPPureRootCount=0; 
@@ -60,7 +62,8 @@ public class PredictionEvaluation {
 	public int EIsolatedECount=0; 
 	public int FPMixedRootCount=0; 
 	public int FNMixedRootCount=0; 
-	
+	public int ENotApplicableCount=0; 
+
 	public int getE() {
 		return E;
 	}

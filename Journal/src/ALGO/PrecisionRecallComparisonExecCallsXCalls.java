@@ -318,8 +318,8 @@ public class PrecisionRecallComparisonExecCallsXCalls {
 			
 
 				
-				MethodList XCallees =method.getCalleesShell(); 
-				MethodList XCallers =method.getCallersShell(); 
+				MethodList XCallees =method.getXCallees(); 
+				MethodList XCallers =method.getXCallers(); 
 				MethodList CalleesExecuted =method.getCalleesExecuted();
 				
 				MethodList BasicCallees =method.Callees; 
@@ -408,7 +408,7 @@ public class PrecisionRecallComparisonExecCallsXCalls {
 				
 
 					
-					MethodList XCallees =method.getCalleesShell(); 
+					MethodList XCallees =method.getXCallees(); 
 				
 					MethodList CalleesExecuted =method.getCalleesExecuted();
 					
@@ -496,7 +496,7 @@ public class PrecisionRecallComparisonExecCallsXCalls {
 						
 
 						
-						MethodList XCallees =method.getCalleesShell(); 
+						MethodList XCallees =method.getXCallees(); 
 					
 						MethodList CalleesExecuted =method.getCalleesExecuted();
 						
@@ -582,7 +582,7 @@ public class PrecisionRecallComparisonExecCallsXCalls {
 							
 
 							
-							MethodList XCallees =method.getCalleesShell(); 
+							MethodList XCallees =method.getXCallees(); 
 						
 							MethodList CalleesExecuted =method.getCalleesExecuted();
 							

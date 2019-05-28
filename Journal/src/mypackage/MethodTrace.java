@@ -13,6 +13,7 @@ import ALGO.AlgoFinal;
 import ALGO.DatabaseInput;
 import ALGO.MethodList;
 import ALGO.OwnerClassList;
+import ALGO.Prediction;
 import Chess.LogInfo;
 import Chess.PredictionEvaluation;
 import spoon.pattern.internal.SubstitutionRequestProvider;
@@ -22,12 +23,11 @@ public final class MethodTrace {
 	public Method Method= new Method();
 	public Requirement Requirement=new Requirement();
 	public String gold;
-	public String goldCopy;
+	public String Input;
 
-	public String prediction; 
-	public String goldfinal;
-	public String likelihood;
-	public String why;
+		public Prediction prediction ; 
+
+
 	boolean SubjectDeveloperEqualityFlag;
 	public String  ClassLevelGold; 
 
@@ -39,22 +39,71 @@ public final class MethodTrace {
 	public ALGO.PredictionValues PredictionValues= new ALGO.PredictionValues(); 
 
 
-	
+//	getcallers
+//	   if tzpe)executed return method.executedCallers
+//
+//   getcallerscallers
+//   
+//   
+//   getcallees
 
 
+	public MethodList getCallers() {
+		if(AlgoFinal.ExecutedCallsTechnique) {
+			return this.Method.getCallersExecuted(); 
+		}else if(AlgoFinal.BasicTechnique) {
+			return this.Method.Callers; 
 
+		}else if(AlgoFinal.XCallsTechnique) {
+			return this.Method.getXCallers(); 
+		}
+		return null; 
+	}
+	
+	public MethodList getCallees() throws CloneNotSupportedException {
+		if(AlgoFinal.ExecutedCallsTechnique) {
+			return this.Method.getCalleesExecuted(); 
+		}else if(AlgoFinal.BasicTechnique) {
+			return this.Method.Callees; 
 
+		}else if(AlgoFinal.XCallsTechnique) {
+			return this.Method.getXCallees(); 
+		}
+		return null; 
+	}
 	
+	public MethodList getCallersCallers() throws CloneNotSupportedException {
+		if(AlgoFinal.ExecutedCallsTechnique) {
+			return this.Method.getCallersCallersExecuted(); 
+		}else if(AlgoFinal.BasicTechnique) {
+			return this.Method.getBasicCallersCallers(); 
+
+		}else if(AlgoFinal.XCallsTechnique) {
+			return this.Method.getXCallersCallers(); 
+		}
+		return null; 
+	}
 	
+	public MethodList getCalleesCallees() throws CloneNotSupportedException {
+		if(AlgoFinal.ExecutedCallsTechnique) {
+			return this.Method.getCalleesCalleesExecuted(); 
+		}else if(AlgoFinal.BasicTechnique) {
+			return this.Method.getBasicCalleesCallees(); 
+
+		}else if(AlgoFinal.XCallsTechnique) {
+			return this.Method.getXCalleesCallees(); 
+		}
+		return null; 
+	}
 	
 	
 
-	public String getGoldCopy() {
-		return goldCopy;
+	public String getInput() {
+		return Input;
 	}
 
-	public void setGoldCopy(String goldCopy) {
-		this.goldCopy = goldCopy;
+	public void setInput(String Input) {
+		this.Input = Input;
 	}
 
 	public String getClassLevelGold() {
@@ -86,12 +135,18 @@ public final class MethodTrace {
 	}
 
 	public String getPrediction() {
-		return prediction;
+		if(this.prediction.PredictionValue.equals("E")) {
+			return this.getGold();  
+		}else {
+			return prediction.PredictionValue; 
+		}
 	}
 
 
+	
 
-	public void setPrediction(String prediction) {
+	public void setPrediction(Prediction prediction ) {
+	
 		this.prediction = prediction;
 	}
 
@@ -172,22 +227,41 @@ public final class MethodTrace {
 
 	/************************************************************************************************************************************************/
 	/**
+	 * @param type 
+	 * @param iteration 
 	 * @throws CloneNotSupportedException **********************************************************************************************************************************************/
-	public void SetPrediction(LinkedHashMap<String, LogInfo> LogInfoHashMap, String Pred, String reason) throws CloneNotSupportedException
+	public void SetPrediction(LinkedHashMap<String, LogInfo> LogInfoHashMap, Prediction Prediction, String type, int iteration) throws CloneNotSupportedException
 			
 			
 			{
-		if(this.prediction.trim().equals("E")) {
+		
 
-			String reqMethod=this.Requirement.ID+"-"+this.Method.ID; 
-			
-			this.prediction=Pred; 
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(Pred);
-			modified=true; 
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(reason);
+		String ReqMethod=this.Requirement.ID+"-"+this.Method.ID; 
+		System.out.println(ReqMethod);
+		if( this.prediction.PredictionValue.trim().equals("E") && (Prediction.PredictionValue.equals("T")|| Prediction.PredictionValue.equals("N"))) {
+			System.out.println("=====>ITERATION "+iteration+" "+this.prediction.PredictionValue+" "+Prediction.PredictionValue);
+			MethodTrace.modified=true; 		
+			this.prediction=Prediction; 
+			this.TraceSet=true; 
+
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(prediction.Reason+type);
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(prediction.PredictionValue);
+
+		}
+		else if( this.prediction.PredictionValue.trim().equals("E") && Prediction.PredictionValue.equals("E")){
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(prediction.Reason+type);
+			this.prediction=Prediction; 
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(prediction.PredictionValue);
 			this.TraceSet=true; 
 			this.UpdateCallersCallees(LogInfoHashMap);
+		}else {
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add("");
+
+		}
 			
+		
+		
+
 		}
 
 
@@ -197,7 +271,7 @@ public final class MethodTrace {
 
 		
 		
-	}
+	
 	/************************************************************************************************************************************************/
 	/**
 	 * @throws CloneNotSupportedException **********************************************************************************************************************************************/
@@ -682,7 +756,7 @@ if(!this.Method.Children.isEmpty()) {
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 //FINAL CALLERS
-for(Method caller: this.Method.getCallersShell()) {
+for(Method caller: this.Method.getXCallers()) {
 	ExtendedCallers.add(caller.toString()); 
 //	ExtendedCallersPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction()); 
 	SetPredictionsSetOwners(caller, this, ExtendedCallersPredictions, ExtendedCallersOwners); 
@@ -693,7 +767,7 @@ for(Method caller: this.Method.getCallersShell()) {
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
 //FINAL CALLEES
-for(Method callee: this.Method.getCalleesShell()) {
+for(Method callee: this.Method.getXCallees()) {
 ExtendedCallees.add(callee.toString()); 
 //ExtendedCalleesPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+callee.ID).getPrediction()); 
 SetPredictionsSetOwners(callee, this, ExtendedCalleesPredictions, ExtendedCalleesOwners); 
@@ -760,7 +834,7 @@ ChildrenPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"
 				LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setParentsPredictions(ParentPredictions);
 				
 				
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+this.Method.ID).prediction);
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+this.Method.ID).prediction.PredictionValue);
 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setExtendedCallersFinal(ExtendedCallers);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setExtendedCallersPredictionsFinal(ExtendedCallersPredictions);
@@ -850,7 +924,13 @@ ChildrenPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"
 	@Override
 	public String toString() {
 		return "MethodTrace [Method=" + Method.toString() + ", Requirement=" + Requirement + ", gold=" + gold + ", prediction="
-				+ prediction + ", goldfinal=" + goldfinal + "]";
+				+ prediction + "]";
+	}
+
+	public static MethodTrace getMethodTrace(mypackage.Requirement requirement, mypackage.Method method) {
+		// TODO Auto-generated method stub
+		return 	AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+method.ID); 
+
 	}
 	
 

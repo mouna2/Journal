@@ -20,6 +20,7 @@ import org.eclipse.jdt.core.search.MethodNameMatch;
 import ALGO.AlgoFinal;
 import ALGO.DatabaseInput;
 import ALGO.MethodList;
+import ALGO.Prediction;
 import ALGO.PredictionValues;
 import Tables.methodcalls;
 import mypackage.ClassTrace2;
@@ -1061,7 +1062,7 @@ public class LogInfo {
 			
 		
 			LogInfoHashMap.put(Req+"-"+Method, loginfo); 
-			methodtrace.setPrediction("E");
+			methodtrace.setPrediction(ALGO.Prediction.EInitializedPrediction);
 
 			String traceClassOldValue= methodtrace.Method.Owner.DeveloperGold; 
 
@@ -1310,8 +1311,7 @@ int count=0;
 				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
 						&& methodTrace.isTraceSet()
 						) {
-					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),
-							methodTrace.getPrediction().trim());
+					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().trim());
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
 					
@@ -1344,145 +1344,153 @@ int count=0;
 		// TODO Auto-generated method stub
 		
 		int IterationsSize= logInfoHashMap.get(mykey).IterationValues.size(); 
-		if(result.equals("TP") && methodTrace.PredictionValues.TPureTInner==true) {
+		if(result.equals("TP") && methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionInner)) {
 			pattern.TPPureInnerCount++; 
-		}else if(result.equals("TN") && methodTrace.PredictionValues.NPureNInner==true) {
+		}else if(result.equals("TN") && methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionInner)) {
 			pattern.TNPureInnerCount++; 
-		}else if(result.equals("TP") && methodTrace.PredictionValues.TMixedTInner==true) {
+		}else if(result.equals("TP") && methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionInner)) {
 			pattern.TPMixedInnerCount++; 
 		} 
-		else if(result.equals("TN") && methodTrace.PredictionValues.NMixedNInner==true) {
+		else if(result.equals("TN") && methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionInner)) {
 			pattern.TNMixedInnerCount++; 
 		}
-		else if(result.equals("FP") && methodTrace.PredictionValues.TPureTInner==true) {
+		else if(result.equals("FP") && methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionInner)) {
 			pattern.FPPureInnerCount++; 
-		}else if(result.equals("FN") && methodTrace.PredictionValues.NPureNInner==true) {
+		}else if(result.equals("FN") && methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionInner)) {
 			pattern.FNPureInnerCount++; 
-		}else if(result.equals("FP") && methodTrace.PredictionValues.TMixedTInner==true) {
+		}else if(result.equals("FP") && methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionInner)) {
 			pattern.FPMixedInnerCount++; 
 		} 
-		else if(result.equals("FN") && methodTrace.PredictionValues.NMixedNInner==true) {
+		else if(result.equals("FN") && methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionInner)) {
 			pattern.FNMixedInnerCount++; 
 		}
 		
 		
 		/*****************************************************************************/
-		else if(result.equals("TP") && methodTrace.PredictionValues.TPureTLeaf==true) {
+		else if(result.equals("TP") && methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionLeaf)) {
 			pattern.TPPureLeafCount++; 
-		}
-		else if(result.equals("TN") && methodTrace.PredictionValues.NPureNLeaf==true) {
+		}else if(result.equals("TN") && methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionLeaf)) {
 			pattern.TNPureLeafCount++; 
-		}else if(result.equals("TP") && methodTrace.PredictionValues.TMixedTLeaf==true) {
+		}else if(result.equals("TP") && methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionLeaf)) {
 			pattern.TPMixedLeafCount++; 
-		}
-		else if(result.equals("TN") && methodTrace.PredictionValues.NMixedNLeaf==true) {
+		} 
+		else if(result.equals("TN") && methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionLeaf)) {
 			pattern.TNMixedLeafCount++; 
 		}
-		else if(result.equals("FP") && methodTrace.PredictionValues.TPureTLeaf==true) {
+		else if(result.equals("FP") && methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionLeaf)) {
 			pattern.FPPureLeafCount++; 
-		}
-		else if(result.equals("FN") && methodTrace.PredictionValues.NPureNLeaf==true) {
+		}else if(result.equals("FN") && methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionLeaf)) {
 			pattern.FNPureLeafCount++; 
-		}else if(result.equals("FP") && methodTrace.PredictionValues.TMixedTLeaf==true) {
+		}else if(result.equals("FP") && methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionLeaf)) {
 			pattern.FPMixedLeafCount++; 
-		}
-		else if(result.equals("FN") && methodTrace.PredictionValues.NMixedNLeaf==true) {
+		} 
+		else if(result.equals("FN") && methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionLeaf)) {
 			pattern.FNMixedLeafCount++; 
 		}
 		
+		
 		/*****************************************************************************/
 
 		
-		else if(result.equals("TN") && methodTrace.PredictionValues.NPureNRoot==true) {
-			pattern.TNPureRootCount++; 
-		}else if(result.equals("TP") && methodTrace.PredictionValues.TPureTRoot==true) {
+		else if(result.equals("TP") && methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionRoot)) {
 			pattern.TPPureRootCount++; 
-		}else if(result.equals("TN") && methodTrace.PredictionValues.NMixedNRoot==true) {
-			pattern.TNMixedRootCount++; 
-		}else if(result.equals("TP") && methodTrace.PredictionValues.TMixedTRoot==true) {
+		}else if(result.equals("TN") && methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionRoot)) {
+			pattern.TNPureRootCount++; 
+		}else if(result.equals("TP") && methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionRoot)) {
 			pattern.TPMixedRootCount++; 
+		} 
+		else if(result.equals("TN") && methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionRoot)) {
+			pattern.TNMixedRootCount++; 
 		}
-		else if(result.equals("FN") && methodTrace.PredictionValues.NPureNRoot==true) {
-			pattern.FNPureRootCount++; 
-		}else if(result.equals("FP") && methodTrace.PredictionValues.TPureTRoot==true) {
+		else if(result.equals("FP") && methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionRoot)) {
 			pattern.FPPureRootCount++; 
-		}else if(result.equals("FN") && methodTrace.PredictionValues.NMixedNRoot==true) {
-			pattern.FNMixedRootCount++; 
-		}else if(result.equals("FP") && methodTrace.PredictionValues.TMixedTRoot==true) {
+		}else if(result.equals("FN") && methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionRoot)) {
+			pattern.FNPureRootCount++; 
+		}else if(result.equals("FP") && methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionRoot)) {
 			pattern.FPMixedRootCount++; 
+		} 
+		else if(result.equals("FN") && methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionRoot)) {
+			pattern.FNMixedRootCount++; 
 		}
 		
 		/*****************************************************************************/
 
 		
-		else if(result.equals("E") && methodTrace.PredictionValues.EBoundaryRoot==true) {
+		else if(result.equals("E") && methodTrace.prediction.equals(ALGO.Prediction.EBoundaryPredictionRoot)) {
 			pattern.EBoundaryRootCount++; 
-		}else if(result.equals("E") && methodTrace.PredictionValues.EUndecidableRoot==true) {
+		}else if(result.equals("E") && methodTrace.prediction.equals(ALGO.Prediction.EUndecidablePredictionRoot)) {
 			pattern.EUndecidableRootCount++; 
-		}else if(result.equals("E") && methodTrace.PredictionValues.EBoundaryInner==true) {
+		}else if(result.equals("E") && methodTrace.prediction.equals(ALGO.Prediction.EBoundaryPredictionInner)) {
+			pattern.EBoundaryInnerCount++; 
+		}else if(result.equals("E") && methodTrace.prediction.equals(ALGO.Prediction.EUndecidablePredictionInner)) {
 			pattern.EUndecidableInnerCount++; 
-		}else if(result.equals("E") && methodTrace.PredictionValues.EUndecidableInner==true) {
-			pattern.EUndecidableInnerCount++; 
-		}else if(result.equals("E") && methodTrace.PredictionValues.EBoundaryLeaf==true) {
+		}else if(result.equals("E") && methodTrace.prediction.equals(ALGO.Prediction.EBoundaryPredictionLeaf)) {
 			pattern.EBoundaryLeafCount++; 
-		}else if(result.equals("E") && methodTrace.PredictionValues.EUndecidableLeaf==true) {
+		}else if(result.equals("E") && methodTrace.prediction.equals(ALGO.Prediction.EUndecidablePredictionLeaf)) {
 			pattern.EUndecidableLeafCount++; 
 		}
-		else if(result.equals("E") && methodTrace.PredictionValues.EIsolatedE==true) {
+		else if(result.equals("E") && methodTrace.prediction.equals(ALGO.Prediction.EIsolatedPrediction)) {
 			pattern.EIsolatedECount++; 
+		}
+		else if(result.equals("E") && methodTrace.prediction.equals(ALGO.Prediction.ENotApplicablePrediction)) {
+			pattern.ENotApplicableCount++; 
 		}
 		
 		/*********************************************************************************************/
 		
 		
-		if( methodTrace.PredictionValues.TMixedTInner==true ) {
+		if( methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionInner) ) {
 			ownerClassPredictionValues.TMixedTInnerCount++; 
-		}else if( methodTrace.PredictionValues.TPureTInner==true ) {
+		}else if( methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionInner) ) {
 			ownerClassPredictionValues.TPureTInnerCount++; 
-		}else if( methodTrace.PredictionValues.NPureNInner==true ) {
+		}else if( methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionInner) ) {
 			ownerClassPredictionValues.NPureNInnerCount++; 
-		}else if( methodTrace.PredictionValues.NMixedNInner==true) {
+		}else if( methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionInner)) {
 			ownerClassPredictionValues.NMixedNInnerCount++;  
 		}
 		
-		else if( methodTrace.PredictionValues.NPureNLeaf==true) {
+		else if( methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionLeaf)) {
 			ownerClassPredictionValues.NPureNLeafCount++;  
-		}else if( methodTrace.PredictionValues.TPureTLeaf==true ) {
+		}else if( methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionLeaf) ) {
 			ownerClassPredictionValues.TPureTLeafCount++;  
-		}else if( methodTrace.PredictionValues.NMixedNLeaf==true ) {
+		}else if( methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionLeaf)) {
 			ownerClassPredictionValues.NMixedNLeafCount++;  
-		}else if( methodTrace.PredictionValues.TMixedTLeaf==true) {
+		}else if( methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionLeaf)) {
 			ownerClassPredictionValues.TMixedTLeafCount++;  
 		}
 		
-		else if( methodTrace.PredictionValues.NPureNRoot==true) {
+		else if( methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionRoot)) {
 			ownerClassPredictionValues.NPureNRootCount++;  
-		}else if( methodTrace.PredictionValues.TPureTRoot==true ) {
+		}else if( methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionRoot)) {
 			ownerClassPredictionValues.TPureTRootCount++;  
-		}else if( methodTrace.PredictionValues.NMixedNRoot==true ) {
+		}else if( methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionRoot) ) {
 			ownerClassPredictionValues.NMixedNRootCount++;  
-		}else if( methodTrace.PredictionValues.TMixedTRoot==true) {
+		}else if( methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionRoot)) {
 			ownerClassPredictionValues.TMixedTRootCount++;  
 		}
 		
 		
 		
-		else if( methodTrace.PredictionValues.EBoundaryLeaf==true) {
+		else if( methodTrace.prediction.equals(ALGO.Prediction.EBoundaryPredictionLeaf)) {
 			ownerClassPredictionValues.EBoundaryLeafCount++;  
-		}else if( methodTrace.PredictionValues.EUndecidableLeaf==true) {
+		}else if( methodTrace.prediction.equals(ALGO.Prediction.EUndecidablePredictionLeaf)) {
 			ownerClassPredictionValues.EUndecidableLeafCount++;  
-		}else if( methodTrace.PredictionValues.EBoundaryInner==true) {
+		}else if( methodTrace.prediction.equals(ALGO.Prediction.EBoundaryPredictionInner)) {
 			ownerClassPredictionValues.EBoundaryInnerCount++;  
-		}else if( methodTrace.PredictionValues.EUndecidableInner==true) {
+		}else if( methodTrace.prediction.equals(ALGO.Prediction.EUndecidablePredictionInner)) {
 			ownerClassPredictionValues.EUndecidableInnerCount++;  
 		}
-		else if( methodTrace.PredictionValues.EBoundaryRoot==true) {
+		else if( methodTrace.prediction.equals(ALGO.Prediction.EBoundaryPredictionRoot)) {
 			ownerClassPredictionValues.EBoundaryRootCount++;  
-		}else if( methodTrace.PredictionValues.EUndecidableRoot==true) {
+		}else if( methodTrace.prediction.equals(ALGO.Prediction.EUndecidablePredictionRoot)) {
 			ownerClassPredictionValues.EUndecidableRootCount++;  
 		}
-		else if( methodTrace.PredictionValues.EIsolatedE==true) {
+		else if( methodTrace.prediction.equals(ALGO.Prediction.EIsolatedPrediction)) {
 			ownerClassPredictionValues.EIsolatedECount++; 
+		}
+		
+		else if( methodTrace.prediction.equals(ALGO.Prediction.ENotApplicablePrediction)) {
+			ownerClassPredictionValues.ENotApplicableCount++; 
 		}
 	}
 	public static void ComputePrecisionAndRecallCUMULATIVE(
@@ -1549,31 +1557,31 @@ int count=0;
 			//PURE 
 			LogInfo.bwfile1.write(ownerClassPredictionValues.TPureTInnerCount+"/"+ownerClassPredictionValues.NPureNInnerCount+"/"+ownerClassPredictionValues.EUndecidableInnerCount+"/"+ownerClassPredictionValues.EBoundaryInnerCount+"/"+
 					
-					ownerClassPredictionValues.EIsolatedECount
+					ownerClassPredictionValues.EIsolatedECount+"/"+ ownerClassPredictionValues.ENotApplicableCount
 					+"/"+TotalPattern.TPPureInnerCount+"/"+TotalPattern.TNPureInnerCount+"/"+TotalPattern.FPPureInnerCount+"/"+TotalPattern.FNPureInnerCount);
 			LogInfo.bwfile1.newLine(); 
 			//MIXED 
 			LogInfo.bwfile1.write(ownerClassPredictionValues.TMixedTInnerCount+"/"+ownerClassPredictionValues.NMixedNInnerCount+"/"+ownerClassPredictionValues.EUndecidableInnerCount+"/"+ownerClassPredictionValues.EBoundaryInnerCount+"/"+ownerClassPredictionValues.EIsolatedECount
-					+"/"+TotalPattern.TPMixedInnerCount+"/"+TotalPattern.TNMixedInnerCount+"/"+TotalPattern.FPMixedInnerCount+"/"+TotalPattern.FNMixedInnerCount);
+					+"/"+ ownerClassPredictionValues.ENotApplicableCount+"/"+TotalPattern.TPMixedInnerCount+"/"+TotalPattern.TNMixedInnerCount+"/"+TotalPattern.FPMixedInnerCount+"/"+TotalPattern.FNMixedInnerCount);
 			LogInfo.bwfile1.newLine(); 
 			LogInfo.bwfile1.newLine(); 
 			//PURE 
 			LogInfo.bwfile1.write(ownerClassPredictionValues.TPureTLeafCount+"/"+ownerClassPredictionValues.NPureNLeafCount+"/"+ownerClassPredictionValues.EUndecidableLeafCount+"/"+ownerClassPredictionValues.EBoundaryLeafCount+"/"+ownerClassPredictionValues.EIsolatedECount
-					+"/"+TotalPattern.TPPureLeafCount+"/"+TotalPattern.TNPureLeafCount+"/"+TotalPattern.FPPureLeafCount+"/"+TotalPattern.FNPureLeafCount);
+					+"/"+ ownerClassPredictionValues.ENotApplicableCount+"/"+TotalPattern.TPPureLeafCount+"/"+TotalPattern.TNPureLeafCount+"/"+TotalPattern.FPPureLeafCount+"/"+TotalPattern.FNPureLeafCount);
 			LogInfo.bwfile1.newLine(); 
 			//MIXED 
 			LogInfo.bwfile1.write(ownerClassPredictionValues.TMixedTLeafCount+"/"+ownerClassPredictionValues.NMixedNLeafCount+"/"+ownerClassPredictionValues.EUndecidableLeafCount+"/"+ownerClassPredictionValues.EBoundaryLeafCount+"/"+ownerClassPredictionValues.EIsolatedECount
-					+"/"+TotalPattern.TPMixedLeafCount+"/"+TotalPattern.TNMixedLeafCount+"/"+TotalPattern.FPMixedLeafCount+"/"+TotalPattern.FNMixedLeafCount);
+					+"/"+ ownerClassPredictionValues.ENotApplicableCount+"/"+TotalPattern.TPMixedLeafCount+"/"+TotalPattern.TNMixedLeafCount+"/"+TotalPattern.FPMixedLeafCount+"/"+TotalPattern.FNMixedLeafCount);
 		
 			LogInfo.bwfile1.newLine(); 
 			LogInfo.bwfile1.newLine(); 
 			//PURE 
 			LogInfo.bwfile1.write(ownerClassPredictionValues.TPureTRootCount+"/"+ownerClassPredictionValues.NPureNRootCount+"/"+ownerClassPredictionValues.EUndecidableRootCount+"/"+ownerClassPredictionValues.EBoundaryRootCount+"/"+ownerClassPredictionValues.EIsolatedECount
-					+"/"+TotalPattern.TPPureRootCount+"/"+TotalPattern.TNPureRootCount+"/"+TotalPattern.FPPureRootCount+"/"+TotalPattern.FNPureRootCount);
+					+"/"+ ownerClassPredictionValues.ENotApplicableCount+"/"+TotalPattern.TPPureRootCount+"/"+TotalPattern.TNPureRootCount+"/"+TotalPattern.FPPureRootCount+"/"+TotalPattern.FNPureRootCount);
 			LogInfo.bwfile1.newLine(); 
 			//MIXED 
 			LogInfo.bwfile1.write(ownerClassPredictionValues.TMixedTRootCount+"/"+ownerClassPredictionValues.NMixedNRootCount+"/"+ownerClassPredictionValues.EUndecidableRootCount+"/"+ownerClassPredictionValues.EBoundaryRootCount+"/"+ownerClassPredictionValues.EIsolatedECount
-					+"/"+TotalPattern.TPMixedRootCount+"/"+TotalPattern.TNMixedRootCount+"/"+TotalPattern.FPMixedRootCount+"/"+TotalPattern.FNMixedRootCount);
+					+"/"+ ownerClassPredictionValues.ENotApplicableCount	+"/"+TotalPattern.TPMixedRootCount+"/"+TotalPattern.TNMixedRootCount+"/"+TotalPattern.FPMixedRootCount+"/"+TotalPattern.FNMixedRootCount);
 	
 			
 			LogInfo.bwfile1.newLine(); 
@@ -1587,84 +1595,12 @@ int count=0;
 			
 		
 		}
-		
-		//END CODE  TO PASTE INTO EXCEL SPREADSHEET 
-//		else if(Type.equals("CUMULATIVE")) {
-//			LogInfo.bwfileCumulative.write(TotalPattern.TruePositive+","+TotalPattern.TrueNegative+","+TotalPattern.FalsePositive+","+TotalPattern.FalseNegative+","+TotalPattern.E);
-//			
-//			LogInfo.bwfileCumulative.write(","+ownerClassPredictionValues.T+","+ownerClassPredictionValues.N+","+ownerClassPredictionValues.E);
-//	
-//			LogInfo.bwfileCumulative.newLine();
-//		}
-		
 
-
-		
-		
-		
-//		LogInfo.bwfile1.write(" OUTPUT COMPLETENESS T: "+Type+"   "+(float)TotalPattern.TruePositive/(TotalPattern.TruePositive+TotalPattern.TrueNegative+TotalPattern.FalsePositive+TotalPattern.FalseNegative+TotalPattern.E)); //TP/(TP+TN+FP+FN+E)
-//		LogInfo.bwfile1.newLine();
-//		LogInfo.bwfile1.write(" OUTPUT COMPLETENESS N: "+Type+"   "+(float)TotalPattern.TrueNegative/(TotalPattern.TruePositive+TotalPattern.TrueNegative+TotalPattern.FalsePositive+TotalPattern.FalseNegative+TotalPattern.E)); //TN/(TP+TN+FP+FN+E)
-//		LogInfo.bwfile1.newLine();
-//		LogInfo.bwfile1.write(" OUTPUT COMPLETENESS E: "+Type+"   "+(float)TotalPattern.E/(TotalPattern.TruePositive+TotalPattern.TrueNegative+TotalPattern.FalsePositive+TotalPattern.FalseNegative+TotalPattern.E));//E/(TP+TN+FP+FN+E)
-//		LogInfo.bwfile1.newLine();
-//		if(TotalPattern.TruePositive+TotalPattern.FalsePositive!=0) {
-//			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS PRECISION T: "+Type+"   "+(float)TotalPattern.TruePositive/(TotalPattern.TruePositive+TotalPattern.FalsePositive)); //TP/(TP+FP)); 
-//			LogInfo.bwfile1.newLine();
-//		}else {
-//			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS PRECISION T: "+Type+"   "+0); 
-//			LogInfo.bwfile1.newLine();
-//		}
-//		if(TotalPattern.TrueNegative+TotalPattern.FalseNegative!=0) {
-//			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS PRECISION N: "+Type+"   "+(float)TotalPattern.TrueNegative/(TotalPattern.TrueNegative+TotalPattern.FalseNegative)); //TN/(FN+TN)
-//			LogInfo.bwfile1.newLine();
-//		}else {
-//			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS PRECISION N: "+Type+"   "+0); 
-//			LogInfo.bwfile1.newLine();
-//		}
-//		if(TotalPattern.TruePositive+TotalPattern.FalseNegative!=0) {
-//			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS RECALL T: "+Type+"   "+(float)TotalPattern.TruePositive/(TotalPattern.TruePositive+TotalPattern.FalseNegative)); //TP/(TP+FN)
-//			LogInfo.bwfile1.newLine();
-//		}else {
-//			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS RECALL T: "+Type+"   "+0); 
-//			LogInfo.bwfile1.newLine();
-//		}
-//		if(TotalPattern.FalsePositive+TotalPattern.TrueNegative!=0) {
-//			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS RECALL N: "+Type+"   "+(float)TotalPattern.TrueNegative/(TotalPattern.FalsePositive+TotalPattern.TrueNegative)); //TN/(FP+TN)
-//			LogInfo.bwfile1.newLine();
-//		}else {
-//			LogInfo.bwfile1.write(" OUTPUT CORRECTNESS RECALL N: "+Type+"   "+0); 
-//			LogInfo.bwfile1.newLine();
-//		}
-//				
-//		
-//		LogInfo.bwfile1.newLine();
-//
-//		LogInfo.bwfile1.write("PREDICTION PERCENTAGE T: "+Type+"   "+ (float)ownerClassPredictionValues.T/(ownerClassPredictionValues.T+ownerClassPredictionValues.N+ownerClassPredictionValues.E));
-//		LogInfo.bwfile1.newLine();
-//		LogInfo.bwfile1.write(" PREDICTION PERCENTAGE N: "+Type+"   "+ (float)ownerClassPredictionValues.N/(ownerClassPredictionValues.T+ownerClassPredictionValues.N+ownerClassPredictionValues.E));
-//		LogInfo.bwfile1.newLine();
-//		LogInfo.bwfile1.write(" PREDICTION PERCENTAGE E: "+Type+"   "+ (float)ownerClassPredictionValues.E/(ownerClassPredictionValues.T+ownerClassPredictionValues.N+ownerClassPredictionValues.E));
-//		LogInfo.bwfile1.newLine();
-//		LogInfo.bwfile1.newLine();
-		
-		
-		
-		
-		//ORIGINAL CODE FOR PRECISION RECALL 
-//		LogInfo.bwfile1.write(precisionRecall+"                  "+ProgramName+"                     "+TotalPattern.toString());
-//		LogInfo.bwfile1.newLine();
-//		LogInfo.bwfile1.write(PredictionValues+"     "+ProgramName+"                     "+ownerClassPredictionValues.toString());
-//		LogInfo.bwfile1.newLine();
-//		LogInfo.bwfile1.write("-------------------------------------------------------------------");
-		//END ORIGINAL CODE FOR PRECISION RECALL 
-//		LogInfo.bwfile1.newLine();
 	}
 	public static void updateTableLog(String ProgramName, Collection<MethodTrace> MethodTracesHashmapValues, LinkedHashMap<String, LogInfo> LogInfoHashMap) throws IOException {
 		// TODO Auto-generated method stub			
 		 // Create a new file output stream.
-       
-		if (ProgramName.equals("chess")) {
+       		if (ProgramName.equals("chess")) {
 			
 			LogInfo.bwfileChess.write(
 					"MethodID, MethodName, RequirementID, RequirementName, ClassID, ClassName, "
@@ -2055,7 +1991,7 @@ int count=0;
 	private static void WriteMethodCallsProgram(BufferedWriter bwchessMethodCallsWriter) throws IOException, CloneNotSupportedException {
 		// TODO Auto-generated method stub
 		for( String meth:DatabaseInput.MethodHashMap.keySet()) {
-			for(Method callee: DatabaseInput.MethodHashMap.get(meth).getCalleesShell()) {
+			for(Method callee: DatabaseInput.MethodHashMap.get(meth).getXCallees()) {
 				bwchessMethodCallsWriter.write(""+DatabaseInput.MethodHashMap.get(meth).getClassrep().classname+"."+DatabaseInput.MethodHashMap.get(meth).methodname+"---");
 				
 				bwchessMethodCallsWriter.write(callee.getClassrep().classname+"."+callee.methodname);
@@ -2076,8 +2012,8 @@ int count=0;
 		for (String methodKey : DatabaseInput.MethodHashMap.keySet()) {
 			Method method = DatabaseInput.MethodHashMap.get(methodKey); 
 			if(XCallers==true) {
-				CallerHashMap.put(method, method.getCallersShell()); 
-				CalleeHashMap.put(method, method.getCalleesShell()); 	
+				CallerHashMap.put(method, method.getXCallers()); 
+				CalleeHashMap.put(method, method.getXCallees()); 	
 			}
 			else if(ExecutedCallers==true) {
 				CallerHashMap.put(method, method.getCallersExecuted()); 

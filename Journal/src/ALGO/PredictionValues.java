@@ -40,7 +40,9 @@ public class PredictionValues {
 		public int EUndecidableLeafCount=0; 
 		public int EBoundaryLeafCount=0; 
 		public int EIsolatedECount=0; 
-
+		public int ENotApplicableCount=0; 
+		
+		
 		public int TPureTRootCount=0; 
 		public int NPureNRootCount=0; 
 		public int TMixedTRootCount=0; 

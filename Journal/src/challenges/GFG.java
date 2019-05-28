@@ -7,6 +7,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import com.mysql.cj.jdbc.Blob;
+import com.sun.prism.GraphicsResource;
 
 import ALGO.AlgoFinal;
 
@@ -20,39 +21,51 @@ class GFG {
 		 Scanner sc = new Scanner(System.in); 
 		
 			int amount =sc.nextInt(); 
+			HashMap<String, String> myhashmap = new HashMap<String, String>(); 
+			myhashmap.put("a", "2"); 
+			myhashmap.put("b", "2"); 
+			myhashmap.put("c", "2"); 
+			
+			myhashmap.put("d", "3"); 
+			myhashmap.put("e", "3"); 
+			myhashmap.put("f", "3"); 
+			
+			myhashmap.put("g", "4"); 
+			myhashmap.put("h", "4"); 
+			myhashmap.put("i", "4"); 
+			
+			myhashmap.put("j", "5");
+			myhashmap.put("k", "5"); 
+			myhashmap.put("l", "5"); 
+			
+			myhashmap.put("m", "6"); 
+			myhashmap.put("n", "6"); 
+			myhashmap.put("o", "6"); 
+			
+			myhashmap.put("p", "7"); 
+			myhashmap.put("q", "7");
+			myhashmap.put("r", "7"); 
+			myhashmap.put("s", "7"); 
+
+			
+			myhashmap.put("t", "8"); 
+			myhashmap.put("u", "8"); 
+			myhashmap.put("v", "8"); 
+
+			myhashmap.put("w", "9"); 
+			myhashmap.put("x", "9"); 
+			myhashmap.put("y", "9"); 
+			myhashmap.put("z", "9"); 
 
 	        while (amount --> 0) {
-	        	int size =sc.nextInt(); 
-	        	int array[] = new int[size]; 
-	        	for(int i=0; i<size; i++) {
-	        		array[i]=sc.nextInt(); 
+	        	String s = sc.next(); 
+	        	
+	        	String[] mystrings = s.split(""); 
+	        	String Result=""; 
+	        	for(String mystring : mystrings) {
+	        		Result=Result+myhashmap.get(mystring); 
 	        	}
-	        	
-	        	Arrays.sort(array);
-//	        	System.out.println(Arrays.toString(array));
-	        	HashSet<Integer> myhashset = new HashSet<Integer>(); 
-	        	int copy=0; 
-	        	for(int i=0; i<array.length-1; i++) {
-	        			if(i%2==0 && !myhashset.contains(array[i])) {
-			        		myhashset.add(array[i]); 
-			        		copy=array[i]; 
-	        			}
-	        			else if(i%2==1 && !myhashset.contains(array[i])) {
-//	        				System.out.println(array[i]);
-	        				System.out.println(copy);
-	        			}
-	        		
-	        	}
-	        	
-	        	
-	        	
-	        	
-	        	
-	     
-	        	
-	        	
-	        	
-	        	
+	        	System.out.println(Result);
 	        }
 	 }
 

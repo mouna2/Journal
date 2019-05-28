@@ -28,11 +28,11 @@ class Test {
 		for(MethodTrace Methodtrace: methodtraces2HashMap.values()) {
 			System.out.println("===>Method "+Methodtrace.getMethod().ID);
 
-			System.out.println("CALLERS "+Methodtrace.getMethod().getCallersShell().toString());
-			System.out.println("CALLEES "+Methodtrace.getMethod().getCalleesShell().toString());
+			System.out.println("CALLERS "+Methodtrace.getMethod().getXCallers().toString());
+			System.out.println("CALLEES "+Methodtrace.getMethod().getXCallees().toString());
 
-			assertEquals(Methodtrace.getMethod().getCallersShell().toString(), MethodHashMapCallers.get(Methodtrace.getMethod().ID));
-			assertEquals(Methodtrace.getMethod().getCalleesShell().toString(), MethodHashMapCallees.get(Methodtrace.getMethod().ID));
+			assertEquals(Methodtrace.getMethod().getXCallers().toString(), MethodHashMapCallers.get(Methodtrace.getMethod().ID));
+			assertEquals(Methodtrace.getMethod().getXCallees().toString(), MethodHashMapCallees.get(Methodtrace.getMethod().ID));
 
 			
 			//SET EXPECTED VALUES 

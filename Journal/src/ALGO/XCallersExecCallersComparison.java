@@ -318,9 +318,9 @@ public class XCallersExecCallersComparison {
 				bwfile1chessXCalleesExecCallees.write(method.ID+"/"); 
 				bwfile1chessCalleesExecCallees.write(method.ID+"/"); 
 
-				MethodList CallersShell = method.getCallersShell(); 
-				MethodList CallersCallersShell =method.getCallersCallersShell(); 
-				MethodList CalleesShell =method.getCalleesShell(); 
+				MethodList CallersShell = method.getXCallers(); 
+				MethodList CallersCallersShell =method.getXCallersCallers(); 
+				MethodList CalleesShell =method.getXCallees(); 
 				MethodList CallersExecuted =method.getCallersExecuted(); 
 				MethodList CalleesExecuted =method.getCalleesExecuted();
 				MethodList CallersCallersExecuted =method.getCallersCallersExecuted(); 
@@ -428,9 +428,9 @@ public class XCallersExecCallersComparison {
 				System.out.println();
 				bwfile1ganttXCalleesExecCallees.write(method.ID+"/"); 
 				
-				MethodList CallersShell = method.getCallersShell(); 
-				MethodList CallersCallersShell =method.getCallersCallersShell(); 
-				MethodList CalleesShell =method.getCalleesShell(); 
+				MethodList CallersShell = method.getXCallers(); 
+				MethodList CallersCallersShell =method.getXCallersCallers(); 
+				MethodList CalleesShell =method.getXCallees(); 
 				MethodList CallersExecuted =method.getCallersExecuted(); 
 				MethodList CalleesExecuted =method.getCalleesExecuted();
 				MethodList CallersCallersExecuted =method.getCallersCallersExecuted(); 
@@ -552,9 +552,9 @@ public class XCallersExecCallersComparison {
 				bwfile1jhotdrawCalleesExecCallees.write(method.ID+"/"); 
 				
 				
-				MethodList CallersShell = method.getCallersShell(); 
-				MethodList CallersCallersShell =method.getCallersCallersShell(); 
-				MethodList CalleesShell =method.getCalleesShell(); 
+				MethodList CallersShell = method.getXCallers(); 
+				MethodList CallersCallersShell =method.getXCallersCallers(); 
+				MethodList CalleesShell =method.getXCallees(); 
 				MethodList CallersExecuted =method.getCallersExecuted(); 
 				MethodList CalleesExecuted =method.getCalleesExecuted();
 				MethodList CallersCallersExecuted =method.getCallersCallersExecuted(); 
@@ -664,9 +664,9 @@ public class XCallersExecCallersComparison {
 				bwfile1itrustXCalleesExecCallees.write(method.ID+"/"); 
 				bwfile1itrustCalleesExecCallees.write(method.ID+"/"); 
 
-				MethodList CallersShell = method.getCallersShell(); 
-				MethodList CallersCallersShell =method.getCallersCallersShell(); 
-				MethodList CalleesShell =method.getCalleesShell(); 
+				MethodList CallersShell = method.getXCallers(); 
+				MethodList CallersCallersShell =method.getXCallersCallers(); 
+				MethodList CalleesShell =method.getXCallees(); 
 				MethodList CallersExecuted =method.getCallersExecuted(); 
 				MethodList CalleesExecuted =method.getCalleesExecuted();
 				MethodList CallersCallersExecuted =method.getCallersCallersExecuted(); 
