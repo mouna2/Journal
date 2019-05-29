@@ -292,16 +292,16 @@ public class AlgoFinal  {
 		//////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////////////////////////
-		int iteration=1; 
-		MethodTrace.modified = true;
-
-		while (MethodTrace.modified ) {
-			System.out.println("iteration "+iteration);
-			MethodTrace.modified = false;
-			TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap, iteration); 
-
-			iteration++; 
-		}
+//		int iteration=1; 
+//		MethodTrace.modified = true;
+//
+//		while (MethodTrace.modified ) {
+//			System.out.println("iteration "+iteration);
+//			MethodTrace.modified = false;
+			TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
+//
+//			iteration++; 
+//		}
 
 		
 		LogInfo.ComputePrecisionAndRecallNONCUMULATIVE(methodtraces2HashMap,TotalPattern, ProgramName, OwnerClassPredictionValues, LogInfoHashMap);
@@ -310,7 +310,7 @@ public class AlgoFinal  {
 
 
 
-
+		LogInfo.updateMatrixLog(MethodTracesList, ProgramName); 
 		int ITERATION = 0;
 		
 
@@ -383,6 +383,7 @@ public class AlgoFinal  {
 		//		System.out.println("RemainingpredictionValues"+TotalPattern);
 		//		LogInfo.updateResultsLog(RemainingPattern, RemainingpredictionValues, ProgramName, "NON OWNER CLASS PRED", "non owner class prediction values");
 
+		
 
 
 		TotalPredictionValues = new PredictionValues(); 
@@ -479,15 +480,15 @@ public class AlgoFinal  {
 
 	/************************************************************************************************************************************************/
 	/************************************************************************************************************************************************/
-	public void ResetAllTraceSetFlags(HashMap<String, MethodTrace> methodtraces2HashMap2) {
-		// TODO Auto-generated method stub
-
-		for(String key: methodtraces2HashMap2.keySet()) {
-			MethodTrace MethodTrace = methodtraces2HashMap2.get(key); 
-			MethodTrace.setTraceSet(false);
-		}
-
-	}
+//	public void ResetAllTraceSetFlags(HashMap<String, MethodTrace> methodtraces2HashMap2) {
+//		// TODO Auto-generated method stub
+//
+//		for(String key: methodtraces2HashMap2.keySet()) {
+//			MethodTrace MethodTrace = methodtraces2HashMap2.get(key); 
+//			MethodTrace.setTraceSet(false);
+//		}
+//
+//	}
 
 	/************************************************************************************************************************************************/
 	/************************************************************************************************************************************************/

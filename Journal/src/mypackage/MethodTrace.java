@@ -31,7 +31,6 @@ public final class MethodTrace {
 	boolean SubjectDeveloperEqualityFlag;
 	public String  ClassLevelGold; 
 
-	public boolean TraceSet=false; 
 
 	public String SubjectT; 
 	public String SubjectN; 
@@ -157,15 +156,6 @@ public final class MethodTrace {
 
 
 
-	public boolean isTraceSet() {
-		return TraceSet;
-	}
-
-
-
-	public void setTraceSet(boolean traceSet) {
-		TraceSet = traceSet;
-	}
 
 
 
@@ -238,26 +228,21 @@ public final class MethodTrace {
 
 		String ReqMethod=this.Requirement.ID+"-"+this.Method.ID; 
 		System.out.println(ReqMethod);
-		if( this.prediction.PredictionValue.trim().equals("E") && (Prediction.PredictionValue.equals("T")|| Prediction.PredictionValue.equals("N"))) {
+		if( this.prediction.PredictionValue.trim().equals("E") &&  (Prediction.PredictionValue.equals("T")|| Prediction.PredictionValue.equals("N"))) {
 			System.out.println("=====>ITERATION "+iteration+" "+this.prediction.PredictionValue+" "+Prediction.PredictionValue);
-			MethodTrace.modified=true; 		
 			this.prediction=Prediction; 
-			this.TraceSet=true; 
-
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(prediction.Reason+type);
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(prediction.Reason+type+"/"+prediction.pattern);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(prediction.PredictionValue);
+			MethodTrace.modified=true; 		
 
 		}
 		else if( this.prediction.PredictionValue.trim().equals("E") && Prediction.PredictionValue.equals("E")){
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(prediction.Reason+type);
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(prediction.Reason+type+"/"+prediction.pattern);
 			this.prediction=Prediction; 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(prediction.PredictionValue);
-			this.TraceSet=true; 
 			this.UpdateCallersCallees(LogInfoHashMap);
-		}else {
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add("");
-
 		}
+
 			
 		
 		

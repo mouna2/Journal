@@ -204,10 +204,11 @@ public class TraceValidator {
 	put("ENT-EN", Prediction.EUndecidablePredictionRoot) ; 
 	put("ENT-ENT", Prediction.TMixedTPredictionRoot); }}; 
 
-		static void MakePredictions(List<MethodTrace> MethodTracesList, LinkedHashMap<String, LogInfo> LogInfoHashMap, int iteration) throws Exception {
+		static void MakePredictions(List<MethodTrace> MethodTracesList, LinkedHashMap<String, LogInfo> LogInfoHashMap) throws Exception {
 			// TODO Auto-generated method stub
+			int iteration =1; 
 			for (MethodTrace methodtrace : MethodTracesList) {
-
+				
 				String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
 
 
@@ -267,7 +268,7 @@ public class TraceValidator {
 
 				}	
 
-
+				iteration ++; 
 			}
 		}
 		public static void  Predict(MethodTrace methodTrace, MethodList rows, MethodList columns, HashMap<String, Prediction> MatrixHashMap, LinkedHashMap<String, LogInfo> LogInfoHashMap, String Type, int iteration) throws CloneNotSupportedException {
@@ -275,7 +276,7 @@ public class TraceValidator {
 			 String columnKey = CalculateTNE(methodTrace.Requirement, columns); 
 
 			Prediction prediction = MatrixHashMap.get(rowKey+"-"+columnKey);  
-			prediction.Type=Type; 
+			prediction.pattern=rowKey+"-"+columnKey; 
 			methodTrace.SetPrediction(LogInfoHashMap, prediction, Type,iteration);
 			
 		}

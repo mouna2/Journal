@@ -6,12 +6,13 @@ public class Prediction {
 	public String Reason ="";
 	public String likelihood;
 	public String why;
-	public String Type ; 
-	public Prediction(String predictionValue, String reason, String type) {
+//	public String Type ; 
+	public String pattern=""; 
+	public Prediction(String predictionValue, String reason, String mypattern) {
 		super();
 		PredictionValue = predictionValue;
 		Reason = reason;
-		Type=type; 
+		pattern=mypattern; 
 	} 
 	public static Prediction EIsolatedPrediction = new Prediction("E", "IsolatedE", ""); 
 	public static Prediction EInitializedPrediction = new Prediction("E", "InitializedE", ""); 
@@ -43,4 +44,7 @@ public class Prediction {
 	public static Prediction TMixedTPredictionRoot = new Prediction("T","MixedT", "Root");  
 	public static Prediction NMixedNPredictionRoot = new Prediction("N","MixedN", "Root");  
 	public static Prediction NPureNPredictionRoot = new Prediction("N","PureN", "Root");  
+	
+	
+	
 }

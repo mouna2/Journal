@@ -1269,7 +1269,7 @@ int count=0;
 			if((ProgramName.equals("gantt")|| ProgramName.equals("jhotdraw") )&& AlgoFinal.MethodLevelTraces==true){
 				
 				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
-						&& methodTrace.isTraceSet() 
+//						&& methodTrace.isTraceSet() 
 					
 						
 						
@@ -1289,7 +1289,7 @@ int count=0;
 				System.out.println(mykey+" "+methodTrace.getClassLevelGold());
 				
 				if (methodTrace.getClassLevelGold() != null && methodTrace.getPrediction() != null 
-						&& methodTrace.isTraceSet()
+//						&& methodTrace.isTraceSet()
 					) {
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getClassLevelGold().trim(),methodTrace.getPrediction().trim());
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
@@ -1309,7 +1309,7 @@ int count=0;
 			else if(ProgramName.equals("chess")|| ProgramName.equals("itrust") ) {
 				
 				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
-						&& methodTrace.isTraceSet()
+//						&& methodTrace.isTraceSet()
 						) {
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().trim());
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
@@ -2039,5 +2039,10 @@ int count=0;
 	}
 
 	}
+	public static void updateMatrixLog(List<MethodTrace> methodTracesList, String programName) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 
 }

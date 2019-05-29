@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Test;
+
 import com.mysql.cj.jdbc.Blob;
 import com.sun.prism.GraphicsResource;
 
@@ -18,55 +20,39 @@ class GFG {
 
     
 	 public static void main (String[] args) throws IOException {
-		 Scanner sc = new Scanner(System.in); 
-		
-			int amount =sc.nextInt(); 
-			HashMap<String, String> myhashmap = new HashMap<String, String>(); 
-			myhashmap.put("a", "2"); 
-			myhashmap.put("b", "2"); 
-			myhashmap.put("c", "2"); 
-			
-			myhashmap.put("d", "3"); 
-			myhashmap.put("e", "3"); 
-			myhashmap.put("f", "3"); 
-			
-			myhashmap.put("g", "4"); 
-			myhashmap.put("h", "4"); 
-			myhashmap.put("i", "4"); 
-			
-			myhashmap.put("j", "5");
-			myhashmap.put("k", "5"); 
-			myhashmap.put("l", "5"); 
-			
-			myhashmap.put("m", "6"); 
-			myhashmap.put("n", "6"); 
-			myhashmap.put("o", "6"); 
-			
-			myhashmap.put("p", "7"); 
-			myhashmap.put("q", "7");
-			myhashmap.put("r", "7"); 
-			myhashmap.put("s", "7"); 
+		 
+		 Scanner sc= new Scanner(System.in);  
+		 int TestCases = sc.nextInt(); 
+		 while(TestCases-->0) {
+			 String TestCase =sc.next(); 
+			char[] chars = TestCase.toCharArray(); 
+			List<Integer> mylist = new ArrayList<Integer>(); 
+			String s=""; 
+			int first=0; 
+			int second=0; 
 
+			for(int i=0; i<chars.length; i++) {
+				if(Character.isUpperCase(chars[i]) && first==0) {
+					second =i; 
+					s=s+TestCase.substring(first, second)+" ";
+					first=i; 
+				}else if(Character.isUpperCase(chars[i]) && first!=0) {
+					second =i; 
+					s=s+TestCase.substring(first, second)+" ";
+					first=i; 
+				}
+				
+			}
+			s=s+TestCase.substring(first, TestCase.length())+" ";
 			
-			myhashmap.put("t", "8"); 
-			myhashmap.put("u", "8"); 
-			myhashmap.put("v", "8"); 
+			System.out.println(s.trim().toLowerCase());
+			 
+			
 
-			myhashmap.put("w", "9"); 
-			myhashmap.put("x", "9"); 
-			myhashmap.put("y", "9"); 
-			myhashmap.put("z", "9"); 
-
-	        while (amount --> 0) {
-	        	String s = sc.next(); 
-	        	
-	        	String[] mystrings = s.split(""); 
-	        	String Result=""; 
-	        	for(String mystring : mystrings) {
-	        		Result=Result+myhashmap.get(mystring); 
-	        	}
-	        	System.out.println(Result);
-	        }
+		 }
+		 
+		 
+		 
 	 }
 
 	private static void FindEven(int number, List<Integer> mylist) {
