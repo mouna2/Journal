@@ -207,6 +207,9 @@ public class TraceValidator {
 		static void MakePredictions(List<MethodTrace> MethodTracesList, LinkedHashMap<String, LogInfo> LogInfoHashMap) throws Exception {
 			// TODO Auto-generated method stub
 			int iteration =1; 
+			MethodTrace.modified=true; 
+			while(MethodTrace.modified) {
+				MethodTrace.modified=false; 
 			for (MethodTrace methodtrace : MethodTracesList) {
 				
 				String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
@@ -268,7 +271,9 @@ public class TraceValidator {
 
 				}	
 
-				iteration ++; 
+				
+			}
+			iteration ++; 
 			}
 		}
 		public static void  Predict(MethodTrace methodTrace, MethodList rows, MethodList columns, HashMap<String, Prediction> MatrixHashMap, LinkedHashMap<String, LogInfo> LogInfoHashMap, String Type, int iteration) throws CloneNotSupportedException {
