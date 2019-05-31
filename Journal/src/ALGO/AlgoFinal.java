@@ -79,8 +79,8 @@ public class AlgoFinal  {
 	public static boolean IncompletenessSeeding=false; 
 	public static boolean NoSeeding=true; 
 
-	public static boolean ExecutedCallsTechnique=true; 
-	public static boolean XCallsTechnique=false; 
+	public static boolean ExecutedCallsTechnique=false; 
+	public static boolean XCallsTechnique=true; 
 	public static boolean BasicTechnique=false; 
 
 	public static boolean ClassLevelTraces=false; 
@@ -310,7 +310,6 @@ public class AlgoFinal  {
 
 
 
-		LogInfo.updateMatrixLog(MethodTracesList, ProgramName); 
 		int ITERATION = 0;
 		
 

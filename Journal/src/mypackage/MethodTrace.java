@@ -234,6 +234,10 @@ public final class MethodTrace {
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(prediction.Reason+type+"/"+prediction.pattern);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(prediction.PredictionValue);
 			MethodTrace.modified=true; 		
+			
+			String var= this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
+			System.out.println("hey");
 
 		}
 		else if( this.prediction.PredictionValue.trim().equals("E") && Prediction.PredictionValue.equals("E")){
@@ -241,6 +245,10 @@ public final class MethodTrace {
 			this.prediction=Prediction; 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(prediction.PredictionValue);
 			this.UpdateCallersCallees(LogInfoHashMap);
+			String var= this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
+
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
+			System.out.println("hey");
 		}
 
 			

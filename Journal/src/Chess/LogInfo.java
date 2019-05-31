@@ -19,9 +19,11 @@ import org.eclipse.jdt.core.search.MethodNameMatch;
 
 import ALGO.AlgoFinal;
 import ALGO.DatabaseInput;
+
 import ALGO.MethodList;
 import ALGO.Prediction;
 import ALGO.PredictionValues;
+
 import Tables.methodcalls;
 import mypackage.ClassTrace2;
 import mypackage.Method;
@@ -42,6 +44,7 @@ public class LogInfo {
 	public String PrecisionRecall; 
 	String GoldFinal; 
 	String SubjectGold; 
+	public String PredictionSummary=""; 
 	List<String> IterationValues= new ArrayList<String>();
 	boolean SubjectDeveloperEqualityFlag; 
 	String Reason; 
@@ -660,6 +663,8 @@ public class LogInfo {
 	public static BufferedWriter bwJHotDrawMethodCallsWriter =null; 
 
 	public static BufferedWriter bwfile1 = null;
+	public static BufferedWriter bwMatrix = null;
+
 	public static BufferedWriter bwTraceClass = null;
 	public static BufferedWriter bwfileCumulative = null;
 	public List<String> getExtendedCallers() {
@@ -965,6 +970,7 @@ public class LogInfo {
 
 				+","+Prediction	
 				+","+PrecisionRecall	
+				+","+PredictionSummary	
 		+","+	toString2(IterationValues); 
 //		return MethodID+","+MethodName+","+RequirementID+","+RequirementName+","+ClassID+","+ClassName+","+TraceValue+","+TraceClassOldValue+","+TraceClassNewValue+","+
 //				PrecisionRecall	+","+toString2(IterationValues)+","+TraceValue+"-"+Reason+"-" +PrecisionRecall;
@@ -1124,6 +1130,12 @@ public class LogInfo {
 				File  file2log = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\PrecisionRecallChessCumulative.txt");
 				FileOutputStream	 fosfila2 = new FileOutputStream(file2log);
 					bwfileCumulative = new BufferedWriter(new OutputStreamWriter(fosfila2));
+					
+					
+					
+					File  MatrixLog = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\TraceMatrixChess.txt");
+					FileOutputStream	 fosMatrix = new FileOutputStream(MatrixLog);
+						bwMatrix = new BufferedWriter(new OutputStreamWriter(fosMatrix));
 
 				
 				File mytraceClass = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\TracesClassesChess.txt");
@@ -1620,7 +1632,10 @@ int count=0;
 					+"ExecutedCallees, ExecutedCalleesPredictions, ExecutedOwnerCallees, ExecutedCallers, ExecutedCallersPredictions,ExecutedOwnerCallers,"
 
 					+ "Prediction,"
-					+ "PrecisionRecall,IterationValues"
+					+ "PrecisionRecall,"
+					+ "PredictionSummary,"
+
+					+"IterationValues"
 					);
 			LogInfo.bwfileChess.newLine();
 		}
@@ -1644,7 +1659,10 @@ int count=0;
 					+"ExecutedCallees, ExecutedCalleesPredictions, ExecutedOwnerCallees, ExecutedCallers, ExecutedCallersPredictions,ExecutedOwnerCallers,"
 
 					+ "Prediction,"
-					+ "PrecisionRecall,IterationValues"
+					+ "PrecisionRecall,"
+					+ "PredictionSummary,"
+				
+					+"IterationValues"
 					);
 			LogInfo.bwfile2.newLine();
 		}
@@ -1692,7 +1710,10 @@ int count=0;
 					+"ExecutedCallees, ExecutedCalleesPredictions, ExecutedOwnerCallees, ExecutedCallers, ExecutedCallersPredictions,ExecutedOwnerCallers,"
 
 					+ "Prediction,"
-					+ "PrecisionRecall,IterationValues"
+					+ "PrecisionRecall,"
+					+ "PredictionSummary,"
+				
+					+"IterationValues"
 					);
 			LogInfo.bwfile3.newLine();
 		}
@@ -1714,9 +1735,11 @@ int count=0;
 					+" CalleesCalleesInterfaceInheritance, CalleesCalleesInterfaceInheritancePredictions, CalleesCalleesInterfaceInheritanceOwners,"
 					+"ExtendedCallees, ExtendedCalleesPredictions, ExtendedOwnerCallees, ExtendedCallers, ExtendedCallersPredictions,ExtendedOwnerCallers,"
 					+"ExecutedCallees, ExecutedCalleesPredictions, ExecutedOwnerCallees, ExecutedCallers, ExecutedCallersPredictions,ExecutedOwnerCallers,"
-
 					+ "Prediction,"
-					+ "PrecisionRecall,IterationValues"
+					+ "PrecisionRecall,"
+					+ "PredictionSummary,"
+
+					+"IterationValues"
 					);
 			LogInfo.bwfile4.newLine();
 		}
@@ -2038,10 +2061,6 @@ int count=0;
 		}
 	}
 
-	}
-	public static void updateMatrixLog(List<MethodTrace> methodTracesList, String programName) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 
