@@ -80,8 +80,8 @@ public class AlgoFinal  {
 	public static boolean NoSeeding=true; 
 
 	public static boolean ExecutedCallsTechnique=false; 
-	public static boolean XCallsTechnique=true; 
-	public static boolean BasicTechnique=false; 
+	public static boolean XCallsTechnique=false; 
+	public static boolean BasicTechnique=true; 
 
 	public static boolean ClassLevelTraces=false; 
 	public static boolean MethodLevelTraces=true; 

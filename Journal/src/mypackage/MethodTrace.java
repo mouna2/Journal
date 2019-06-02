@@ -230,6 +230,7 @@ public final class MethodTrace {
 		System.out.println(ReqMethod);
 		if( this.prediction.PredictionValue.trim().equals("E") &&  (Prediction.PredictionValue.equals("T")|| Prediction.PredictionValue.equals("N"))) {
 			System.out.println("=====>ITERATION "+iteration+" "+this.prediction.PredictionValue+" "+Prediction.PredictionValue);
+			Prediction.Type=type; 
 			this.prediction=Prediction; 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(prediction.Reason+type+"/"+prediction.pattern);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(prediction.PredictionValue);
@@ -237,11 +238,13 @@ public final class MethodTrace {
 			
 			String var= this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
+
 			System.out.println("hey");
 
 		}
 		else if( this.prediction.PredictionValue.trim().equals("E") && Prediction.PredictionValue.equals("E")){
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(prediction.Reason+type+"/"+prediction.pattern);
+			Prediction.Type=type; 
 			this.prediction=Prediction; 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(prediction.PredictionValue);
 			this.UpdateCallersCallees(LogInfoHashMap);

@@ -6,7 +6,7 @@ public class Prediction {
 	public String Reason ="";
 	public String likelihood;
 	public String why;
-//	public String Type ; 
+	public String Type ; 
 	public String pattern=""; 
 	public Prediction(String predictionValue, String reason, String mypattern) {
 		super();

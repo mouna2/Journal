@@ -45,6 +45,7 @@ public class LogInfo {
 	String GoldFinal; 
 	String SubjectGold; 
 	public String PredictionSummary=""; 
+	public String PredictionSummaryPrecisionRecall=""; 
 	List<String> IterationValues= new ArrayList<String>();
 	boolean SubjectDeveloperEqualityFlag; 
 	String Reason; 
@@ -971,6 +972,8 @@ public class LogInfo {
 				+","+Prediction	
 				+","+PrecisionRecall	
 				+","+PredictionSummary	
+				+","+PredictionSummaryPrecisionRecall
+
 		+","+	toString2(IterationValues); 
 //		return MethodID+","+MethodName+","+RequirementID+","+RequirementName+","+ClassID+","+ClassName+","+TraceValue+","+TraceClassOldValue+","+TraceClassNewValue+","+
 //				PrecisionRecall	+","+toString2(IterationValues)+","+TraceValue+"-"+Reason+"-" +PrecisionRecall;
@@ -1287,6 +1290,8 @@ int count=0;
 						
 						) {
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().trim());
+					logInfoHashMap.get(mykey).PredictionSummaryPrecisionRecall=Result+"/"+methodTrace.prediction.Reason+"/"+methodTrace.prediction.Type+"/"+methodTrace.prediction.pattern; 
+
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
 					
@@ -1304,6 +1309,8 @@ int count=0;
 //						&& methodTrace.isTraceSet()
 					) {
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getClassLevelGold().trim(),methodTrace.getPrediction().trim());
+					logInfoHashMap.get(mykey).PredictionSummaryPrecisionRecall=Result+"/"+methodTrace.prediction.Reason+"/"+methodTrace.prediction.Type+"/"+methodTrace.prediction.pattern; 
+
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
 					
@@ -1324,6 +1331,8 @@ int count=0;
 //						&& methodTrace.isTraceSet()
 						) {
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().trim());
+					logInfoHashMap.get(mykey).PredictionSummaryPrecisionRecall=Result+"/"+methodTrace.prediction.Reason+"/"+methodTrace.prediction.Type+"/"+methodTrace.prediction.pattern; 
+
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
 					
@@ -1634,6 +1643,7 @@ int count=0;
 					+ "Prediction,"
 					+ "PrecisionRecall,"
 					+ "PredictionSummary,"
+					+ "PredictionPrecisionRecallSummary,"
 
 					+"IterationValues"
 					);
@@ -1661,7 +1671,8 @@ int count=0;
 					+ "Prediction,"
 					+ "PrecisionRecall,"
 					+ "PredictionSummary,"
-				
+					+ "PredictionPrecisionRecallSummary,"
+
 					+"IterationValues"
 					);
 			LogInfo.bwfile2.newLine();
@@ -1712,7 +1723,8 @@ int count=0;
 					+ "Prediction,"
 					+ "PrecisionRecall,"
 					+ "PredictionSummary,"
-				
+					+ "PredictionPrecisionRecallSummary,"
+
 					+"IterationValues"
 					);
 			LogInfo.bwfile3.newLine();
@@ -1738,6 +1750,7 @@ int count=0;
 					+ "Prediction,"
 					+ "PrecisionRecall,"
 					+ "PredictionSummary,"
+					+ "PredictionPrecisionRecallSummary,"
 
 					+"IterationValues"
 					);
