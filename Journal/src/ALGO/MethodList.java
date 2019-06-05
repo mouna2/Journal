@@ -70,7 +70,7 @@ public class MethodList extends ArrayList<Method> {
 			String key = (String) (RequirementID + "-" + MethodID);
 			if (methodtraces2HashMap.get(key) == null) throw new Exception();
 			if(!GoldFlag) {
-				if (methodtraces2HashMap.get(key).getPrediction().equals("T")) 
+				if (methodtraces2HashMap.get(key).getPredictionOrGold().equals("T")) 
 					return true;
 			}else {
 				if (methodtraces2HashMap.get(key).getGold().equals("T")) 
@@ -98,7 +98,7 @@ public class MethodList extends ArrayList<Method> {
 			String key = (String) (RequirementID + "-" + MethodID);
 			if (methodtraces2HashMap.get(key) == null) throw new Exception();
 			if(!GoldFlag) {
-				if (methodtraces2HashMap.get(key).getPrediction().equals("E")) 
+				if (methodtraces2HashMap.get(key).getPredictionOrGold().equals("E")) 
 					return true;
 			}else {
 				if (methodtraces2HashMap.get(key).getGold().equals("E")) 
@@ -127,7 +127,7 @@ public class MethodList extends ArrayList<Method> {
 				String key = (String) (RequirementID + "-" + MethodID);
 				if (methodtraces2HashMap.get(key) == null) throw new Exception();
 				if(!GoldFlag) {
-					if (methodtraces2HashMap.get(key).getPrediction().equals("N")) 
+					if (methodtraces2HashMap.get(key).getPredictionOrGold().equals("N")) 
 						return true;
 				}else {
 					if (methodtraces2HashMap.get(key).getGold().equals("N")) 
@@ -159,7 +159,7 @@ public class MethodList extends ArrayList<Method> {
 				String MethodID = method.ID; 
 				String key = (String) (RequirementID + "-" + MethodID);
 				if (methodtraces2HashMap.get(key) == null) throw new Exception();
-					if (methodtraces2HashMap.get(key).getPrediction().equals("E")) 
+					if (methodtraces2HashMap.get(key).getPredictionOrGold().equals("E")) 
 						return true; 
 
 				
@@ -187,7 +187,7 @@ public class MethodList extends ArrayList<Method> {
 				if (methodtraces2HashMap.get(key) == null) throw new Exception();
 
 				if(!GoldFlag) {
-					if (!methodtraces2HashMap.get(key).getPrediction().equals("N")) return false; 
+					if (!methodtraces2HashMap.get(key).getPredictionOrGold().equals("N")) return false; 
 				}else {
 					if (!methodtraces2HashMap.get(key).getGold().equals("N")) return false; 
 				}
@@ -213,7 +213,7 @@ public class MethodList extends ArrayList<Method> {
 				if (methodtraces2HashMap.get(key) == null) throw new Exception();
 
 				if(!GoldFlag) {
-					if (!methodtraces2HashMap.get(key).getPrediction().equals("T")) return false; 
+					if (!methodtraces2HashMap.get(key).getPredictionOrGold().equals("T")) return false; 
 				}else {
 					if (!methodtraces2HashMap.get(key).getGold().equals("T")) return false; 
 				}
@@ -240,7 +240,7 @@ public class MethodList extends ArrayList<Method> {
 				if (methodtraces2HashMap.get(key) == null) throw new Exception();
 
 				if(!GoldFlag) {
-					if (!methodtraces2HashMap.get(key).getPrediction().equals("E")) return false; 
+					if (!methodtraces2HashMap.get(key).getPredictionOrGold().equals("E")) return false; 
 				}else {
 					if (!methodtraces2HashMap.get(key).getGold().equals("E")) return false; 
 				}
@@ -264,7 +264,7 @@ public class MethodList extends ArrayList<Method> {
 
 				MethodTrace trace = methodtraces2HashMap.get(requirement.ID + "-" + method.ID);
 				if (trace == null) 	throw new Exception();
-				if (!trace.getPrediction().equals("T")) return false; 
+				if (!trace.getPredictionOrGold().equals("T")) return false; 
 			}
 			return true;
 		}
@@ -331,7 +331,7 @@ public class MethodList extends ArrayList<Method> {
 				String key = (String) (RequirementID + "-" + MethodID);
 				if (methodtraces2HashMap.get(key) == null) throw new Exception();
 				if(!GoldFlag) {
-					if (methodtraces2HashMap.get(key).getPrediction().equals("N")) 
+					if (methodtraces2HashMap.get(key).getPredictionOrGold().equals("N")) 
 						return false;
 				}else {
 					if (methodtraces2HashMap.get(key).getGold().equals("N")) 
@@ -356,7 +356,7 @@ public class MethodList extends ArrayList<Method> {
 				String key = (String) (RequirementID + "-" + MethodID);
 				if (methodtraces2HashMap.get(key) == null) throw new Exception();
 				if(!GoldFlag) {
-					if (methodtraces2HashMap.get(key).getPrediction().equals("T")) 
+					if (methodtraces2HashMap.get(key).getPredictionOrGold().equals("T")) 
 						return false;
 				}else {
 					if (methodtraces2HashMap.get(key).getGold().equals("T")) 
@@ -383,7 +383,7 @@ public class MethodList extends ArrayList<Method> {
 				String key = (String) (RequirementID + "-" + MethodID);
 				if (methodtraces2HashMap.get(key) == null) throw new Exception();
 				if(!GoldFlag) {
-					if (methodtraces2HashMap.get(key).getPrediction().equals("E")) 
+					if (methodtraces2HashMap.get(key).getPredictionOrGold().equals("E")) 
 						return false;
 				}else {
 					if (methodtraces2HashMap.get(key).getGold().equals("E")) 

@@ -6,8 +6,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 
 import ALGO.AlgoFinal;
 import ALGO.DatabaseInput;
@@ -25,7 +27,11 @@ public final class MethodTrace {
 	public String gold;
 	public String Input;
 
-		public Prediction prediction ; 
+	public Prediction prediction ; 
+	public String predictionReason ;
+	public String predictionType ;
+	public String predictionValue ;
+	public String predictionPattern ;
 
 
 	boolean SubjectDeveloperEqualityFlag;
@@ -35,7 +41,8 @@ public final class MethodTrace {
 	public String SubjectT; 
 	public String SubjectN; 
 	public PredictionEvaluation PredictionEvaluation= new PredictionEvaluation(); 
-	public ALGO.PredictionValues PredictionValues= new ALGO.PredictionValues(); 
+	public ALGO.PredictionValues PredictionValues= new ALGO.PredictionValues();
+	private String PredictionSummary=""; 
 
 
 //	getcallers
@@ -46,6 +53,14 @@ public final class MethodTrace {
 //   
 //   getcallees
 
+
+	public String getPredictionSummary() {
+		return PredictionSummary;
+	}
+
+	public void setPredictionSummary(String predictionSummary) {
+		PredictionSummary = predictionSummary;
+	}
 
 	public MethodList getCallers() {
 		if(AlgoFinal.ExecutedCallsTechnique) {
@@ -133,7 +148,7 @@ public final class MethodTrace {
 		return SubjectDeveloperEqualityFlag;
 	}
 
-	public String getPrediction() {
+	public String getPredictionOrGold() {
 		if(this.prediction.PredictionValue.equals("E")) {
 			return this.getGold();  
 		}else {
@@ -157,7 +172,11 @@ public final class MethodTrace {
 
 
 
-
+	public  Prediction getPrediction() {
+		
+			return prediction; 
+		
+	}
 
 
 	
@@ -224,38 +243,46 @@ public final class MethodTrace {
 			
 			
 			{
-		
+		String reqMethod = this.Requirement.ID+"-"+this.Method.ID; 
+//		System.out.println("==============>"+AlgoFinal.methodtraces2HashMap.get("1-3").PredictionSummary);
+//		System.out.println("==============>"+AlgoFinal.methodtraces2HashMap.get("1-3").prediction.pattern);
 
-		String ReqMethod=this.Requirement.ID+"-"+this.Method.ID; 
-		System.out.println(ReqMethod);
-		if( this.prediction.PredictionValue.trim().equals("E") &&  (Prediction.PredictionValue.equals("T")|| Prediction.PredictionValue.equals("N"))) {
-			System.out.println("=====>ITERATION "+iteration+" "+this.prediction.PredictionValue+" "+Prediction.PredictionValue);
-			Prediction.Type=type; 
-			this.prediction=Prediction; 
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(prediction.Reason+type+"/"+prediction.pattern);
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(prediction.PredictionValue);
+		if(this.prediction.PredictionValue.equals("E") && !Prediction.PredictionValue.equals("E")) {
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(Prediction.Reason+type+"/"+Prediction.pattern);
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(Prediction.PredictionValue);
 			MethodTrace.modified=true; 		
 			
 			String var= this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
-
-			System.out.println("hey");
-
-		}
-		else if( this.prediction.PredictionValue.trim().equals("E") && Prediction.PredictionValue.equals("E")){
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(prediction.Reason+type+"/"+prediction.pattern);
-			Prediction.Type=type; 
 			this.prediction=Prediction; 
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(prediction.PredictionValue);
-			this.UpdateCallersCallees(LogInfoHashMap);
-			String var= this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
-
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
-			System.out.println("hey");
-		}
+			this.PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
+//			System.out.println("$$$$$$$$$ "+prediction.pattern);
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.PredictionSummary; 
+//			System.out.println("hey");
+			setValues(Prediction.PredictionValue, Prediction.Reason, Prediction.Type, Prediction.pattern); 
+			this.UpdateCallersCallees(LogInfoHashMap, reqMethod);			
 
 			
-		
+//			System.out.println("pppppppp   "+AlgoFinal.methodtraces2HashMap.get(reqMethod).prediction.pattern);
+
+		}else if(this.prediction.PredictionValue.equals("E") && Prediction.PredictionValue.equals("E")) {
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(Prediction.Reason+type+"/"+Prediction.pattern);
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(Prediction.PredictionValue);
+			String var= this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
+//			System.out.println(var);
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
+			this.prediction=Prediction; 
+			this.PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.PredictionSummary; 
+			setValues(Prediction.PredictionValue, Prediction.Reason, Prediction.Type, Prediction.pattern); 
+			this.UpdateCallersCallees(LogInfoHashMap, reqMethod);			
+
+		}
+	
+
+
+			
+
 		
 
 		}
@@ -268,76 +295,69 @@ public final class MethodTrace {
 		
 		
 	
+	private void setValues(String predictionValue2, String reason, String type, String pattern) {
+		// TODO Auto-generated method stub
+		this.predictionReason=reason; 
+		this.predictionPattern=pattern; 
+		this.predictionType=type; 
+		this.predictionValue= predictionValue2; 
+		
+	}
+
 	/************************************************************************************************************************************************/
 	/**
+	 * @param reqMethod 
 	 * @throws CloneNotSupportedException **********************************************************************************************************************************************/
-	public void UpdateCallersCallees(LinkedHashMap<String, LogInfo> LogInfoHashMap) throws CloneNotSupportedException
+	public void UpdateCallersCallees(LinkedHashMap<String, LogInfo> LogInfoHashMap, String reqMethod) throws CloneNotSupportedException
 			
 			
 			{
 		// TODO Auto-generated method stub
 		List<String> Callers= new ArrayList<String>(); 
 		List<String> CallersPredictions= new ArrayList<String>(); 
-		List<String> CallersOwners= new ArrayList<String>(); 
-		List<String> CallersofCallers= new ArrayList<String>(); 
-		List<String> CallersofCallersPredictions= new ArrayList<String>(); 
-		List<String> CallersofCallersOwners= new ArrayList<String>(); 
+		List<String> CallersOwners= new  ArrayList<String>(); 
+
 		List<String> InterfaceCallers= new ArrayList<String>(); 
 		List<String> InterfaceCallersPredictions= new ArrayList<String>(); 
-		List<String> InterfaceCallersOwners= new ArrayList<String>(); 
+		List<String> InterfaceCallersOwners= new  ArrayList<String>(); 
+		
 		List<String> SuperclassCallers= new ArrayList<String>(); 
 		List<String> SuperclassCallersPredictions= new ArrayList<String>(); 
-		List<String> SuperclassCallersOwners= new ArrayList<String>(); 
-		List<String> InterfaceCallersofCallers= new ArrayList<String>(); 
-		List<String> InterfaceCallersofCallersPredictions= new ArrayList<String>(); 
-		List<String> InterfaceCallersofCallersOwners= new ArrayList<String>(); 
-		List<String> SuperclassCallersofCallers= new ArrayList<String>(); 
-		List<String> SuperclassCallersofCallersPredictions= new ArrayList<String>(); 
-		List<String> SuperclassCallersofCallersOwners= new ArrayList<String>(); 
-		List<String> OuterCallersFinal= new ArrayList<String>(); 
-		List<String> OuterCallersFinalPredictions= new ArrayList<String>(); 
-		List<String> OuterCallersFinalOwners= new ArrayList<String>(); 
-		List<String> ImplementationCallersPredictions= new ArrayList<String>(); 
-		List<String> ImplementationCallersOwners= new ArrayList<String>(); 
-		List<String> SuperclassCalleesOwners= new ArrayList<String>(); 
-		List<String> SuperclassCalleesPredictions= new ArrayList<String>(); 
-		List<String> SuperclassCallees= new ArrayList<String>(); 
-
+		List<String> SuperclassCallersOwners= new  ArrayList<String>(); 
 		
-		List<String> Callees= new ArrayList<String>(); 
-		List<String> CalleesPredictions= new ArrayList<String>(); 
-		List<String> CalleesOwners= new ArrayList<String>(); 		
-		
-		List<String> InterfaceCallees= new ArrayList<String>(); 
-		List<String> InterfaceCalleesPredictions= new ArrayList<String>(); 
-		List<String> InterfaceCalleesOwners= new ArrayList<String>(); 		
-		List<String> CalleesofCallees= new ArrayList<String>(); 
-		List<String> CalleesofCalleesPredictions= new ArrayList<String>(); 
-		List<String> CalleesofCalleesOwners= new ArrayList<String>(); 
-		List<String> ImplementationCallees= new ArrayList<String>(); 
 		List<String> ImplementationCallers= new ArrayList<String>(); 
+		List<String> ImplementationCallersPredictions= new ArrayList<String>(); 
+		List<String> ImplementationCallersOwners= new  ArrayList<String>(); 
+		
+		List<String> SuperclassCallees= new ArrayList<String>(); 
+		List<String> SuperclassCalleesOwners= new ArrayList<String>(); 
+		List<String> SuperclassCalleesPredictions= new  ArrayList<String>(); 
+		
+		List<String> Callees= new ArrayList<String>(); 	
+		List<String> CalleesPredictions= new ArrayList<String>(); 
+		List<String> CalleesOwners= new  ArrayList<String>(); 
+		
 
+		List<String> ImplementationCallees= new ArrayList<String>(); 
 		List<String> ImplementationCalleesPredictions= new ArrayList<String>(); 
-		List<String> ImplementationCalleesOwners= new ArrayList<String>(); 
-		List<String> ChildrenCallees= new ArrayList<String>(); 
-		List<String> ChildrenCallers= new ArrayList<String>(); 
+		List<String> ImplementationCalleesOwners= new  ArrayList<String>(); 
+		
 
+		
+		List<String> ChildrenCallees= new ArrayList<String>(); 
 		List<String> ChildrenCalleesPredictions= new ArrayList<String>(); 
 		List<String> ChildrenCalleesOwners= new ArrayList<String>(); 
+		
+		List<String> ChildrenCallers= new ArrayList<String>(); 
 		List<String> ChildrenCallersPredictions= new ArrayList<String>(); 
 		List<String> ChildrenCallersOwners= new ArrayList<String>(); 
-		List<String> ImplementationCalleesofCallees= new ArrayList<String>(); 
-		List<String> ImplementationCalleesofCalleesPredictions= new ArrayList<String>(); 
-		List<String> ImplementationCalleesofCalleesOwners= new ArrayList<String>(); 
-		List<String> ChildrenCalleesofCallees= new ArrayList<String>(); 
-		List<String> ChildrenCalleesofCalleesPredictions= new ArrayList<String>(); 
-		List<String> ChildrenCalleesofCalleesOwners= new ArrayList<String>(); 
-		List<String> OuterCalleesFinal= new ArrayList<String>(); 
-		List<String> OuterCalleesFinalPredictions= new ArrayList<String>(); 
-		List<String> OuterCalleesFinalOwners= new ArrayList<String>(); 
+		
+		
+		
 		List<String> ExtendedCallees= new ArrayList<String>(); 
 		List<String> ExtendedCalleesOwners= new ArrayList<String>(); 
 		List<String> ExtendedCalleesPredictions= new ArrayList<String>(); 
+		
 		List<String> ExtendedCallers= new ArrayList<String>(); 
 		List<String> ExtendedCallersPredictions= new ArrayList<String>(); 
 		List<String> ExtendedCallersOwners= new ArrayList<String>(); 
@@ -354,93 +374,25 @@ public final class MethodTrace {
 		List<String> ExecutedCallees= new ArrayList<String>(); 
 		List<String> ExecutedCalleesPredictions= new ArrayList<String>(); 
 		List<String> ExecutedCalleesOwners= new ArrayList<String>(); 
+		
 		List<String> Interfaces= new ArrayList<String>(); 
 		List<String> InterfacesPredictions= new ArrayList<String>(); 
+		
 		List<String> Parents= new ArrayList<String>(); 
 		List<String> ParentPredictions= new ArrayList<String>(); 
+		
 		List<String> Children= new ArrayList<String>(); 
-		List<String> ChildrenPredictions= new ArrayList<String>(); 		
+		List<String> ChildrenPredictions= new ArrayList<String>(); 	
+		
 		List<String> Implementations= new ArrayList<String>(); 
-		List<String> ImplementationsPredictions= new ArrayList<String>(); 	
-		String reqMethod=this.Requirement.ID+"-"+this.Method.ID; 
+		List<String> ImplementationsPredictions= new ArrayList<String>(); 
+		
+		String reqMethod2=this.Requirement.ID+"-"+this.Method.ID; 
 		
 		
 		
 
-//		
-//			////////////////////////////////////////////////////////////////////////////////////////////
-//			////////////////////////////////////////////////////////////////////////////////////////////
-//			//CALLERS INTERFACES 
-//			for(Method caller: this.Method.CallersInterfaces) {
-//					InterfaceCallers.add(caller.toString()); 
-//					SetPredictionsSetOwners(caller, this, InterfaceCallersPredictions, InterfaceCallersOwners); 
-//			}
-//			////////////////////////////////////////////////////////////////////////////////////////////
-//			////////////////////////////////////////////////////////////////////////////////////////////
-//			//CALLERS INTERFACES 
-//			for(Method caller: this.Method.CallersInterfaces) {
-//				SuperclassCallers.add(caller.toString()); 
-//				SetPredictionsSetOwners(caller, this, SuperclassCallersPredictions, SuperclassCallersOwners); 
-//			}
-//		
-//			////////////////////////////////////////////////////////////////////////////////////////////
-//			////////////////////////////////////////////////////////////////////////////////////////////
-//			//CALLEES IMPLEMENTATIONS 
-//			for(Method callee: this.Method.CalleesImplementations) {
-//				ImplementationCallees.add(callee.toString()); 
-//				SetPredictionsSetOwners(callee, this, ImplementationCalleesPredictions, ImplementationCalleesOwners); 
-//			}
-//			////////////////////////////////////////////////////////////////////////////////////////////
-//			////////////////////////////////////////////////////////////////////////////////////////////
-//			//CALLEES CHILDREN  
-//			for(Method callee: this.Method.CalleesChildren) {
-//				ChildrenCallees.add(callee.toString()); 
-//				SetPredictionsSetOwners(callee, this, ChildrenCalleesPredictions, ChildrenCalleesOwners); 
-//			}
-//		
-//			////////////////////////////////////////////////////////////////////////////////////////////
-//			////////////////////////////////////////////////////////////////////////////////////////////
-//			//CALLEES OF CALLEES   
-//			for(Method callee: this.Method.CalleesofCallees) {
-//				CalleesofCallees.add(callee.toString()); 
-//				SetPredictionsSetOwners(callee, this, CalleesofCalleesPredictions, CalleesofCalleesOwners); 
-//			}
-//			////////////////////////////////////////////////////////////////////////////////////////////
-//			////////////////////////////////////////////////////////////////////////////////////////////
-//			//CALLEES OF CALLEES IMPLEMENTATIONS 
-//			for(Method callee: this.Method.CalleesofCalleesImplementations) {
-//				ImplementationCalleesofCallees.add(callee.toString()); 
-//				SetPredictionsSetOwners(callee, this, ImplementationCalleesofCalleesPredictions, ImplementationCalleesofCalleesOwners); 
-//			}
-//			////////////////////////////////////////////////////////////////////////////////////////////
-//			////////////////////////////////////////////////////////////////////////////////////////////
-//			//CALLEES OF CALLEES CHILDREN  
-//			for(Method callee: this.Method.CalleesofCalleesChildren) {
-//				ChildrenCalleesofCallees.add(callee.toString()); 
-//				SetPredictionsSetOwners(callee, this, ChildrenCalleesofCalleesPredictions, ChildrenCalleesofCalleesOwners); 
-//			}
-//		////////////////////////////////////////////////////////////////////////////////////////////
-//		////////////////////////////////////////////////////////////////////////////////////////////
-//		//CALLERS OF CALLERS   
-//		for(Method caller: this.Method.CallersofCallers) {
-//			CallersofCallers.add(caller.toString()); 
-//			SetPredictionsSetOwners(caller, this, CallersofCallersPredictions, CallersofCallersOwners); 
-//		}
-//		////////////////////////////////////////////////////////////////////////////////////////////
-//		////////////////////////////////////////////////////////////////////////////////////////////
-//		//CALLERS OF CALLERS SUPERCLASSES
-//		for(Method callee: this.Method.CallersofCallersSuperclasses) {
-//			SuperclassCallersofCallers.add(callee.toString()); 
-//			SetPredictionsSetOwners(callee, this, SuperclassCallersofCallersPredictions, SuperclassCallersofCallersOwners); 
-//		}
-//		////////////////////////////////////////////////////////////////////////////////////////////
-//		////////////////////////////////////////////////////////////////////////////////////////////
-//		//CALLERS OF CALLERS INTERFACES 
-//		for(Method caller: this.Method.CallersofCallersInterfaces) {
-//			InterfaceCallersofCallers.add(caller.toString()); 
-//			SetPredictionsSetOwners(caller, this, InterfaceCallersofCallersPredictions, InterfaceCallersofCallersOwners); 
-//		}
-		
+
 		
 		setPrediction(this.prediction);
 		////////////////////////////////////////////////////////////////////////////////////////////
@@ -475,27 +427,28 @@ public final class MethodTrace {
 				ExecutedCallers.add(ExecutedCaller.toString()); 
 				SetPredictionsSetOwners(ExecutedCaller, this, ExecutedCallersPredictions, ExecutedCallersOwners); 
 			}
-			
-			
-			
-//		}
+			}
 		////////////////////////////////////////////////////////////////////////////////////////////
 		////////////////////////////////////////////////////////////////////////////////////////////
 		
 			
 		
 		//EXECUTED CALLEES
+		int count=0; 
+//		System.out.println(this.Method+"======>"+this.Method.getCalleesExecuted());
+
 		for(Method ExecutedCallee: this.Method.getCalleesExecuted()) {
-			if(ExecutedCallee!=null) {
+//			if(ExecutedCallee!=null) {
 				ExecutedCallees.add(ExecutedCallee.toString()); 
 				SetPredictionsSetOwners(ExecutedCallee, this, ExecutedCalleesPredictions, ExecutedCalleesOwners); 
-			}
+				count++; 
+//			}
 			
 
 			
 			
 		}
-		}	////////////////////////////////////////////////////////////////////////////////////////////
+			////////////////////////////////////////////////////////////////////////////////////////////
 			////////////////////////////////////////////////////////////////////////////////////////////
 		//CALLERS OF INTERFACES 
 		if(!this.Method.Interfaces.isEmpty()) {
@@ -647,107 +600,7 @@ if(!this.Method.Children.isEmpty()) {
 
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////
-////CALLERS OF CALLERS 
-//for(Method caller: this.Method.getCallersAugmentedInterfacesSuperclasses(Requirement)) {
-//	
-//		for(mypackage.Method callerofcaller: caller.Callers) {
-//			CallersofCallers.add(callerofcaller.toString()); 
-//			SetPredictionsSetOwners(callerofcaller, this, CallersofCallersPredictions, CallersofCallersOwners); 
-//
-//			
-//			
-//			//SUPERCLASS CALLERS OF CALLERS 
-//			if(!callerofcaller.Superclasses.isEmpty()) {
-//				for(mypackage.Method callerofcallerSuperclass: callerofcaller.Superclasses) {
-//					for(mypackage.Method CallerCallerSuperclass: callerofcallerSuperclass.Callers) {
-//
-//					SuperclassCallersofCallers.add(CallerCallerSuperclass.toString());
-//					SetPredictionsSetOwners(CallerCallerSuperclass, this, SuperclassCallersofCallersPredictions, SuperclassCallersofCallersOwners); 
-//
-//					}
-//					
-//				}
-//			}
-//			//INTERFACE CALLERS OF CALLERS 
-//			if(!callerofcaller.Interfaces.isEmpty()) {
-//				for(mypackage.Method callerofcallerInterface: callerofcaller.Interfaces) {
-//					for(mypackage.Method CallerCallerInterface: callerofcallerInterface.Callers) {
-//						InterfaceCallersofCallers.add(CallerCallerInterface.toString()); 
-//						SetPredictionsSetOwners(CallerCallerInterface, this, InterfaceCallersofCallersPredictions, InterfaceCallersofCallersOwners); 
-//					}
-//				
-//
-//				
-//					
-//				}
-//			}
-//		}
-//	
-//
-//	
-//	
-//}
-//////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////
-////CALLEES OF CALLEES 
-//for(Method callee: this.Method.getCalleesAugmentedChildrenImplementations(Requirement)) {
-//			for(mypackage.Method calleeofcallee: callee.Callees) {
-////				System.out.println(calleeofcallee.toString());
-//					CalleesofCallees.add(calleeofcallee.toString()); 
-//					SetPredictionsSetOwners(calleeofcallee, this, CalleesofCalleesPredictions, CalleesofCalleesOwners); 
-//
-//					
-//		
-//		
-//		//CHILDREN CALLEES OF CALLEES 
-//		if(!calleeofcallee.Children.isEmpty()) {
-//			for(mypackage.Method calleeofcalleeChildren: calleeofcallee.Superclasses) {
-//				for(mypackage.Method calleeofcalleeChild: calleeofcalleeChildren.Callees) {
-//					ChildrenCalleesofCallees.add(calleeofcalleeChild.toString()); 
-//					SetPredictionsSetOwners(calleeofcalleeChild, this, ChildrenCalleesofCalleesPredictions, ChildrenCalleesofCalleesOwners); 
-//				}
-//				
-//
-//				
-//			}
-//		}
-//		//IMPLEMENTATION CALLEES OF CALLEES 
-//		if(!calleeofcallee.Implementations.isEmpty()) {
-//			for(mypackage.Method calleeofcalleeImp: calleeofcallee.Implementations) {
-//				for(mypackage.Method calleeofcalleeImplementation: calleeofcalleeImp.Callees) {
-//				ImplementationCalleesofCallees.add(calleeofcalleeImplementation.toString()); 
-//				SetPredictionsSetOwners(calleeofcalleeImplementation, this, ImplementationCalleesofCalleesPredictions, ImplementationCalleesofCalleesOwners); 
-//				}
-//			
-//				
-//			}
-//		}
-//		
-//	}
-//		
-//
-//}
-//////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////
-////FINAL CALLERS 
-//for(Method caller: this.Method.getOuterCallersFinal(Requirement)) {
-//OuterCallersFinal.add(caller.toString()); 
-//SetPredictionsSetOwners(caller, this, OuterCallersFinalPredictions, OuterCallersFinalOwners); 
-//
-//
-//}
-//////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////
-////FINAL CALLEES
-//for(Method callee: this.Method.getOuterCalleesFinal(Requirement)) {
-//OuterCalleesFinal.add(callee.toString()); 
-//SetPredictionsSetOwners(callee, this, OuterCalleesFinalPredictions, OuterCalleesFinalOwners); 
-//
-//
-//
-//}	
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -779,7 +632,7 @@ SetPredictionsSetOwners(callee, this, ExtendedCalleesPredictions, ExtendedCallee
 //INTERFACES  
 for(Method myinterface: this.Method.Interfaces) {
 Interfaces.add(myinterface.toString()); 
-InterfacesPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+myinterface.ID).getPrediction()); 
+InterfacesPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+myinterface.ID).getPrediction().PredictionValue); 
 
 }
 ////////////////////////////////////////////////////////////////////////////////////////////
@@ -789,7 +642,7 @@ InterfacesPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID
 //IMPLEMENTATIONS  
 for(Method myimplementation: this.Method.Implementations) {
 Implementations.add(myimplementation.toString()); 
-ImplementationsPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+myimplementation.ID).getPrediction()); 
+ImplementationsPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+myimplementation.ID).getPrediction().PredictionValue); 
 
 
 }
@@ -800,7 +653,7 @@ ImplementationsPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requireme
 //PARENTS  
 for(Method mysuperclass: this.Method.Superclasses) {
 Parents.add(mysuperclass.toString()); 
-ParentPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+mysuperclass.ID).getPrediction()); 
+ParentPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+mysuperclass.ID).getPrediction().PredictionValue); 
 
 
 }
@@ -811,11 +664,11 @@ ParentPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"
 //CHILDREN  
 for(Method mychild: this.Method.Children) {
 Children.add(mychild.toString()); 
-ChildrenPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+mychild.ID).getPrediction()); 
+ChildrenPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+mychild.ID).getPrediction().PredictionValue); 
 
 
 }
-
+		
 
 				LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setInterfaces(Interfaces);
 				LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setInterfacesPredictions(InterfacesPredictions);
@@ -840,7 +693,7 @@ ChildrenPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setExtendedCalleesPredictionsFinal(ExtendedCalleesPredictions);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setExtendedOwnerCalleesFinal(ExtendedCalleesOwners); 
 
-
+			 reqMethod = this.Requirement.ID+"-"+this.Method.ID; 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setExecutedCallees(ExecutedCallees);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setExecutedCalleesPredictions(ExecutedCalleesPredictions);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setExecutedOwnerCallees(ExecutedCalleesOwners);
@@ -900,20 +753,20 @@ ChildrenPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"
 		LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setCalleesCalleesInterfaceInheritanceOwners(CalleesCalleesInterfaceInheritanceOwners);
 		
 	}
-	private void SetPredictionsSetOwners(mypackage.Method caller, MethodTrace methodTrace, List<String> CallersPredictions, List<String> CallersOwners) {
+	private void SetPredictionsSetOwners(mypackage.Method caller, MethodTrace methodTrace, List<String> callersPredictions, List<String> callersOwners) {
 		// TODO Auto-generated method stub
 		if(caller.Owner.ID.equals(this.Method.Owner.ID)) {
-			CallersPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction().toLowerCase()); 
+			callersPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction().PredictionValue.toLowerCase()); 
 
 		}else {
 //			System.out.println(this.Requirement.ID+"-"+caller.ID);
 //			System.out.println(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID));
-			CallersPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction()); 
+			callersPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction().PredictionValue); 
 		}
 		if(caller.Owner.ID.equals(this.Method.Owner.ID)) {
-			CallersOwners.add(DatabaseInput.classTraceHashMap.get(this.Requirement.ID+"-"+caller.Owner.ID).DeveloperGold.toLowerCase()); 
+			callersOwners.add(DatabaseInput.classTraceHashMap.get(this.Requirement.ID+"-"+caller.Owner.ID).DeveloperGold.toLowerCase()); 
 		}else {
-			CallersOwners.add(DatabaseInput.classTraceHashMap.get(this.Requirement.ID+"-"+caller.Owner.ID).DeveloperGold); 
+			callersOwners.add(DatabaseInput.classTraceHashMap.get(this.Requirement.ID+"-"+caller.Owner.ID).DeveloperGold); 
 		}
 	}
 

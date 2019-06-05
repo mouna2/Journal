@@ -6,13 +6,14 @@ public class Prediction {
 	public String Reason ="";
 	public String likelihood;
 	public String why;
-	public String Type ; 
+	public String Type =""; 
 	public String pattern=""; 
 	public Prediction(String predictionValue, String reason, String mypattern) {
-		super();
+//		super();
 		PredictionValue = predictionValue;
 		Reason = reason;
 		pattern=mypattern; 
+		
 	} 
 	public static Prediction EIsolatedPrediction = new Prediction("E", "IsolatedE", ""); 
 	public static Prediction EInitializedPrediction = new Prediction("E", "InitializedE", ""); 

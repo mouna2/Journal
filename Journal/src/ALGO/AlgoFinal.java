@@ -80,11 +80,11 @@ public class AlgoFinal  {
 	public static boolean NoSeeding=true; 
 
 	public static boolean ExecutedCallsTechnique=false; 
-	public static boolean XCallsTechnique=false; 
-	public static boolean BasicTechnique=true; 
+	public static boolean BasicTechnique=false; 
+	public static boolean XCallsTechnique=true; 
 
-	public static boolean ClassLevelTraces=false; 
-	public static boolean MethodLevelTraces=true; 
+	public static boolean ClassLevelTraces=true; 
+	public static boolean MethodLevelTraces=false; 
 
 	/**
 	 * Run a SQL command which does not return a recordset:
@@ -282,7 +282,7 @@ public class AlgoFinal  {
 		
 		
 		
-		System.out.println("yes");
+//		System.out.println("yes");
 		//////////////////////////////////////////////////////////////////////////////////////////
 		//////////////////////////////////////////////////////////////////////////////////////////
 		//STEP 1
@@ -301,7 +301,17 @@ public class AlgoFinal  {
 			TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
 //
 //			iteration++; 
-//		}
+//		}	
+			for(MethodTrace methodtrace: MethodTracesList) {
+			String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
+//			System.out.println(methodtrace.prediction.PredictionValue);
+			if(methodtrace.prediction.PredictionValue.equals("E")) {
+				methodtrace.UpdateCallersCallees(LogInfoHashMap, reqMethod);			
+
+			}
+
+		}
+
 
 		
 		LogInfo.ComputePrecisionAndRecallNONCUMULATIVE(methodtraces2HashMap,TotalPattern, ProgramName, OwnerClassPredictionValues, LogInfoHashMap);
@@ -320,16 +330,7 @@ public class AlgoFinal  {
 		
 
 
-		for(MethodTrace methodtrace: MethodTracesList) {
-			String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
-
-			if(methodtrace.prediction.PredictionValue.equals("E")) {
-				methodtrace.UpdateCallersCallees(LogInfoHashMap);			
-
-			}
-
-		}
-
+	
 		System.out.println(ITERATION);
 		System.out.println("FINISJED");
 
@@ -714,7 +715,7 @@ public class AlgoFinal  {
 					logInfoHashMap.put(mykey, loginfo); 
 
 
-					System.out.println(mykey);
+//					System.out.println(mykey);
 					MethodTrace methodtrace = methodTraceHashMap.get(mykey); 
 					methodtrace.setSubjectDeveloperEqualityFlag(true);
 					methodTraceHashMap.put(mykey, methodtrace); 
@@ -753,23 +754,23 @@ public class AlgoFinal  {
 
 		for(int i=0; i<1; i++) {
 			System.out.println("========================> RUN "+i);
-			String ProgramName = "chess";
-			AlgoFinal frame = new AlgoFinal(
-					ProgramName);
-//			
+//			String ProgramName = "chess";
+//			AlgoFinal frame = new AlgoFinal(
+//					ProgramName);
+			
 //						String ProgramName2 = "gantt";
 //						AlgoFinal frame = new AlgoFinal(ProgramName2);
 			////			
 			////////			String ProgramName2 = "dummy";
 			////////			AlgoFinal	 frame = new AlgoFinal(ProgramName2);
 			//////	//
-			//			String ProgramName3 = "itrust";
-			//			AlgoFinal	 frame = new AlgoFinal(ProgramName3);
-			//
-			//				 //ooo
-			//				 
-			//			String ProgramName4 = "jhotdraw";
-			//			AlgoFinal	frame = new AlgoFinal(ProgramName4);
+//						String ProgramName3 = "itrust";
+//						AlgoFinal	 frame = new AlgoFinal(ProgramName3);
+			
+							 //ooo
+//							 
+						String ProgramName4 = "jhotdraw";
+						AlgoFinal	frame = new AlgoFinal(ProgramName4);
 
 		}
 	}

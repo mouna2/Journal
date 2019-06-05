@@ -12,8 +12,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.jdt.core.search.MethodNameMatch;
 
@@ -218,8 +220,8 @@ public class LogInfo {
 	public List<String> getChildrenCallersOwners() {
 		return ChildrenCallersOwners;
 	}
-	public void setChildrenCallersOwners(List<String> childrenCallersOwners) {
-		ChildrenCallersOwners = childrenCallersOwners;
+	public void setChildrenCallersOwners(List<String> childrenCallersOwners2) {
+		ChildrenCallersOwners = childrenCallersOwners2;
 	}
 	public List<String> getSuperclassCallees() {
 		return SuperclassCallees;
@@ -297,8 +299,8 @@ public class LogInfo {
 	public List<String> getCalleesOwners() {
 		return CalleesOwners;
 	}
-	public void setCalleesOwners(List<String> calleesOwners) {
-		CalleesOwners = calleesOwners;
+	public void setCalleesOwners(List<String> calleesOwners2) {
+		CalleesOwners = calleesOwners2;
 	}
 	
 	public List<String> getImplementationCalleesOwners() {
@@ -460,8 +462,8 @@ public class LogInfo {
 	public List<String> getImplementationPredictions() {
 		return ImplementationPredictions;
 	}
-	public void setImplementationPredictions(List<String> implementationPredictions) {
-		ImplementationPredictions = implementationPredictions;
+	public void setImplementationPredictions(List<String> implementationsPredictions2) {
+		ImplementationPredictions = implementationsPredictions2;
 	}
 	public List<String> getInterfacePredictions() {
 		return InterfacePredictions;
@@ -478,8 +480,8 @@ public class LogInfo {
 	public List<String> getChildrenPredictions() {
 		return ChildrenPredictions;
 	}
-	public void setChildrenPredictions(List<String> childrenPredictions) {
-		ChildrenPredictions = childrenPredictions;
+	public void setChildrenPredictions(List<String> childrenPredictions2) {
+		ChildrenPredictions = childrenPredictions2;
 	}
 	public List<String> getImplementationOwners() {
 		return ImplementationOwners;
@@ -817,106 +819,107 @@ public class LogInfo {
 		String ExtendedCalleesOwnerList=""; 
 		if(Callers!=null) {
 			 CallersList=toString3(Callers); 
-			 CallersOwnersList=toString3(CallersOwners); 
-			 CallersPredictionsList=toString3(CallersPredictions); 
+			 CallersOwnersList=toString3List(CallersOwners); 
+			 CallersPredictionsList=toString3List(CallersPredictions); 
 		}
 	if(Callees!=null) {
 		 CalleesList=toString3(Callees); 
-		 CalleesOwnersList=toString3(CalleesOwners); 
-		 CalleesPredictionsList=toString3(CalleesPredictions); 
+		 CalleesOwnersList=toString3List(CalleesOwners); 
+		 CalleesPredictionsList=toString3List(CalleesPredictions); 
 		
 	}
 	
 		if(InterfaceCallers!=null) {
 			 InterfaceCallerList=toString3(InterfaceCallers); 
-			 InterfaceCallerOwnerList=toString3(InterfaceCallersOwners); 
-			 InterfaceCallerPredictionList=toString3(InterfaceCallerPredictions); 
+			 InterfaceCallerOwnerList=toString3List(InterfaceCallersOwners); 
+			 InterfaceCallerPredictionList=toString3List(InterfaceCallerPredictions); 
 		}
 		
 		if(ImplementationCallers!=null) {
 			 ImplementationCallerList=toString3(ImplementationCallers); 
-			 ImplementationCallerOwnerList=toString3(ImplementationCallersOwners); 
-			 ImplementationCallerPredictionList=toString3(ImplementationCallerPredictions); 
+			 ImplementationCallerOwnerList=toString3List(ImplementationCallersOwners); 
+			 ImplementationCallerPredictionList=toString3List(ImplementationCallerPredictions); 
 			
 		}
 		
 		if(ChildrenCallers!=null) {
 			 ChildrenCallerList=toString3(ChildrenCallers); 
-			 ChildrenCallerOwnerList=toString3(ChildrenCallersOwners); 
-			 ChildrenCallerPredictionList=toString3(ChildrenCallerPredictions); 
+			 ChildrenCallerOwnerList=toString3List(ChildrenCallersOwners); 
+			 ChildrenCallerPredictionList=toString3List(ChildrenCallerPredictions); 
 		}
 		
 		
 		if(ImplementationCallees!=null) {
 			 ImplementationCalleeList=toString3(ImplementationCallees); 
-			 ImplementationCalleeOwnerList=toString3(ImplementationCalleesOwners); 
-			 ImplementationCalleePredictionList=toString3(ImplementationCalleePredictions); 
+			 ImplementationCalleeOwnerList=toString3List(ImplementationCalleesOwners); 
+			 ImplementationCalleePredictionList=toString3List(ImplementationCalleePredictions); 
 		}
-		
 		
 		if(SuperclassCallers!=null) {
 			 SuperclassCallerList=toString3(SuperclassCallers); 
-			 SuperclassCallerOwnerList=toString3(SuperclassCallersOwners); 
-			 SuperclassCallerPredictionList=toString3(SuperclassCallerPredictions); 
+			 SuperclassCallerOwnerList=toString3List(SuperclassCallersOwners); 
+			 SuperclassCallerPredictionList=toString3List(SuperclassCallerPredictions); 
 		}
 		
 		if(ChildrenCallees!=null) {
 			 ChildrenCalleesList=toString3(ChildrenCallees); 
-			 ChildrenCalleeOwnerList=toString3(ChildrenCalleesOwners); 
-			 ChildrenCalleePredictionList=toString3(ChildrenCalleePredictions); 
+			 ChildrenCalleeOwnerList=toString3List(ChildrenCalleesOwners); 
+			 ChildrenCalleePredictionList=toString3List(ChildrenCalleePredictions); 
 		}
 		
 		if(SuperclassCallees!=null) {
 			 SuperclassCalleesList=toString3(SuperclassCallees); 
-			 SuperclassCalleesOwnerList=toString3(SuperclassCalleesOwners); 
-			 SuperclassCalleesPredictionList=toString3(SuperclassCalleePredictions); 
+			 SuperclassCalleesOwnerList=toString3List(SuperclassCalleesOwners); 
+			 SuperclassCalleesPredictionList=toString3List(SuperclassCalleePredictions); 
 		}
 		
 		String ExtendedCalleesPredictionsList=""; 
 		if(ExtendedCalleesFinal!=null) {
 			 ExtendedCalleesList=toString3(ExtendedCalleesFinal); 
-			 ExtendedCalleesPredictionsList=toString3(ExtendedCalleesPredictionsFinal); 
+			 ExtendedCalleesPredictionsList=toString3List(ExtendedCalleesPredictionsFinal); 
 		}
 		String ExtendedCallersList=""; 
 		String ExtendedCallersPredictionsList=""; 
 		if(ExtendedCallersFinal!=null) {
 		 ExtendedCallersList=toString3(ExtendedCallersFinal); 
-		 ExtendedCallersPredictionsList=toString3(ExtendedCallersPredictionsFinal); 
+		 ExtendedCallersPredictionsList=toString3List(ExtendedCallersPredictionsFinal); 
 		}
 		String ExtendedOwnerCalleesList=""; 
 		String ExtendedOwnerCallersList=""; 
 		if(ExtendedOwnerCalleesFinal!=null) {
-			 ExtendedOwnerCalleesList=toString3(ExtendedOwnerCalleesFinal); 
-			 ExtendedOwnerCallersList=toString3(ExtendedOwnerCallersFinal); 
+			 ExtendedOwnerCalleesList=toString3List(ExtendedOwnerCalleesFinal); 
+			 ExtendedOwnerCallersList=toString3List(ExtendedOwnerCallersFinal); 
 		}
 		String CalleesCalleesInterfaceInheritanceList=""; 
 		String CalleesCalleesInterfaceInheritanceOwnersList=""; 
 		String CalleesCalleesInterfaceInheritancePredictionsList=""; 
 		if(CalleesCalleesInterfaceInheritance!=null) {
 			 CalleesCalleesInterfaceInheritanceList=toString3(CalleesCalleesInterfaceInheritance); 
-			 CalleesCalleesInterfaceInheritanceOwnersList		 =toString3(CalleesCalleesInterfaceInheritanceOwners); 
-			 CalleesCalleesInterfaceInheritancePredictionsList       =toString3(CalleesCalleesInterfaceInheritancePredictions); 
+			 CalleesCalleesInterfaceInheritanceOwnersList		 =toString3List(CalleesCalleesInterfaceInheritanceOwners); 
+			 CalleesCalleesInterfaceInheritancePredictionsList       =toString3List(CalleesCalleesInterfaceInheritancePredictions); 
 		}
 		String ExecutedCalleesList=""; 
 		String ExecutedCalleesPredictionsList=""; 
+
 	if(ExecutedCallees!=null) {
 		 ExecutedCalleesList=toString3(ExecutedCallees); 
-		 ExecutedCalleesPredictionsList=toString3(ExecutedCalleesPredictions); 
+		 ExecutedCalleesPredictionsList=toString3List(ExecutedCalleesPredictions); 
+
 	}
 	String ExecutedCallersList=""; 
 	String ExecutedCallersPredictionsList=""; 
 	if(ExecutedCallers!=null) {
 		 ExecutedCallersList=toString3(ExecutedCallers); 
-		 ExecutedCallersPredictionsList=toString3(ExecutedCallersPredictions); 
+		 ExecutedCallersPredictionsList=toString3List(ExecutedCallersPredictions); 
 	}
 	String ExecutedOwnerCalleesList=""; 
 		if(ExecutedOwnerCallees!=null) {
-			 ExecutedOwnerCalleesList=toString3(ExecutedOwnerCallees); 
+			ExecutedOwnerCalleesList=toString3List(ExecutedOwnerCallees); 
 
 		}
 		String ExecutedOwnerCallersList=""; 
 		if(ExecutedOwnerCallers!=null) {
-		 ExecutedOwnerCallersList=toString3(ExecutedOwnerCallers); 
+		 ExecutedOwnerCallersList=toString3List(ExecutedOwnerCallers); 
 		}
 		String reqClass= RequirementID+"-"+ClassID; 
 		String iterfaces=""; 
@@ -927,34 +930,36 @@ public class LogInfo {
 		 parentsList = toString3(Parents);
 		String parentsPredictionList=""; 
 		if(ParentsPredictions!=null)
-		 parentsPredictionList = toString3(ParentsPredictions); 
+		 parentsPredictionList = toString3List(ParentsPredictions); 
 		String childrenList=""; 
 		if(Children!=null)
 		 childrenList = toString3(Children); 
 		String childrenPredictionList=""; 
 		if(ChildrenPredictions!=null)
-		 childrenPredictionList = toString3(ChildrenPredictions); 
+		 childrenPredictionList = toString3List(ChildrenPredictions); 
 		String interfaceList=""; 
 		if(Interfaces!=null)
 		 interfaceList = toString3(Interfaces); 
 		String interfacePredictionList=""; 
 		if(InterfacesPredictions!=null)
-		 interfacePredictionList = toString3(InterfacesPredictions); 
+		 interfacePredictionList = toString3List(InterfacesPredictions); 
 		String implementationList=""; 
 		if(Implementations!=null)
 		 implementationList = toString3(Implementations); 
 		String implementationPredictionList=""; 
 		if(ImplementationPredictions!=null)
-		 implementationPredictionList = toString3(ImplementationPredictions); 
+		 implementationPredictionList = toString3List(ImplementationPredictions); 
 
 		
-		
+	
 		return MethodID+","+MethodName+","+RequirementID+","+RequirementName+","+ClassID+","+ClassName
 				
 				+","+TraceValue+","+DatabaseInput.OwnerTraceHashMap.get(reqClass)
 				+","+interfaceList+","+interfacePredictionList+","+implementationList+","+implementationPredictionList+","+parentsList+","+parentsPredictionList+","+childrenList+","+childrenPredictionList
+				
 				+","+CallersList+","+CallersPredictionsList+","+CallersOwnersList
 				+","+InterfaceCallerList+","+InterfaceCallerPredictionList+","+InterfaceCallerOwnerList
+		
 				+","+SuperclassCallerList+","+SuperclassCallerPredictionList+","+SuperclassCallerOwnerList
 				+","+ImplementationCallerList+","+ImplementationCallerPredictionList+","+ImplementationCallerOwnerList
 				+","+ChildrenCallerList+","+ChildrenCallerPredictionList+","+ChildrenCallerOwnerList
@@ -965,16 +970,15 @@ public class LogInfo {
 				+","+SuperclassCalleesList+","+SuperclassCalleesPredictionList+","+SuperclassCalleesOwnerList
 				+","+CalleesCalleesInterfaceInheritanceList+","+CalleesCalleesInterfaceInheritancePredictionsList+","+CalleesCalleesInterfaceInheritanceOwnersList
 
-				
 				+","+ExtendedCalleesList+","+ExtendedCalleesPredictionsList+","+ExtendedOwnerCalleesList+","+ExtendedCallersList+","+ExtendedCallersPredictionsList+","+ExtendedOwnerCallersList
 				+","+ExecutedCalleesList+","+ExecutedCalleesPredictionsList+","+ExecutedOwnerCalleesList+","+ExecutedCallersList+","+ExecutedCallersPredictionsList+","+ExecutedOwnerCallersList
-
 				+","+Prediction	
 				+","+PrecisionRecall	
 				+","+PredictionSummary	
 				+","+PredictionSummaryPrecisionRecall
 
 		+","+	toString2(IterationValues); 
+		
 //		return MethodID+","+MethodName+","+RequirementID+","+RequirementName+","+ClassID+","+ClassName+","+TraceValue+","+TraceClassOldValue+","+TraceClassNewValue+","+
 //				PrecisionRecall	+","+toString2(IterationValues)+","+TraceValue+"-"+Reason+"-" +PrecisionRecall;
 		
@@ -984,22 +988,20 @@ public class LogInfo {
 		// TODO Auto-generated method stub
 		String s= ""; 
 		int counter=0; 
-//		if(values!=null) {
-//			for(String value: values) {
-//				
-//				counter++; 
-//				if(counter==values.size()) {
-//					s=s+value; 
-//				}
-//				else {
-//					s=s+value+"/"; 
-//				}
-//				
-//			}
-//			s=s.replaceAll(",", "_"); 
-//
-//			return s;
-//		}
+
+		 s= String.join("/", values );
+
+		s=s.replaceAll(",","_");
+		
+		return s; 
+	}
+	
+	
+	public String toString3List(List<String> values) {
+		// TODO Auto-generated method stub
+		String s= ""; 
+		int counter=0; 
+
 		 s= String.join("/", values );
 
 		s=s.replaceAll(",","_");
@@ -1018,18 +1020,18 @@ public class LogInfo {
 	public void setRequirementName(String requirementName) {
 		RequirementName = requirementName;
 	}
-	public String toString2(List<String> IterationValues) {
+	public String toString2(List<String> iterationValues2) {
 		 String FinalString=""; 
 		 int it=0; 
 		 Reason=""; 
-		for(String s: IterationValues) {
-			if(it+1<IterationValues.size()) {
+		for(String s: iterationValues2) {
+			if(it+1<iterationValues2.size()) {
 				FinalString=FinalString+s+","; 
 				
 				it++; 	
 			}
 			
-			else if(it+1==IterationValues.size()) {
+			else if(it+1==iterationValues2.size()) {
 				FinalString=FinalString+s; 
 				
 			}
@@ -1289,13 +1291,14 @@ int count=0;
 						
 						
 						) {
-					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().trim());
-					logInfoHashMap.get(mykey).PredictionSummaryPrecisionRecall=Result+"/"+methodTrace.prediction.Reason+"/"+methodTrace.prediction.Type+"/"+methodTrace.prediction.pattern; 
+					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().PredictionValue);
+					logInfoHashMap.get(mykey).PredictionSummaryPrecisionRecall=methodTrace.getGold().trim()+"/"+AlgoFinal.methodtraces2HashMap.get(mykey).predictionReason+"/"+ 
+							AlgoFinal.methodtraces2HashMap.get(mykey).predictionType+"/"+AlgoFinal.methodtraces2HashMap.get(mykey).predictionPattern; 
 
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
 					
-					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getPrediction().trim());
+					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getGold().trim());
 					UpdateCategoryCounters(Result, methodTrace, Pattern, ownerClassPredictionValues, mykey, logInfoHashMap); 
 
 				}
@@ -1303,18 +1306,18 @@ int count=0;
 
 			}
 			else if((ProgramName.equals("gantt")|| ProgramName.equals("jhotdraw")) && AlgoFinal.ClassLevelTraces==true){
-				System.out.println(mykey+" "+methodTrace.getClassLevelGold());
+//				System.out.println(mykey+" "+methodTrace.getClassLevelGold());
 				
 				if (methodTrace.getClassLevelGold() != null && methodTrace.getPrediction() != null 
 //						&& methodTrace.isTraceSet()
 					) {
-					String Result = Pattern.ComparePredictionToGold(methodTrace.getClassLevelGold().trim(),methodTrace.getPrediction().trim());
-					logInfoHashMap.get(mykey).PredictionSummaryPrecisionRecall=Result+"/"+methodTrace.prediction.Reason+"/"+methodTrace.prediction.Type+"/"+methodTrace.prediction.pattern; 
-
+					String Result = Pattern.ComparePredictionToGold(methodTrace.getClassLevelGold().trim(),methodTrace.getPrediction().PredictionValue);
+					logInfoHashMap.get(mykey).PredictionSummaryPrecisionRecall=methodTrace.getGold().trim()+"/"+AlgoFinal.methodtraces2HashMap.get(mykey).predictionReason+"/"+ 
+							AlgoFinal.methodtraces2HashMap.get(mykey).predictionType+"/"+AlgoFinal.methodtraces2HashMap.get(mykey).predictionPattern; 
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
 					
-					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getPrediction().trim());
+					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getGold().trim());
 					UpdateCategoryCounters(Result, methodTrace, Pattern, ownerClassPredictionValues, mykey, logInfoHashMap); 
 
 
@@ -1330,15 +1333,14 @@ int count=0;
 				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
 //						&& methodTrace.isTraceSet()
 						) {
-					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().trim());
-					logInfoHashMap.get(mykey).PredictionSummaryPrecisionRecall=Result+"/"+methodTrace.prediction.Reason+"/"+methodTrace.prediction.Type+"/"+methodTrace.prediction.pattern; 
-
+					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().PredictionValue);
+					logInfoHashMap.get(mykey).PredictionSummaryPrecisionRecall=methodTrace.getGold().trim()+"/"+AlgoFinal.methodtraces2HashMap.get(mykey).predictionReason+"/"+ 
+							AlgoFinal.methodtraces2HashMap.get(mykey).predictionType+"/"+AlgoFinal.methodtraces2HashMap.get(mykey).predictionPattern; 
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
 					
-					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getPrediction().trim());
+					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getPrediction().PredictionValue.trim());
 					UpdateCategoryCounters(Result, methodTrace, Pattern, ownerClassPredictionValues, mykey, logInfoHashMap); 
-
 
 
 				}
@@ -1347,11 +1349,11 @@ int count=0;
 
 		
 
-			
+//			System.out.println(logInfoHashMap.get(mykey).PredictionSummaryPrecisionRecall);
 
 
 		}
-		System.out.println(Pattern.toString());
+//		System.out.println(Pattern.toString());
 		System.out.println(count);
 		System.out.println(count);
 	}
@@ -1365,47 +1367,47 @@ int count=0;
 		// TODO Auto-generated method stub
 		
 		int IterationsSize= logInfoHashMap.get(mykey).IterationValues.size(); 
-		if(result.equals("TP") && methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionInner)) {
+		if(result.equals("TP") && methodTrace.getPrediction().equals(ALGO.Prediction.TPureTPredictionInner)) {
 			pattern.TPPureInnerCount++; 
-		}else if(result.equals("TN") && methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionInner)) {
+		}else if(result.equals("TN") && methodTrace.getPrediction().equals(ALGO.Prediction.NPureNPredictionInner)) {
 			pattern.TNPureInnerCount++; 
-		}else if(result.equals("TP") && methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionInner)) {
+		}else if(result.equals("TP") && methodTrace.getPrediction().equals(ALGO.Prediction.TMixedTPredictionInner)) {
 			pattern.TPMixedInnerCount++; 
 		} 
-		else if(result.equals("TN") && methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionInner)) {
+		else if(result.equals("TN") && methodTrace.getPrediction().equals(ALGO.Prediction.NMixedNPredictionInner)) {
 			pattern.TNMixedInnerCount++; 
 		}
-		else if(result.equals("FP") && methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionInner)) {
+		else if(result.equals("FP") && methodTrace.getPrediction().equals(ALGO.Prediction.TPureTPredictionInner)) {
 			pattern.FPPureInnerCount++; 
-		}else if(result.equals("FN") && methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionInner)) {
+		}else if(result.equals("FN") && methodTrace.getPrediction().equals(ALGO.Prediction.NPureNPredictionInner)) {
 			pattern.FNPureInnerCount++; 
-		}else if(result.equals("FP") && methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionInner)) {
+		}else if(result.equals("FP") && methodTrace.getPrediction().equals(ALGO.Prediction.TMixedTPredictionInner)) {
 			pattern.FPMixedInnerCount++; 
 		} 
-		else if(result.equals("FN") && methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionInner)) {
+		else if(result.equals("FN") && methodTrace.getPrediction().equals(ALGO.Prediction.NMixedNPredictionInner)) {
 			pattern.FNMixedInnerCount++; 
 		}
 		
 		
 		/*****************************************************************************/
-		else if(result.equals("TP") && methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionLeaf)) {
+		else if(result.equals("TP") && methodTrace.getPrediction().equals(ALGO.Prediction.TPureTPredictionLeaf)) {
 			pattern.TPPureLeafCount++; 
-		}else if(result.equals("TN") && methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionLeaf)) {
+		}else if(result.equals("TN") && methodTrace.getPrediction().equals(ALGO.Prediction.NPureNPredictionLeaf)) {
 			pattern.TNPureLeafCount++; 
-		}else if(result.equals("TP") && methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionLeaf)) {
+		}else if(result.equals("TP") && methodTrace.getPrediction().equals(ALGO.Prediction.TMixedTPredictionLeaf)) {
 			pattern.TPMixedLeafCount++; 
 		} 
-		else if(result.equals("TN") && methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionLeaf)) {
+		else if(result.equals("TN") && methodTrace.getPrediction().equals(ALGO.Prediction.NMixedNPredictionLeaf)) {
 			pattern.TNMixedLeafCount++; 
 		}
-		else if(result.equals("FP") && methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionLeaf)) {
+		else if(result.equals("FP") && methodTrace.getPrediction().equals(ALGO.Prediction.TPureTPredictionLeaf)) {
 			pattern.FPPureLeafCount++; 
-		}else if(result.equals("FN") && methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionLeaf)) {
+		}else if(result.equals("FN") && methodTrace.getPrediction().equals(ALGO.Prediction.NPureNPredictionLeaf)) {
 			pattern.FNPureLeafCount++; 
-		}else if(result.equals("FP") && methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionLeaf)) {
+		}else if(result.equals("FP") && methodTrace.getPrediction().equals(ALGO.Prediction.TMixedTPredictionLeaf)) {
 			pattern.FPMixedLeafCount++; 
 		} 
-		else if(result.equals("FN") && methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionLeaf)) {
+		else if(result.equals("FN") && methodTrace.getPrediction().equals(ALGO.Prediction.NMixedNPredictionLeaf)) {
 			pattern.FNMixedLeafCount++; 
 		}
 		
@@ -1413,104 +1415,104 @@ int count=0;
 		/*****************************************************************************/
 
 		
-		else if(result.equals("TP") && methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionRoot)) {
+		else if(result.equals("TP") && methodTrace.getPrediction().equals(ALGO.Prediction.TPureTPredictionRoot)) {
 			pattern.TPPureRootCount++; 
-		}else if(result.equals("TN") && methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionRoot)) {
+		}else if(result.equals("TN") && methodTrace.getPrediction().equals(ALGO.Prediction.NPureNPredictionRoot)) {
 			pattern.TNPureRootCount++; 
-		}else if(result.equals("TP") && methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionRoot)) {
+		}else if(result.equals("TP") && methodTrace.getPrediction().equals(ALGO.Prediction.TMixedTPredictionRoot)) {
 			pattern.TPMixedRootCount++; 
 		} 
-		else if(result.equals("TN") && methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionRoot)) {
+		else if(result.equals("TN") && methodTrace.getPrediction().equals(ALGO.Prediction.NMixedNPredictionRoot)) {
 			pattern.TNMixedRootCount++; 
 		}
-		else if(result.equals("FP") && methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionRoot)) {
+		else if(result.equals("FP") && methodTrace.getPrediction().equals(ALGO.Prediction.TPureTPredictionRoot)) {
 			pattern.FPPureRootCount++; 
-		}else if(result.equals("FN") && methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionRoot)) {
+		}else if(result.equals("FN") && methodTrace.getPrediction().equals(ALGO.Prediction.NPureNPredictionRoot)) {
 			pattern.FNPureRootCount++; 
-		}else if(result.equals("FP") && methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionRoot)) {
+		}else if(result.equals("FP") && methodTrace.getPrediction().equals(ALGO.Prediction.TMixedTPredictionRoot)) {
 			pattern.FPMixedRootCount++; 
 		} 
-		else if(result.equals("FN") && methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionRoot)) {
+		else if(result.equals("FN") && methodTrace.getPrediction().equals(ALGO.Prediction.NMixedNPredictionRoot)) {
 			pattern.FNMixedRootCount++; 
 		}
 		
 		/*****************************************************************************/
 
 		
-		else if(result.equals("E") && methodTrace.prediction.equals(ALGO.Prediction.EBoundaryPredictionRoot)) {
+		else if(result.equals("E") && methodTrace.getPrediction().equals(ALGO.Prediction.EBoundaryPredictionRoot)) {
 			pattern.EBoundaryRootCount++; 
-		}else if(result.equals("E") && methodTrace.prediction.equals(ALGO.Prediction.EUndecidablePredictionRoot)) {
+		}else if(result.equals("E") && methodTrace.getPrediction().equals(ALGO.Prediction.EUndecidablePredictionRoot)) {
 			pattern.EUndecidableRootCount++; 
-		}else if(result.equals("E") && methodTrace.prediction.equals(ALGO.Prediction.EBoundaryPredictionInner)) {
+		}else if(result.equals("E") && methodTrace.getPrediction().equals(ALGO.Prediction.EBoundaryPredictionInner)) {
 			pattern.EBoundaryInnerCount++; 
-		}else if(result.equals("E") && methodTrace.prediction.equals(ALGO.Prediction.EUndecidablePredictionInner)) {
+		}else if(result.equals("E") && methodTrace.getPrediction().equals(ALGO.Prediction.EUndecidablePredictionInner)) {
 			pattern.EUndecidableInnerCount++; 
-		}else if(result.equals("E") && methodTrace.prediction.equals(ALGO.Prediction.EBoundaryPredictionLeaf)) {
+		}else if(result.equals("E") && methodTrace.getPrediction().equals(ALGO.Prediction.EBoundaryPredictionLeaf)) {
 			pattern.EBoundaryLeafCount++; 
-		}else if(result.equals("E") && methodTrace.prediction.equals(ALGO.Prediction.EUndecidablePredictionLeaf)) {
+		}else if(result.equals("E") && methodTrace.getPrediction().equals(ALGO.Prediction.EUndecidablePredictionLeaf)) {
 			pattern.EUndecidableLeafCount++; 
 		}
-		else if(result.equals("E") && methodTrace.prediction.equals(ALGO.Prediction.EIsolatedPrediction)) {
+		else if(result.equals("E") && methodTrace.getPrediction().equals(ALGO.Prediction.EIsolatedPrediction)) {
 			pattern.EIsolatedECount++; 
 		}
-		else if(result.equals("E") && methodTrace.prediction.equals(ALGO.Prediction.ENotApplicablePrediction)) {
+		else if(result.equals("E") && methodTrace.getPrediction().equals(ALGO.Prediction.ENotApplicablePrediction)) {
 			pattern.ENotApplicableCount++; 
 		}
 		
 		/*********************************************************************************************/
 		
 		
-		if( methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionInner) ) {
+		if( methodTrace.getPrediction().equals(ALGO.Prediction.TMixedTPredictionInner) ) {
 			ownerClassPredictionValues.TMixedTInnerCount++; 
-		}else if( methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionInner) ) {
+		}else if( methodTrace.getPrediction().equals(ALGO.Prediction.TPureTPredictionInner) ) {
 			ownerClassPredictionValues.TPureTInnerCount++; 
-		}else if( methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionInner) ) {
+		}else if( methodTrace.getPrediction().equals(ALGO.Prediction.NPureNPredictionInner) ) {
 			ownerClassPredictionValues.NPureNInnerCount++; 
-		}else if( methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionInner)) {
+		}else if( methodTrace.getPrediction().equals(ALGO.Prediction.NMixedNPredictionInner)) {
 			ownerClassPredictionValues.NMixedNInnerCount++;  
 		}
 		
-		else if( methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionLeaf)) {
+		else if( methodTrace.getPrediction().equals(ALGO.Prediction.NPureNPredictionLeaf)) {
 			ownerClassPredictionValues.NPureNLeafCount++;  
-		}else if( methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionLeaf) ) {
+		}else if( methodTrace.getPrediction().equals(ALGO.Prediction.TPureTPredictionLeaf) ) {
 			ownerClassPredictionValues.TPureTLeafCount++;  
-		}else if( methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionLeaf)) {
+		}else if( methodTrace.getPrediction().equals(ALGO.Prediction.NMixedNPredictionLeaf)) {
 			ownerClassPredictionValues.NMixedNLeafCount++;  
-		}else if( methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionLeaf)) {
+		}else if( methodTrace.getPrediction().equals(ALGO.Prediction.TMixedTPredictionLeaf)) {
 			ownerClassPredictionValues.TMixedTLeafCount++;  
 		}
 		
-		else if( methodTrace.prediction.equals(ALGO.Prediction.NPureNPredictionRoot)) {
+		else if( methodTrace.getPrediction().equals(ALGO.Prediction.NPureNPredictionRoot)) {
 			ownerClassPredictionValues.NPureNRootCount++;  
-		}else if( methodTrace.prediction.equals(ALGO.Prediction.TPureTPredictionRoot)) {
+		}else if( methodTrace.getPrediction().equals(ALGO.Prediction.TPureTPredictionRoot)) {
 			ownerClassPredictionValues.TPureTRootCount++;  
-		}else if( methodTrace.prediction.equals(ALGO.Prediction.NMixedNPredictionRoot) ) {
+		}else if( methodTrace.getPrediction().equals(ALGO.Prediction.NMixedNPredictionRoot) ) {
 			ownerClassPredictionValues.NMixedNRootCount++;  
-		}else if( methodTrace.prediction.equals(ALGO.Prediction.TMixedTPredictionRoot)) {
+		}else if( methodTrace.getPrediction().equals(ALGO.Prediction.TMixedTPredictionRoot)) {
 			ownerClassPredictionValues.TMixedTRootCount++;  
 		}
 		
 		
 		
-		else if( methodTrace.prediction.equals(ALGO.Prediction.EBoundaryPredictionLeaf)) {
+		else if( methodTrace.getPrediction().equals(ALGO.Prediction.EBoundaryPredictionLeaf)) {
 			ownerClassPredictionValues.EBoundaryLeafCount++;  
-		}else if( methodTrace.prediction.equals(ALGO.Prediction.EUndecidablePredictionLeaf)) {
+		}else if( methodTrace.getPrediction().equals(ALGO.Prediction.EUndecidablePredictionLeaf)) {
 			ownerClassPredictionValues.EUndecidableLeafCount++;  
-		}else if( methodTrace.prediction.equals(ALGO.Prediction.EBoundaryPredictionInner)) {
+		}else if( methodTrace.getPrediction().equals(ALGO.Prediction.EBoundaryPredictionInner)) {
 			ownerClassPredictionValues.EBoundaryInnerCount++;  
-		}else if( methodTrace.prediction.equals(ALGO.Prediction.EUndecidablePredictionInner)) {
+		}else if( methodTrace.getPrediction().equals(ALGO.Prediction.EUndecidablePredictionInner)) {
 			ownerClassPredictionValues.EUndecidableInnerCount++;  
 		}
-		else if( methodTrace.prediction.equals(ALGO.Prediction.EBoundaryPredictionRoot)) {
+		else if( methodTrace.getPrediction().equals(ALGO.Prediction.EBoundaryPredictionRoot)) {
 			ownerClassPredictionValues.EBoundaryRootCount++;  
-		}else if( methodTrace.prediction.equals(ALGO.Prediction.EUndecidablePredictionRoot)) {
+		}else if( methodTrace.getPrediction().equals(ALGO.Prediction.EUndecidablePredictionRoot)) {
 			ownerClassPredictionValues.EUndecidableRootCount++;  
 		}
-		else if( methodTrace.prediction.equals(ALGO.Prediction.EIsolatedPrediction)) {
+		else if( methodTrace.getPrediction().equals(ALGO.Prediction.EIsolatedPrediction)) {
 			ownerClassPredictionValues.EIsolatedECount++; 
 		}
 		
-		else if( methodTrace.prediction.equals(ALGO.Prediction.ENotApplicablePrediction)) {
+		else if( methodTrace.getPrediction().equals(ALGO.Prediction.ENotApplicablePrediction)) {
 			ownerClassPredictionValues.ENotApplicableCount++; 
 		}
 	}
@@ -1527,7 +1529,7 @@ int count=0;
 				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
 //						&& methodTraceHashMap.get(mykey).isSubjectDeveloperEqualityFlag()
 						) {
-					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().trim());
+					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().PredictionValue.trim());
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
 					
@@ -1546,7 +1548,7 @@ int count=0;
 				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
 					) {
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),
-							methodTrace.getPrediction().trim());
+							methodTrace.getPrediction().PredictionValue.trim());
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
 				
@@ -1564,7 +1566,7 @@ int count=0;
 
 
 		}
-		System.out.println(Pattern.toString());
+//		System.out.println(Pattern.toString());
 
 	}
 	public static void updateResultsLog(PredictionEvaluation TotalPattern,  PredictionValues ownerClassPredictionValues, String ProgramName, String precisionRecall, String PredictionValues, String Type) throws IOException {
@@ -1643,7 +1645,7 @@ int count=0;
 					+ "Prediction,"
 					+ "PrecisionRecall,"
 					+ "PredictionSummary,"
-					+ "PredictionPrecisionRecallSummary,"
+					+ "GoldSummary,"
 
 					+"IterationValues"
 					);
@@ -1670,8 +1672,9 @@ int count=0;
 
 					+ "Prediction,"
 					+ "PrecisionRecall,"
+					
 					+ "PredictionSummary,"
-					+ "PredictionPrecisionRecallSummary,"
+					+ "GoldSummary,"
 
 					+"IterationValues"
 					);
@@ -1722,8 +1725,9 @@ int count=0;
 
 					+ "Prediction,"
 					+ "PrecisionRecall,"
+					
 					+ "PredictionSummary,"
-					+ "PredictionPrecisionRecallSummary,"
+					+ "GoldSummary,"
 
 					+"IterationValues"
 					);
@@ -1749,8 +1753,9 @@ int count=0;
 					+"ExecutedCallees, ExecutedCalleesPredictions, ExecutedOwnerCallees, ExecutedCallers, ExecutedCallersPredictions,ExecutedOwnerCallers,"
 					+ "Prediction,"
 					+ "PrecisionRecall,"
+					
 					+ "PredictionSummary,"
-					+ "PredictionPrecisionRecallSummary,"
+					+ "GoldSummary,"
 
 					+"IterationValues"
 					);
@@ -1786,7 +1791,7 @@ int count=0;
 //				System.out.println(LogInfoHashMap.get(reqmethod).toString());
 				
 				//UNCOMMENT THESE TWO LINES BELOW 
-				
+//				System.out.println(LogInfoHashMap.get(reqmethod).toString());
 				LogInfo.bwfile3.write(LogInfoHashMap.get(reqmethod).toString());
 				LogInfo.bwfile3.newLine();
 				
@@ -1836,7 +1841,7 @@ int count=0;
 					+","+AlgoFinal.methodtraces2HashMap.get(mykey).Method.Owner.classname
 					+","+AlgoFinal.methodtraces2HashMap.get(mykey).Requirement.ID
 					+","+AlgoFinal.methodtraces2HashMap.get(mykey).gold
-					+","+AlgoFinal.methodtraces2HashMap.get(mykey).prediction);
+					+","+AlgoFinal.methodtraces2HashMap.get(mykey).getPrediction().PredictionValue);
 
 			bwInterfacesImpJHotDraw2.newLine();
 			for(String entry: interfacesImplementationsHashMap.get(mykey)) {
@@ -1847,7 +1852,7 @@ int count=0;
 								+","+AlgoFinal.methodtraces2HashMap.get(entry).Method.Owner.classname
 								+","+AlgoFinal.methodtraces2HashMap.get(entry).Requirement.ID
 								+","+AlgoFinal.methodtraces2HashMap.get(entry).gold
-								+","+AlgoFinal.methodtraces2HashMap.get(entry).prediction);
+								+","+AlgoFinal.methodtraces2HashMap.get(entry).getPrediction().PredictionValue);
 			
 				bwInterfacesImpJHotDraw2.newLine();
 			}
@@ -1860,7 +1865,7 @@ int count=0;
 					AlgoFinal.methodtraces2HashMap.get(mykey).Method.Owner.classname
 					+","+AlgoFinal.methodtraces2HashMap.get(mykey).Requirement.ID
 					+","+AlgoFinal.methodtraces2HashMap.get(mykey).gold
-					+","+AlgoFinal.methodtraces2HashMap.get(mykey).prediction);
+					+","+AlgoFinal.methodtraces2HashMap.get(mykey).getPrediction().PredictionValue);
 
 			bwSuperclassesChildrenJHotDraw2.newLine();
 			for(String entry: superclassChildrenHashMap.get(mykey)) {
@@ -1871,7 +1876,7 @@ int count=0;
 								AlgoFinal.methodtraces2HashMap.get(entry).Method.Owner.classname
 								+","+AlgoFinal.methodtraces2HashMap.get(entry).Requirement.ID
 								+","+AlgoFinal.methodtraces2HashMap.get(entry).gold
-								+","+AlgoFinal.methodtraces2HashMap.get(entry).prediction);
+								+","+AlgoFinal.methodtraces2HashMap.get(entry).getPrediction().PredictionValue);
 			
 				bwSuperclassesChildrenJHotDraw2.newLine();
 			}
@@ -1944,7 +1949,7 @@ int count=0;
 			LogInfoHashMap.get(reqmethod);
 			/////////////////////////////////////////////////////////
 			if(!methodtrace.Method.Implementations.isEmpty()) {
-				ArrayList<String> ImpList = new ArrayList<String>(); 
+				List<String> ImpList = new ArrayList<String>(); 
 				for(Method myimp: methodtrace.Method.Implementations) {
 					ImpList.add(methodtrace.Requirement.ID+"-"+myimp.ID); 
 				}
@@ -1953,7 +1958,7 @@ int count=0;
 			/////////////////////////////////////////////////////////
 
 			if(!methodtrace.Method.Children.isEmpty()) {
-				ArrayList<String> ChildrenList = new ArrayList<String>(); 
+				List<String> ChildrenList = new ArrayList<String>(); 
 				for(Method mychild: methodtrace.Method.Children) {
 					ChildrenList.add(methodtrace.Requirement.ID+"-"+mychild.ID); 
 				}

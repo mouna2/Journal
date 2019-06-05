@@ -236,12 +236,11 @@ public class Method implements Comparable<Method>{
 
 	@Override
 	public String toString() {
-		return  ID + ", methodname=" + methodname 
-				 
-				//			+	", requirementsGold="
-				//				+ requirementsGold.toString() + 
-//				+Owner.toString()+"]"
-				+"[ ClassID="+Owner.ID+"  ClassName="+Owner.classname +" ]"
+		return  ID 
+//				+ ", methodname=" + methodname 
+//				 
+//
+//				+"[ ClassID="+Owner.ID+"  ClassName="+Owner.classname +" ]"
 				;
 	}
 	//////////////////////////////////////////////////////////////////////////////////

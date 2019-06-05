@@ -216,7 +216,6 @@ public class TraceValidator {
 
 
 				
-				
 				//INNER METHOD 
 				if(!methodtrace.getCallers().isEmpty() && !methodtrace.getCallees().isEmpty())
 				{
@@ -282,6 +281,7 @@ public class TraceValidator {
 
 			Prediction prediction = MatrixHashMap.get(rowKey+"-"+columnKey);  
 			prediction.pattern=rowKey+"-"+columnKey; 
+			prediction.Type=Type; 
 			methodTrace.SetPrediction(LogInfoHashMap, prediction, Type,iteration);
 			
 		}
@@ -294,7 +294,7 @@ public class TraceValidator {
 			// TODO Auto-generated method stub
 			String Key=""; 
 			for(Method method: methods) {
-			String Prediction= MethodTrace.getMethodTrace(requirement, method).getPrediction(); 
+			String Prediction= MethodTrace.getMethodTrace(requirement, method).getPredictionOrGold(); 
 				if(Prediction.equals("T") && !Key.contains("T")) {
 					Key=Key+"T"; 
 				}

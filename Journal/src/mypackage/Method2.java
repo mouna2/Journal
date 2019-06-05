@@ -355,10 +355,10 @@ public class Method2 {
 		for(Method2 Callee: NewCallees) {
 			if(
 //					AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Callee.ID).prediction.equals("T") ||
-					AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Callee.ID).prediction.equals("N")) {
+					AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Callee.ID).getPredictionOrGold().equals("N")) {
 				FinalCallees.add(Callee); 
 			}
-			else if(AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Callee.ID).prediction.equals("E") ) {
+			else if(AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Callee.ID).getPredictionOrGold().equals("E") ) {
 				if(!Callee.Owner.ID.equals(this.Owner.ID)){
 					FinalCallees.add(Callee); 
 				}else {
@@ -561,10 +561,10 @@ public class Method2 {
 			
 			
 			for(Method2 Caller: NewCallers) {
-				if(AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("N")) {
+				if(AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).getPredictionOrGold().equals("N")) {
 					FinalCallers.add(Caller); 
 				}
-				else if(AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).prediction.equals("E") ) {
+				else if(AlgoFinal.methodtraces2HashMap.get(requirement.ID+"-"+Caller.ID).getPredictionOrGold().equals("E") ) {
 					if(!Caller.Owner.ID.equals(this.Owner.ID)){
 						FinalCallers.add(Caller); 
 					}else {
