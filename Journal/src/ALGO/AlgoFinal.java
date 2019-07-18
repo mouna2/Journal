@@ -236,7 +236,7 @@ public class AlgoFinal  {
 
 		PredictionValues PredictionClassTraceBefore = new PredictionValues(); 
 		PredictionValues PredictionClassTraceAfter = new PredictionValues(); 
-		PredictionValues OwnerClassPredictionValues = new PredictionValues(); 
+		PredictionValues CountPredictionValues = new PredictionValues(); 
 
 		CountTracesClassesValues(PredictionClassTraceBefore, methodtraces2HashMap);
 		LogInfo.InitializeLogInfoHashMap(LogInfoHashMap,MethodTracesHashmapValues, methodtraces2HashMap ); 
@@ -314,9 +314,9 @@ public class AlgoFinal  {
 
 
 		
-		LogInfo.ComputePrecisionAndRecallNONCUMULATIVE(methodtraces2HashMap,TotalPattern, ProgramName, OwnerClassPredictionValues, LogInfoHashMap);
+		LogInfo.ComputePrecisionAndRecallNONCUMULATIVE(methodtraces2HashMap,TotalPattern, ProgramName, CountPredictionValues, LogInfoHashMap);
 
-		LogInfo.updateResultsLog(TotalPattern, OwnerClassPredictionValues, ProgramName, "OWNER CLASS PRED", "owner class prediction values", "INDIVIDUAL");
+		LogInfo.updateResultsLog(TotalPattern, CountPredictionValues, ProgramName, "OWNER CLASS PRED", "owner class prediction values", "INDIVIDUAL");
 
 
 
@@ -754,10 +754,10 @@ public class AlgoFinal  {
 
 		for(int i=0; i<1; i++) {
 			System.out.println("========================> RUN "+i);
-//			String ProgramName = "chess";
-//			AlgoFinal frame = new AlgoFinal(
-//					ProgramName);
-			
+			String ProgramName = "chess";
+			AlgoFinal frame = new AlgoFinal(
+					ProgramName);
+//			
 //						String ProgramName2 = "gantt";
 //						AlgoFinal frame = new AlgoFinal(ProgramName2);
 			////			
@@ -766,11 +766,11 @@ public class AlgoFinal  {
 			//////	//
 //						String ProgramName3 = "itrust";
 //						AlgoFinal	 frame = new AlgoFinal(ProgramName3);
-			
-							 //ooo
+//			
+//							 //ooo
 //							 
-						String ProgramName4 = "jhotdraw";
-						AlgoFinal	frame = new AlgoFinal(ProgramName4);
+//						String ProgramName4 = "jhotdraw";
+//						AlgoFinal	frame = new AlgoFinal(ProgramName4);
 
 		}
 	}
