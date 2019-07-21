@@ -32,7 +32,8 @@ public final class MethodTrace {
 	public String predictionType ;
 	public String predictionValue ;
 	public String predictionPattern ;
-
+	public String pattern; 
+	public String type; 
 
 	boolean SubjectDeveloperEqualityFlag;
 	public String  ClassLevelGold; 
@@ -43,6 +44,7 @@ public final class MethodTrace {
 	public PredictionEvaluation PredictionEvaluation= new PredictionEvaluation(); 
 	public ALGO.PredictionValues PredictionValues= new ALGO.PredictionValues();
 	private String PredictionSummary=""; 
+	private String PatternAndType=""; 
 
 
 //	getcallers
@@ -54,8 +56,32 @@ public final class MethodTrace {
 //   getcallees
 
 
+	public String getPatternAndType() {
+		return PatternAndType;
+	}
+
+	public void setPatternAndType(String patternAndType) {
+		PatternAndType = patternAndType;
+	}
+
 	public String getPredictionSummary() {
 		return PredictionSummary;
+	}
+
+	public String getPattern() {
+		return pattern;
+	}
+
+	public void setPattern(String pattern) {
+		this.pattern = pattern;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public void setPredictionSummary(String predictionSummary) {
@@ -238,38 +264,33 @@ public final class MethodTrace {
 	/**
 	 * @param type 
 	 * @param iteration 
+	 * @param pattern 
 	 * @throws CloneNotSupportedException **********************************************************************************************************************************************/
-	public void SetPrediction(LinkedHashMap<String, LogInfo> LogInfoHashMap, Prediction Prediction, String type, int iteration) throws CloneNotSupportedException
+	public void SetPrediction(LinkedHashMap<String, LogInfo> LogInfoHashMap, Prediction Prediction, String type, int iteration, String pattern) throws CloneNotSupportedException
 			
 			
 			{
 		String reqMethod = this.Requirement.ID+"-"+this.Method.ID; 
-//		System.out.println("==============>"+AlgoFinal.methodtraces2HashMap.get("1-3").PredictionSummary);
-//		System.out.println("==============>"+AlgoFinal.methodtraces2HashMap.get("1-3").prediction.pattern);
+
 
 		if(this.prediction.PredictionValue.equals("E") && !Prediction.PredictionValue.equals("E")) {
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(Prediction.Reason+type+"/"+Prediction.pattern);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(Prediction.PredictionValue);
-			MethodTrace.modified=true; 		
-			
+			MethodTrace.modified=true; 				
 			String var= this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
 			this.prediction=Prediction; 
 			this.PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
-//			System.out.println("$$$$$$$$$ "+prediction.pattern);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.PredictionSummary; 
-//			System.out.println("hey");
 			setValues(Prediction.PredictionValue, Prediction.Reason, Prediction.Type, Prediction.pattern); 
 			this.UpdateCallersCallees(LogInfoHashMap, reqMethod);			
 
 			
-//			System.out.println("pppppppp   "+AlgoFinal.methodtraces2HashMap.get(reqMethod).prediction.pattern);
 
 		}else if(this.prediction.PredictionValue.equals("E") && Prediction.PredictionValue.equals("E")) {
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(Prediction.Reason+type+"/"+Prediction.pattern);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(Prediction.PredictionValue);
 			String var= this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
-//			System.out.println(var);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
 			this.prediction=Prediction; 
 			this.PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
@@ -278,8 +299,10 @@ public final class MethodTrace {
 			this.UpdateCallersCallees(LogInfoHashMap, reqMethod);			
 
 		}
-	
-
+		this.setType(type);
+		this.setPattern(pattern); 
+		String PatternAndType=pattern+"/"+prediction.Type; 
+		this.setPatternAndType(PatternAndType);
 
 			
 
