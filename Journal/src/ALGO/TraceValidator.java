@@ -232,7 +232,7 @@ public class TraceValidator {
 					String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
 
 
-
+					
 					//INNER METHOD PURE 
 					if(!methodtrace.getCallers().isEmpty() && !methodtrace.getCallees().isEmpty())
 					{
@@ -259,18 +259,6 @@ public class TraceValidator {
 
 					}
 
-					//E ISOLATED 
-					else if(methodtrace.getCallers().isEmpty() && methodtrace.getCallees().isEmpty())
-					{
-
-						methodtrace.SetPrediction(LogInfoHashMap, Prediction.EIsolatedPrediction, "", iteration, "Isolated");
-
-						
-					//E NOT APPLICABLE 
-					}else {
-						methodtrace.SetPrediction(LogInfoHashMap, Prediction.ENotApplicablePrediction, "", iteration, "NotApplicable");
-
-					}
 //					
 
 
@@ -298,7 +286,7 @@ public class TraceValidator {
 
 					String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
 
-				
+
 
 					//INNER METHOD 
 					if(!methodtrace.getCallers().isEmpty() && !methodtrace.getCallees().isEmpty())
@@ -329,12 +317,12 @@ public class TraceValidator {
 					else if(methodtrace.getCallers().isEmpty() && methodtrace.getCallees().isEmpty())
 					{
 
-						methodtrace.SetPrediction(LogInfoHashMap, Prediction.EIsolatedPrediction, "", iteration, "Isolated");
+						methodtrace.SetPrediction(LogInfoHashMap, Prediction.EIsolatedPrediction, "", iteration);
 
 						
 					//E NOT APPLICABLE 
 					}else {
-						methodtrace.SetPrediction(LogInfoHashMap, Prediction.ENotApplicablePrediction, "", iteration, "NotApplicable");
+						methodtrace.SetPrediction(LogInfoHashMap, Prediction.ENotApplicablePrediction, "", iteration);
 
 					}
 
@@ -362,42 +350,12 @@ public class TraceValidator {
 		public static void  Predict(MethodTrace methodTrace, MethodList rows, MethodList columns, HashMap<String, Prediction> MatrixHashMap, LinkedHashMap<String, LogInfo> LogInfoHashMap, String Type, int iteration) throws CloneNotSupportedException {
 			String rowKey = CalculateTNE(methodTrace.Requirement, rows); 
 			String columnKey = CalculateTNE(methodTrace.Requirement, columns); 
-			System.out.println(methodTrace.Method.ID);
+
 			Prediction prediction = MatrixHashMap.get(rowKey+"-"+columnKey);  
 			if(prediction!=null) {
-			
-				
-//				ENTGoldValues GoldValues=Prediction.Matrix.get(PatternAndType);  
-//				
-//					
-//				
-//				if(methodTrace.getInput().equals("E")) {
-//					int E=GoldValues.getE(); 
-//					E=E+1; 
-//					GoldValues.setE(E);
-//					Prediction.Matrix.put(PatternAndType,GoldValues);
-//
-//				}else if(methodTrace.getInput().equals("N")) {
-//					int N=GoldValues.getN(); 
-//					N=N+1; 
-//					GoldValues.setN(N);
-//					Prediction.Matrix.put(PatternAndType,GoldValues);
-//
-//				}else if(methodTrace.getInput().equals("T")) {
-//					int T=GoldValues.getT(); 
-//					T=T+1; 
-//					GoldValues.setT(T);
-//					Prediction.Matrix.put(PatternAndType,GoldValues);
-//				}
-				if(methodTrace.prediction.PredictionValue.equals("E")) {
-					prediction.pattern=rowKey+"-"+columnKey; 
-					prediction.Type=Type;
-					String PatternAndType=prediction.pattern+"/"+prediction.Type; 
-					methodTrace.setPatternAndType(PatternAndType);
-					methodTrace.SetPrediction(LogInfoHashMap, prediction, Type,iteration, prediction.pattern);
-				}
-				
-			
+				prediction.pattern=rowKey+"-"+columnKey; 
+				prediction.Type=Type; 
+				methodTrace.SetPrediction(LogInfoHashMap, prediction, Type,iteration);
 			}
 		
 
@@ -411,7 +369,7 @@ public class TraceValidator {
 			// TODO Auto-generated method stub
 			String Key=""; 
 			for(Method method: methods) {
-				String Prediction= MethodTrace.getMethodTrace(requirement, method).getPredictionOrGold(); 
+				String Prediction= MethodTrace.getMethodTrace(requirement, method).getPredictionOrInput(); 
 				if(Prediction.equals("T") && !Key.contains("T")) {
 					Key=Key+"T"; 
 				}
@@ -446,7 +404,6 @@ public class TraceValidator {
 
 
 }
-
 
 
 

@@ -21,7 +21,7 @@ import org.eclipse.jdt.core.search.MethodNameMatch;
 
 import ALGO.AlgoFinal;
 import ALGO.DatabaseInput;
-import ALGO.ENTGoldValues;
+
 import ALGO.MethodList;
 import ALGO.Prediction;
 import ALGO.PredictionValues;
@@ -45,7 +45,6 @@ public class LogInfo {
 	String Prediction; 
 	public String PrecisionRecall; 
 	String GoldFinal; 
-	String Input; 
 	String SubjectGold; 
 	public String PredictionSummary=""; 
 	public String PredictionSummaryPrecisionRecall=""; 
@@ -63,6 +62,16 @@ public class LogInfo {
 	List<String> Callers; 
 	List<String> CallersPredictions; 
 	List<String> CallersOwners; 
+	
+	List<String> CallersCallers; 
+	List<String> CallersCallersPredictions; 
+	List<String> CallersCallersOwners; 
+	
+	
+	List<String> CalleesCallees; 
+	List<String> CalleesCalleesPredictions; 
+	List<String> CalleesCalleesOwners; 
+	
 	
 	List<String> Callees; 
 	List<String> CalleesPredictions; 
@@ -133,8 +142,23 @@ public class LogInfo {
 	
 	
 	
-	public String getInput() {
-		return Input;
+	public List<String> getCalleesCallees() {
+		return CalleesCallees;
+	}
+	public void setCalleesCallees(List<String> calleesCallees) {
+		CalleesCallees = calleesCallees;
+	}
+	public List<String> getCalleesCalleesPredictions() {
+		return CalleesCalleesPredictions;
+	}
+	public void setCalleesCalleesPredictions(List<String> calleesCalleesPredictions) {
+		CalleesCalleesPredictions = calleesCalleesPredictions;
+	}
+	public List<String> getCalleesCalleesOwners() {
+		return CalleesCalleesOwners;
+	}
+	public void setCalleesCalleesOwners(List<String> calleesCalleesOwners) {
+		CalleesCalleesOwners = calleesCalleesOwners;
 	}
 	public List<String> getExecutedCallers() {
 		return ExecutedCallers;
@@ -282,6 +306,24 @@ public class LogInfo {
 		ExtendedCalleesPredictionsFinal = extendedCalleesPredictionsFinal;
 	}
 	
+	public List<String> getCallersCallers() {
+		return CallersCallers;
+	}
+	public void setCallersCallers(List<String> callersCallers) {
+		CallersCallers = callersCallers;
+	}
+	public List<String> getCallersCallersPredictions() {
+		return CallersCallersPredictions;
+	}
+	public void setCallersCallersPredictions(List<String> callersCallersPredictions) {
+		CallersCallersPredictions = callersCallersPredictions;
+	}
+	public List<String> getCallersCallersOwners() {
+		return CallersCallersOwners;
+	}
+	public void setCallersCallersOwners(List<String> callersCallersOwners) {
+		CallersCallersOwners = callersCallersOwners;
+	}
 	public List<String> getCallersPredictions() {
 		return CallersPredictions;
 	}
@@ -668,7 +710,6 @@ public class LogInfo {
 	public static BufferedWriter bwGANTTMethodCallsWriter =null; 
 	public static BufferedWriter bwiTrustMethodCallsWriter =null; 
 	public static BufferedWriter bwJHotDrawMethodCallsWriter =null; 
-	public static BufferedWriter bwchessRunResultsWriter =null; 
 
 	public static BufferedWriter bwfile1 = null;
 	public static BufferedWriter bwMatrix = null;
@@ -799,6 +840,15 @@ public class LogInfo {
 		String CallersList=""; 
 		String CallersOwnersList=""; 
 		String CallersPredictionsList=""; 
+		
+		String CallersCallersList=""; 
+		String CallersCallersOwnersList=""; 
+		String CallersCallersPredictionsList=""; 
+		
+		String CalleesCalleesList=""; 
+		String CalleesCalleesOwnersList=""; 
+		String CalleesCalleesPredictionsList=""; 
+		
 		String InterfaceCallerList=""; 
 		String InterfaceCallerOwnerList=""; 
 		String InterfaceCallerPredictionList=""; 
@@ -822,6 +872,19 @@ public class LogInfo {
 		String SuperclassCalleesPredictionList=""; 
 		String ExtendedCalleesList=""; 
 		String ExtendedCalleesOwnerList=""; 
+		
+		if(CallersCallers!=null) {
+			 CallersCallersList=toString3(CallersCallers); 
+			 CallersCallersOwnersList=toString3List(CallersCallersOwners); 
+			 CallersCallersPredictionsList=toString3List(CallersCallersPredictions); 
+		}
+		
+		
+		if(CalleesCallees!=null) {
+			 CalleesCalleesList=toString3(CalleesCallees); 
+			 CalleesCalleesOwnersList=toString3List(CalleesCalleesOwners); 
+			 CalleesCalleesPredictionsList=toString3List(CalleesCalleesPredictions); 
+		}
 		if(Callers!=null) {
 			 CallersList=toString3(Callers); 
 			 CallersOwnersList=toString3List(CallersOwners); 
@@ -963,6 +1026,8 @@ public class LogInfo {
 				+","+interfaceList+","+interfacePredictionList+","+implementationList+","+implementationPredictionList+","+parentsList+","+parentsPredictionList+","+childrenList+","+childrenPredictionList
 				
 				+","+CallersList+","+CallersPredictionsList+","+CallersOwnersList
+				+","+CallersCallersList+","+CallersCallersPredictionsList+","+CallersCallersOwnersList
+
 				+","+InterfaceCallerList+","+InterfaceCallerPredictionList+","+InterfaceCallerOwnerList
 		
 				+","+SuperclassCallerList+","+SuperclassCallerPredictionList+","+SuperclassCallerOwnerList
@@ -970,6 +1035,8 @@ public class LogInfo {
 				+","+ChildrenCallerList+","+ChildrenCallerPredictionList+","+ChildrenCallerOwnerList
 				
 				+","+CalleesList+","+CalleesPredictionsList+","+CalleesOwnersList
+				+","+CalleesCalleesList+","+CalleesCalleesPredictionsList+","+CalleesCalleesOwnersList
+
 				+","+ImplementationCalleeList+","+ImplementationCalleePredictionList+","+ImplementationCalleeOwnerList
 				+","+ChildrenCalleesList+","+ChildrenCalleePredictionList+","+ChildrenCalleeOwnerList
 				+","+SuperclassCalleesList+","+SuperclassCalleesPredictionList+","+SuperclassCalleesOwnerList
@@ -1167,10 +1234,6 @@ public class LogInfo {
 				FileOutputStream myFileOutputStream3 = new FileOutputStream(myfile3);
 				 bwchessMethodCallsWriter = new BufferedWriter(new OutputStreamWriter(myFileOutputStream3));
 				System.out.println("yes");
-				
-				File myfile4 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\RunResultsChess.txt");
-				FileOutputStream myFileOutputStream4 = new FileOutputStream(myfile4);
-				 bwchessRunResultsWriter = new BufferedWriter(new OutputStreamWriter(myFileOutputStream4));
 		}
 
 		if (ProgramName.equals("gantt")) {
@@ -1291,24 +1354,23 @@ public class LogInfo {
 int count=0; 
 		for (String mykey : methodTraceHashMap.keySet()) {
 			MethodTrace methodTrace = methodTraceHashMap.get(mykey);
-			String pattern =methodTrace.getPattern(); 
-			String type=methodTrace.getType();  
+			
 			if((ProgramName.equals("gantt")|| ProgramName.equals("jhotdraw") )&& AlgoFinal.MethodLevelTraces==true){
 				
-				if (methodTrace.getInput() != null && methodTrace.getPrediction() != null 
+				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
 //						&& methodTrace.isTraceSet() 
 					
 						
 						
 						) {
-					String Result = Pattern.ComparePredictionToGold(methodTrace.getInput().trim(),methodTrace.getPrediction().PredictionValue);
-					logInfoHashMap.get(mykey).PredictionSummaryPrecisionRecall=methodTrace.getInput().trim()+"/"+AlgoFinal.methodtraces2HashMap.get(mykey).predictionReason+"/"+ 
+					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().PredictionValue);
+					logInfoHashMap.get(mykey).PredictionSummaryPrecisionRecall=methodTrace.getGold().trim()+"/"+AlgoFinal.methodtraces2HashMap.get(mykey).predictionReason+"/"+ 
 							AlgoFinal.methodtraces2HashMap.get(mykey).predictionType+"/"+AlgoFinal.methodtraces2HashMap.get(mykey).predictionPattern; 
 
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
 					
-					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getInput().trim());
+					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getGold().trim());
 					UpdateCategoryCounters(Result, methodTrace, Pattern, ownerClassPredictionValues, mykey, logInfoHashMap); 
 
 				}
@@ -1321,13 +1383,13 @@ int count=0;
 				if (methodTrace.getClassLevelGold() != null && methodTrace.getPrediction() != null 
 //						&& methodTrace.isTraceSet()
 					) {
-					String Result = Pattern.ComparePredictionToGold(methodTrace.getInput().trim(),methodTrace.getPrediction().PredictionValue);
-					logInfoHashMap.get(mykey).PredictionSummaryPrecisionRecall=methodTrace.getInput().trim()+"/"+AlgoFinal.methodtraces2HashMap.get(mykey).predictionReason+"/"+ 
+					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().PredictionValue);
+					logInfoHashMap.get(mykey).PredictionSummaryPrecisionRecall=methodTrace.getGold().trim()+"/"+AlgoFinal.methodtraces2HashMap.get(mykey).predictionReason+"/"+ 
 							AlgoFinal.methodtraces2HashMap.get(mykey).predictionType+"/"+AlgoFinal.methodtraces2HashMap.get(mykey).predictionPattern; 
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
 					
-					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getInput().trim());
+					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getGold().trim());
 					UpdateCategoryCounters(Result, methodTrace, Pattern, ownerClassPredictionValues, mykey, logInfoHashMap); 
 
 
@@ -1340,11 +1402,11 @@ int count=0;
 			
 			else if(ProgramName.equals("chess")|| ProgramName.equals("itrust") ) {
 				
-				if (methodTrace.getInput() != null && methodTrace.getPrediction() != null 
+				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
 //						&& methodTrace.isTraceSet()
 						) {
-					String Result = Pattern.ComparePredictionToGold(methodTrace.getInput().trim(),methodTrace.getPrediction().PredictionValue);
-					logInfoHashMap.get(mykey).PredictionSummaryPrecisionRecall=methodTrace.getInput().trim()+"/"+AlgoFinal.methodtraces2HashMap.get(mykey).predictionReason+"/"+ 
+					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().PredictionValue);
+					logInfoHashMap.get(mykey).PredictionSummaryPrecisionRecall=methodTrace.getGold().trim()+"/"+AlgoFinal.methodtraces2HashMap.get(mykey).predictionReason+"/"+ 
 							AlgoFinal.methodtraces2HashMap.get(mykey).predictionType+"/"+AlgoFinal.methodtraces2HashMap.get(mykey).predictionPattern; 
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
@@ -1364,6 +1426,7 @@ int count=0;
 
 		}
 //		System.out.println(Pattern.toString());
+		System.out.println(count);
 		System.out.println(count);
 	}
 	
@@ -1639,11 +1702,16 @@ int count=0;
 					+ "Gold, TraceClassValue,"
 					+" Interfaces, InterfacesPredictions, Implementations, ImplementationsPredictions, Parents, ParentPredictions, Children, ChildrenPredictions,"
 					+" Callers, CallersPredictions, CallersOwnerValues,"
+				
+					+" CallersCallers, CallersCallersPredictions, CallersCallersOwnerValues,"
+
 					+" InterfaceCallers, InterfaceCallersPredictions, InterfaceCallersOwnerValues,"
 					+" SuperclassCallers, SuperclassCallersPredictions, SuperclassCallersOwnerValues,"
 					+" ImplementationCallers, ImplementationCallersPredictions, ImplementationCallersOwnerValues,"
 					+" ChildrenCallers, ChildrenCallersPredictions, ChildrenCallersOwnerValues,"	
 					+" Callees, CalleesPredictions, CalleesOwnerValues,"
+					+" CalleesCallees, CalleesCalleesPredictions, CalleesCalleesOwnerValues,"
+
 					+" ImplementationCallees, ImplementationCalleesPredictions, ImplementationCalleesOwnerValues,"
 					+" ChildrenCallees, ChildrenCalleesPredictions, ChildrenCalleesOwnerValues,"
 					+" SuperclassCallees, SuperclassCalleesPredictions, SuperclassCalleesOwnerValues,"
@@ -1667,11 +1735,17 @@ int count=0;
 					+ "Gold, TraceClassValue,"
 					+" Interfaces, InterfacesPredictions, Implementations, ImplementationsPredictions, Parents, ParentPredictions, Children, ChildrenPredictions,"
 					+" Callers, CallersPredictions, CallersOwnerValues,"
+					
+					+" CallersCallers, CallersCallersPredictions, CallersCallersOwnerValues,"
+
+					
 					+" InterfaceCallers, InterfaceCallersPredictions, InterfaceCallersOwnerValues,"
 					+" SuperclassCallers, SuperclassCallersPredictions, SuperclassCallersOwnerValues,"
 					+" ImplementationCallers, ImplementationCallersPredictions, ImplementationCallersOwnerValues,"
 					+" ChildrenCallers, ChildrenCallersPredictions, ChildrenCallersOwnerValues,"	
 					+" Callees, CalleesPredictions, CalleesOwnerValues,"
+					+" CalleesCallees, CalleesCalleesPredictions, CalleesCalleesOwnerValues,"
+
 					+" ImplementationCallees, ImplementationCalleesPredictions, ImplementationCalleesOwnerValues,"
 					+" ChildrenCallees, ChildrenCalleesPredictions, ChildrenCalleesOwnerValues,"
 					+" SuperclassCallees, SuperclassCalleesPredictions, SuperclassCalleesOwnerValues,"
@@ -1720,11 +1794,16 @@ int count=0;
 					+ "Gold, TraceClassValue,"
 					+" Interfaces, InterfacesPredictions, Implementations, ImplementationsPredictions, Parents, ParentPredictions, Children, ChildrenPredictions,"
 					+" Callers, CallersPredictions, CallersOwnerValues,"
+					
+					+" CallersCallers, CallersCallersPredictions, CallersCallersOwnerValues,"
+
 					+" InterfaceCallers, InterfaceCallersPredictions, InterfaceCallersOwnerValues,"
 					+" SuperclassCallers, SuperclassCallersPredictions, SuperclassCallersOwnerValues,"
 					+" ImplementationCallers, ImplementationCallersPredictions, ImplementationCallersOwnerValues,"
 					+" ChildrenCallers, ChildrenCallersPredictions, ChildrenCallersOwnerValues,"	
 					+" Callees, CalleesPredictions, CalleesOwnerValues,"
+					+" CalleesCallees, CalleesCalleesPredictions, CalleesCalleesOwnerValues,"
+
 					+" ImplementationCallees, ImplementationCalleesPredictions, ImplementationCalleesOwnerValues,"
 					+" ChildrenCallees, ChildrenCalleesPredictions, ChildrenCalleesOwnerValues,"
 					+" SuperclassCallees, SuperclassCalleesPredictions, SuperclassCalleesOwnerValues,"
@@ -1749,11 +1828,16 @@ int count=0;
 					+ "Gold, TraceClassValue,"
 					+" Interfaces, InterfacesPredictions, Implementations, ImplementationsPredictions, Parents, ParentPredictions, Children, ChildrenPredictions,"
 					+" Callers, CallersPredictions, CallersOwnerValues,"
+					
+					+" CallersCallers, CallersCallersPredictions, CallersCallersOwnerValues,"
+
 					+" InterfaceCallers, InterfaceCallersPredictions, InterfaceCallersOwnerValues,"
 					+" SuperclassCallers, SuperclassCallersPredictions, SuperclassCallersOwnerValues,"
 					+" ImplementationCallers, ImplementationCallersPredictions, ImplementationCallersOwnerValues,"
 					+" ChildrenCallers, ChildrenCallersPredictions, ChildrenCallersOwnerValues,"	
 					+" Callees, CalleesPredictions, CalleesOwnerValues,"
+					+" CalleesCallees, CalleesCalleesPredictions, CalleesCalleesOwnerValues,"
+
 					+" ImplementationCallees, ImplementationCalleesPredictions, ImplementationCalleesOwnerValues,"
 					+" ChildrenCallees, ChildrenCalleesPredictions, ChildrenCalleesOwnerValues,"
 					+" SuperclassCallees, SuperclassCalleesPredictions, SuperclassCalleesOwnerValues,"
@@ -2088,267 +2172,6 @@ int count=0;
 		}
 	}
 
-	}
-	public void setInput(String string) {
-		// TODO Auto-generated method stub
-		
-	}
-	public static void updateRunResults(List<MethodTrace> methodtraces) throws IOException {
-		// TODO Auto-generated method stub
-		if (AlgoFinal.ProgramName.equals("chess")) {
-			bwchessRunResultsWriter.write("E/Isolated/GoldE, E/Isolated/GoldN, E/Isolated/GoldT,"
-										+ "E/NotApplicable/GoldE, E/Isolated/GoldN, E/Isolated/GoldT, "
-										+"T-T/Inner/GoldE,T-T/Inner/GoldN,T-T/Inner/GoldT,"
-										+ "T-N/Inner/GoldE,T-N/Inner/GoldN,T-N/Inner/GoldT, "
-										+ "T-E/Inner/GoldE, T-E/Inner/GoldN,T-E/Inner/GoldT,"
-										+ "T-ET/Inner/GoldE,T-ET/Inner/GoldN,T-ET/Inner/GoldT,"
-										+ "T-EN/Inner/GoldE,T-EN/Inner/GoldN,T-EN/Inner/GoldT,"
-										+ "T-NT/Inner/GoldE,T-NT/Inner/GoldN,T-NT/Inner/GoldT,"
-										+ "T-ENT/Inner/GoldE,T-ENT/Inner/GoldN,T-ENT/Inner/GoldT,"
-										
-										
-										+"N-T/Inner/GoldE, N-T/Inner/GoldN,N-T/Inner/GoldT, "
-										+ "N-N/Inner/GoldE, N-N/Inner/GoldN, N-N/Inner/GoldT,"
-										+ "N-E/Inner/GoldE, N-E/Inner/GoldN, N-E/Inner/GoldT,"
-										+ "N-ET/Inner/GoldE, N-ET/Inner/GoldN, N-ET/Inner/GoldT,"
-										+ "N-EN/Inner/GoldE, N-EN/Inner/GoldN, N-EN/Inner/GoldT,"
-										+ "N-NT/Inner/GoldE, N-NT/Inner/GoldN, N-NT/Inner/GoldT,"
-										+ "N-ENT/Inner/GoldE, N-ENT/Inner/GoldN, N-ENT/Inner/GoldT,"
-
-
-										+"E-T/Inner/GoldE, E-T/Inner/GoldN,E-T/Inner/GoldT, "
-										+ "E-N/Inner/GoldE, E-N/Inner/GoldN, E-N/Inner/GoldT,"
-										+ "E-E/Inner/GoldE, E-E/Inner/GoldN, E-E/Inner/GoldT,"
-										+ "E-ET/Inner/GoldE, E-ET/Inner/GoldN, E-ET/Inner/GoldT,"
-										+ "E-EN/Inner/GoldE, E-EN/Inner/GoldN, E-EN/Inner/GoldT,"
-										+ "E-NT/Inner/GoldE, E-NT/Inner/GoldN, E-NT/Inner/GoldT,"
-										+ "E-ENT/Inner/GoldE, E-ENT/Inner/GoldN, E-ENT/Inner/GoldT,"
-										
-										
-										+ "NT-T/Inner/GoldE, NT-T/Inner/GoldN,NT-T/Inner/GoldT, "
-										+ "NT-N/Inner/GoldE, NT-N/Inner/GoldN, NT-N/Inner/GoldT,"
-										+ "NT-E/Inner/GoldE, NT-E/Inner/GoldN, NT-E/Inner/GoldT,"
-										+ "NT-ET/Inner/GoldE, NT-ET/Inner/GoldN, NT-ET/Inner/GoldT,"
-										+ "NT-EN/Inner/GoldE, NT-EN/Inner/GoldN, NT-EN/Inner/GoldT,"
-										+ "NT-NT/Inner/GoldE, NT-NT/Inner/GoldN, NT-NT/Inner/GoldT,"	
-										+ "NT-ENT/Inner/GoldE, NT-ENT/Inner/GoldN, NT-ENT/Inner/GoldT,"
-
-									
-										+"ET-T/Inner/GoldE, ET-T/Inner/GoldN,ET-T/Inner/GoldT, "
-										+ "ET-N/Inner/GoldE, ET-N/Inner/GoldN, ET-N/Inner/GoldT,"
-										+ "ET-E/Inner/GoldE, ET-E/Inner/GoldN, ET-E/Inner/GoldT,"
-										+ "ET-ET/Inner/GoldE, ET-ET/Inner/GoldN, ET-ET/Inner/GoldT,"
-										+ "ET-EN/Inner/GoldE, ET-EN/Inner/GoldN, ET-EN/Inner/GoldT,"
-										+ "ET-NT/Inner/GoldE, ET-NT/Inner/GoldN, ET-NT/Inner/GoldT,"						
-										+ "ET-ENT/Inner/GoldE, ET-ENT/Inner/GoldN, ET-ENT/Inner/GoldT,"
-									
-									
-									
-									+ "EN-T/Inner/GoldE, EN-T/Inner/GoldN,EN-T/Inner/GoldT, "
-									+ "EN-N/Inner/GoldE, EN-N/Inner/GoldN, EN-N/Inner/GoldT,"
-									+ "EN-E/Inner/GoldE, EN-E/Inner/GoldN, EN-E/Inner/GoldT,"
-									+ "EN-ET/Inner/GoldE, EN-ET/Inner/GoldN, EN-ET/Inner/GoldT,"
-									+ "EN-EN/Inner/GoldE, EN-EN/Inner/GoldN, EN-EN/Inner/GoldT,"
-									+ "EN-NT/Inner/GoldE, EN-NT/Inner/GoldN, EN-NT/Inner/GoldT,"
-									+ "EN-ENT/Inner/GoldE, EN-ENT/Inner/GoldN, EN-ENT/Inner/GoldT,"
-									
-									
-									
-									
-					
-					
-									
-								+ "ENT-T/Inner/GoldE, ENT-T/Inner/GoldN,ENT-T/Inner/GoldT, "
-								+ "ENT-N/Inner/GoldE, ENT-N/Inner/GoldN, ENT-N/Inner/GoldT,"
-								+ "ENT-E/Inner/GoldE, ENT-E/Inner/GoldN, ENT-E/Inner/GoldT,"
-								+ "ENT-ET/Inner/GoldE, ENT-ET/Inner/GoldN, ENT-ET/Inner/GoldT,"
-								+ "ENT-EN/Inner/GoldE, ENT-EN/Inner/GoldN, ENT-EN/Inner/GoldT,"
-								+ "ENT-NT/Inner/GoldE,ENT-NT/Inner/GoldN, ENT-NT/Inner/GoldT,"
-								+ "ENT-ENT/Inner/GoldE, ENT-ENT/Inner/GoldN, ENT-ENT/Inner/GoldT,"
-								
-								/***********************************************************/
-									
-									
-										+"T-T/Leaf/GoldE,T-T/Leaf/GoldN,T-T/Leaf/GoldT,"
-										+ "T-N/Leaf/GoldE,T-N/Leaf/GoldN,T-N/Leaf/GoldT, "
-										+ "T-E/Leaf/GoldE, T-E/Leaf/GoldN,T-E/Leaf/GoldT,"
-										+ "T-ET/Leaf/GoldE,T-ET/Leaf/GoldN,T-ET/Leaf/GoldT,"
-										+ "T-EN/Leaf/GoldE,T-EN/Leaf/GoldN,T-EN/Leaf/GoldT,"
-										+ "T-NT/Leaf/GoldE,T-NT/Leaf/GoldN,T-NT/Leaf/GoldT,"
-										+ "T-ENT/Leaf/GoldE,T-ENT/Leaf/GoldN,T-ENT/Leaf/GoldT,"
-										
-										
-										+"N-T/Leaf/GoldE, N-T/Leaf/GoldN,N-T/Leaf/GoldT, "
-										+ "N-N/Leaf/GoldE, N-N/Leaf/GoldN, N-N/Leaf/GoldT,"
-										+ "N-E/Leaf/GoldE, N-E/Leaf/GoldN, N-E/Leaf/GoldT,"
-										+ "N-ET/Leaf/GoldE, N-ET/Leaf/GoldN, N-ET/Leaf/GoldT,"
-										+ "N-EN/Leaf/GoldE, N-EN/Leaf/GoldN, N-EN/Leaf/GoldT,"
-										+ "N-NT/Leaf/GoldE, N-NT/Leaf/GoldN, N-NT/Leaf/GoldT,"
-										+ "N-ENT/Leaf/GoldE, N-ENT/Leaf/GoldN, N-ENT/Leaf/GoldT,"
-
-
-										+"E-T/Leaf/GoldE, E-T/Leaf/GoldN,E-T/Leaf/GoldT, "
-										+ "E-N/Leaf/GoldE, E-N/Leaf/GoldN, E-N/Leaf/GoldT,"
-										+ "E-E/Leaf/GoldE, E-E/Leaf/GoldN, E-E/Leaf/GoldT,"
-										+ "E-ET/Leaf/GoldE, E-ET/Leaf/GoldN, E-ET/Leaf/GoldT,"
-										+ "E-EN/Leaf/GoldE, E-EN/Leaf/GoldN, E-EN/Leaf/GoldT,"
-										+ "E-NT/Leaf/GoldE, E-NT/Leaf/GoldN, E-NT/Leaf/GoldT,"
-										+ "E-ENT/Leaf/GoldE, E-ENT/Leaf/GoldN, E-ENT/Leaf/GoldT,"
-										
-										
-										+ "NT-T/Leaf/GoldE, NT-T/Leaf/GoldN,NT-T/Leaf/GoldT, "
-										+ "NT-N/Leaf/GoldE, NT-N/Leaf/GoldN, NT-N/Leaf/GoldT,"
-										+ "NT-E/Leaf/GoldE, NT-E/Leaf/GoldN, NT-E/Leaf/GoldT,"
-										+ "NT-ET/Leaf/GoldE, NT-ET/Leaf/GoldN, NT-ET/Leaf/GoldT,"
-										+ "NT-EN/Leaf/GoldE, NT-EN/Leaf/GoldN, NT-EN/Leaf/GoldT,"
-										+ "NT-NT/Leaf/GoldE, NT-NT/Leaf/GoldN, NT-NT/Leaf/GoldT,"	
-										+ "NT-ENT/Leaf/GoldE, NT-ENT/Leaf/GoldN, NT-ENT/Leaf/GoldT,"
-
-									
-										+"ET-T/Leaf/GoldE, ET-T/Leaf/GoldN,ET-T/Leaf/GoldT, "
-										+ "ET-N/Leaf/GoldE, ET-N/Leaf/GoldN, ET-N/Leaf/GoldT,"
-										+ "ET-E/Leaf/GoldE, ET-E/Leaf/GoldN, ET-E/Leaf/GoldT,"
-										+ "ET-ET/Leaf/GoldE, ET-ET/Leaf/GoldN, ET-ET/Leaf/GoldT,"
-										+ "ET-EN/Leaf/GoldE, ET-EN/Leaf/GoldN, ET-EN/Leaf/GoldT,"
-										+ "ET-NT/Leaf/GoldE, ET-NT/Leaf/GoldN, ET-NT/Leaf/GoldT,"						
-										+ "ET-ENT/Leaf/GoldE, ET-ENT/Leaf/GoldN, ET-ENT/Leaf/GoldT,"
-									
-									
-									
-									+ "EN-T/Leaf/GoldE, EN-T/Leaf/GoldN,EN-T/Leaf/GoldT, "
-									+ "EN-N/Leaf/GoldE, EN-N/Leaf/GoldN, EN-N/Leaf/GoldT,"
-									+ "EN-E/Leaf/GoldE, EN-E/Leaf/GoldN, EN-E/Leaf/GoldT,"
-									+ "EN-ET/Leaf/GoldE, EN-ET/Leaf/GoldN, EN-ET/Leaf/GoldT,"
-									+ "EN-EN/Leaf/GoldE, EN-EN/Leaf/GoldN, EN-EN/Leaf/GoldT,"
-									+ "EN-NT/Leaf/GoldE, EN-NT/Leaf/GoldN, EN-NT/Leaf/GoldT,"
-									+ "EN-ENT/Leaf/GoldE, EN-ENT/Leaf/GoldN, EN-ENT/Leaf/GoldT,"
-									
-									
-									
-									
-					
-					
-									
-								+ "ENT-T/Leaf/GoldE, ENT-T/Leaf/GoldN,ENT-T/Leaf/GoldT, "
-								+ "ENT-N/Leaf/GoldE, ENT-N/Leaf/GoldN, ENT-N/Leaf/GoldT,"
-								+ "ENT-E/Leaf/GoldE, ENT-E/Leaf/GoldN, ENT-E/Leaf/GoldT,"
-								+ "ENT-ET/Leaf/GoldE, ENT-ET/Leaf/GoldN, ENT-ET/Leaf/GoldT,"
-								+ "ENT-EN/Leaf/GoldE, ENT-EN/Leaf/GoldN, ENT-EN/Leaf/GoldT,"
-								+ "ENT-NT/Leaf/GoldE,ENT-NT/Leaf/GoldN, ENT-NT/Leaf/GoldT,"
-								+ "ENT-ENT/Leaf/GoldE, ENT-ENT/Leaf/GoldN, ENT-ENT/Leaf/GoldT,"
-								
-								/***********************************************************/
-
-										+"T-T/Root/GoldE,T-T/Root/GoldN,T-T/Root/GoldT,"
-										+ "T-N/Root/GoldE,T-N/Root/GoldN,T-N/Root/GoldT, "
-										+ "T-E/Root/GoldE, T-E/Root/GoldN,T-E/Root/GoldT,"
-										+ "T-ET/Root/GoldE,T-ET/Root/GoldN,T-ET/Root/GoldT,"
-										+ "T-EN/Root/GoldE,T-EN/Root/GoldN,T-EN/Root/GoldT,"
-										+ "T-NT/Root/GoldE,T-NT/Root/GoldN,T-NT/Root/GoldT,"
-										+ "T-ENT/Root/GoldE,T-ENT/Root/GoldN,T-ENT/Root/GoldT,"
-										
-										
-										+"N-T/Root/GoldE, N-T/Root/GoldN,N-T/Root/GoldT, "
-										+ "N-N/Root/GoldE, N-N/Root/GoldN, N-N/Root/GoldT,"
-										+ "N-E/Root/GoldE, N-E/Root/GoldN, N-E/Root/GoldT,"
-										+ "N-ET/Root/GoldE, N-ET/Root/GoldN, N-ET/Root/GoldT,"
-										+ "N-EN/Root/GoldE, N-EN/Root/GoldN, N-EN/Root/GoldT,"
-										+ "N-NT/Root/GoldE, N-NT/Root/GoldN, N-NT/Root/GoldT,"
-										+ "N-ENT/Root/GoldE, N-ENT/Root/GoldN, N-ENT/Root/GoldT,"
-
-
-										+"E-T/Root/GoldE, E-T/Root/GoldN,E-T/Root/GoldT, "
-										+ "E-N/Root/GoldE, E-N/Root/GoldN, E-N/Root/GoldT,"
-										+ "E-E/Root/GoldE, E-E/Root/GoldN, E-E/Root/GoldT,"
-										+ "E-ET/Root/GoldE, E-ET/Root/GoldN, E-ET/Root/GoldT,"
-										+ "E-EN/Root/GoldE, E-EN/Root/GoldN, E-EN/Root/GoldT,"
-										+ "E-NT/Root/GoldE, E-NT/Root/GoldN, E-NT/Root/GoldT,"
-										+ "E-ENT/Root/GoldE, E-ENT/Root/GoldN, E-ENT/Root/GoldT,"
-										
-										
-										+ "NT-T/Root/GoldE, NT-T/Root/GoldN,NT-T/Root/GoldT, "
-										+ "NT-N/Root/GoldE, NT-N/Root/GoldN, NT-N/Root/GoldT,"
-										+ "NT-E/Root/GoldE, NT-E/Root/GoldN, NT-E/Root/GoldT,"
-										+ "NT-ET/Root/GoldE, NT-ET/Root/GoldN, NT-ET/Root/GoldT,"
-										+ "NT-EN/Root/GoldE, NT-EN/Root/GoldN, NT-EN/Root/GoldT,"
-										+ "NT-NT/Root/GoldE, NT-NT/Root/GoldN, NT-NT/Root/GoldT,"	
-										+ "NT-ENT/Root/GoldE, NT-ENT/Root/GoldN, NT-ENT/Root/GoldT,"
-
-									
-										+"ET-T/Root/GoldE, ET-T/Root/GoldN,ET-T/Root/GoldT, "
-										+ "ET-N/Root/GoldE, ET-N/Root/GoldN, ET-N/Root/GoldT,"
-										+ "ET-E/Root/GoldE, ET-E/Root/GoldN, ET-E/Root/GoldT,"
-										+ "ET-ET/Root/GoldE, ET-ET/Root/GoldN, ET-ET/Root/GoldT,"
-										+ "ET-EN/Root/GoldE, ET-EN/Root/GoldN, ET-EN/Root/GoldT,"
-										+ "ET-NT/Root/GoldE, ET-NT/Root/GoldN, ET-NT/Root/GoldT,"						
-										+ "ET-ENT/Root/GoldE, ET-ENT/Root/GoldN, ET-ENT/Root/GoldT,"
-									
-									
-									
-									+ "EN-T/Root/GoldE, EN-T/Root/GoldN,EN-T/Root/GoldT, "
-									+ "EN-N/Root/GoldE, EN-N/Root/GoldN, EN-N/Root/GoldT,"
-									+ "EN-E/Root/GoldE, EN-E/Root/GoldN, EN-E/Root/GoldT,"
-									+ "EN-ET/Root/GoldE, EN-ET/Root/GoldN, EN-ET/Root/GoldT,"
-									+ "EN-EN/Root/GoldE, EN-EN/Root/GoldN, EN-EN/Root/GoldT,"
-									+ "EN-NT/Root/GoldE, EN-NT/Root/GoldN, EN-NT/Root/GoldT,"
-									+ "EN-ENT/Root/GoldE, EN-ENT/Root/GoldN, EN-ENT/Root/GoldT,"
-									
-									
-									
-									
-					
-					
-									
-								+ "ENT-T/Root/GoldE, ENT-T/Root/GoldN,ENT-T/Root/GoldT, "
-								+ "ENT-N/Root/GoldE, ENT-N/Root/GoldN, ENT-N/Root/GoldT,"
-								+ "ENT-E/Root/GoldE, ENT-E/Root/GoldN, ENT-E/Root/GoldT,"
-								+ "ENT-ET/Root/GoldE, ENT-ET/Root/GoldN, ENT-ET/Root/GoldT,"
-								+ "ENT-EN/Root/GoldE, ENT-EN/Root/GoldN, ENT-EN/Root/GoldT,"
-								+ "ENT-NT/Root/GoldE,ENT-NT/Root/GoldN, ENT-NT/Root/GoldT,"
-								+ "ENT-ENT/Root/GoldE, ENT-ENT/Root/GoldN, ENT-ENT/Root/GoldT,"
-									
-									
-									);
-		
-			
-			bwchessRunResultsWriter.newLine();
-			
-			for(MethodTrace methodTrace: methodtraces) {
-				ENTGoldValues GoldValues=ALGO.Prediction.Matrix.get(methodTrace.getPatternAndType());  
-				
-					
-				
-				if(methodTrace.getInput().equals("E")) {
-					int E=GoldValues.getE(); 
-					E=E+1; 
-					GoldValues.setE(E);
-					ALGO.Prediction.Matrix.put(methodTrace.getPatternAndType(),GoldValues);
-
-				}else if(methodTrace.getInput().equals("N")) {
-					int N=GoldValues.getN(); 
-					N=N+1; 
-					GoldValues.setN(N);
-					ALGO.Prediction.Matrix.put(methodTrace.getPatternAndType(),GoldValues);
-
-				}else if(methodTrace.getInput().equals("T")) {
-					int T=GoldValues.getT(); 
-					T=T+1; 
-					GoldValues.setT(T);
-					ALGO.Prediction.Matrix.put(methodTrace.getPatternAndType(),GoldValues);
-				}
-			}
-			for(String mykey: ALGO.Prediction.Matrix.keySet()) {
-				bwchessRunResultsWriter.write(ALGO.Prediction.Matrix.get(mykey).getE()+","+ALGO.Prediction.Matrix.get(mykey).getN()+","+ALGO.Prediction.Matrix.get(mykey).getT()+","); 
-				
-	
-				}
-			
-			bwchessRunResultsWriter.newLine();
-
-		}
-		
-		
-		bwchessRunResultsWriter.close();
 	}
 	
 

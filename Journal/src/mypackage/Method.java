@@ -55,7 +55,7 @@ public class Method implements Comparable<Method>{
 	
 
 
-	public MethodList CallersofCallers= null; 
+	public MethodList CallersofCallers= new MethodList(); 
 	public MethodList CalleesofCallees= new MethodList(); 
 	public MethodList CalleesImplementations= new MethodList(); 
 	public MethodList CallersInterfaces= new MethodList(); 
