@@ -27,8 +27,10 @@ public class Clazz {
 	public List<Clazz> Implementations= new ArrayList<Clazz>(); 
 	public MethodList methods = new MethodList(); 
 	 HashMap<Integer, Clazz> ClassRepresentationHashMap= new HashMap<Integer, Clazz>(); 
-
 	
+
+
+
 	public void setDeveloperGold( String developerGold) {
 		DeveloperGold = developerGold;
 	}

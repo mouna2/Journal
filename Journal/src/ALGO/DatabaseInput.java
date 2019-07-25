@@ -33,7 +33,7 @@ public class DatabaseInput {
 
 	static List<ArrayList<String>> CallsList = new ArrayList<ArrayList<String>>(); 
 	
-
+	public static HashMap<String, HashMap<String, MethodTrace>> OwnerClassestoMethodsHashMap = new HashMap<String, HashMap<String, MethodTrace>>();
 
 
 
@@ -532,7 +532,7 @@ public static void CreateRequirementsHashMap(Connection conn) throws SQLExceptio
 	public static void CreateMethodTraces(Connection conn) throws SQLException {
 	// TODO Auto-generated method stub
 		
-
+		
 		Statement st = conn.createStatement();
 		OwnerTraceHashMap=new LinkedHashMap<String, String>();
 		SubjectTraceHashMap=  new LinkedHashMap<String, String>(); 
@@ -540,6 +540,7 @@ public static void CreateRequirementsHashMap(Connection conn) throws SQLExceptio
 
 		while (myresults.next()) {
 			MethodTrace MethodTrace = new MethodTrace();
+			HashMap<String, mypackage.MethodTrace> methodTraceList = new HashMap<String, mypackage.MethodTrace>(); 
 			Method method= new Method(); 
 			Requirement requirement= new Requirement(); 
 			 requirement=RequirementHashMap.get(myresults.getString("requirementid")); 
@@ -572,6 +573,11 @@ public static void CreateRequirementsHashMap(Connection conn) throws SQLExceptio
 	        
 	        OwnerTraceHashMap.put(reqClass, classTraceHashMap.get(reqClass).DeveloperGold); 
 	        SubjectTraceHashMap.put(reqClass, classTraceHashMap.get(reqClass).SubjectGold); 
+	        if(OwnerClassestoMethodsHashMap.get(MethodTrace.Requirement.ID+"-"+MethodTrace.Method.Owner.ID)!=null) {
+	        	methodTraceList = OwnerClassestoMethodsHashMap.get(MethodTrace.Requirement.ID+"-"+MethodTrace.Method.Owner.ID); 
+	        }
+	        methodTraceList.put(reqMethod, MethodTrace); 
+        	OwnerClassestoMethodsHashMap.put(MethodTrace.Requirement.ID+"-"+MethodTrace.Method.Owner.ID, methodTraceList); 
 
 		}
 		

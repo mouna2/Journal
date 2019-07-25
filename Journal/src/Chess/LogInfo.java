@@ -21,7 +21,7 @@ import org.eclipse.jdt.core.search.MethodNameMatch;
 
 import ALGO.AlgoFinal;
 import ALGO.DatabaseInput;
-
+import ALGO.DatabaseReading;
 import ALGO.MethodList;
 import ALGO.Prediction;
 import ALGO.PredictionValues;
@@ -51,7 +51,6 @@ public class LogInfo {
 	List<String> IterationValues= new ArrayList<String>();
 	boolean SubjectDeveloperEqualityFlag; 
 	String Reason; 
-	
 	
 	List<String> ExtendedCallersText;
 	
@@ -129,7 +128,7 @@ public class LogInfo {
 	public List<String> ExecutedCallees; 
 	public List<String> ExecutedCalleesPredictions; 
 	public List<String> ExecutedOwnerCallees; 
-
+	String predictionGeneralization; 
 	
 	public List<String> Parents; 
 	public List<String> ParentsPredictions; 
@@ -142,6 +141,13 @@ public class LogInfo {
 	
 	
 	
+
+	public String getPredictionGeneralization() {
+		return predictionGeneralization;
+	}
+	public void setPredictionGeneralization(String predictionGeneralization) {
+		this.predictionGeneralization = predictionGeneralization;
+	}
 	public List<String> getCalleesCallees() {
 		return CalleesCallees;
 	}
@@ -1045,12 +1051,12 @@ public class LogInfo {
 				+","+ExtendedCalleesList+","+ExtendedCalleesPredictionsList+","+ExtendedOwnerCalleesList+","+ExtendedCallersList+","+ExtendedCallersPredictionsList+","+ExtendedOwnerCallersList
 				+","+ExecutedCalleesList+","+ExecutedCalleesPredictionsList+","+ExecutedOwnerCalleesList+","+ExecutedCallersList+","+ExecutedCallersPredictionsList+","+ExecutedOwnerCallersList
 				+","+Prediction	
+				+","+ predictionGeneralization
 				+","+PrecisionRecall	
 				+","+PredictionSummary	
 				+","+PredictionSummaryPrecisionRecall
 
 		+","+	toString2(IterationValues); 
-		
 //		return MethodID+","+MethodName+","+RequirementID+","+RequirementName+","+ClassID+","+ClassName+","+TraceValue+","+TraceClassOldValue+","+TraceClassNewValue+","+
 //				PrecisionRecall	+","+toString2(IterationValues)+","+TraceValue+"-"+Reason+"-" +PrecisionRecall;
 		
@@ -1351,10 +1357,34 @@ public class LogInfo {
 			PredictionEvaluation Pattern, String ProgramName,  PredictionValues ownerClassPredictionValues, LinkedHashMap<String, LogInfo> logInfoHashMap) throws SQLException, CloneNotSupportedException {
 		// TODO Auto-generated method stub
 	Pattern.ResetCounters(Pattern);
-int count=0; 
+	int count=0; 
+	
+	
 		for (String mykey : methodTraceHashMap.keySet()) {
 			MethodTrace methodTrace = methodTraceHashMap.get(mykey);
-			
+			/**********************************************************************************************/
+			/**********************************************************************************************/
+
+				HashMap<String, MethodTrace> methodsList = DatabaseInput.OwnerClassestoMethodsHashMap.get(methodTrace.Requirement.ID+"-"+methodTrace.Method.Owner.ID); 
+			  Collection<MethodTrace> methodtraces = methodsList.values();
+			  if(methodtraces.stream().filter(o -> o.getPrediction().PredictionValue.equals("T")).findFirst().isPresent()) {
+				  methodTrace.setClassPredictionGeneralized("T");
+				  logInfoHashMap.get(mykey).setPredictionGeneralization("T");
+			  
+			  }else if(methodtraces.stream().filter(o -> o.getPrediction().PredictionValue.equals("E")).findFirst().isPresent()) {
+				  methodTrace.setClassPredictionGeneralized("E");
+				  logInfoHashMap.get(mykey).setPredictionGeneralization("E");
+
+			  }else {
+				  methodTrace.setClassPredictionGeneralized("N");
+				  logInfoHashMap.get(mykey).setPredictionGeneralization("N");
+
+			  }
+				/**********************************************************************************************/
+				/**********************************************************************************************/
+
+			  
+					
 			if((ProgramName.equals("gantt")|| ProgramName.equals("jhotdraw") )&& AlgoFinal.MethodLevelTraces==true){
 				
 				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
@@ -1372,9 +1402,8 @@ int count=0;
 					
 					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getGold().trim());
 					UpdateCategoryCounters(Result, methodTrace, Pattern, ownerClassPredictionValues, mykey, logInfoHashMap); 
-
+					
 				}
-				
 
 			}
 			else if((ProgramName.equals("gantt")|| ProgramName.equals("jhotdraw")) && AlgoFinal.ClassLevelTraces==true){
@@ -1720,6 +1749,8 @@ int count=0;
 					+"ExecutedCallees, ExecutedCalleesPredictions, ExecutedOwnerCallees, ExecutedCallers, ExecutedCallersPredictions,ExecutedOwnerCallers,"
 
 					+ "Prediction,"
+					+ "ClassPredictionGeneralization,"
+
 					+ "PrecisionRecall,"
 					+ "PredictionSummary,"
 					+ "GoldSummary,"
@@ -1754,6 +1785,8 @@ int count=0;
 					+"ExecutedCallees, ExecutedCalleesPredictions, ExecutedOwnerCallees, ExecutedCallers, ExecutedCallersPredictions,ExecutedOwnerCallers,"
 
 					+ "Prediction,"
+					+ "ClassPredictionGeneralization,"
+
 					+ "PrecisionRecall,"
 					
 					+ "PredictionSummary,"
@@ -1812,6 +1845,8 @@ int count=0;
 					+"ExecutedCallees, ExecutedCalleesPredictions, ExecutedOwnerCallees, ExecutedCallers, ExecutedCallersPredictions,ExecutedOwnerCallers,"
 
 					+ "Prediction,"
+					+ "ClassPredictionGeneralization,"
+
 					+ "PrecisionRecall,"
 					
 					+ "PredictionSummary,"
@@ -1845,6 +1880,8 @@ int count=0;
 					+"ExtendedCallees, ExtendedCalleesPredictions, ExtendedOwnerCallees, ExtendedCallers, ExtendedCallersPredictions,ExtendedOwnerCallers,"
 					+"ExecutedCallees, ExecutedCalleesPredictions, ExecutedOwnerCallees, ExecutedCallers, ExecutedCallersPredictions,ExecutedOwnerCallers,"
 					+ "Prediction,"
+					+ "ClassPredictionGeneralization,"
+
 					+ "PrecisionRecall,"
 					
 					+ "PredictionSummary,"

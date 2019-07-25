@@ -13,6 +13,7 @@ import java.util.Set;
 
 import ALGO.AlgoFinal;
 import ALGO.DatabaseInput;
+import ALGO.DatabaseReading;
 import ALGO.MethodList;
 import ALGO.OwnerClassList;
 import ALGO.Prediction;
@@ -32,11 +33,19 @@ public final class MethodTrace {
 	public String predictionType ;
 	public String predictionValue ;
 	public String predictionPattern ;
-
+	public String classPredictionGeneralized; 
 
 	boolean SubjectDeveloperEqualityFlag;
 	public String  ClassLevelGold; 
 
+
+	public String getClassPredictionGeneralized() {
+		return classPredictionGeneralized;
+	}
+
+	public void setClassPredictionGeneralized(String classPredictionGeneralized) {
+		this.classPredictionGeneralized = classPredictionGeneralized;
+	}
 
 	public String SubjectT; 
 	public String SubjectN; 
@@ -244,37 +253,31 @@ public final class MethodTrace {
 			
 			{
 		String reqMethod = this.Requirement.ID+"-"+this.Method.ID; 
-//		System.out.println("==============>"+AlgoFinal.methodtraces2HashMap.get("1-3").PredictionSummary);
-//		System.out.println("==============>"+AlgoFinal.methodtraces2HashMap.get("1-3").prediction.pattern);
-//		System.out.println(this.prediction.pattern +" current prediction "+ this.prediction.likelihood+" new prediction "+ Prediction.likelihood);
-		if(this.prediction.likelihood<Prediction.likelihood) {
+
+		
+		if(this.prediction.Likelihood<Prediction.Likelihood) {
 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(Prediction.Reason+type+"/"+Prediction.pattern);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(Prediction.PredictionValue);
 			MethodTrace.modified=true; 		
-			
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
 			this.prediction=Prediction; 
 			this.PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.PredictionSummary; 
 			setValues(Prediction.PredictionValue, Prediction.Reason, Prediction.Type, Prediction.pattern); 
-			this.UpdateCallersCallees(LogInfoHashMap, reqMethod);			
 			
-			
-
+		
 		
 		}
 		else if(this.prediction.PredictionValue.equals("E") && !Prediction.PredictionValue.equals("E")) {
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(Prediction.Reason+type+"/"+Prediction.pattern);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(Prediction.PredictionValue);
 			MethodTrace.modified=true; 		
-			
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
 			this.prediction=Prediction; 
 			this.PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.PredictionSummary; 
 			setValues(Prediction.PredictionValue, Prediction.Reason, Prediction.Type, Prediction.pattern); 
-			this.UpdateCallersCallees(LogInfoHashMap, reqMethod);			
 			
 			
 
@@ -286,15 +289,15 @@ public final class MethodTrace {
 			this.PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.PredictionSummary; 
 			setValues(Prediction.PredictionValue, Prediction.Reason, Prediction.Type, Prediction.pattern); 
-			this.UpdateCallersCallees(LogInfoHashMap, reqMethod);			
 
 		}
 	
 
 
-			
+		HashMap<String, MethodTrace> methodTraces = DatabaseInput.OwnerClassestoMethodsHashMap.get(this.Requirement.ID+"-"+this.Method.Owner.ID); 
+		methodTraces.put(this.Requirement.ID+"-"+this.Method.ID, this); 	
 
-		
+		System.out.println("yes");
 
 		}
 

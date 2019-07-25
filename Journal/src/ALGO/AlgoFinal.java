@@ -83,8 +83,8 @@ public class AlgoFinal  {
 	public static boolean BasicTechnique=false; 
 	public static boolean XCallsTechnique=true; 
 
-	public static boolean ClassLevelTraces=false; 
-	public static boolean MethodLevelTraces=true; 
+	public static boolean ClassLevelTraces=true; 
+	public static boolean MethodLevelTraces=false; 
 
 	/**
 	 * Run a SQL command which does not return a recordset:
@@ -595,7 +595,13 @@ public class AlgoFinal  {
 
 
 		for (MethodTrace methodtrace : methodTracesHashmapValues) {
-			methodtrace.setInput(methodtrace.getGold());
+			if(AlgoFinal.ClassLevelTraces) {
+				methodtrace.setInput(methodtrace.getClassLevelGold());
+
+			}else if(AlgoFinal.MethodLevelTraces){
+				methodtrace.setInput(methodtrace.getGold());
+
+			}
 			methodtrace.setPrediction(Prediction.EInitializedPrediction);
 			LogInfoHashMap.get(methodtrace.Requirement.ID+"-"+methodtrace.Method.ID).setPrediction("E");
 
@@ -752,9 +758,9 @@ public class AlgoFinal  {
 
 		for(int i=0; i<1; i++) {
 			System.out.println("========================> RUN "+i);
-//			String ProgramName = "chess";
-//			AlgoFinal frame = new AlgoFinal(
-//					ProgramName);
+			String ProgramName = "chess";
+			AlgoFinal frame = new AlgoFinal(
+					ProgramName);
 //			
 //						String ProgramName2 = "gantt";
 //						AlgoFinal frame = new AlgoFinal(ProgramName2);
@@ -767,8 +773,8 @@ public class AlgoFinal  {
 //			
 //							 //ooo
 //							 
-						String ProgramName4 = "jhotdraw";
-						AlgoFinal	frame = new AlgoFinal(ProgramName4);
+//						String ProgramName4 = "jhotdraw";
+//						AlgoFinal	frame = new AlgoFinal(ProgramName4);
 
 		}
 	}

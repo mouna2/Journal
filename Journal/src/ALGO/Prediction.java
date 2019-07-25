@@ -9,7 +9,7 @@ public class Prediction {
 	
 	public String PredictionValue=""; 
 	public String Reason ="";
-	public int likelihood;
+	public int Likelihood;
 	public String why;
 	public String Type =""; 
 	public String pattern="";
@@ -22,6 +22,7 @@ public class Prediction {
 		PredictionValue = predictionValue;
 		Reason = reason;
 		pattern=mypattern; 
+		Likelihood=likelihood; 
 		
 	} 
 	public static Prediction EIsolatedPrediction = new Prediction("E", "IsolatedE", "", 0); 
