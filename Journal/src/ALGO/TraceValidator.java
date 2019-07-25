@@ -14,7 +14,7 @@ import mypackage.Requirement;
 public class TraceValidator {
 
 	public static HashMap<String, Prediction> InnerMatrix= new HashMap<String, Prediction>(){{
-//		put("T-T", Prediction.TPureTPredictionInner) ; 
+		put("T-T", Prediction.TPureTPredictionInner) ; 
 		put("T-N", Prediction.EBoundaryPredictionInner) ; 
 		put("T-E", Prediction.EUndecidablePredictionInner) ; 
 		put("T-NT", Prediction.TMixedTPredictionInner) ; 
@@ -23,7 +23,7 @@ public class TraceValidator {
 		put("T-ENT",  Prediction.TMixedTPredictionInner) ; 
 
 		put("N-T", Prediction.EBoundaryPredictionInner) ; 
-//		put("N-N", Prediction.NPureNPredictionInner) ; 
+		put("N-N", Prediction.NPureNPredictionInner) ; 
 		put("N-E", Prediction.EUndecidablePredictionInner) ; 
 		put("N-NT", Prediction.NMixedNPredictionInner) ; 
 		put("N-ET", Prediction.EUndecidablePredictionInner) ; 
@@ -82,7 +82,7 @@ public class TraceValidator {
 
 
 		public static HashMap<String, Prediction> RootMatrix= new HashMap<String, Prediction>(){{
-//		put("T-T", Prediction.TPureTPredictionRoot) ; 
+		put("T-T", Prediction.TPureTPredictionRoot) ; 
 		put("T-N", Prediction.EBoundaryPredictionRoot) ; 
 		put("T-E", Prediction.EUndecidablePredictionRoot) ; 
 		put("T-NT", Prediction.TMixedTPredictionRoot) ; 
@@ -91,7 +91,7 @@ public class TraceValidator {
 		put("T-ENT",  Prediction.TMixedTPredictionRoot) ; 
 
 		put("N-T", Prediction.EBoundaryPredictionRoot) ; 
-//		put("N-N", Prediction.NPureNPredictionRoot) ; 
+		put("N-N", Prediction.NPureNPredictionRoot) ; 
 		put("N-E", Prediction.EUndecidablePredictionRoot) ; 
 		put("N-NT", Prediction.NMixedNPredictionRoot) ; 
 		put("N-ET", Prediction.EUndecidablePredictionRoot) ; 
@@ -143,7 +143,7 @@ public class TraceValidator {
 		put("ENT-EN", Prediction.EUndecidablePredictionRoot) ; 
 		put("ENT-ENT", Prediction.TMixedTPredictionRoot); }}; 
 		public static HashMap<String, Prediction> LeafMatrix= new HashMap<String, Prediction>(){{
-//		put("T-T", Prediction.TPureTPredictionLeaf) ; 
+		put("T-T", Prediction.TPureTPredictionLeaf) ; 
 		put("T-N", Prediction.EBoundaryPredictionLeaf) ; 
 		put("T-E", Prediction.EUndecidablePredictionLeaf) ; 
 		put("T-NT", Prediction.TMixedTPredictionLeaf) ; 
@@ -152,7 +152,7 @@ public class TraceValidator {
 		put("T-ENT",  Prediction.TMixedTPredictionLeaf) ; 
 
 		put("N-T", Prediction.EBoundaryPredictionLeaf) ; 
-//		put("N-N", Prediction.NPureNPredictionLeaf) ; 
+		put("N-N", Prediction.NPureNPredictionLeaf) ; 
 		put("N-E", Prediction.EUndecidablePredictionLeaf) ; 
 		put("N-NT", Prediction.NMixedNPredictionLeaf) ; 
 		put("N-ET", Prediction.EUndecidablePredictionLeaf) ; 
@@ -229,69 +229,22 @@ public class TraceValidator {
 				MethodTrace.modified=false; 
 				for (MethodTrace methodtrace : MethodTracesList) {
 
-					String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
-
-
-					
-					//INNER METHOD PURE 
-					if(!methodtrace.getCallers().isEmpty() && !methodtrace.getCallees().isEmpty())
-					{
-
-						TraceValidator.Predict(methodtrace, methodtrace.getCallers(), methodtrace.getCallees(), TraceValidator.PureInnerMatrix, LogInfoHashMap, "Inner", iteration);
-
-					}
-
-
-					//LEAF METHOD PURE 
-
-					else if(!methodtrace.getCallers().isEmpty() && methodtrace.getCallees().isEmpty() && !methodtrace.getCallersCallers().isEmpty())
-					{
-
-						TraceValidator.Predict(methodtrace, methodtrace.getCallers(), methodtrace.getCallersCallers(), TraceValidator.PureLeafMatrix, LogInfoHashMap, "Leaf", iteration);
-
-
-
-					}		//ROOT METHOD PURE 
-					else if(methodtrace.getCallers().isEmpty() && !methodtrace.getCallees().isEmpty()&& !methodtrace.getCalleesCallees().isEmpty())
-					{
-
-						TraceValidator.Predict(methodtrace, methodtrace.getCallees(), methodtrace.getCalleesCallees(), TraceValidator.PureRootMatrix, LogInfoHashMap, "Root", iteration);
-
-					}
+	
 
 //					
 
 
 
 
-
-
-
-
-
-
-
-
-//					if(LogInfoHashMap.get(reqMethod).getIterationValues().size()==iteration-1) {
-//						LogInfoHashMap.get(reqMethod).getIterationValues().add("");
-//
-//					}	
-
-
-				}
-				
-				
-				
-				for (MethodTrace methodtrace : MethodTracesList) {
-
 					String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
+
 
 
 
 					//INNER METHOD 
 					if(!methodtrace.getCallers().isEmpty() && !methodtrace.getCallees().isEmpty())
 					{
-
+						
 						TraceValidator.Predict(methodtrace, methodtrace.getCallers(), methodtrace.getCallees(), TraceValidator.InnerMatrix, LogInfoHashMap, "Inner", iteration);
 
 					}
@@ -313,6 +266,32 @@ public class TraceValidator {
 						TraceValidator.Predict(methodtrace, methodtrace.getCallees(), methodtrace.getCalleesCallees(), TraceValidator.RootMatrix, LogInfoHashMap, "Root", iteration);
 
 					}
+					
+					//INNER METHOD PURE 
+					else if(!methodtrace.getCallers().isEmpty() && !methodtrace.getCallees().isEmpty())
+					{
+
+						TraceValidator.Predict(methodtrace, methodtrace.getCallers(), methodtrace.getCallees(), TraceValidator.InnerMatrix, LogInfoHashMap, "Inner", iteration);
+
+					}
+
+
+					//LEAF METHOD PURE 
+
+					else if(!methodtrace.getCallers().isEmpty() && methodtrace.getCallees().isEmpty() && !methodtrace.getCallersCallers().isEmpty())
+					{
+
+						TraceValidator.Predict(methodtrace, methodtrace.getCallers(), methodtrace.getCallersCallers(), TraceValidator.LeafMatrix, LogInfoHashMap, "Leaf", iteration);
+
+
+
+					}		//ROOT METHOD PURE 
+					else if(methodtrace.getCallers().isEmpty() && !methodtrace.getCallees().isEmpty()&& !methodtrace.getCalleesCallees().isEmpty())
+					{
+
+						TraceValidator.Predict(methodtrace, methodtrace.getCallees(), methodtrace.getCalleesCallees(), TraceValidator.RootMatrix, LogInfoHashMap, "Root", iteration);
+
+					}
 					//E ISOLATED 
 					else if(methodtrace.getCallers().isEmpty() && methodtrace.getCallees().isEmpty())
 					{
@@ -326,9 +305,7 @@ public class TraceValidator {
 
 					}
 
-
-
-
+				}
 
 
 
@@ -343,7 +320,7 @@ public class TraceValidator {
 //					}	
 
 
-				}
+				
 				iteration ++; 
 			}
 		}

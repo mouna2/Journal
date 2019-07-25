@@ -246,30 +246,41 @@ public final class MethodTrace {
 		String reqMethod = this.Requirement.ID+"-"+this.Method.ID; 
 //		System.out.println("==============>"+AlgoFinal.methodtraces2HashMap.get("1-3").PredictionSummary);
 //		System.out.println("==============>"+AlgoFinal.methodtraces2HashMap.get("1-3").prediction.pattern);
+//		System.out.println(this.prediction.pattern +" current prediction "+ this.prediction.likelihood+" new prediction "+ Prediction.likelihood);
+		if(this.prediction.likelihood<Prediction.likelihood) {
 
-		if(this.prediction.PredictionValue.equals("E") && !Prediction.PredictionValue.equals("E")) {
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(Prediction.Reason+type+"/"+Prediction.pattern);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(Prediction.PredictionValue);
 			MethodTrace.modified=true; 		
 			
-			String var= this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
 			this.prediction=Prediction; 
 			this.PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
-//			System.out.println("$$$$$$$$$ "+prediction.pattern);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.PredictionSummary; 
-//			System.out.println("hey");
 			setValues(Prediction.PredictionValue, Prediction.Reason, Prediction.Type, Prediction.pattern); 
 			this.UpdateCallersCallees(LogInfoHashMap, reqMethod);			
-
 			
-//			System.out.println("pppppppp   "+AlgoFinal.methodtraces2HashMap.get(reqMethod).prediction.pattern);
+			
+
+		
+		}
+		else if(this.prediction.PredictionValue.equals("E") && !Prediction.PredictionValue.equals("E")) {
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(Prediction.Reason+type+"/"+Prediction.pattern);
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(Prediction.PredictionValue);
+			MethodTrace.modified=true; 		
+			
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
+			this.prediction=Prediction; 
+			this.PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.PredictionSummary; 
+			setValues(Prediction.PredictionValue, Prediction.Reason, Prediction.Type, Prediction.pattern); 
+			this.UpdateCallersCallees(LogInfoHashMap, reqMethod);			
+			
+			
 
 		}else if(this.prediction.PredictionValue.equals("E") && Prediction.PredictionValue.equals("E")) {
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(Prediction.Reason+type+"/"+Prediction.pattern);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(Prediction.PredictionValue);
-			String var= this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
-//			System.out.println(var);
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
 			this.prediction=Prediction; 
 			this.PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 

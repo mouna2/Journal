@@ -80,8 +80,8 @@ public class AlgoFinal  {
 	public static boolean NoSeeding=true; 
 
 	public static boolean ExecutedCallsTechnique=false; 
-	public static boolean BasicTechnique=true; 
-	public static boolean XCallsTechnique=false; 
+	public static boolean BasicTechnique=false; 
+	public static boolean XCallsTechnique=true; 
 
 	public static boolean ClassLevelTraces=false; 
 	public static boolean MethodLevelTraces=true; 
@@ -756,8 +756,8 @@ public class AlgoFinal  {
 //			AlgoFinal frame = new AlgoFinal(
 //					ProgramName);
 //			
-						String ProgramName2 = "gantt";
-						AlgoFinal frame = new AlgoFinal(ProgramName2);
+//						String ProgramName2 = "gantt";
+//						AlgoFinal frame = new AlgoFinal(ProgramName2);
 			////			
 			////////			String ProgramName2 = "dummy";
 			////////			AlgoFinal	 frame = new AlgoFinal(ProgramName2);
@@ -767,8 +767,8 @@ public class AlgoFinal  {
 //			
 //							 //ooo
 //							 
-//						String ProgramName4 = "jhotdraw";
-//						AlgoFinal	frame = new AlgoFinal(ProgramName4);
+						String ProgramName4 = "jhotdraw";
+						AlgoFinal	frame = new AlgoFinal(ProgramName4);
 
 		}
 	}
