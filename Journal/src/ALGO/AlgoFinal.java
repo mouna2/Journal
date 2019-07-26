@@ -333,12 +333,18 @@ public class AlgoFinal  {
 
 					}else if(ProgramName.equals("gantt")) {
 						TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
+						LogInfo.writeHeaders( LogInfo.bwchessRunResultsWriter);
+
 						LogInfo.updateRunResults(MethodTracesList, 0, 0, "NA", LogInfo.bwGanttRunResultsWriter);
 					}else if(ProgramName.equals("itrust")) {
 						TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
+						LogInfo.writeHeaders( LogInfo.bwchessRunResultsWriter);
+
 						LogInfo.updateRunResults(MethodTracesList, 0, 0, "NA", LogInfo.bwiTrustRunResultsWriter);
 					}else if(ProgramName.equals("jhotdraw")) {
 						TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
+						LogInfo.writeHeaders( LogInfo.bwchessRunResultsWriter);
+
 						LogInfo.updateRunResults(MethodTracesList, 0, 0, "NA", LogInfo.bwJHotDrawRunResultsWriter);
 					}
 			
@@ -892,12 +898,12 @@ public class AlgoFinal  {
 
 		for(int i=0; i<1; i++) {
 			System.out.println("========================> RUN "+i);
-			String ProgramName = "chess";
-			AlgoFinal frame = new AlgoFinal(
-					ProgramName, i);
-//			
-//						String ProgramName2 = "gantt";
-//						AlgoFinal frame = new AlgoFinal(ProgramName2, i);
+//			String ProgramName = "chess";
+//			AlgoFinal frame = new AlgoFinal(
+//					ProgramName, i);
+			
+						String ProgramName2 = "gantt";
+						AlgoFinal frame = new AlgoFinal(ProgramName2, i);
 			////			
 			////////			String ProgramName2 = "dummy";
 			////////			AlgoFinal	 frame = new AlgoFinal(ProgramName2, i);
