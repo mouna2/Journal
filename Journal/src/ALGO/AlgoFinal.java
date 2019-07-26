@@ -80,8 +80,8 @@ public class AlgoFinal  {
 
 
 	public static boolean ErrorSeeding=false; 
-	public static boolean IncompletenessSeeding=true; 
-	public static boolean NoSeeding=false; 
+	public static boolean IncompletenessSeeding=false; 
+	public static boolean NoSeeding=true; 
 
 	public static boolean ExecutedCallsTechnique=false; 
 	public static boolean BasicTechnique=false; 
@@ -437,7 +437,7 @@ public class AlgoFinal  {
 
 
 
-//		LogInfo.updateTableLog(ProgramName, MethodTracesHashmapValues, LogInfoHashMap);
+		LogInfo.updateTableLog(ProgramName, MethodTracesHashmapValues, LogInfoHashMap);
 
 		System.out.println("YES6");
 		LogInfo.closeLogFile(); 
@@ -890,7 +890,7 @@ public class AlgoFinal  {
 	 * @throws Exception **********************************************************************************************************************************************/
 	public static void main(String[] args) throws Exception {
 
-		for(int i=0; i<5; i++) {
+		for(int i=0; i<1; i++) {
 			System.out.println("========================> RUN "+i);
 			String ProgramName = "chess";
 			AlgoFinal frame = new AlgoFinal(
