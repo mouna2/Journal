@@ -78,7 +78,6 @@ import spoon.support.reflect.declaration.CtTypeImpl;
 /**
  * This class demonstrates how to connect to MySQL and run some basic commands.
  * 
- * In order to use this, you have to download the Connector/J driver and add
  * its .jar file to your build path.  You can find it here:
  * 
  * http://dev.mysql.com/downloads/connector/j/
@@ -140,7 +139,7 @@ public class DatabaseChess {
 		Properties connectionProps = new Properties();
 		connectionProps.put("root", this.userName);
 		connectionProps.put("123456", this.password);
-		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/databasechess","root","123456");
+		conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/databasechess?useLegacyDatetimeCode=false&serverTimezone=UTC","root","123456");
 
 		return conn;
 	}
@@ -1326,7 +1325,7 @@ public class DatabaseChess {
                 
                  
             }
-             System.out.println("yes");
+//             System.out.println("yes");
              
              
             for( CtConstructorCall myclass: ctNewClasses) {

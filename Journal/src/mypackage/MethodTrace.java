@@ -326,7 +326,7 @@ public final class MethodTrace {
 		HashMap<String, MethodTrace> methodTraces = DatabaseInput.OwnerClassestoMethodsHashMap.get(this.Requirement.ID+"-"+this.Method.Owner.ID); 
 		methodTraces.put(this.Requirement.ID+"-"+this.Method.ID, this); 	
 
-		System.out.println("yes");
+//		System.out.println("yes");
 		
 		
 

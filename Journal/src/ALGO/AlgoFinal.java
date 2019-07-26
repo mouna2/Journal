@@ -203,6 +203,10 @@ public class AlgoFinal  {
 			File file3log = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\LogFileUnderstandFN.txt");
 			FileOutputStream fosfila3 = new FileOutputStream(file3log);
 			bwfile3 = new BufferedWriter(new OutputStreamWriter(fosfila3));
+			
+			
+			 BufferedWriter bwchessRunResultsWriter = new BufferedWriter(new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\RunResultsChess.txt", true));
+
 		}
 		// TODO Auto-generated method stub
 		LogInfo.CreateLogFiles(ProgramName);
@@ -215,6 +219,9 @@ public class AlgoFinal  {
 		}
 
 
+		
+		
+		
 
 		DatabaseReading DatabaseReading= new DatabaseReading(ProgramName); 
 
@@ -303,20 +310,19 @@ public class AlgoFinal  {
 //		while (MethodTrace.modified ) {
 //			System.out.println("iteration "+iteration);
 //			MethodTrace.modified = false;
+		
+		if(AlgoFinal.NoSeeding) {
 			TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
-//
-//			iteration++; 
-//		}	
-			for(MethodTrace methodtrace: MethodTracesList) {
-			String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
-				methodtrace.UpdateCallersCallees(LogInfoHashMap, reqMethod);			
 
-			
+			LogInfo.updateRunResults(MethodTracesList);
 
 		}
+		
 
-
-		LogInfo.updateRunResults(MethodTracesList);
+		for(MethodTrace methodtrace: MethodTracesList) {
+			String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
+				methodtrace.UpdateCallersCallees(LogInfoHashMap, reqMethod);			
+	}
 		LogInfo.ComputePrecisionAndRecallNONCUMULATIVE(methodtraces2HashMap,TotalPattern, ProgramName, CountPredictionValues, LogInfoHashMap);
 
 		LogInfo.updateResultsLog(TotalPattern, CountPredictionValues, ProgramName, "OWNER CLASS PRED", "owner class prediction values", "INDIVIDUAL");
@@ -632,28 +638,28 @@ public class AlgoFinal  {
 		/***********************************************************************************/
 		/***********************************************************************************/
 		/***********************************************************************************/
-
+		int k=0; 
 		//SEEDING PROCESS 
 		for(Requirement requirement: DatabaseInput.RequirementHashMap.values()) {
 			Random r = new Random();
 			 int ErrorSeedingPercentageT=r.nextInt( (99 - 1) + 1) + 1;
-			 List<MethodTrace> TMethodTracesList = AlgoFinal.TNMethodTracesHashMap.get(requirement.ID+""); 
-			 if(TMethodTracesList!=null) {
-				 int AmountofSeededTErrors= ErrorSeedingPercentageT*TMethodTracesList.size()/100; 
+			 List<MethodTrace> TNMethodTracesList = AlgoFinal.TNMethodTracesHashMap.get(requirement.ID+""); 
+			 if(TNMethodTracesList!=null) {
+				 int AmountofSeededTErrors= ErrorSeedingPercentageT*TNMethodTracesList.size()/100; 
 					AlgoFinal.ErrorSeedingPercentages.put(runNumber+"-"+ requirement.ID, ErrorSeedingPercentageT); 
-					TMethodTracesList=TNMethodTracesHashMap.get(requirement.ID+""); 
+					TNMethodTracesList=TNMethodTracesHashMap.get(requirement.ID+""); 
 					
 					
 					int j=0; 
 					while(j<AmountofSeededTErrors) {
 						 
 						int low = 1;
-						int high = TMethodTracesList.size()-1;
+						int high = TNMethodTracesList.size()-1;
 						int randomTTrace = r.nextInt(high-low) + low;
 						
 
 							
-							MethodTrace methodTrace = TMethodTracesList.get(randomTTrace); 
+							MethodTrace methodTrace = TNMethodTracesList.get(randomTTrace); 
 							methodTrace.setInput("E");
 							LogInfoHashMap.get(requirement.ID+"-"+methodTrace.Method.ID).setInput("E"); 
 							j++; 
@@ -663,12 +669,16 @@ public class AlgoFinal  {
 				}
 			 }
 			 
-			 
+			
 			 TraceValidator.MakePredictions(methodTracesHashmapValues, LogInfoHashMap); 
-		
+			LogInfo.updateRunResults(methodTracesHashmapValues);
+
+			 System.out.println(k);
+			 k++; 
 		}
 			
-			
+		LogInfo.bwchessRunResultsWriter.close();
+
 		
 		
 

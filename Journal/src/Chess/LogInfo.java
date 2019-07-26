@@ -1257,12 +1257,15 @@ public class LogInfo {
 				File myfile3 = new File("C:\\Users\\mouna\\new_workspace\\TracePredictorFinal\\src\\ChessFiles\\MethodCalls.txt");
 				FileOutputStream myFileOutputStream3 = new FileOutputStream(myfile3);
 				 bwchessMethodCallsWriter = new BufferedWriter(new OutputStreamWriter(myFileOutputStream3));
-				System.out.println("yes");
+//				System.out.println("yes");
 				
 				
-				File myfile4 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\RunResultsChess.txt");
-				FileOutputStream myFileOutputStream4 = new FileOutputStream(myfile4);
-				 bwchessRunResultsWriter = new BufferedWriter(new OutputStreamWriter(myFileOutputStream4));
+//				File myfile4 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\RunResultsChess.txt");
+//				FileOutputStream myFileOutputStream4 = new FileOutputStream(myfile4);
+//				 bwchessRunResultsWriter = new BufferedWriter(new OutputStreamWriter(myFileOutputStream4));
+				 
+				 bwchessRunResultsWriter = new BufferedWriter(new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\RunResultsChess.txt", true));
+
 		}
 
 		if (ProgramName.equals("gantt")) {
@@ -2412,7 +2415,7 @@ public class LogInfo {
 			
 			for(MethodTrace methodTrace: methodtraces) {
 				String reqMethod = methodTrace.Requirement.ID+"-"+methodTrace.Method.ID; 
-				System.out.println(methodTrace +"     "+methodTrace.getPatternAndType()+"   ");
+//				System.out.println(methodTrace +"     "+methodTrace.getPatternAndType()+"   ");
 				ENTGoldValues GoldValues=ALGO.Prediction.Matrix.get(methodTrace.getPatternAndType());  
 				
 					
@@ -2446,8 +2449,10 @@ public class LogInfo {
 
 		}
 		
-		
-		bwchessRunResultsWriter.close();
+		if(AlgoFinal.NoSeeding) {
+			bwchessRunResultsWriter.close();
+
+		}
 	}
 	public static void WriteMethodCalls(String programName) throws IOException, CloneNotSupportedException {
 		if(programName.equals("chess")) {
