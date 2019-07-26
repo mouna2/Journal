@@ -58,7 +58,7 @@ import mypackage.Requirement;
 
 public class AlgoFinal  {
 	static HashMap<String, List<MethodTrace>> TNMethodTracesHashMap = new HashMap<String, List<MethodTrace>> ();
-	static HashMap<String, Integer> ErrorSeedingPercentages = new HashMap<String, Integer> ();
+	public static HashMap<String, Integer> ErrorSeedingPercentages = new HashMap<String, Integer> ();
 
 	public static String ProgramName=""; 
 	public static boolean InheritanceFlag=true; 
@@ -314,7 +314,7 @@ public class AlgoFinal  {
 		if(AlgoFinal.NoSeeding) {
 			TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
 
-			LogInfo.updateRunResults(MethodTracesList);
+			LogInfo.updateRunResults(MethodTracesList, 0, 0, "NA");
 
 		}
 		
@@ -671,7 +671,9 @@ public class AlgoFinal  {
 			 
 			
 			 TraceValidator.MakePredictions(methodTracesHashmapValues, LogInfoHashMap); 
-			LogInfo.updateRunResults(methodTracesHashmapValues);
+			 int ErrorSeedingPercentage=AlgoFinal.ErrorSeedingPercentages.get(runNumber+"-"+ requirement.ID); 
+			 String requirementID= requirement.ID+""; 
+			 LogInfo.updateRunResults(methodTracesHashmapValues, runNumber, ErrorSeedingPercentage, requirementID);
 
 			 System.out.println(k);
 			 k++; 
