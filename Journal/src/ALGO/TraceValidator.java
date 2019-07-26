@@ -296,12 +296,11 @@ public class TraceValidator {
 					else if(methodtrace.getCallers().isEmpty() && methodtrace.getCallees().isEmpty())
 					{
 
-						methodtrace.SetPrediction(LogInfoHashMap, Prediction.EIsolatedPrediction, "", iteration);
-
+						methodtrace.SetPrediction(LogInfoHashMap, Prediction.EIsolatedPrediction, "", iteration, "IsolatedE/");
 						
 					//E NOT APPLICABLE 
 					}else {
-						methodtrace.SetPrediction(LogInfoHashMap, Prediction.ENotApplicablePrediction, "", iteration);
+						methodtrace.SetPrediction(LogInfoHashMap, Prediction.ENotApplicablePrediction, "", iteration, "NotApplicableE/");
 
 					}
 
@@ -327,12 +326,14 @@ public class TraceValidator {
 		public static void  Predict(MethodTrace methodTrace, MethodList rows, MethodList columns, HashMap<String, Prediction> MatrixHashMap, LinkedHashMap<String, LogInfo> LogInfoHashMap, String Type, int iteration) throws CloneNotSupportedException {
 			String rowKey = CalculateTNE(methodTrace.Requirement, rows); 
 			String columnKey = CalculateTNE(methodTrace.Requirement, columns); 
-
+			String reqMethod= methodTrace.Requirement.ID+"-"+methodTrace.Method.ID; 
 			Prediction prediction = MatrixHashMap.get(rowKey+"-"+columnKey);  
+			String PatternAndType=prediction.Reason+Type+"/"+rowKey+"-"+columnKey; 
+			
 			if(prediction!=null) {
 				prediction.pattern=rowKey+"-"+columnKey; 
 				prediction.Type=Type; 
-				methodTrace.SetPrediction(LogInfoHashMap, prediction, Type,iteration);
+				methodTrace.SetPrediction(LogInfoHashMap, prediction, Type,iteration, PatternAndType);
 			}
 		
 

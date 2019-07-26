@@ -8,20 +8,20 @@ import java.util.List;
 public class Prediction {
 	
 	public String PredictionValue=""; 
-	public String Reason ="";
 	public int Likelihood;
 	public String why;
 	public String Type =""; 
+	public String Reason =""; 
 	public String pattern="";
 	public boolean PredictionSet=false; 
 	public int GoldT=0;
 	public int GoldN=0;
 	public int GoldE=0;
-	public Prediction(String predictionValue, String reason, String mypattern, int likelihood) {
+	public Prediction(String predictionValue,String reason,  String type, int likelihood) {
 //		super();
 		PredictionValue = predictionValue;
-		Reason = reason;
-		pattern=mypattern; 
+		Type = type;
+		Reason=reason; 
 		Likelihood=likelihood; 
 		
 	} 
@@ -61,204 +61,203 @@ public class Prediction {
 	public static LinkedHashMap<String, ENTGoldValues> Matrix= new LinkedHashMap<String, ENTGoldValues>(){{
 		
 
-		put("Isolated/", new ENTGoldValues(0,0,0)) ; 
-		put("NotApplicable/", new ENTGoldValues(0,0,0)) ; 
+		put("IsolatedE/", new ENTGoldValues(0,0,0)) ; 
+		put("NotApplicableE/", new ENTGoldValues(0,0,0)) ; 
 
-		put("T-T/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("T-N/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("T-E/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("T-ET/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("T-EN/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("T-NT/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("T-ENT/Inner",  new ENTGoldValues(0,0,0)) ; 
+		put("PureTInner/T-T", new ENTGoldValues(0,0,0)) ; 
+		put("BoundaryEInner/T-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/T-E", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTInner/T-ET", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/T-EN", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTInner/T-NT", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTInner/T-ENT",  new ENTGoldValues(0,0,0)) ; 
 
-		put("N-T/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("N-N/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("N-E/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("N-ET/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("N-EN/Inner",new ENTGoldValues(0,0,0)) ; 
-		put("N-NT/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("N-ENT/Inner", new ENTGoldValues(0,0,0)) ; 
-
-
-		put("E-T/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("E-N/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("E-E/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("E-ET/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("E-EN/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("E-NT/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("E-ENT/Inner", new ENTGoldValues(0,0,0)) ; 
-
-		
-		put("ET-T/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("ET-N/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("ET-E/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("ET-ET/Inner",  new ENTGoldValues(0,0,0)) ; 
-		put("ET-EN/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("ET-NT/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("ET-ENT/Inner",  new ENTGoldValues(0,0,0)) ; 
+		put("BoundaryEInner/N-T", new ENTGoldValues(0,0,0)) ; 
+		put("PureNInner/N-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/N-E", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/N-ET", new ENTGoldValues(0,0,0)) ; 
+		put("MixedNInner/N-EN",new ENTGoldValues(0,0,0)) ; 
+		put("MixedNInner/N-NT", new ENTGoldValues(0,0,0)) ; 
+		put("MixedNInner/N-ENT", new ENTGoldValues(0,0,0)) ; 
 
 
-		put("EN-T/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("EN-N/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("EN-E/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("EN-ET/Inner",new ENTGoldValues(0,0,0)) ; 
-		put("EN-EN/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("EN-NT/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("EN-ENT/Inner", new ENTGoldValues(0,0,0)) ; 
-
-		put("NT-T/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("NT-N/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("NT-E/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("NT-ET/Inner",  new ENTGoldValues(0,0,0)) ; 
-		put("NT-EN/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("NT-NT/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("NT-ENT/Inner",new ENTGoldValues(0,0,0)) ; 
-
+		put("UndecidableEInner/E-T", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/E-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/E-E", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/E-ET", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/E-EN", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/E-NT", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/E-ENT", new ENTGoldValues(0,0,0)) ; 
 
 		
+		put("MixedTInner/ET-T", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/ET-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/ET-E", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTInner/ET-NT", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTInner/ET-ET",  new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/ET-EN", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTInner/ET-ENT",  new ENTGoldValues(0,0,0)) ; 
 
 
-		put("ENT-T/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("ENT-N/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("ENT-E/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("ENT-ET/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("ENT-EN/Inner", new ENTGoldValues(0,0,0)) ; 
-		put("ENT-NT/Inner",new ENTGoldValues(0,0,0)) ; 	
-		put("ENT-ENT/Inner",new ENTGoldValues(0,0,0)); 
-		
-		
-		/*******************************/
+		put("UndecidableEInner/EN-T", new ENTGoldValues(0,0,0)) ; 
+		put("MixedNInner/EN-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/EN-E", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/EN-NT", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/EN-ET",new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/EN-EN", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/EN-ENT", new ENTGoldValues(0,0,0)) ; 
 
-		put("T-T/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("T-N/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("T-E/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("T-ET/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("T-EN/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("T-NT/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("T-ENT/Leaf",  new ENTGoldValues(0,0,0)) ; 
-
-		put("N-T/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("N-N/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("N-E/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("N-ET/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("N-EN/Leaf",new ENTGoldValues(0,0,0)) ; 
-		put("N-NT/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("N-ENT/Leaf", new ENTGoldValues(0,0,0)) ; 
-
-
-		put("E-T/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("E-N/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("E-E/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("E-ET/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("E-EN/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("E-NT/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("E-ENT/Leaf", new ENTGoldValues(0,0,0)) ; 
-
-		
-		put("ET-T/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("ET-N/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("ET-E/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("ET-ET/Leaf",  new ENTGoldValues(0,0,0)) ; 
-		put("ET-EN/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("ET-NT/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("ET-ENT/Leaf",  new ENTGoldValues(0,0,0)) ; 
-
-
-		put("EN-T/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("EN-N/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("EN-E/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("EN-ET/Leaf",new ENTGoldValues(0,0,0)) ; 
-		put("EN-EN/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("EN-NT/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("EN-ENT/Leaf", new ENTGoldValues(0,0,0)) ; 
-
-		put("NT-T/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("NT-N/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("NT-E/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("NT-ET/Leaf",  new ENTGoldValues(0,0,0)) ; 
-		put("NT-EN/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("NT-NT/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("NT-ENT/Leaf",new ENTGoldValues(0,0,0)) ; 
+		put("MixedTInner/NT-T", new ENTGoldValues(0,0,0)) ; 
+		put("MixedNInner/NT-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/NT-E", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTInner/NT-NT", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTInner/NT-ET",  new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/NT-EN", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTInner/NT-ENT",new ENTGoldValues(0,0,0)) ; 
 
 
 		
 
 
-		put("ENT-T/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("ENT-N/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("ENT-E/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("ENT-ET/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("ENT-EN/Leaf", new ENTGoldValues(0,0,0)) ; 
-		put("ENT-NT/Leaf",new ENTGoldValues(0,0,0)) ; 	
-		put("ENT-ENT/Leaf",new ENTGoldValues(0,0,0)); 
+		put("MixedTInner/ENT-T", new ENTGoldValues(0,0,0)) ; 
+		put("MixedNInner/ENT-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/ENT-E", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTInner/ENT-NT",new ENTGoldValues(0,0,0)) ; 	
+		put("MixedTInner/ENT-ET", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/ENT-EN", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTInner/ENT-ENT",new ENTGoldValues(0,0,0)); 
+		
 		
 		/*******************************/
-		
-		put("T-T/Root", new ENTGoldValues(0,0,0)) ; 
-		put("T-N/Root", new ENTGoldValues(0,0,0)) ; 
-		put("T-E/Root", new ENTGoldValues(0,0,0)) ; 
-		put("T-ET/Root", new ENTGoldValues(0,0,0)) ; 
-		put("T-EN/Root", new ENTGoldValues(0,0,0)) ; 
-		put("T-NT/Root", new ENTGoldValues(0,0,0)) ; 
-		put("T-ENT/Root",  new ENTGoldValues(0,0,0)) ; 
 
-		put("N-T/Root", new ENTGoldValues(0,0,0)) ; 
-		put("N-N/Root", new ENTGoldValues(0,0,0)) ; 
-		put("N-E/Root", new ENTGoldValues(0,0,0)) ; 
-		put("N-ET/Root", new ENTGoldValues(0,0,0)) ; 
-		put("N-EN/Root",new ENTGoldValues(0,0,0)) ; 
-		put("N-NT/Root", new ENTGoldValues(0,0,0)) ; 
-		put("N-ENT/Root", new ENTGoldValues(0,0,0)) ; 
+		put("PureTLeaf/T-T", new ENTGoldValues(0,0,0)) ; 
+		put("BoundaryELeaf/T-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/T-E", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTLeaf/T-ET", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/T-EN", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTLeaf/T-NT", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTLeaf/T-ENT",  new ENTGoldValues(0,0,0)) ; 
 
-
-		put("E-T/Root", new ENTGoldValues(0,0,0)) ; 
-		put("E-N/Root", new ENTGoldValues(0,0,0)) ; 
-		put("E-E/Root", new ENTGoldValues(0,0,0)) ; 
-		put("E-ET/Root", new ENTGoldValues(0,0,0)) ; 
-		put("E-EN/Root", new ENTGoldValues(0,0,0)) ; 
-		put("E-NT/Root", new ENTGoldValues(0,0,0)) ; 
-		put("E-ENT/Root", new ENTGoldValues(0,0,0)) ; 
-
-		
-		put("ET-T/Root", new ENTGoldValues(0,0,0)) ; 
-		put("ET-N/Root", new ENTGoldValues(0,0,0)) ; 
-		put("ET-E/Root", new ENTGoldValues(0,0,0)) ; 
-		put("ET-ET/Root",  new ENTGoldValues(0,0,0)) ; 
-		put("ET-EN/Root", new ENTGoldValues(0,0,0)) ; 
-		put("ET-NT/Root", new ENTGoldValues(0,0,0)) ; 
-		put("ET-ENT/Root",  new ENTGoldValues(0,0,0)) ; 
+		put("BoundaryELeaf/N-T", new ENTGoldValues(0,0,0)) ; 
+		put("PureNLeaf/N-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/N-E", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/N-ET", new ENTGoldValues(0,0,0)) ; 
+		put("MixedNLeaf/N-EN",new ENTGoldValues(0,0,0)) ; 
+		put("MixedNLeaf/N-NT", new ENTGoldValues(0,0,0)) ; 
+		put("MixedNLeaf/N-ENT", new ENTGoldValues(0,0,0)) ; 
 
 
-		put("EN-T/Root", new ENTGoldValues(0,0,0)) ; 
-		put("EN-N/Root", new ENTGoldValues(0,0,0)) ; 
-		put("EN-E/Root", new ENTGoldValues(0,0,0)) ; 
-		put("EN-ET/Root",new ENTGoldValues(0,0,0)) ; 
-		put("EN-EN/Root", new ENTGoldValues(0,0,0)) ; 
-		put("EN-NT/Root", new ENTGoldValues(0,0,0)) ; 
-		put("EN-ENT/Root", new ENTGoldValues(0,0,0)) ; 
-
-		put("NT-T/Root", new ENTGoldValues(0,0,0)) ; 
-		put("NT-N/Root", new ENTGoldValues(0,0,0)) ; 
-		put("NT-E/Root", new ENTGoldValues(0,0,0)) ; 
-		put("NT-ET/Root",  new ENTGoldValues(0,0,0)) ; 
-		put("NT-EN/Root", new ENTGoldValues(0,0,0)) ; 
-		put("NT-NT/Root", new ENTGoldValues(0,0,0)) ; 
-		put("NT-ENT/Root",new ENTGoldValues(0,0,0)) ; 
-
+		put("UndecidableELeaf/E-T", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/E-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/E-E", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/E-ET", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/E-EN", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/E-NT", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/E-ENT", new ENTGoldValues(0,0,0)) ; 
 
 		
+		put("MixedTLeaf/ET-T", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/ET-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/ET-E", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTLeaf/ET-ET",  new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/ET-EN", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTLeaf/ET-NT", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTLeaf/ET-ENT",  new ENTGoldValues(0,0,0)) ; 
 
 
-		put("ENT-T/Root", new ENTGoldValues(0,0,0)) ; 
-		put("ENT-N/Root", new ENTGoldValues(0,0,0)) ; 
-		put("ENT-E/Root", new ENTGoldValues(0,0,0)) ; 
-		put("ENT-ET/Root", new ENTGoldValues(0,0,0)) ; 
-		put("ENT-EN/Root", new ENTGoldValues(0,0,0)) ; 
-		put("ENT-NT/Root",new ENTGoldValues(0,0,0)) ; 	
-		put("ENT-ENT/Root",new ENTGoldValues(0,0,0)); 
+		put("UndecidableELeaf/EN-T", new ENTGoldValues(0,0,0)) ; 
+		put("MixedNLeaf/EN-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/EN-E", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/EN-ET",new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/EN-EN", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/EN-NT", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/EN-ENT", new ENTGoldValues(0,0,0)) ; 
+
+		put("MixedTLeaf/NT-T", new ENTGoldValues(0,0,0)) ; 
+		put("MixedNLeaf/NT-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/NT-E", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTLeaf/NT-ET",  new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/NT-EN", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTLeaf/NT-NT", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTLeaf/NT-ENT",new ENTGoldValues(0,0,0)) ; 
+
+
+		
+
+
+		put("MixedTLeaf/ENT-T", new ENTGoldValues(0,0,0)) ; 
+		put("MixedNLeaf/ENT-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/ENT-E", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTLeaf/ENT-ET", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/ENT-EN", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTLeaf/ENT-NT",new ENTGoldValues(0,0,0)) ; 	
+		put("MixedTLeaf/ENT-ENT",new ENTGoldValues(0,0,0)); 
+		
+		/*******************************/
+		
+		put("PureTRoot/T-T", new ENTGoldValues(0,0,0)) ; 
+		put("BoundaryERoot/T-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/T-E", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTRoot/T-ET", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/T-EN", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTRoot/T-NT", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTRoot/T-ENT",  new ENTGoldValues(0,0,0)) ; 
+
+		put("BoundaryERoot/N-T", new ENTGoldValues(0,0,0)) ; 
+		put("PureNRoot/N-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/N-E", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/N-ET", new ENTGoldValues(0,0,0)) ; 
+		put("MixedNRoot/N-EN",new ENTGoldValues(0,0,0)) ; 
+		put("MixedNRoot/N-NT", new ENTGoldValues(0,0,0)) ; 
+		put("MixedNRoot/N-ENT", new ENTGoldValues(0,0,0)) ; 
+
+
+		put("UndecidableERoot/E-T", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/E-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/E-E", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/E-ET", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/E-EN", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/E-NT", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/E-ENT", new ENTGoldValues(0,0,0)) ; 
+
+		
+		put("MixedTRoot/ET-T", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/ET-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/ET-E", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTRoot/ET-ET",  new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/ET-EN", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTRoot/ET-NT", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTRoot/ET-ENT",  new ENTGoldValues(0,0,0)) ; 
+
+
+		put("UndecidableERoot/EN-T", new ENTGoldValues(0,0,0)) ; 
+		put("MixedNRoot/EN-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/EN-E", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/EN-ET",new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/EN-EN", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/EN-NT", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/EN-ENT", new ENTGoldValues(0,0,0)) ; 
+
+		put("MixedTRoot/NT-T", new ENTGoldValues(0,0,0)) ; 
+		put("MixedNRoot/NT-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/NT-E", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTRoot/NT-ET",  new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/NT-EN", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTRoot/NT-NT", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTRoot/NT-ENT",new ENTGoldValues(0,0,0)) ; 
+
+
+		
+
+
+		put("MixedTRoot/ENT-T", new ENTGoldValues(0,0,0)) ; 
+		put("MixedNRoot/ENT-N", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/ENT-E", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTRoot/ENT-ET", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/ENT-EN", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTRoot/ENT-NT",new ENTGoldValues(0,0,0)) ; 	
+		put("MixedTRoot/ENT-ENT",new ENTGoldValues(0,0,0)); 
 	}}; 
-	
 	
 	
 	

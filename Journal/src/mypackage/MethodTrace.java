@@ -27,17 +27,46 @@ public final class MethodTrace {
 	public Requirement Requirement=new Requirement();
 	public String gold;
 	public String Input;
-
+	
 	public Prediction prediction ; 
 	public String predictionReason ;
+	public String patternAndType ;
+
 	public String predictionType ;
 	public String predictionValue ;
 	public String predictionPattern ;
 	public String classPredictionGeneralized; 
-
+	private String PatternAndType=""; 
 	boolean SubjectDeveloperEqualityFlag;
 	public String  ClassLevelGold; 
+	public String pattern=""; 
+	public String type=""; 
 
+	public String getPattern() {
+		return pattern;
+	}
+
+
+
+	public void setPattern(String pattern) {
+		this.pattern = pattern;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getPatternAndType() {
+		return PatternAndType;
+	}
+
+	public void setPatternAndType(String patternAndType) {
+		PatternAndType = patternAndType;
+	}
 
 	public String getClassPredictionGeneralized() {
 		return classPredictionGeneralized;
@@ -247,57 +276,59 @@ public final class MethodTrace {
 	/**
 	 * @param type 
 	 * @param iteration 
+	 * @param patternAndType2 
 	 * @throws CloneNotSupportedException **********************************************************************************************************************************************/
-	public void SetPrediction(LinkedHashMap<String, LogInfo> LogInfoHashMap, Prediction Prediction, String type, int iteration) throws CloneNotSupportedException
+	public void SetPrediction(LinkedHashMap<String, LogInfo> LogInfoHashMap, Prediction Prediction, String type, int iteration, String patternAndType2) throws CloneNotSupportedException
 			
 			
 			{
 		String reqMethod = this.Requirement.ID+"-"+this.Method.ID; 
 
-		
+//		this.setPatternAndType(Prediction.Reason+Prediction.Type+"/"+Prediction.pattern);
 		if(this.prediction.Likelihood<Prediction.Likelihood) {
-
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(Prediction.Reason+type+"/"+Prediction.pattern);
+			this.setPatternAndType(patternAndType2);
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(this.getPatternAndType());
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(Prediction.PredictionValue);
 			MethodTrace.modified=true; 		
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+this.getPatternAndType(); 
 			this.prediction=Prediction; 
-			this.PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
+			this.PredictionSummary=this.prediction.PredictionValue+"/"+this.getPatternAndType(); 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.PredictionSummary; 
-			setValues(Prediction.PredictionValue, Prediction.Reason, Prediction.Type, Prediction.pattern); 
 			
 		
 		
 		}
 		else if(this.prediction.PredictionValue.equals("E") && !Prediction.PredictionValue.equals("E")) {
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(Prediction.Reason+type+"/"+Prediction.pattern);
+			this.setPatternAndType(patternAndType2);
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(this.getPatternAndType());
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(Prediction.PredictionValue);
 			MethodTrace.modified=true; 		
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+this.getPatternAndType(); 
 			this.prediction=Prediction; 
-			this.PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
+			this.PredictionSummary=this.prediction.PredictionValue+"/"+this.getPatternAndType(); 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.PredictionSummary; 
-			setValues(Prediction.PredictionValue, Prediction.Reason, Prediction.Type, Prediction.pattern); 
 			
 			
 
 		}else if(this.prediction.PredictionValue.equals("E") && Prediction.PredictionValue.equals("E")) {
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(Prediction.Reason+type+"/"+Prediction.pattern);
+			this.setPatternAndType(patternAndType2);
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).getIterationValues().add(this.getPatternAndType());
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setPrediction(Prediction.PredictionValue);
-			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
+			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.prediction.PredictionValue+"/"+this.getPatternAndType(); 
 			this.prediction=Prediction; 
-			this.PredictionSummary=this.prediction.PredictionValue+"/"+prediction.Reason+"/"+type+"/"+prediction.pattern; 
+			this.PredictionSummary=this.prediction.PredictionValue+"/"+this.getPatternAndType(); 
 			LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).PredictionSummary=this.PredictionSummary; 
-			setValues(Prediction.PredictionValue, Prediction.Reason, Prediction.Type, Prediction.pattern); 
 
 		}
 	
 
-
+	
 		HashMap<String, MethodTrace> methodTraces = DatabaseInput.OwnerClassestoMethodsHashMap.get(this.Requirement.ID+"-"+this.Method.Owner.ID); 
 		methodTraces.put(this.Requirement.ID+"-"+this.Method.ID, this); 	
 
 		System.out.println("yes");
+		
+		
 
 		}
 
@@ -415,8 +446,11 @@ public final class MethodTrace {
 		
 		
 		
-
-
+		
+		////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////
+		////////////////////////////////////////////////////////////////////////////////////////////
 		
 		setPrediction(this.prediction);
 		////////////////////////////////////////////////////////////////////////////////////////////
@@ -717,7 +751,8 @@ ChildrenPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"
 
 
 }
-		
+				LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setInputState(this.getInput());
+
 
 				LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setInterfaces(Interfaces);
 				LogInfoHashMap.get(this.Requirement.ID+"-"+this.Method.ID).setInterfacesPredictions(InterfacesPredictions);
@@ -810,17 +845,27 @@ ChildrenPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"
 	}
 	private void SetPredictionsSetOwners(mypackage.Method caller, MethodTrace methodTrace, List<String> callersPredictions, List<String> callersOwners) {
 		// TODO Auto-generated method stub
-		if(caller.Owner.ID.equals(this.Method.Owner.ID)) {
+		if(caller.Owner.ID.equals(this.Method.Owner.ID) && this.getInput().equals("E") && !this.getPrediction().PredictionValue.equals("E")) {
+			callersPredictions.add("!"+AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction().PredictionValue.toLowerCase()); 
+
+		}else if(caller.Owner.ID.equals(this.Method.Owner.ID) && this.getInput().equals(this.getPrediction().PredictionValue)) {
 			callersPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction().PredictionValue.toLowerCase()); 
 
-		}else {
-//			System.out.println(this.Requirement.ID+"-"+caller.ID);
-//			System.out.println(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID));
+		}else if(!caller.Owner.ID.equals(this.Method.Owner.ID) && this.getInput().equals("E") && !this.getPrediction().PredictionValue.equals("E")) {
+			callersPredictions.add("!"+AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction().PredictionValue); 
+
+		}else if(!caller.Owner.ID.equals(this.Method.Owner.ID) && this.getInput().equals(this.getPrediction().PredictionValue)) {
 			callersPredictions.add(AlgoFinal.methodtraces2HashMap.get(this.Requirement.ID+"-"+caller.ID).getPrediction().PredictionValue); 
+
 		}
-		if(caller.Owner.ID.equals(this.Method.Owner.ID)) {
+		
+		if(caller.Owner.ID.equals(this.Method.Owner.ID) && this.getInput().equals("E") && !this.getPrediction().PredictionValue.equals("E")) {
+			callersOwners.add("!"+DatabaseInput.classTraceHashMap.get(this.Requirement.ID+"-"+caller.Owner.ID).DeveloperGold.toLowerCase()); 
+		}else if(caller.Owner.ID.equals(this.Method.Owner.ID) && this.getInput().equals(this.getPrediction().PredictionValue)){
 			callersOwners.add(DatabaseInput.classTraceHashMap.get(this.Requirement.ID+"-"+caller.Owner.ID).DeveloperGold.toLowerCase()); 
-		}else {
+		}else if(!caller.Owner.ID.equals(this.Method.Owner.ID) && this.getInput().equals("E") && !this.getPrediction().PredictionValue.equals("E")) {
+			callersOwners.add("!"+DatabaseInput.classTraceHashMap.get(this.Requirement.ID+"-"+caller.Owner.ID).DeveloperGold); 
+		}else if(!caller.Owner.ID.equals(this.Method.Owner.ID) && this.getInput().equals(this.getPrediction().PredictionValue)){
 			callersOwners.add(DatabaseInput.classTraceHashMap.get(this.Requirement.ID+"-"+caller.Owner.ID).DeveloperGold); 
 		}
 	}
