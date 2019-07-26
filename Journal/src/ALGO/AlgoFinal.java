@@ -325,11 +325,12 @@ public class AlgoFinal  {
 //		while (MethodTrace.modified ) {
 //			System.out.println("iteration "+iteration);
 //			MethodTrace.modified = false;
-		
 		if(AlgoFinal.NoSeeding ) {
 					if(ProgramName.equals("chess")) {
 						TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
+						LogInfo.writeHeaders( LogInfo.bwchessRunResultsWriter);
 						LogInfo.updateRunResults(MethodTracesList, 0, 0, "NA", LogInfo.bwchessRunResultsWriter);
+
 					}else if(ProgramName.equals("gantt")) {
 						TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
 						LogInfo.updateRunResults(MethodTracesList, 0, 0, "NA", LogInfo.bwGanttRunResultsWriter);
@@ -630,7 +631,7 @@ public class AlgoFinal  {
 		// TODO Auto-generated method stub
 
 		//CREATING A TRACE LIST OF METHODS THAT TRACE TO EACH REQUIREMENT
-		
+		LogInfo.writeHeaders(bufferedWriter); 
 		for (MethodTrace methodtrace : methodTracesHashmapValues) {
 			List<MethodTrace> TMethodTracesList = new ArrayList<MethodTrace>(); 
 
@@ -891,9 +892,9 @@ public class AlgoFinal  {
 
 		for(int i=0; i<5; i++) {
 			System.out.println("========================> RUN "+i);
-//			String ProgramName = "chess";
-//			AlgoFinal frame = new AlgoFinal(
-//					ProgramName, i);
+			String ProgramName = "chess";
+			AlgoFinal frame = new AlgoFinal(
+					ProgramName, i);
 //			
 //						String ProgramName2 = "gantt";
 //						AlgoFinal frame = new AlgoFinal(ProgramName2, i);
@@ -906,8 +907,8 @@ public class AlgoFinal  {
 //			
 //							 //ooo
 //							 
-						String ProgramName4 = "jhotdraw";
-						AlgoFinal	frame = new AlgoFinal(ProgramName4, i);
+//						String ProgramName4 = "jhotdraw";
+//						AlgoFinal	frame = new AlgoFinal(ProgramName4, i);
 
 		}
 	}
