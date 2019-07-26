@@ -642,11 +642,11 @@ public class AlgoFinal  {
 		//SEEDING PROCESS 
 		for(Requirement requirement: DatabaseInput.RequirementHashMap.values()) {
 			Random r = new Random();
-			 int ErrorSeedingPercentageT=r.nextInt( (99 - 1) + 1) + 1;
+			 int ErrorSeedingPercentageTN=r.nextInt( (99 - 1) + 1) + 1;
 			 List<MethodTrace> TNMethodTracesList = AlgoFinal.TNMethodTracesHashMap.get(requirement.ID+""); 
 			 if(TNMethodTracesList!=null) {
-				 int AmountofSeededTErrors= ErrorSeedingPercentageT*TNMethodTracesList.size()/100; 
-					AlgoFinal.ErrorSeedingPercentages.put(runNumber+"-"+ requirement.ID, ErrorSeedingPercentageT); 
+				 int AmountofSeededTErrors= ErrorSeedingPercentageTN*TNMethodTracesList.size()/100; 
+					AlgoFinal.ErrorSeedingPercentages.put(runNumber+"-"+ requirement.ID, ErrorSeedingPercentageTN); 
 					TNMethodTracesList=TNMethodTracesHashMap.get(requirement.ID+""); 
 					
 					
