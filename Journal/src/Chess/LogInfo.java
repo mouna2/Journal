@@ -47,6 +47,9 @@ public class LogInfo {
 	public String PrecisionRecall; 
 	String GoldFinal; 
 	public static BufferedWriter bwchessRunResultsWriter =null; 
+	public static BufferedWriter bwGanttRunResultsWriter =null; 
+	public static BufferedWriter bwJHotDrawRunResultsWriter =null; 
+	public static BufferedWriter bwiTrustRunResultsWriter =null; 
 
 	String SubjectGold; 
 	public String PredictionSummary=""; 
@@ -1297,6 +1300,9 @@ public class LogInfo {
 				File myfile3 = new File("C:\\Users\\mouna\\new_workspace\\TracePredictorFinal\\src\\GanttFiles\\MethodCalls.txt");
 				FileOutputStream myFileOutputStream3 = new FileOutputStream(myfile3);
 				 bwGANTTMethodCallsWriter = new BufferedWriter(new OutputStreamWriter(myFileOutputStream3));
+				 
+				 bwGanttRunResultsWriter = new BufferedWriter(new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\RunResultsGantt.txt", true));
+
 		}
 
 		if (ProgramName.equals("itrust")) {
@@ -1329,6 +1335,9 @@ public class LogInfo {
 			File myfile3 = new File("C:\\Users\\mouna\\new_workspace\\TracePredictorFinal\\src\\iTrustFiles\\MethodCalls.txt");
 			FileOutputStream myFileOutputStream3 = new FileOutputStream(myfile3);
 			 bwiTrustMethodCallsWriter = new BufferedWriter(new OutputStreamWriter(myFileOutputStream3));
+			 
+			 bwiTrustRunResultsWriter = new BufferedWriter(new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\RunResultsiTrust.txt", true));
+
 		}
 
 		if (ProgramName.equals("jhotdraw")) {
@@ -1362,6 +1371,9 @@ public class LogInfo {
 				File myfile3 = new File("C:\\Users\\mouna\\new_workspace\\TracePredictorFinal\\src\\JHotDrawFiles\\MethodCalls.txt");
 				FileOutputStream myFileOutputStream3 = new FileOutputStream(myfile3);
 				 bwJHotDrawMethodCallsWriter = new BufferedWriter(new OutputStreamWriter(myFileOutputStream3));
+				 
+				 bwJHotDrawRunResultsWriter = new BufferedWriter(new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\RunResultsJHotDraw.txt", true));
+
 				
 		}
 		// bwfile2.newLine();
@@ -2176,10 +2188,9 @@ public class LogInfo {
 	}
 	
 	
-	public static void updateRunResults(List<MethodTrace> methodtraces, int runNumber, int errorSeedingPercentage, String requirementID) throws IOException {
+	public static void updateRunResults(List<MethodTrace> methodtraces, int runNumber, int errorSeedingPercentage, String requirementID, BufferedWriter mybufferWriter) throws IOException {
 		// TODO Auto-generated method stub
-		if (AlgoFinal.ProgramName.equals("chess")) {
-			bwchessRunResultsWriter.write("Run#, %Seeding, Requirement, "
+			mybufferWriter.write("Run#, %Seeding, Requirement, "
 										+"E/Isolated/GoldE, E/Isolated/GoldN, E/Isolated/GoldT,"
 										+ "E/NotApplicable/GoldE, E/Isolated/GoldN, E/Isolated/GoldT, "
 										+"T-T/Inner/GoldE,T-T/Inner/GoldN,T-T/Inner/GoldT,"
@@ -2412,7 +2423,7 @@ public class LogInfo {
 									);
 		
 			
-			bwchessRunResultsWriter.newLine();
+			mybufferWriter.newLine();
 			ALGO.Prediction.Matrix= reinitializeMatrix(ALGO.Prediction.Matrix); 
 
 			for(MethodTrace methodTrace: methodtraces) {
@@ -2441,20 +2452,22 @@ public class LogInfo {
 					ALGO.Prediction.Matrix.put(methodTrace.getPatternAndType(),GoldValues);
 				}
 			}
-			bwchessRunResultsWriter.write(runNumber+","+AlgoFinal.ErrorSeedingPercentages.get(runNumber+"-"+requirementID)+","+requirementID+","); 
+			mybufferWriter.write(runNumber+","+AlgoFinal.ErrorSeedingPercentages.get(runNumber+"-"+requirementID)+","+requirementID+","); 
 
 			for(String mykey: ALGO.Prediction.Matrix.keySet()) {
-				bwchessRunResultsWriter.write(ALGO.Prediction.Matrix.get(mykey).getE()+","+ALGO.Prediction.Matrix.get(mykey).getN()+","+ALGO.Prediction.Matrix.get(mykey).getT()+","); 
+				mybufferWriter.write(ALGO.Prediction.Matrix.get(mykey).getE()+","+ALGO.Prediction.Matrix.get(mykey).getN()+","+ALGO.Prediction.Matrix.get(mykey).getT()+","); 
 				
 	
 				}
 			
-			bwchessRunResultsWriter.newLine();
+			mybufferWriter.newLine();
 
-		}
+		
 		
 		if(AlgoFinal.NoSeeding) {
-			bwchessRunResultsWriter.close();
+			
+				mybufferWriter.close();
+			
 
 		}
 	}
