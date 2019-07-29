@@ -61,12 +61,12 @@ public class Prediction {
 	public static LinkedHashMap<String, ENTGoldValues> Matrix= new LinkedHashMap<String, ENTGoldValues>(){{
 		
 
-		put("IsolatedE/", new ENTGoldValues(0,0,0)) ; 
-		put("NotApplicableE/", new ENTGoldValues(0,0,0)) ; 
-
+		put("IsolatedE", new ENTGoldValues(0,0,0)) ; 
+		put("NotApplicableE", new ENTGoldValues(0,0,0)) ; 
+/************************************************************************/
 		put("PureTInner/T-T", new ENTGoldValues(0,0,0)) ; 
 		put("BoundaryEInner/T-N", new ENTGoldValues(0,0,0)) ; 
-		put("UndecidableEInner/T-E", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/T-E", new ENTGoldValues(0,0,0)) ;
 		put("MixedTInner/T-ET", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableEInner/T-EN", new ENTGoldValues(0,0,0)) ; 
 		put("MixedTInner/T-NT", new ENTGoldValues(0,0,0)) ; 
@@ -90,30 +90,38 @@ public class Prediction {
 		put("UndecidableEInner/E-ENT", new ENTGoldValues(0,0,0)) ; 
 
 		
+		
 		put("MixedTInner/ET-T", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableEInner/ET-N", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableEInner/ET-E", new ENTGoldValues(0,0,0)) ; 
-		put("MixedTInner/ET-NT", new ENTGoldValues(0,0,0)) ; 
 		put("MixedTInner/ET-ET",  new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableEInner/ET-EN", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTInner/ET-NT", new ENTGoldValues(0,0,0)) ; 
 		put("MixedTInner/ET-ENT",  new ENTGoldValues(0,0,0)) ; 
-
-
+		
+		
 		put("UndecidableEInner/EN-T", new ENTGoldValues(0,0,0)) ; 
 		put("MixedNInner/EN-N", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableEInner/EN-E", new ENTGoldValues(0,0,0)) ; 
-		put("UndecidableEInner/EN-NT", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableEInner/EN-ET",new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableEInner/EN-EN", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableEInner/EN-NT", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableEInner/EN-ENT", new ENTGoldValues(0,0,0)) ; 
-
+		
 		put("MixedTInner/NT-T", new ENTGoldValues(0,0,0)) ; 
 		put("MixedNInner/NT-N", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableEInner/NT-E", new ENTGoldValues(0,0,0)) ; 
-		put("MixedTInner/NT-NT", new ENTGoldValues(0,0,0)) ; 
 		put("MixedTInner/NT-ET",  new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableEInner/NT-EN", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTInner/NT-NT", new ENTGoldValues(0,0,0)) ; 
 		put("MixedTInner/NT-ENT",new ENTGoldValues(0,0,0)) ; 
+		
+	
+
+
+		
+
+		
 
 
 		
@@ -122,9 +130,9 @@ public class Prediction {
 		put("MixedTInner/ENT-T", new ENTGoldValues(0,0,0)) ; 
 		put("MixedNInner/ENT-N", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableEInner/ENT-E", new ENTGoldValues(0,0,0)) ; 
-		put("MixedTInner/ENT-NT",new ENTGoldValues(0,0,0)) ; 	
 		put("MixedTInner/ENT-ET", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableEInner/ENT-EN", new ENTGoldValues(0,0,0)) ; 
+		put("MixedTInner/ENT-NT",new ENTGoldValues(0,0,0)) ; 	
 		put("MixedTInner/ENT-ENT",new ENTGoldValues(0,0,0)); 
 		
 		
@@ -132,7 +140,7 @@ public class Prediction {
 
 		put("PureTLeaf/T-T", new ENTGoldValues(0,0,0)) ; 
 		put("BoundaryELeaf/T-N", new ENTGoldValues(0,0,0)) ; 
-		put("UndecidableELeaf/T-E", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableELeaf/T-E", new ENTGoldValues(0,0,0)) ;
 		put("MixedTLeaf/T-ET", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableELeaf/T-EN", new ENTGoldValues(0,0,0)) ; 
 		put("MixedTLeaf/T-NT", new ENTGoldValues(0,0,0)) ; 
@@ -156,6 +164,7 @@ public class Prediction {
 		put("UndecidableELeaf/E-ENT", new ENTGoldValues(0,0,0)) ; 
 
 		
+		
 		put("MixedTLeaf/ET-T", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableELeaf/ET-N", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableELeaf/ET-E", new ENTGoldValues(0,0,0)) ; 
@@ -163,8 +172,8 @@ public class Prediction {
 		put("UndecidableELeaf/ET-EN", new ENTGoldValues(0,0,0)) ; 
 		put("MixedTLeaf/ET-NT", new ENTGoldValues(0,0,0)) ; 
 		put("MixedTLeaf/ET-ENT",  new ENTGoldValues(0,0,0)) ; 
-
-
+		
+		
 		put("UndecidableELeaf/EN-T", new ENTGoldValues(0,0,0)) ; 
 		put("MixedNLeaf/EN-N", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableELeaf/EN-E", new ENTGoldValues(0,0,0)) ; 
@@ -172,7 +181,7 @@ public class Prediction {
 		put("UndecidableELeaf/EN-EN", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableELeaf/EN-NT", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableELeaf/EN-ENT", new ENTGoldValues(0,0,0)) ; 
-
+		
 		put("MixedTLeaf/NT-T", new ENTGoldValues(0,0,0)) ; 
 		put("MixedNLeaf/NT-N", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableELeaf/NT-E", new ENTGoldValues(0,0,0)) ; 
@@ -180,11 +189,7 @@ public class Prediction {
 		put("UndecidableELeaf/NT-EN", new ENTGoldValues(0,0,0)) ; 
 		put("MixedTLeaf/NT-NT", new ENTGoldValues(0,0,0)) ; 
 		put("MixedTLeaf/NT-ENT",new ENTGoldValues(0,0,0)) ; 
-
-
 		
-
-
 		put("MixedTLeaf/ENT-T", new ENTGoldValues(0,0,0)) ; 
 		put("MixedNLeaf/ENT-N", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableELeaf/ENT-E", new ENTGoldValues(0,0,0)) ; 
@@ -197,7 +202,7 @@ public class Prediction {
 		
 		put("PureTRoot/T-T", new ENTGoldValues(0,0,0)) ; 
 		put("BoundaryERoot/T-N", new ENTGoldValues(0,0,0)) ; 
-		put("UndecidableERoot/T-E", new ENTGoldValues(0,0,0)) ; 
+		put("UndecidableERoot/T-E", new ENTGoldValues(0,0,0)) ;
 		put("MixedTRoot/T-ET", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableERoot/T-EN", new ENTGoldValues(0,0,0)) ; 
 		put("MixedTRoot/T-NT", new ENTGoldValues(0,0,0)) ; 
@@ -221,6 +226,7 @@ public class Prediction {
 		put("UndecidableERoot/E-ENT", new ENTGoldValues(0,0,0)) ; 
 
 		
+		
 		put("MixedTRoot/ET-T", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableERoot/ET-N", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableERoot/ET-E", new ENTGoldValues(0,0,0)) ; 
@@ -228,8 +234,8 @@ public class Prediction {
 		put("UndecidableERoot/ET-EN", new ENTGoldValues(0,0,0)) ; 
 		put("MixedTRoot/ET-NT", new ENTGoldValues(0,0,0)) ; 
 		put("MixedTRoot/ET-ENT",  new ENTGoldValues(0,0,0)) ; 
-
-
+		
+		
 		put("UndecidableERoot/EN-T", new ENTGoldValues(0,0,0)) ; 
 		put("MixedNRoot/EN-N", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableERoot/EN-E", new ENTGoldValues(0,0,0)) ; 
@@ -237,7 +243,7 @@ public class Prediction {
 		put("UndecidableERoot/EN-EN", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableERoot/EN-NT", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableERoot/EN-ENT", new ENTGoldValues(0,0,0)) ; 
-
+		
 		put("MixedTRoot/NT-T", new ENTGoldValues(0,0,0)) ; 
 		put("MixedNRoot/NT-N", new ENTGoldValues(0,0,0)) ; 
 		put("UndecidableERoot/NT-E", new ENTGoldValues(0,0,0)) ; 
@@ -245,6 +251,13 @@ public class Prediction {
 		put("UndecidableERoot/NT-EN", new ENTGoldValues(0,0,0)) ; 
 		put("MixedTRoot/NT-NT", new ENTGoldValues(0,0,0)) ; 
 		put("MixedTRoot/NT-ENT",new ENTGoldValues(0,0,0)) ; 
+		
+	
+
+
+		
+
+		
 
 
 		

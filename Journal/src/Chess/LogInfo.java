@@ -2189,241 +2189,7 @@ public class LogInfo {
 	
 	
 	public static void updateRunResults(List<MethodTrace> methodtraces, int runNumber, int errorSeedingPercentage, String requirementID, BufferedWriter mybufferWriter) throws IOException {
-		// TODO Auto-generated method stub
-//			mybufferWriter.write("Run#, %Seeding, Requirement, "
-//										+"E/Isolated/GoldE, E/Isolated/GoldN, E/Isolated/GoldT,"
-//										+ "E/NotApplicable/GoldE, E/Isolated/GoldN, E/Isolated/GoldT, "
-//										+"T-T/Inner/GoldE,T-T/Inner/GoldN,T-T/Inner/GoldT,"
-//										+ "T-N/Inner/GoldE,T-N/Inner/GoldN,T-N/Inner/GoldT, "
-//										+ "T-E/Inner/GoldE, T-E/Inner/GoldN,T-E/Inner/GoldT,"
-//										+ "T-ET/Inner/GoldE,T-ET/Inner/GoldN,T-ET/Inner/GoldT,"
-//										+ "T-EN/Inner/GoldE,T-EN/Inner/GoldN,T-EN/Inner/GoldT,"
-//										+ "T-NT/Inner/GoldE,T-NT/Inner/GoldN,T-NT/Inner/GoldT,"
-//										+ "T-ENT/Inner/GoldE,T-ENT/Inner/GoldN,T-ENT/Inner/GoldT,"
-//										
-//										
-//										+"N-T/Inner/GoldE, N-T/Inner/GoldN,N-T/Inner/GoldT, "
-//										+ "N-N/Inner/GoldE, N-N/Inner/GoldN, N-N/Inner/GoldT,"
-//										+ "N-E/Inner/GoldE, N-E/Inner/GoldN, N-E/Inner/GoldT,"
-//										+ "N-ET/Inner/GoldE, N-ET/Inner/GoldN, N-ET/Inner/GoldT,"
-//										+ "N-EN/Inner/GoldE, N-EN/Inner/GoldN, N-EN/Inner/GoldT,"
-//										+ "N-NT/Inner/GoldE, N-NT/Inner/GoldN, N-NT/Inner/GoldT,"
-//										+ "N-ENT/Inner/GoldE, N-ENT/Inner/GoldN, N-ENT/Inner/GoldT,"
-//
-//
-//										+"E-T/Inner/GoldE, E-T/Inner/GoldN,E-T/Inner/GoldT, "
-//										+ "E-N/Inner/GoldE, E-N/Inner/GoldN, E-N/Inner/GoldT,"
-//										+ "E-E/Inner/GoldE, E-E/Inner/GoldN, E-E/Inner/GoldT,"
-//										+ "E-ET/Inner/GoldE, E-ET/Inner/GoldN, E-ET/Inner/GoldT,"
-//										+ "E-EN/Inner/GoldE, E-EN/Inner/GoldN, E-EN/Inner/GoldT,"
-//										+ "E-NT/Inner/GoldE, E-NT/Inner/GoldN, E-NT/Inner/GoldT,"
-//										+ "E-ENT/Inner/GoldE, E-ENT/Inner/GoldN, E-ENT/Inner/GoldT,"
-//										
-//										
-//										+"ET-T/Inner/GoldE, ET-T/Inner/GoldN,ET-T/Inner/GoldT, "
-//										+ "ET-N/Inner/GoldE, ET-N/Inner/GoldN, ET-N/Inner/GoldT,"
-//										+ "ET-E/Inner/GoldE, ET-E/Inner/GoldN, ET-E/Inner/GoldT,"
-//										+ "ET-NT/Inner/GoldE, ET-NT/Inner/GoldN, ET-NT/Inner/GoldT,"						
-//										+ "ET-ET/Inner/GoldE, ET-ET/Inner/GoldN, ET-ET/Inner/GoldT,"
-//										+ "ET-EN/Inner/GoldE, ET-EN/Inner/GoldN, ET-EN/Inner/GoldT,"
-//										+ "ET-ENT/Inner/GoldE, ET-ENT/Inner/GoldN, ET-ENT/Inner/GoldT,"
-//										
-//										
-//										
-//										+ "EN-T/Inner/GoldE, EN-T/Inner/GoldN,EN-T/Inner/GoldT, "
-//										+ "EN-N/Inner/GoldE, EN-N/Inner/GoldN, EN-N/Inner/GoldT,"
-//										+ "EN-E/Inner/GoldE, EN-E/Inner/GoldN, EN-E/Inner/GoldT,"
-//										+ "EN-NT/Inner/GoldE, EN-NT/Inner/GoldN, EN-NT/Inner/GoldT,"
-//										+ "EN-ET/Inner/GoldE, EN-ET/Inner/GoldN, EN-ET/Inner/GoldT,"
-//										+ "EN-EN/Inner/GoldE, EN-EN/Inner/GoldN, EN-EN/Inner/GoldT,"
-//										+ "EN-ENT/Inner/GoldE, EN-ENT/Inner/GoldN, EN-ENT/Inner/GoldT,"
-//										
-//										+ "NT-T/Inner/GoldE, NT-T/Inner/GoldN,NT-T/Inner/GoldT, "
-//										+ "NT-N/Inner/GoldE, NT-N/Inner/GoldN, NT-N/Inner/GoldT,"
-//										+ "NT-E/Inner/GoldE, NT-E/Inner/GoldN, NT-E/Inner/GoldT,"
-//										+ "NT-NT/Inner/GoldE, NT-NT/Inner/GoldN, NT-NT/Inner/GoldT,"	
-//										+ "NT-ET/Inner/GoldE, NT-ET/Inner/GoldN, NT-ET/Inner/GoldT,"
-//										+ "NT-EN/Inner/GoldE, NT-EN/Inner/GoldN, NT-EN/Inner/GoldT,"
-//										+ "NT-ENT/Inner/GoldE, NT-ENT/Inner/GoldN, NT-ENT/Inner/GoldT,"
-//
-//									
-//										
-//									
-//									
-//									
-//									
-//									
-//									
-//									
-//									
-//					
-//					
-//									
-//								+ "ENT-T/Inner/GoldE, ENT-T/Inner/GoldN,ENT-T/Inner/GoldT, "
-//								+ "ENT-N/Inner/GoldE, ENT-N/Inner/GoldN, ENT-N/Inner/GoldT,"
-//								+ "ENT-E/Inner/GoldE, ENT-E/Inner/GoldN, ENT-E/Inner/GoldT,"
-//								+ "ENT-NT/Inner/GoldE,ENT-NT/Inner/GoldN, ENT-NT/Inner/GoldT,"
-//								+ "ENT-ET/Inner/GoldE, ENT-ET/Inner/GoldN, ENT-ET/Inner/GoldT,"
-//								+ "ENT-EN/Inner/GoldE, ENT-EN/Inner/GoldN, ENT-EN/Inner/GoldT,"
-//								+ "ENT-ENT/Inner/GoldE, ENT-ENT/Inner/GoldN, ENT-ENT/Inner/GoldT,"
-//								
-//								/***********************************************************/
-//									
-//								+"T-T/Leaf/GoldE,T-T/Leaf/GoldN,T-T/Leaf/GoldT,"
-//								+ "T-N/Leaf/GoldE,T-N/Leaf/GoldN,T-N/Leaf/GoldT, "
-//								+ "T-E/Leaf/GoldE, T-E/Leaf/GoldN,T-E/Leaf/GoldT,"
-//								+ "T-ET/Leaf/GoldE,T-ET/Leaf/GoldN,T-ET/Leaf/GoldT,"
-//								+ "T-EN/Leaf/GoldE,T-EN/Leaf/GoldN,T-EN/Leaf/GoldT,"
-//								+ "T-NT/Leaf/GoldE,T-NT/Leaf/GoldN,T-NT/Leaf/GoldT,"
-//								+ "T-ENT/Leaf/GoldE,T-ENT/Leaf/GoldN,T-ENT/Leaf/GoldT,"
-//								
-//								
-//								+"N-T/Leaf/GoldE, N-T/Leaf/GoldN,N-T/Leaf/GoldT, "
-//								+ "N-N/Leaf/GoldE, N-N/Leaf/GoldN, N-N/Leaf/GoldT,"
-//								+ "N-E/Leaf/GoldE, N-E/Leaf/GoldN, N-E/Leaf/GoldT,"
-//								+ "N-ET/Leaf/GoldE, N-ET/Leaf/GoldN, N-ET/Leaf/GoldT,"
-//								+ "N-EN/Leaf/GoldE, N-EN/Leaf/GoldN, N-EN/Leaf/GoldT,"
-//								+ "N-NT/Leaf/GoldE, N-NT/Leaf/GoldN, N-NT/Leaf/GoldT,"
-//								+ "N-ENT/Leaf/GoldE, N-ENT/Leaf/GoldN, N-ENT/Leaf/GoldT,"
-//
-//
-//								+"E-T/Leaf/GoldE, E-T/Leaf/GoldN,E-T/Leaf/GoldT, "
-//								+ "E-N/Leaf/GoldE, E-N/Leaf/GoldN, E-N/Leaf/GoldT,"
-//								+ "E-E/Leaf/GoldE, E-E/Leaf/GoldN, E-E/Leaf/GoldT,"
-//								+ "E-ET/Leaf/GoldE, E-ET/Leaf/GoldN, E-ET/Leaf/GoldT,"
-//								+ "E-EN/Leaf/GoldE, E-EN/Leaf/GoldN, E-EN/Leaf/GoldT,"
-//								+ "E-NT/Leaf/GoldE, E-NT/Leaf/GoldN, E-NT/Leaf/GoldT,"
-//								+ "E-ENT/Leaf/GoldE, E-ENT/Leaf/GoldN, E-ENT/Leaf/GoldT,"
-//								
-//								
-//								+"ET-T/Leaf/GoldE, ET-T/Leaf/GoldN,ET-T/Leaf/GoldT, "
-//								+ "ET-N/Leaf/GoldE, ET-N/Leaf/GoldN, ET-N/Leaf/GoldT,"
-//								+ "ET-E/Leaf/GoldE, ET-E/Leaf/GoldN, ET-E/Leaf/GoldT,"
-//								+ "ET-NT/Leaf/GoldE, ET-NT/Leaf/GoldN, ET-NT/Leaf/GoldT,"						
-//								+ "ET-ET/Leaf/GoldE, ET-ET/Leaf/GoldN, ET-ET/Leaf/GoldT,"
-//								+ "ET-EN/Leaf/GoldE, ET-EN/Leaf/GoldN, ET-EN/Leaf/GoldT,"
-//								+ "ET-ENT/Leaf/GoldE, ET-ENT/Leaf/GoldN, ET-ENT/Leaf/GoldT,"
-//								
-//								
-//								
-//								+ "EN-T/Leaf/GoldE, EN-T/Leaf/GoldN,EN-T/Leaf/GoldT, "
-//								+ "EN-N/Leaf/GoldE, EN-N/Leaf/GoldN, EN-N/Leaf/GoldT,"
-//								+ "EN-E/Leaf/GoldE, EN-E/Leaf/GoldN, EN-E/Leaf/GoldT,"
-//								+ "EN-NT/Leaf/GoldE, EN-NT/Leaf/GoldN, EN-NT/Leaf/GoldT,"
-//								+ "EN-ET/Leaf/GoldE, EN-ET/Leaf/GoldN, EN-ET/Leaf/GoldT,"
-//								+ "EN-EN/Leaf/GoldE, EN-EN/Leaf/GoldN, EN-EN/Leaf/GoldT,"
-//								+ "EN-ENT/Leaf/GoldE, EN-ENT/Leaf/GoldN, EN-ENT/Leaf/GoldT,"
-//								
-//								+ "NT-T/Leaf/GoldE, NT-T/Leaf/GoldN,NT-T/Leaf/GoldT, "
-//								+ "NT-N/Leaf/GoldE, NT-N/Leaf/GoldN, NT-N/Leaf/GoldT,"
-//								+ "NT-E/Leaf/GoldE, NT-E/Leaf/GoldN, NT-E/Leaf/GoldT,"
-//								+ "NT-NT/Leaf/GoldE, NT-NT/Leaf/GoldN, NT-NT/Leaf/GoldT,"	
-//								+ "NT-ET/Leaf/GoldE, NT-ET/Leaf/GoldN, NT-ET/Leaf/GoldT,"
-//								+ "NT-EN/Leaf/GoldE, NT-EN/Leaf/GoldN, NT-EN/Leaf/GoldT,"
-//								+ "NT-ENT/Leaf/GoldE, NT-ENT/Leaf/GoldN, NT-ENT/Leaf/GoldT,"
-//
-//							
-//								
-//							
-//							
-//							
-//							
-//							
-//							
-//							
-//							
-//			
-//			
-//							
-//						+ "ENT-T/Leaf/GoldE, ENT-T/Leaf/GoldN,ENT-T/Leaf/GoldT, "
-//						+ "ENT-N/Leaf/GoldE, ENT-N/Leaf/GoldN, ENT-N/Leaf/GoldT,"
-//						+ "ENT-E/Leaf/GoldE, ENT-E/Leaf/GoldN, ENT-E/Leaf/GoldT,"
-//						+ "ENT-NT/Leaf/GoldE,ENT-NT/Leaf/GoldN, ENT-NT/Leaf/GoldT,"
-//						+ "ENT-ET/Leaf/GoldE, ENT-ET/Leaf/GoldN, ENT-ET/Leaf/GoldT,"
-//						+ "ENT-EN/Leaf/GoldE, ENT-EN/Leaf/GoldN, ENT-EN/Leaf/GoldT,"
-//						+ "ENT-ENT/Leaf/GoldE, ENT-ENT/Leaf/GoldN, ENT-ENT/Leaf/GoldT,"
-//								
-//								/***********************************************************/
-//
-//						+"T-T/Root/GoldE,T-T/Root/GoldN,T-T/Root/GoldT,"
-//						+ "T-N/Root/GoldE,T-N/Root/GoldN,T-N/Root/GoldT, "
-//						+ "T-E/Root/GoldE, T-E/Root/GoldN,T-E/Root/GoldT,"
-//						+ "T-ET/Root/GoldE,T-ET/Root/GoldN,T-ET/Root/GoldT,"
-//						+ "T-EN/Root/GoldE,T-EN/Root/GoldN,T-EN/Root/GoldT,"
-//						+ "T-NT/Root/GoldE,T-NT/Root/GoldN,T-NT/Root/GoldT,"
-//						+ "T-ENT/Root/GoldE,T-ENT/Root/GoldN,T-ENT/Root/GoldT,"
-//						
-//						
-//						+"N-T/Root/GoldE, N-T/Root/GoldN,N-T/Root/GoldT, "
-//						+ "N-N/Root/GoldE, N-N/Root/GoldN, N-N/Root/GoldT,"
-//						+ "N-E/Root/GoldE, N-E/Root/GoldN, N-E/Root/GoldT,"
-//						+ "N-ET/Root/GoldE, N-ET/Root/GoldN, N-ET/Root/GoldT,"
-//						+ "N-EN/Root/GoldE, N-EN/Root/GoldN, N-EN/Root/GoldT,"
-//						+ "N-NT/Root/GoldE, N-NT/Root/GoldN, N-NT/Root/GoldT,"
-//						+ "N-ENT/Root/GoldE, N-ENT/Root/GoldN, N-ENT/Root/GoldT,"
-//						
-//						
-//						+"E-T/Root/GoldE, E-T/Root/GoldN,E-T/Root/GoldT, "
-//						+ "E-N/Root/GoldE, E-N/Root/GoldN, E-N/Root/GoldT,"
-//						+ "E-E/Root/GoldE, E-E/Root/GoldN, E-E/Root/GoldT,"
-//						+ "E-ET/Root/GoldE, E-ET/Root/GoldN, E-ET/Root/GoldT,"
-//						+ "E-EN/Root/GoldE, E-EN/Root/GoldN, E-EN/Root/GoldT,"
-//						+ "E-NT/Root/GoldE, E-NT/Root/GoldN, E-NT/Root/GoldT,"
-//						+ "E-ENT/Root/GoldE, E-ENT/Root/GoldN, E-ENT/Root/GoldT,"
-//						
-//						
-//						+"ET-T/Root/GoldE, ET-T/Root/GoldN,ET-T/Root/GoldT, "
-//						+ "ET-N/Root/GoldE, ET-N/Root/GoldN, ET-N/Root/GoldT,"
-//						+ "ET-E/Root/GoldE, ET-E/Root/GoldN, ET-E/Root/GoldT,"
-//						+ "ET-NT/Root/GoldE, ET-NT/Root/GoldN, ET-NT/Root/GoldT,"						
-//						+ "ET-ET/Root/GoldE, ET-ET/Root/GoldN, ET-ET/Root/GoldT,"
-//						+ "ET-EN/Root/GoldE, ET-EN/Root/GoldN, ET-EN/Root/GoldT,"
-//						+ "ET-ENT/Root/GoldE, ET-ENT/Root/GoldN, ET-ENT/Root/GoldT,"
-//						
-//						
-//						
-//						+ "EN-T/Root/GoldE, EN-T/Root/GoldN,EN-T/Root/GoldT, "
-//						+ "EN-N/Root/GoldE, EN-N/Root/GoldN, EN-N/Root/GoldT,"
-//						+ "EN-E/Root/GoldE, EN-E/Root/GoldN, EN-E/Root/GoldT,"
-//						+ "EN-NT/Root/GoldE, EN-NT/Root/GoldN, EN-NT/Root/GoldT,"
-//						+ "EN-ET/Root/GoldE, EN-ET/Root/GoldN, EN-ET/Root/GoldT,"
-//						+ "EN-EN/Root/GoldE, EN-EN/Root/GoldN, EN-EN/Root/GoldT,"
-//						+ "EN-ENT/Root/GoldE, EN-ENT/Root/GoldN, EN-ENT/Root/GoldT,"
-//						
-//						+ "NT-T/Root/GoldE, NT-T/Root/GoldN,NT-T/Root/GoldT, "
-//						+ "NT-N/Root/GoldE, NT-N/Root/GoldN, NT-N/Root/GoldT,"
-//						+ "NT-E/Root/GoldE, NT-E/Root/GoldN, NT-E/Root/GoldT,"
-//						+ "NT-NT/Root/GoldE, NT-NT/Root/GoldN, NT-NT/Root/GoldT,"	
-//						+ "NT-ET/Root/GoldE, NT-ET/Root/GoldN, NT-ET/Root/GoldT,"
-//						+ "NT-EN/Root/GoldE, NT-EN/Root/GoldN, NT-EN/Root/GoldT,"
-//						+ "NT-ENT/Root/GoldE, NT-ENT/Root/GoldN, NT-ENT/Root/GoldT,"
-//						
-//						
-//						
-//						
-//						
-//						
-//						
-//						
-//						
-//						
-//						
-//						
-//						
-//						
-//						+ "ENT-T/Root/GoldE, ENT-T/Root/GoldN,ENT-T/Root/GoldT, "
-//						+ "ENT-N/Root/GoldE, ENT-N/Root/GoldN, ENT-N/Root/GoldT,"
-//						+ "ENT-E/Root/GoldE, ENT-E/Root/GoldN, ENT-E/Root/GoldT,"
-//						+ "ENT-NT/Root/GoldE,ENT-NT/Root/GoldN, ENT-NT/Root/GoldT,"
-//						+ "ENT-ET/Root/GoldE, ENT-ET/Root/GoldN, ENT-ET/Root/GoldT,"
-//						+ "ENT-EN/Root/GoldE, ENT-EN/Root/GoldN, ENT-EN/Root/GoldT,"
-//						+ "ENT-ENT/Root/GoldE, ENT-ENT/Root/GoldN, ENT-ENT/Root/GoldT,"
-//									
-//									
-//									);
-//		
-//			
-//			mybufferWriter.newLine();
+
 			ALGO.Prediction.Matrix= reinitializeMatrix(ALGO.Prediction.Matrix); 
 
 			for(MethodTrace methodTrace: methodtraces) {
@@ -2452,14 +2218,23 @@ public class LogInfo {
 					ALGO.Prediction.Matrix.put(methodTrace.getPatternAndType(),GoldValues);
 				}
 			}
-			mybufferWriter.write(runNumber+","+AlgoFinal.ErrorSeedingPercentages.get(runNumber+"-"+requirementID)+","+requirementID+","); 
-
+			
+//			String headers="Run#, %Seeding, Requirement, "; 
+			String line= runNumber+","+AlgoFinal.ErrorSeedingPercentages.get(runNumber+"-"+requirementID)+","+requirementID+","; 
+			
+				
+			
 			for(String mykey: ALGO.Prediction.Matrix.keySet()) {
-				mybufferWriter.write(ALGO.Prediction.Matrix.get(mykey).getE()+","+ALGO.Prediction.Matrix.get(mykey).getN()+","+ALGO.Prediction.Matrix.get(mykey).getT()+","); 
+//				headers=headers+mykey+"/GoldE"+","+mykey+"/GoldN"+","+mykey+"/GoldT"+","; 
+				line=line+ALGO.Prediction.Matrix.get(mykey).getE()+","+ALGO.Prediction.Matrix.get(mykey).getN()+","+ALGO.Prediction.Matrix.get(mykey).getT()+","; 
 				
 	
 				}
-			
+//			mybufferWriter.write(headers);
+//			mybufferWriter.newLine();
+			mybufferWriter.write(line);
+
+
 			mybufferWriter.newLine();
 
 		
@@ -2470,6 +2245,41 @@ public class LogInfo {
 			
 
 		}
+	}
+	
+	
+	public static void updateRunResultsHeaders(List<MethodTrace> methodtraces, int runNumber, int errorSeedingPercentage, String requirementID, BufferedWriter mybufferWriter) throws IOException {
+
+		ALGO.Prediction.Matrix= reinitializeMatrix(ALGO.Prediction.Matrix); 
+		String headers="Run#, %Seeding, Requirement, "; 
+
+		
+			
+				
+			
+			
+		
+		
+			
+		
+		for(String mykey: ALGO.Prediction.Matrix.keySet()) {
+			headers=headers+mykey+"/GoldE"+","+mykey+"/GoldN"+","+mykey+"/GoldT"+","; 
+			
+
+			}
+		mybufferWriter.write(headers);
+		mybufferWriter.newLine();
+	
+
+	
+	
+	if(AlgoFinal.NoSeeding) {
+		
+			mybufferWriter.close();
+		
+
+	
+}
 	}
 	private static LinkedHashMap<String, ENTGoldValues> reinitializeMatrix(
 			LinkedHashMap<String, ENTGoldValues> matrix) {
@@ -2742,240 +2552,233 @@ public class LogInfo {
 	}
 	public static void writeHeaders(BufferedWriter mybufferWriter) throws IOException {
 		// TODO Auto-generated method stub
-		mybufferWriter.write("Run#, %Seeding, Requirement, "
-				+"E/Isolated/GoldE, E/Isolated/GoldN, E/Isolated/GoldT,"
-				+ "E/NotApplicable/GoldE, E/Isolated/GoldN, E/Isolated/GoldT, "
-				+"T-T/Inner/GoldE,T-T/Inner/GoldN,T-T/Inner/GoldT,"
-				+ "T-N/Inner/GoldE,T-N/Inner/GoldN,T-N/Inner/GoldT, "
-				+ "T-E/Inner/GoldE, T-E/Inner/GoldN,T-E/Inner/GoldT,"
-				+ "T-ET/Inner/GoldE,T-ET/Inner/GoldN,T-ET/Inner/GoldT,"
-				+ "T-EN/Inner/GoldE,T-EN/Inner/GoldN,T-EN/Inner/GoldT,"
-				+ "T-NT/Inner/GoldE,T-NT/Inner/GoldN,T-NT/Inner/GoldT,"
-				+ "T-ENT/Inner/GoldE,T-ENT/Inner/GoldN,T-ENT/Inner/GoldT,"
-				
-				
-				+"N-T/Inner/GoldE, N-T/Inner/GoldN,N-T/Inner/GoldT, "
-				+ "N-N/Inner/GoldE, N-N/Inner/GoldN, N-N/Inner/GoldT,"
-				+ "N-E/Inner/GoldE, N-E/Inner/GoldN, N-E/Inner/GoldT,"
-				+ "N-ET/Inner/GoldE, N-ET/Inner/GoldN, N-ET/Inner/GoldT,"
-				+ "N-EN/Inner/GoldE, N-EN/Inner/GoldN, N-EN/Inner/GoldT,"
-				+ "N-NT/Inner/GoldE, N-NT/Inner/GoldN, N-NT/Inner/GoldT,"
-				+ "N-ENT/Inner/GoldE, N-ENT/Inner/GoldN, N-ENT/Inner/GoldT,"
-
-
-				+"E-T/Inner/GoldE, E-T/Inner/GoldN,E-T/Inner/GoldT, "
-				+ "E-N/Inner/GoldE, E-N/Inner/GoldN, E-N/Inner/GoldT,"
-				+ "E-E/Inner/GoldE, E-E/Inner/GoldN, E-E/Inner/GoldT,"
-				+ "E-ET/Inner/GoldE, E-ET/Inner/GoldN, E-ET/Inner/GoldT,"
-				+ "E-EN/Inner/GoldE, E-EN/Inner/GoldN, E-EN/Inner/GoldT,"
-				+ "E-NT/Inner/GoldE, E-NT/Inner/GoldN, E-NT/Inner/GoldT,"
-				+ "E-ENT/Inner/GoldE, E-ENT/Inner/GoldN, E-ENT/Inner/GoldT,"
-				
-				
-				+"ET-T/Inner/GoldE, ET-T/Inner/GoldN,ET-T/Inner/GoldT, "
-				+ "ET-N/Inner/GoldE, ET-N/Inner/GoldN, ET-N/Inner/GoldT,"
-				+ "ET-E/Inner/GoldE, ET-E/Inner/GoldN, ET-E/Inner/GoldT,"
-				+ "ET-NT/Inner/GoldE, ET-NT/Inner/GoldN, ET-NT/Inner/GoldT,"						
-				+ "ET-ET/Inner/GoldE, ET-ET/Inner/GoldN, ET-ET/Inner/GoldT,"
-				+ "ET-EN/Inner/GoldE, ET-EN/Inner/GoldN, ET-EN/Inner/GoldT,"
-				+ "ET-ENT/Inner/GoldE, ET-ENT/Inner/GoldN, ET-ENT/Inner/GoldT,"
-				
-				
-				
-				+ "EN-T/Inner/GoldE, EN-T/Inner/GoldN,EN-T/Inner/GoldT, "
-				+ "EN-N/Inner/GoldE, EN-N/Inner/GoldN, EN-N/Inner/GoldT,"
-				+ "EN-E/Inner/GoldE, EN-E/Inner/GoldN, EN-E/Inner/GoldT,"
-				+ "EN-NT/Inner/GoldE, EN-NT/Inner/GoldN, EN-NT/Inner/GoldT,"
-				+ "EN-ET/Inner/GoldE, EN-ET/Inner/GoldN, EN-ET/Inner/GoldT,"
-				+ "EN-EN/Inner/GoldE, EN-EN/Inner/GoldN, EN-EN/Inner/GoldT,"
-				+ "EN-ENT/Inner/GoldE, EN-ENT/Inner/GoldN, EN-ENT/Inner/GoldT,"
-				
-				+ "NT-T/Inner/GoldE, NT-T/Inner/GoldN,NT-T/Inner/GoldT, "
-				+ "NT-N/Inner/GoldE, NT-N/Inner/GoldN, NT-N/Inner/GoldT,"
-				+ "NT-E/Inner/GoldE, NT-E/Inner/GoldN, NT-E/Inner/GoldT,"
-				+ "NT-NT/Inner/GoldE, NT-NT/Inner/GoldN, NT-NT/Inner/GoldT,"	
-				+ "NT-ET/Inner/GoldE, NT-ET/Inner/GoldN, NT-ET/Inner/GoldT,"
-				+ "NT-EN/Inner/GoldE, NT-EN/Inner/GoldN, NT-EN/Inner/GoldT,"
-				+ "NT-ENT/Inner/GoldE, NT-ENT/Inner/GoldN, NT-ENT/Inner/GoldT,"
-
-			
-				
-			
-			
-			
-			
-			
-			
-			
-			
-
-
-			
-		+ "ENT-T/Inner/GoldE, ENT-T/Inner/GoldN,ENT-T/Inner/GoldT, "
-		+ "ENT-N/Inner/GoldE, ENT-N/Inner/GoldN, ENT-N/Inner/GoldT,"
-		+ "ENT-E/Inner/GoldE, ENT-E/Inner/GoldN, ENT-E/Inner/GoldT,"
-		+ "ENT-NT/Inner/GoldE,ENT-NT/Inner/GoldN, ENT-NT/Inner/GoldT,"
-		+ "ENT-ET/Inner/GoldE, ENT-ET/Inner/GoldN, ENT-ET/Inner/GoldT,"
-		+ "ENT-EN/Inner/GoldE, ENT-EN/Inner/GoldN, ENT-EN/Inner/GoldT,"
-		+ "ENT-ENT/Inner/GoldE, ENT-ENT/Inner/GoldN, ENT-ENT/Inner/GoldT,"
 		
-		/***********************************************************/
-			
-		+"T-T/Leaf/GoldE,T-T/Leaf/GoldN,T-T/Leaf/GoldT,"
-		+ "T-N/Leaf/GoldE,T-N/Leaf/GoldN,T-N/Leaf/GoldT, "
-		+ "T-E/Leaf/GoldE, T-E/Leaf/GoldN,T-E/Leaf/GoldT,"
-		+ "T-ET/Leaf/GoldE,T-ET/Leaf/GoldN,T-ET/Leaf/GoldT,"
-		+ "T-EN/Leaf/GoldE,T-EN/Leaf/GoldN,T-EN/Leaf/GoldT,"
-		+ "T-NT/Leaf/GoldE,T-NT/Leaf/GoldN,T-NT/Leaf/GoldT,"
-		+ "T-ENT/Leaf/GoldE,T-ENT/Leaf/GoldN,T-ENT/Leaf/GoldT,"
-		
-		
-		+"N-T/Leaf/GoldE, N-T/Leaf/GoldN,N-T/Leaf/GoldT, "
-		+ "N-N/Leaf/GoldE, N-N/Leaf/GoldN, N-N/Leaf/GoldT,"
-		+ "N-E/Leaf/GoldE, N-E/Leaf/GoldN, N-E/Leaf/GoldT,"
-		+ "N-ET/Leaf/GoldE, N-ET/Leaf/GoldN, N-ET/Leaf/GoldT,"
-		+ "N-EN/Leaf/GoldE, N-EN/Leaf/GoldN, N-EN/Leaf/GoldT,"
-		+ "N-NT/Leaf/GoldE, N-NT/Leaf/GoldN, N-NT/Leaf/GoldT,"
-		+ "N-ENT/Leaf/GoldE, N-ENT/Leaf/GoldN, N-ENT/Leaf/GoldT,"
-
-
-		+"E-T/Leaf/GoldE, E-T/Leaf/GoldN,E-T/Leaf/GoldT, "
-		+ "E-N/Leaf/GoldE, E-N/Leaf/GoldN, E-N/Leaf/GoldT,"
-		+ "E-E/Leaf/GoldE, E-E/Leaf/GoldN, E-E/Leaf/GoldT,"
-		+ "E-ET/Leaf/GoldE, E-ET/Leaf/GoldN, E-ET/Leaf/GoldT,"
-		+ "E-EN/Leaf/GoldE, E-EN/Leaf/GoldN, E-EN/Leaf/GoldT,"
-		+ "E-NT/Leaf/GoldE, E-NT/Leaf/GoldN, E-NT/Leaf/GoldT,"
-		+ "E-ENT/Leaf/GoldE, E-ENT/Leaf/GoldN, E-ENT/Leaf/GoldT,"
-		
-		
-		+"ET-T/Leaf/GoldE, ET-T/Leaf/GoldN,ET-T/Leaf/GoldT, "
-		+ "ET-N/Leaf/GoldE, ET-N/Leaf/GoldN, ET-N/Leaf/GoldT,"
-		+ "ET-E/Leaf/GoldE, ET-E/Leaf/GoldN, ET-E/Leaf/GoldT,"
-		+ "ET-NT/Leaf/GoldE, ET-NT/Leaf/GoldN, ET-NT/Leaf/GoldT,"						
-		+ "ET-ET/Leaf/GoldE, ET-ET/Leaf/GoldN, ET-ET/Leaf/GoldT,"
-		+ "ET-EN/Leaf/GoldE, ET-EN/Leaf/GoldN, ET-EN/Leaf/GoldT,"
-		+ "ET-ENT/Leaf/GoldE, ET-ENT/Leaf/GoldN, ET-ENT/Leaf/GoldT,"
-		
-		
-		
-		+ "EN-T/Leaf/GoldE, EN-T/Leaf/GoldN,EN-T/Leaf/GoldT, "
-		+ "EN-N/Leaf/GoldE, EN-N/Leaf/GoldN, EN-N/Leaf/GoldT,"
-		+ "EN-E/Leaf/GoldE, EN-E/Leaf/GoldN, EN-E/Leaf/GoldT,"
-		+ "EN-NT/Leaf/GoldE, EN-NT/Leaf/GoldN, EN-NT/Leaf/GoldT,"
-		+ "EN-ET/Leaf/GoldE, EN-ET/Leaf/GoldN, EN-ET/Leaf/GoldT,"
-		+ "EN-EN/Leaf/GoldE, EN-EN/Leaf/GoldN, EN-EN/Leaf/GoldT,"
-		+ "EN-ENT/Leaf/GoldE, EN-ENT/Leaf/GoldN, EN-ENT/Leaf/GoldT,"
-		
-		+ "NT-T/Leaf/GoldE, NT-T/Leaf/GoldN,NT-T/Leaf/GoldT, "
-		+ "NT-N/Leaf/GoldE, NT-N/Leaf/GoldN, NT-N/Leaf/GoldT,"
-		+ "NT-E/Leaf/GoldE, NT-E/Leaf/GoldN, NT-E/Leaf/GoldT,"
-		+ "NT-NT/Leaf/GoldE, NT-NT/Leaf/GoldN, NT-NT/Leaf/GoldT,"	
-		+ "NT-ET/Leaf/GoldE, NT-ET/Leaf/GoldN, NT-ET/Leaf/GoldT,"
-		+ "NT-EN/Leaf/GoldE, NT-EN/Leaf/GoldN, NT-EN/Leaf/GoldT,"
-		+ "NT-ENT/Leaf/GoldE, NT-ENT/Leaf/GoldN, NT-ENT/Leaf/GoldT,"
-
-	
-		
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-	
-+ "ENT-T/Leaf/GoldE, ENT-T/Leaf/GoldN,ENT-T/Leaf/GoldT, "
-+ "ENT-N/Leaf/GoldE, ENT-N/Leaf/GoldN, ENT-N/Leaf/GoldT,"
-+ "ENT-E/Leaf/GoldE, ENT-E/Leaf/GoldN, ENT-E/Leaf/GoldT,"
-+ "ENT-NT/Leaf/GoldE,ENT-NT/Leaf/GoldN, ENT-NT/Leaf/GoldT,"
-+ "ENT-ET/Leaf/GoldE, ENT-ET/Leaf/GoldN, ENT-ET/Leaf/GoldT,"
-+ "ENT-EN/Leaf/GoldE, ENT-EN/Leaf/GoldN, ENT-EN/Leaf/GoldT,"
-+ "ENT-ENT/Leaf/GoldE, ENT-ENT/Leaf/GoldN, ENT-ENT/Leaf/GoldT,"
-		
-		/***********************************************************/
-
-+"T-T/Root/GoldE,T-T/Root/GoldN,T-T/Root/GoldT,"
-+ "T-N/Root/GoldE,T-N/Root/GoldN,T-N/Root/GoldT, "
-+ "T-E/Root/GoldE, T-E/Root/GoldN,T-E/Root/GoldT,"
-+ "T-ET/Root/GoldE,T-ET/Root/GoldN,T-ET/Root/GoldT,"
-+ "T-EN/Root/GoldE,T-EN/Root/GoldN,T-EN/Root/GoldT,"
-+ "T-NT/Root/GoldE,T-NT/Root/GoldN,T-NT/Root/GoldT,"
-+ "T-ENT/Root/GoldE,T-ENT/Root/GoldN,T-ENT/Root/GoldT,"
-
-
-+"N-T/Root/GoldE, N-T/Root/GoldN,N-T/Root/GoldT, "
-+ "N-N/Root/GoldE, N-N/Root/GoldN, N-N/Root/GoldT,"
-+ "N-E/Root/GoldE, N-E/Root/GoldN, N-E/Root/GoldT,"
-+ "N-ET/Root/GoldE, N-ET/Root/GoldN, N-ET/Root/GoldT,"
-+ "N-EN/Root/GoldE, N-EN/Root/GoldN, N-EN/Root/GoldT,"
-+ "N-NT/Root/GoldE, N-NT/Root/GoldN, N-NT/Root/GoldT,"
-+ "N-ENT/Root/GoldE, N-ENT/Root/GoldN, N-ENT/Root/GoldT,"
-
-
-+"E-T/Root/GoldE, E-T/Root/GoldN,E-T/Root/GoldT, "
-+ "E-N/Root/GoldE, E-N/Root/GoldN, E-N/Root/GoldT,"
-+ "E-E/Root/GoldE, E-E/Root/GoldN, E-E/Root/GoldT,"
-+ "E-ET/Root/GoldE, E-ET/Root/GoldN, E-ET/Root/GoldT,"
-+ "E-EN/Root/GoldE, E-EN/Root/GoldN, E-EN/Root/GoldT,"
-+ "E-NT/Root/GoldE, E-NT/Root/GoldN, E-NT/Root/GoldT,"
-+ "E-ENT/Root/GoldE, E-ENT/Root/GoldN, E-ENT/Root/GoldT,"
-
-
-+"ET-T/Root/GoldE, ET-T/Root/GoldN,ET-T/Root/GoldT, "
-+ "ET-N/Root/GoldE, ET-N/Root/GoldN, ET-N/Root/GoldT,"
-+ "ET-E/Root/GoldE, ET-E/Root/GoldN, ET-E/Root/GoldT,"
-+ "ET-NT/Root/GoldE, ET-NT/Root/GoldN, ET-NT/Root/GoldT,"						
-+ "ET-ET/Root/GoldE, ET-ET/Root/GoldN, ET-ET/Root/GoldT,"
-+ "ET-EN/Root/GoldE, ET-EN/Root/GoldN, ET-EN/Root/GoldT,"
-+ "ET-ENT/Root/GoldE, ET-ENT/Root/GoldN, ET-ENT/Root/GoldT,"
-
-
-
-+ "EN-T/Root/GoldE, EN-T/Root/GoldN,EN-T/Root/GoldT, "
-+ "EN-N/Root/GoldE, EN-N/Root/GoldN, EN-N/Root/GoldT,"
-+ "EN-E/Root/GoldE, EN-E/Root/GoldN, EN-E/Root/GoldT,"
-+ "EN-NT/Root/GoldE, EN-NT/Root/GoldN, EN-NT/Root/GoldT,"
-+ "EN-ET/Root/GoldE, EN-ET/Root/GoldN, EN-ET/Root/GoldT,"
-+ "EN-EN/Root/GoldE, EN-EN/Root/GoldN, EN-EN/Root/GoldT,"
-+ "EN-ENT/Root/GoldE, EN-ENT/Root/GoldN, EN-ENT/Root/GoldT,"
-
-+ "NT-T/Root/GoldE, NT-T/Root/GoldN,NT-T/Root/GoldT, "
-+ "NT-N/Root/GoldE, NT-N/Root/GoldN, NT-N/Root/GoldT,"
-+ "NT-E/Root/GoldE, NT-E/Root/GoldN, NT-E/Root/GoldT,"
-+ "NT-NT/Root/GoldE, NT-NT/Root/GoldN, NT-NT/Root/GoldT,"	
-+ "NT-ET/Root/GoldE, NT-ET/Root/GoldN, NT-ET/Root/GoldT,"
-+ "NT-EN/Root/GoldE, NT-EN/Root/GoldN, NT-EN/Root/GoldT,"
-+ "NT-ENT/Root/GoldE, NT-ENT/Root/GoldN, NT-ENT/Root/GoldT,"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-+ "ENT-T/Root/GoldE, ENT-T/Root/GoldN,ENT-T/Root/GoldT, "
-+ "ENT-N/Root/GoldE, ENT-N/Root/GoldN, ENT-N/Root/GoldT,"
-+ "ENT-E/Root/GoldE, ENT-E/Root/GoldN, ENT-E/Root/GoldT,"
-+ "ENT-NT/Root/GoldE,ENT-NT/Root/GoldN, ENT-NT/Root/GoldT,"
-+ "ENT-ET/Root/GoldE, ENT-ET/Root/GoldN, ENT-ET/Root/GoldT,"
-+ "ENT-EN/Root/GoldE, ENT-EN/Root/GoldN, ENT-EN/Root/GoldT,"
-+ "ENT-ENT/Root/GoldE, ENT-ENT/Root/GoldN, ENT-ENT/Root/GoldT,"
-			
-			
-			);
-
-
-mybufferWriter.newLine();
+//		mybufferWriter.write("Run#, %Seeding, Requirement, ");
+//		int i=0; 
+//		for(String mykey: ALGO.Prediction.Matrix.keySet()) {
+//		
+//			mybufferWriter.write(i+"-"+mykey+"GoldE"+","+i+"-"+mykey+"GoldN"+","+i+"-"+mykey+"GoldT"+",");
+//			i++; 
+//		}
+//		mybufferWriter.write(
+//				"1E/Isolated/GoldE, E/Isolated/GoldN, E/Isolated/GoldT,"
+//				+ "2E/NotApplicable/GoldE, E/Isolated/GoldN, E/Isolated/GoldT, "
+//				
+//				+"3PureT/T-T/Inner/GoldE,PureT/T-T/Inner/GoldN,PureT/T-T/Inner/GoldT,"
+//				+ "4EBoundary/T-N/Inner/GoldE,EBoundary/T-N/Inner/GoldN,EBoundary/T-N/Inner/GoldT, "
+//				+ "5EUndecidable/T-E/Inner/GoldE, EUndecidable/T-E/Inner/GoldN,EUndecidable/T-E/Inner/GoldT,"
+//				+ "6MixedT/T-ET/Inner/GoldE,MixedT/T-ET/Inner/GoldN,MixedT/T-ET/Inner/GoldT,"
+//				+ "7EUndecidable/T-EN/Inner/GoldE,EUndecidable/T-EN/Inner/GoldN,EUndecidable/T-EN/Inner/GoldT,"
+//				+ "8MixedT/T-NT/Inner/GoldE,MixedT/T-NT/Inner/GoldN,MixedT/T-NT/Inner/GoldT,"	
+//				+ "9MixedT/T-ENT/Inner/GoldE,MixedT/T-ENT/Inner/GoldN,MixedT/T-ENT/Inner/GoldT,"
+//				
+//				
+//				+"10EBoundary/N-T/Inner/GoldE, EBoundary/N-T/Inner/GoldN,EBoundary/N-T/Inner/GoldT, "
+//				+ "11PureN/N-N/Inner/GoldE, PureN/N-N/Inner/GoldN, PureN/N-N/Inner/GoldT,"
+//				+ "12EUndecidable/N-E/Inner/GoldE, EUndecidable/N-E/Inner/GoldN, EUndecidable/N-E/Inner/GoldT,"
+//				+ "13EUndecidable/N-ET/Inner/GoldE, EUndecidable/N-ET/Inner/GoldN, EUndecidable/N-ET/Inner/GoldT,"
+//				+ "14MixedN/N-EN/Inner/GoldE, MixedN/N-EN/Inner/GoldN, MixedN/N-EN/Inner/GoldT,"
+//				+ "15MixedN/N-NT/Inner/GoldE, MixedN/N-NT/Inner/GoldN, MixedN/N-NT/Inner/GoldT,"			
+//				+ "16MixedN/N-ENT/Inner/GoldE, MixedN/N-ENT/Inner/GoldN, MixedN/N-ENT/Inner/GoldT,"
+//
+//
+//				+"17EUndecidable/E-T/Inner/GoldE, EUndecidable/E-T/Inner/GoldN,EUndecidable/E-T/Inner/GoldT, "
+//				+ "18EUndecidable/E-N/Inner/GoldE, EUndecidable/E-N/Inner/GoldN, EUndecidable/E-N/Inner/GoldT,"
+//				+ "19EUndecidable/E-E/Inner/GoldE, EUndecidable/E-E/Inner/GoldN, EUndecidable/E-E/Inner/GoldT,"
+//				+ "20EUndecidable/E-ET/Inner/GoldE, EUndecidable/E-ET/Inner/GoldN, EUndecidable/E-ET/Inner/GoldT,"
+//				+ "21EUndecidable/E-EN/Inner/GoldE, EUndecidable/E-EN/Inner/GoldN, EUndecidable/E-EN/Inner/GoldT,"
+//				+ "22EUndecidable/E-NT/Inner/GoldE, EUndecidable/E-NT/Inner/GoldN, EUndecidable/E-NT/Inner/GoldT,"
+//				+ "23EUndecidable/E-ENT/Inner/GoldE, EUndecidable/E-ENT/Inner/GoldN, EUndecidable/E-ENT/Inner/GoldT,"
+//				
+//				
+//	+"24MixedT/ET-T/Inner/GoldE, MixedT/ET-T/Inner/GoldN,MixedT/ET-T/Inner/GoldT, "
+//	+ "25EUndecidable/ET-N/Inner/GoldE, EUndecidable/ET-N/Inner/GoldN, EUndecidable/ET-N/Inner/GoldT,"
+//	+ "26EUndecidable/ET-E/Inner/GoldE, EUndecidable/ET-E/Inner/GoldN, EUndecidable/ET-E/Inner/GoldT,"
+//	+ "27MixedT/ET-ET/Inner/GoldE, MixedT/ET-ET/Inner/GoldN, MixedT/ET-ET/Inner/GoldT,"
+//	+ "28EUndecidable/ET-EN/Inner/GoldE, EUndecidable/ET-EN/Inner/GoldN, EUndecidable/ET-EN/Inner/GoldT,"
+//	+ "29MixedT/ET-NT/Inner/GoldE, MixedT/ET-NT/Inner/GoldN, MixedT/ET-NT/Inner/GoldT,"							
+//	+ "30MixedT/ET-ENT/Inner/GoldE, MixedT/ET-ENT/Inner/GoldN, MixedT/ET-ENT/Inner/GoldT,"
+//	
+//	
+//				
+//				+ "31MixedT/NT-T/Inner/GoldE, MixedT/NT-T/Inner/GoldN,MixedT/NT-T/Inner/GoldT, "
+//				+ "32MixedN/NT-N/Inner/GoldE, MixedN/NT-N/Inner/GoldN, MixedN/NT-N/Inner/GoldT,"
+//				+ "33EUndecidable/NT-E/Inner/GoldE, EUndecidable/NT-E/Inner/GoldN, EUndecidable/NT-E/Inner/GoldT,"
+//				+ "34MixedT/NT-ET/Inner/GoldE, MixedT/NT-ET/Inner/GoldN, MixedT/NT-ET/Inner/GoldT,"
+//				+ "35EUndecidable/NT-EN/Inner/GoldE, EUndecidable/NT-EN/Inner/GoldN, EUndecidable/NT-EN/Inner/GoldT,"
+//				+ "36MixedT/NT-NT/Inner/GoldE, MixedT/NT-NT/Inner/GoldN, MixedT/NT-NT/Inner/GoldT,"			
+//				+ "37MixedT/NT-ENT/Inner/GoldE, MixedT/NT-ENT/Inner/GoldN, MixedT/NT-ENT/Inner/GoldT,"
+//				
+//				
+//			
+//				
+//				+ "38EUndecidable/EN-T/Inner/GoldE, EUndecidable/EN-T/Inner/GoldN,EUndecidable/EN-T/Inner/GoldT, "
+//				+ "39MixedN/EN-N/Inner/GoldE, MixedN/EN-N/Inner/GoldN, MixedN/EN-N/Inner/GoldT,"
+//				+ "40EUndecidable/EN-E/Inner/GoldE, EUndecidable/EN-E/Inner/GoldN, EUndecidable/EN-E/Inner/GoldT,"
+//				+ "41EUndecidable/EN-ET/Inner/GoldE, EUndecidable/EN-ET/Inner/GoldN, EUndecidable/EN-ET/Inner/GoldT,"
+//				+ "42EUndecidable/EN-EN/Inner/GoldE, EUndecidable/EN-EN/Inner/GoldN, EUndecidable/EN-EN/Inner/GoldT,"
+//				+ "43EUndecidable/EN-NT/Inner/GoldE, EUndecidable/EN-NT/Inner/GoldN, EUndecidable/EN-NT/Inner/GoldT,"	
+//				+ "44EUndecidable/EN-ENT/Inner/GoldE, EUndecidable/EN-ENT/Inner/GoldN, EUndecidable/EN-ENT/Inner/GoldT,"
+//				
+//				
+//				
+//				
+//				
+//				
+//				
+//		+ "45MixedT/ENT-T/Inner/GoldE, MixedT/ENT-T/Inner/GoldN,MixedT/ENT-T/Inner/GoldT, "
+//		+ "46MixedN/ENT-N/Inner/GoldE, MixedN/ENT-N/Inner/GoldN, MixedN/ENT-N/Inner/GoldT,"
+//		+ "47EUndecidable/ENT-E/Inner/GoldE, EUndecidable/ENT-E/Inner/GoldN, EUndecidable/ENT-E/Inner/GoldT,"
+//		+ "48MixedT/ENT-ET/Inner/GoldE, MixedT/ENT-ET/Inner/GoldN, MixedT/ENT-ET/Inner/GoldT,"
+//		+ "49EUndecidable/ENT-EN/Inner/GoldE, EUndecidable/ENT-EN/Inner/GoldN, EUndecidable/ENT-EN/Inner/GoldT,"
+//		+ "50MixedT/ENT-NT/Inner/GoldE,MixedT/ENT-NT/Inner/GoldN, MixedT/ENT-NT/Inner/GoldT,"
+//		+ "51MixedT/ENT-ENT/Inner/GoldE, MixedT/ENT-ENT/Inner/GoldN, MixedT/ENT-ENT/Inner/GoldT,"
+//		
+//		/***********************************************************/
+//			
+//		+"52PureT/T-T/Leaf/GoldE,PureT/T-T/Leaf/GoldN,PureT/T-T/Leaf/GoldT,"
+//		+ "53EBoundary/T-N/Leaf/GoldE,EBoundary/T-N/Leaf/GoldN,EBoundary/T-N/Leaf/GoldT, "
+//		+ "54EUndecidable/T-E/Leaf/GoldE, EUndecidable/T-E/Leaf/GoldN,EUndecidable/T-E/Leaf/GoldT,"
+//		+ "55MixedT/T-ET/Leaf/GoldE,MixedT/T-ET/Leaf/GoldN,MixedT/T-ET/Leaf/GoldT,"
+//		+ "56EUndecidable/T-EN/Leaf/GoldE,EUndecidable/T-EN/Leaf/GoldN,EUndecidable/T-EN/Leaf/GoldT,"
+//		+ "57MixedT/T-NT/Leaf/GoldE,MixedT/T-NT/Leaf/GoldN,MixedT/T-NT/Leaf/GoldT,"	
+//		+ "58MixedT/T-ENT/Leaf/GoldE,MixedT/T-ENT/Leaf/GoldN,MixedT/T-ENT/Leaf/GoldT,"
+//		
+//		
+//		+"59EBoundary/N-T/Leaf/GoldE, EBoundary/N-T/Leaf/GoldN,EBoundary/N-T/Leaf/GoldT, "
+//		+ "60PureN/N-N/Leaf/GoldE, PureN/N-N/Leaf/GoldN, PureN/N-N/Leaf/GoldT,"
+//		+ "61EUndecidable/N-E/Leaf/GoldE, EUndecidable/N-E/Leaf/GoldN, EUndecidable/N-E/Leaf/GoldT,"
+//		+ "62EUndecidable/N-ET/Leaf/GoldE, EUndecidable/N-ET/Leaf/GoldN, EUndecidable/N-ET/Leaf/GoldT,"
+//		+ "63MixedN/N-EN/Leaf/GoldE, MixedN/N-EN/Leaf/GoldN, MixedN/N-EN/Leaf/GoldT,"
+//		+ "64MixedN/N-NT/Leaf/GoldE, MixedN/N-NT/Leaf/GoldN, MixedN/N-NT/Leaf/GoldT,"			
+//		+ "65MixedN/N-ENT/Leaf/GoldE, MixedN/N-ENT/Leaf/GoldN, MixedN/N-ENT/Leaf/GoldT,"
+//
+//
+//		+"66EUndecidable/E-T/Leaf/GoldE, EUndecidable/E-T/Leaf/GoldN,EUndecidable/E-T/Leaf/GoldT, "
+//		+ "67EUndecidable/E-N/Leaf/GoldE, EUndecidable/E-N/Leaf/GoldN, EUndecidable/E-N/Leaf/GoldT,"
+//		+ "68EUndecidable/E-E/Leaf/GoldE, EUndecidable/E-E/Leaf/GoldN, EUndecidable/E-E/Leaf/GoldT,"
+//		+ "69EUndecidable/E-ET/Leaf/GoldE, EUndecidable/E-ET/Leaf/GoldN, EUndecidable/E-ET/Leaf/GoldT,"
+//		+ "70EUndecidable/E-EN/Leaf/GoldE, EUndecidable/E-EN/Leaf/GoldN, EUndecidable/E-EN/Leaf/GoldT,"
+//		+ "71EUndecidable/E-NT/Leaf/GoldE, EUndecidable/E-NT/Leaf/GoldN, EUndecidable/E-NT/Leaf/GoldT,"
+//		+ "72EUndecidable/E-ENT/Leaf/GoldE, EUndecidable/E-ENT/Leaf/GoldN, EUndecidable/E-ENT/Leaf/GoldT,"
+//		
+//		
+//		+"73MixedT/ET-T/Leaf/GoldE, MixedT/ET-T/Leaf/GoldN,MixedT/ET-T/Leaf/GoldT, "
+//		+ "74EUndecidable/ET-N/Leaf/GoldE, EUndecidable/ET-N/Leaf/GoldN, EUndecidable/ET-N/Leaf/GoldT,"
+//		+ "75EUndecidable/ET-E/Leaf/GoldE, EUndecidable/ET-E/Leaf/GoldN, EUndecidable/ET-E/Leaf/GoldT,"
+//		+ "76MixedT/ET-ET/Leaf/GoldE, MixedT/ET-ET/Leaf/GoldN, MixedT/ET-ET/Leaf/GoldT,"
+//		+ "77EUndecidable/ET-EN/Leaf/GoldE, EUndecidable/ET-EN/Leaf/GoldN, EUndecidable/ET-EN/Leaf/GoldT,"
+//		+ "78MixedT/ET-NT/Leaf/GoldE, MixedT/ET-NT/Leaf/GoldN, MixedT/ET-NT/Leaf/GoldT,"							
+//		+ "79MixedT/ET-ENT/Leaf/GoldE, MixedT/ET-ENT/Leaf/GoldN, MixedT/ET-ENT/Leaf/GoldT,"
+//		
+//		
+//		+ "80MixedT/NT-T/Leaf/GoldE, MixedT/NT-T/Leaf/GoldN,MixedT/NT-T/Leaf/GoldT, "
+//		+ "81MixedN/NT-N/Leaf/GoldE, MixedN/NT-N/Leaf/GoldN, MixedN/NT-N/Leaf/GoldT,"
+//		+ "82EUndecidable/NT-E/Leaf/GoldE, EUndecidable/NT-E/Leaf/GoldN, EUndecidable/NT-E/Leaf/GoldT,"
+//		+ "83MixedT/NT-ET/Leaf/GoldE, MixedT/NT-ET/Leaf/GoldN, MixedT/NT-ET/Leaf/GoldT,"
+//		+ "84EUndecidable/NT-EN/Leaf/GoldE, EUndecidable/NT-EN/Leaf/GoldN, EUndecidable/NT-EN/Leaf/GoldT,"
+//		+ "85MixedT/NT-NT/Leaf/GoldE, MixedT/NT-NT/Leaf/GoldN, MixedT/NT-NT/Leaf/GoldT,"			
+//		+ "86MixedT/NT-ENT/Leaf/GoldE, MixedT/NT-ENT/Leaf/GoldN, MixedT/NT-ENT/Leaf/GoldT,"
+//		
+//	
+//		
+//		+ "87EUndecidable/EN-T/Leaf/GoldE, EUndecidable/EN-T/Leaf/GoldN,EUndecidable/EN-T/Leaf/GoldT, "
+//		+ "88MixedN/EN-N/Leaf/GoldE, MixedN/EN-N/Leaf/GoldN, MixedN/EN-N/Leaf/GoldT,"
+//		+ "89EUndecidable/EN-E/Leaf/GoldE, EUndecidable/EN-E/Leaf/GoldN, EUndecidable/EN-E/Leaf/GoldT,"
+//		+ "90EUndecidable/EN-ET/Leaf/GoldE, EUndecidable/EN-ET/Leaf/GoldN, EUndecidable/EN-ET/Leaf/GoldT,"
+//		+ "91EUndecidable/EN-EN/Leaf/GoldE, EUndecidable/EN-EN/Leaf/GoldN, EUndecidable/EN-EN/Leaf/GoldT,"
+//		+ "92EUndecidable/EN-NT/Leaf/GoldE, EUndecidable/EN-NT/Leaf/GoldN, EUndecidable/EN-NT/Leaf/GoldT,"	
+//		+ "93EUndecidable/EN-ENT/Leaf/GoldE, EUndecidable/EN-ENT/Leaf/GoldN, EUndecidable/EN-ENT/Leaf/GoldT,"
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//+ "94MixedT/ENT-T/Leaf/GoldE, MixedT/ENT-T/Leaf/GoldN,MixedT/ENT-T/Leaf/GoldT, "
+//+ "95MixedN/ENT-N/Leaf/GoldE, MixedN/ENT-N/Leaf/GoldN, MixedN/ENT-N/Leaf/GoldT,"
+//+ "96EUndecidable/ENT-E/Leaf/GoldE, EUndecidable/ENT-E/Leaf/GoldN, EUndecidable/ENT-E/Leaf/GoldT,"
+//+ "97MixedT/ENT-ET/Leaf/GoldE, MixedT/ENT-ET/Leaf/GoldN, MixedT/ENT-ET/Leaf/GoldT,"
+//+ "98EUndecidable/ENT-EN/Leaf/GoldE, EUndecidable/ENT-EN/Leaf/GoldN, EUndecidable/ENT-EN/Leaf/GoldT,"
+//+ "99MixedT/ENT-NT/Leaf/GoldE,MixedT/ENT-NT/Leaf/GoldN, MixedT/ENT-NT/Leaf/GoldT,"
+//+ "100MixedT/ENT-ENT/Leaf/GoldE, MixedT/ENT-ENT/Leaf/GoldN, MixedT/ENT-ENT/Leaf/GoldT,"
+//		
+//		/***********************************************************/
+//
+//		+"101PureT/T-T/Root/GoldE,PureT/T-T/Root/GoldN,PureT/T-T/Root/GoldT,"
+//		+ "102EBoundary/T-N/Root/GoldE,EBoundary/T-N/Root/GoldN,EBoundary/T-N/Root/GoldT, "
+//		+ "103EUndecidable/T-E/Root/GoldE, EUndecidable/T-E/Root/GoldN,EUndecidable/T-E/Root/GoldT,"
+//		+ "104MixedT/T-ET/Root/GoldE,MixedT/T-ET/Root/GoldN,MixedT/T-ET/Root/GoldT,"
+//		+ "105EUndecidable/T-EN/Root/GoldE,EUndecidable/T-EN/Root/GoldN,EUndecidable/T-EN/Root/GoldT,"
+//		+ "106MixedT/T-NT/Root/GoldE,MixedT/T-NT/Root/GoldN,MixedT/T-NT/Root/GoldT,"	
+//		+ "107MixedT/T-ENT/Root/GoldE,MixedT/T-ENT/Root/GoldN,MixedT/T-ENT/Root/GoldT,"
+//		
+//		
+//		+"108EBoundary/N-T/Root/GoldE, EBoundary/N-T/Root/GoldN,EBoundary/N-T/Root/GoldT, "
+//		+ "109PureN/N-N/Root/GoldE, PureN/N-N/Root/GoldN, PureN/N-N/Root/GoldT,"
+//		+ "110EUndecidable/N-E/Root/GoldE, EUndecidable/N-E/Root/GoldN, EUndecidable/N-E/Root/GoldT,"
+//		+ "111EUndecidable/N-ET/Root/GoldE, EUndecidable/N-ET/Root/GoldN, EUndecidable/N-ET/Root/GoldT,"
+//		+ "112MixedN/N-EN/Root/GoldE, MixedN/N-EN/Root/GoldN, MixedN/N-EN/Root/GoldT,"
+//		+ "113MixedN/N-NT/Root/GoldE, MixedN/N-NT/Root/GoldN, MixedN/N-NT/Root/GoldT,"			
+//		+ "114MixedN/N-ENT/Root/GoldE, MixedN/N-ENT/Root/GoldN, MixedN/N-ENT/Root/GoldT,"
+//
+//
+//		+"115EUndecidable/E-T/Root/GoldE, EUndecidable/E-T/Root/GoldN,EUndecidable/E-T/Root/GoldT, "
+//		+ "116EUndecidable/E-N/Root/GoldE, EUndecidable/E-N/Root/GoldN, EUndecidable/E-N/Root/GoldT,"
+//		+ "117EUndecidable/E-E/Root/GoldE, EUndecidable/E-E/Root/GoldN, EUndecidable/E-E/Root/GoldT,"
+//		+ "118EUndecidable/E-ET/Root/GoldE, EUndecidable/E-ET/Root/GoldN, EUndecidable/E-ET/Root/GoldT,"
+//		+ "119EUndecidable/E-EN/Root/GoldE, EUndecidable/E-EN/Root/GoldN, EUndecidable/E-EN/Root/GoldT,"
+//		+ "120EUndecidable/E-NT/Root/GoldE, EUndecidable/E-NT/Root/GoldN, EUndecidable/E-NT/Root/GoldT,"
+//		+ "121EUndecidable/E-ENT/Root/GoldE, EUndecidable/E-ENT/Root/GoldN, EUndecidable/E-ENT/Root/GoldT,"
+//		
+//		
+//	+"122MixedT/ET-T/Root/GoldE, MixedT/ET-T/Root/GoldN,MixedT/ET-T/Root/GoldT, "
+//	+ "123EUndecidable/ET-N/Root/GoldE, EUndecidable/ET-N/Root/GoldN, EUndecidable/ET-N/Root/GoldT,"
+//	+ "124EUndecidable/ET-E/Root/GoldE, EUndecidable/ET-E/Root/GoldN, EUndecidable/ET-E/Root/GoldT,"
+//	+ "125MixedT/ET-ET/Root/GoldE, MixedT/ET-ET/Root/GoldN, MixedT/ET-ET/Root/GoldT,"
+//	+ "126EUndecidable/ET-EN/Root/GoldE, EUndecidable/ET-EN/Root/GoldN, EUndecidable/ET-EN/Root/GoldT,"
+//	+ "127MixedT/ET-NT/Root/GoldE, MixedT/ET-NT/Root/GoldN, MixedT/ET-NT/Root/GoldT,"							
+//	+ "128MixedT/ET-ENT/Root/GoldE, MixedT/ET-ENT/Root/GoldN, MixedT/ET-ENT/Root/GoldT,"
+//		
+//		+ "129MixedT/NT-T/Root/GoldE, MixedT/NT-T/Root/GoldN,MixedT/NT-T/Root/GoldT, "
+//		+ "130MixedN/NT-N/Root/GoldE, MixedN/NT-N/Root/GoldN, MixedN/NT-N/Root/GoldT,"
+//		+ "131EUndecidable/NT-E/Root/GoldE, EUndecidable/NT-E/Root/GoldN, EUndecidable/NT-E/Root/GoldT,"
+//		+ "132MixedT/NT-ET/Root/GoldE, MixedT/NT-ET/Root/GoldN, MixedT/NT-ET/Root/GoldT,"
+//		+ "133EUndecidable/NT-EN/Root/GoldE, EUndecidable/NT-EN/Root/GoldN, EUndecidable/NT-EN/Root/GoldT,"
+//		+ "134MixedT/NT-NT/Root/GoldE, MixedT/NT-NT/Root/GoldN, MixedT/NT-NT/Root/GoldT,"			
+//		+ "135MixedT/NT-ENT/Root/GoldE, MixedT/NT-ENT/Root/GoldN, MixedT/NT-ENT/Root/GoldT,"
+//		
+//		
+//		
+//		
+//		+ "136EUndecidable/EN-T/Root/GoldE, EUndecidable/EN-T/Root/GoldN,EUndecidable/EN-T/Root/GoldT, "
+//		+ "137MixedN/EN-N/Root/GoldE, MixedN/EN-N/Root/GoldN, MixedN/EN-N/Root/GoldT,"
+//		+ "138EUndecidable/EN-E/Root/GoldE, EUndecidable/EN-E/Root/GoldN, EUndecidable/EN-E/Root/GoldT,"
+//		+ "139EUndecidable/EN-ET/Root/GoldE, EUndecidable/EN-ET/Root/GoldN, EUndecidable/EN-ET/Root/GoldT,"
+//		+ "140EUndecidable/EN-EN/Root/GoldE, EUndecidable/EN-EN/Root/GoldN, EUndecidable/EN-EN/Root/GoldT,"
+//		+ "141EUndecidable/EN-NT/Root/GoldE, EUndecidable/EN-NT/Root/GoldN, EUndecidable/EN-NT/Root/GoldT,"	
+//		+ "142EUndecidable/EN-ENT/Root/GoldE, EUndecidable/EN-ENT/Root/GoldN, EUndecidable/EN-ENT/Root/GoldT,"
+//		
+//		
+//		
+//		
+//		
+//		
+//		
+//+ "143MixedT/ENT-T/Root/GoldE, MixedT/ENT-T/Root/GoldN,MixedT/ENT-T/Root/GoldT, "
+//+ "144MixedN/ENT-N/Root/GoldE, MixedN/ENT-N/Root/GoldN, MixedN/ENT-N/Root/GoldT,"
+//+ "145EUndecidable/ENT-E/Root/GoldE, EUndecidable/ENT-E/Root/GoldN, EUndecidable/ENT-E/Root/GoldT,"
+//+ "146MixedT/ENT-ET/Root/GoldE, MixedT/ENT-ET/Root/GoldN, MixedT/ENT-ET/Root/GoldT,"
+//+ "147EUndecidable/ENT-EN/Root/GoldE, EUndecidable/ENT-EN/Root/GoldN, EUndecidable/ENT-EN/Root/GoldT,"
+//+ "148MixedT/ENT-NT/Root/GoldE,MixedT/ENT-NT/Root/GoldN, MixedT/ENT-NT/Root/GoldT,"
+//+ "149MixedT/ENT-ENT/Root/GoldE, MixedT/ENT-ENT/Root/GoldN, MixedT/ENT-ENT/Root/GoldT,"
+//			
+//			
+//			);
+//
+//
+//mybufferWriter.newLine();
 	}
 	
 
