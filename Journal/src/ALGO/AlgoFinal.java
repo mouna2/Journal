@@ -332,20 +332,19 @@ public class AlgoFinal  {
 		if(AlgoFinal.NoSeeding ) {
 					if(ProgramName.equals("chess")) {
 						TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
-//						LogInfo.writeHeaders( LogInfo.bwchessRunResultsWriter);
+						LogInfo.updateRunResultsHeaders(MethodTracesList, 0, 0, "",LogInfo.bwchessRunResultsWriter);
 						LogInfo.updateRunResults(MethodTracesList, 0, 0, "NA", LogInfo.bwchessRunResultsWriter);
-
 					}else if(ProgramName.equals("gantt")) {
 						TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
-						LogInfo.writeHeaders( LogInfo.bwGanttRunResultsWriter);
+						LogInfo.updateRunResultsHeaders(MethodTracesList, 0, 0, "",LogInfo.bwGanttRunResultsWriter);
 						LogInfo.updateRunResults(MethodTracesList, 0, 0, "NA", LogInfo.bwGanttRunResultsWriter);
 					}else if(ProgramName.equals("itrust")) {
 						TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
-						LogInfo.writeHeaders( LogInfo.bwiTrustRunResultsWriter);
+						LogInfo.updateRunResultsHeaders(MethodTracesList, 0, 0, "",LogInfo.bwiTrustRunResultsWriter);
 						LogInfo.updateRunResults(MethodTracesList, 0, 0, "NA", LogInfo.bwiTrustRunResultsWriter);
 					}else if(ProgramName.equals("jhotdraw")) {
 						TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
-						LogInfo.writeHeaders( LogInfo.bwJHotDrawRunResultsWriter);
+						LogInfo.updateRunResultsHeaders(MethodTracesList, 0, 0, "",LogInfo.bwJHotDrawRunResultsWriter);
 						LogInfo.updateRunResults(MethodTracesList, 0, 0, "NA", LogInfo.bwJHotDrawRunResultsWriter);
 					}
 			
@@ -905,12 +904,12 @@ public class AlgoFinal  {
 		for(int i=0; i<10; i++) {
 			System.out.println("========================> RUN "+i);
 			
-			String ProgramName = "chess";
-			AlgoFinal frame = new AlgoFinal(
-					ProgramName, i);
-//			
-//						String ProgramName2 = "gantt";
-//						AlgoFinal frame = new AlgoFinal(ProgramName2, i);
+//			String ProgramName = "chess";
+//			AlgoFinal frame = new AlgoFinal(
+//					ProgramName, i);
+			
+						String ProgramName2 = "gantt";
+						AlgoFinal frame = new AlgoFinal(ProgramName2, i);
 			////			
 			////////			String ProgramName2 = "dummy";
 			////////			AlgoFinal	 frame = new AlgoFinal(ProgramName2, i);

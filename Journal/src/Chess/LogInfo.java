@@ -2273,13 +2273,7 @@ public class LogInfo {
 
 	
 	
-	if(AlgoFinal.NoSeeding) {
-		
-			mybufferWriter.close();
-		
-
 	
-}
 	}
 	private static LinkedHashMap<String, ENTGoldValues> reinitializeMatrix(
 			LinkedHashMap<String, ENTGoldValues> matrix) {
