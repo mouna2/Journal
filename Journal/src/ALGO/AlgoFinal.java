@@ -84,8 +84,8 @@ public class AlgoFinal  {
 	
 	
 	
-	public static boolean IncompletenessSeeding=true; 
-	public static boolean NoSeeding=false; 
+	public static boolean IncompletenessSeeding=false; 
+	public static boolean NoSeeding=true; 
 
 	public static boolean ExecutedCallsTechnique=false; 
 	public static boolean BasicTechnique=false; 
@@ -303,10 +303,7 @@ public class AlgoFinal  {
 		}
 		
 		
-		else if(AlgoFinal.NoSeeding==true) {
-			LogInfoHashMap=InitializeInputHashMapNoSeeding(MethodTracesList, LogInfoHashMap); 
-
-		}
+		
 
 
 		//TRACE MATRIX 
@@ -329,34 +326,38 @@ public class AlgoFinal  {
 //		while (MethodTrace.modified ) {
 //			System.out.println("iteration "+iteration);
 //			MethodTrace.modified = false;
-		if(AlgoFinal.NoSeeding ) {
+		
+		
+		else if(AlgoFinal.NoSeeding ) {
+			LogInfoHashMap=InitializeInputHashMapNoSeeding(MethodTracesList, LogInfoHashMap); 
+			
+			for(MethodTrace methodtrace: MethodTracesList) {
+				String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
+					methodtrace.UpdateCallersCallees(LogInfoHashMap, reqMethod);			
+		}
+			TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
+			LogInfo.ComputePrecisionAndRecallNONCUMULATIVE(methodtraces2HashMap,TotalPattern, ProgramName, CountPredictionValues, LogInfoHashMap);
+			
+			
 					if(ProgramName.equals("chess")) {
-						TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
 						LogInfo.updateRunResultsHeaders(MethodTracesList, 0, 0, "",LogInfo.bwchessRunResultsWriter);
-						LogInfo.updateRunResults(MethodTracesList, 0, 0, "NA", LogInfo.bwchessRunResultsWriter);
+						LogInfo.updateRunMethodResults(MethodTracesList, 0, 0, "NA", LogInfo.bwchessRunResultsWriter);
 					}else if(ProgramName.equals("gantt")) {
-						TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
 						LogInfo.updateRunResultsHeaders(MethodTracesList, 0, 0, "",LogInfo.bwGanttRunResultsWriter);
-						LogInfo.updateRunResults(MethodTracesList, 0, 0, "NA", LogInfo.bwGanttRunResultsWriter);
+						LogInfo.updateRunMethodResults(MethodTracesList, 0, 0, "NA", LogInfo.bwGanttRunResultsWriter);
 					}else if(ProgramName.equals("itrust")) {
-						TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
 						LogInfo.updateRunResultsHeaders(MethodTracesList, 0, 0, "",LogInfo.bwiTrustRunResultsWriter);
-						LogInfo.updateRunResults(MethodTracesList, 0, 0, "NA", LogInfo.bwiTrustRunResultsWriter);
+						LogInfo.updateRunMethodResults(MethodTracesList, 0, 0, "NA", LogInfo.bwiTrustRunResultsWriter);
 					}else if(ProgramName.equals("jhotdraw")) {
-						TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
 						LogInfo.updateRunResultsHeaders(MethodTracesList, 0, 0, "",LogInfo.bwJHotDrawRunResultsWriter);
-						LogInfo.updateRunResults(MethodTracesList, 0, 0, "NA", LogInfo.bwJHotDrawRunResultsWriter);
+						LogInfo.updateRunMethodResults(MethodTracesList, 0, 0, "NA", LogInfo.bwJHotDrawRunResultsWriter);
 					}
 			
 
 		}
 		
 
-		for(MethodTrace methodtrace: MethodTracesList) {
-			String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
-				methodtrace.UpdateCallersCallees(LogInfoHashMap, reqMethod);			
-	}
-		LogInfo.ComputePrecisionAndRecallNONCUMULATIVE(methodtraces2HashMap,TotalPattern, ProgramName, CountPredictionValues, LogInfoHashMap);
+		
 
 //		LogInfo.updateResultsLog(TotalPattern, CountPredictionValues, ProgramName, "OWNER CLASS PRED", "owner class prediction values", "INDIVIDUAL");
 
@@ -709,12 +710,14 @@ public class AlgoFinal  {
 					
 				}
 			 }
-			 
 			
+
+			LogInfo.ComputePrecisionAndRecallNONCUMULATIVE(methodtraces2HashMap,TotalPattern, ProgramName,  new PredictionValues(), LogInfoHashMap);
+
 			 TraceValidator.MakePredictions(methodTracesHashmapValues, LogInfoHashMap); 
 			 int ErrorSeedingPercentage=AlgoFinal.ErrorSeedingPercentages.get(runNumber+"-"+ requirement.ID); 
 			 String requirementID= requirement.ID+""; 
-			 LogInfo.updateRunResults(methodTracesHashmapValues, runNumber, ErrorSeedingPercentage, requirementID,bufferedWriter);
+			 LogInfo.updateRunMethodResults(methodTracesHashmapValues, runNumber, ErrorSeedingPercentage, requirementID,bufferedWriter);
 
 			 System.out.println(k);
 			 k++; 
@@ -901,15 +904,15 @@ public class AlgoFinal  {
 	public static void main(String[] args) throws Exception {
 
 		
-		for(int i=0; i<10; i++) {
+		for(int i=0; i<1; i++) {
 			System.out.println("========================> RUN "+i);
 			
 //			String ProgramName = "chess";
 //			AlgoFinal frame = new AlgoFinal(
 //					ProgramName, i);
-			
-						String ProgramName2 = "gantt";
-						AlgoFinal frame = new AlgoFinal(ProgramName2, i);
+//			
+//						String ProgramName2 = "gantt";
+//						AlgoFinal frame = new AlgoFinal(ProgramName2, i);
 			////			
 			////////			String ProgramName2 = "dummy";
 			////////			AlgoFinal	 frame = new AlgoFinal(ProgramName2, i);
@@ -919,8 +922,8 @@ public class AlgoFinal  {
 //			
 //							 //ooo
 ////							 
-//						String ProgramName4 = "jhotdraw";
-//						AlgoFinal	frame = new AlgoFinal(ProgramName4, i);
+						String ProgramName4 = "jhotdraw";
+						AlgoFinal	frame = new AlgoFinal(ProgramName4, i);
 
 		}
 	}

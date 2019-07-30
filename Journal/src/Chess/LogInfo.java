@@ -53,7 +53,9 @@ public class LogInfo {
 
 	String SubjectGold; 
 	public String PredictionSummary=""; 
-	public String GoldSummary=""; 
+	public String MethodGoldSummary=""; 
+	public String ClassGeneralizedPredictionSummary=""; 
+
 	List<String> IterationValues= new ArrayList<String>();
 	boolean SubjectDeveloperEqualityFlag; 
 	String Reason; 
@@ -78,6 +80,12 @@ public class LogInfo {
 	List<String> CalleesCalleesOwners; 
 	
 	
+	public String getClassGoldSummary() {
+		return ClassGeneralizedPredictionSummary;
+	}
+	public void setClassGoldSummary(String classGoldSummary) {
+		ClassGeneralizedPredictionSummary = classGoldSummary;
+	}
 	List<String> Callees; 
 	List<String> CalleesPredictions; 
 	List<String> CalleesOwners; 
@@ -1075,7 +1083,8 @@ public class LogInfo {
 
 				+","+PrecisionRecall	
 				+","+PredictionSummary	
-				+","+GoldSummary
+				+","+MethodGoldSummary
+				+","+ClassGeneralizedPredictionSummary
 
 		+","+	toString2(IterationValues); 
 //		return MethodID+","+MethodName+","+RequirementID+","+RequirementName+","+ClassID+","+ClassName+","+TraceValue+","+TraceClassOldValue+","+TraceClassNewValue+","+
@@ -1432,7 +1441,8 @@ public class LogInfo {
 						
 						) {
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().PredictionValue);
-					logInfoHashMap.get(mykey).GoldSummary=methodTrace.getGold().trim()+"/"+methodTrace.getPatternAndType(); 
+					logInfoHashMap.get(mykey).MethodGoldSummary=methodTrace.getGold().trim()+"/"+methodTrace.getPatternAndType(); 
+					logInfoHashMap.get(mykey).ClassGeneralizedPredictionSummary=methodTrace.getClassPredictionGeneralized().trim()+"/"+methodTrace.getPatternAndType(); 
 
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
@@ -1449,8 +1459,12 @@ public class LogInfo {
 				if (methodTrace.getClassLevelGold() != null && methodTrace.getPrediction() != null 
 //						&& methodTrace.isTraceSet()
 					) {
+//					String Result = Pattern.ComparePredictionToGold(methodTrace.getClassLevelGold(),methodTrace.getClassPredictionGeneralized().trim());
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().PredictionValue);
-					logInfoHashMap.get(mykey).GoldSummary=methodTrace.getGold().trim()+"/"+methodTrace.getPatternAndType(); 
+
+					logInfoHashMap.get(mykey).MethodGoldSummary=methodTrace.getGold().trim()+"/"+methodTrace.getPatternAndType(); 
+					logInfoHashMap.get(mykey).ClassGeneralizedPredictionSummary=methodTrace.getClassPredictionGeneralized().trim()+"/"+methodTrace.getPatternAndType(); 
+
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
 					
@@ -1465,13 +1479,14 @@ public class LogInfo {
 			
 			
 			
-			else if(ProgramName.equals("chess")|| ProgramName.equals("itrust") ) {
+			else if((ProgramName.equals("chess")|| ProgramName.equals("itrust") )&& AlgoFinal.MethodLevelTraces==true) {
 				
 				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
 //						&& methodTrace.isTraceSet()
 						) {
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().PredictionValue);
-					logInfoHashMap.get(mykey).GoldSummary=methodTrace.getGold().trim()+"/"+methodTrace.getPatternAndType(); 
+					logInfoHashMap.get(mykey).MethodGoldSummary=methodTrace.getGold().trim()+"/"+methodTrace.getPatternAndType(); 
+					logInfoHashMap.get(mykey).ClassGeneralizedPredictionSummary=methodTrace.getClassPredictionGeneralized().trim()+"/"+methodTrace.getPatternAndType(); 
 
 					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
 					Pattern.UpdateCounters(Result, Pattern);
@@ -1484,7 +1499,26 @@ public class LogInfo {
 
 			}
 
-		
+			else if((ProgramName.equals("chess")|| ProgramName.equals("itrust") )&& AlgoFinal.ClassLevelTraces==true) {
+				
+				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
+						) {
+//					String Result = Pattern.ComparePredictionToGold(methodTrace.getClassLevelGold(),methodTrace.getClassPredictionGeneralized().trim());
+					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().PredictionValue);
+
+					logInfoHashMap.get(mykey).MethodGoldSummary=methodTrace.getGold().trim()+"/"+methodTrace.getPatternAndType(); 
+					logInfoHashMap.get(mykey).ClassGeneralizedPredictionSummary=methodTrace.getClassPredictionGeneralized().trim()+"/"+methodTrace.getPatternAndType(); 
+
+					logInfoHashMap.get(mykey).setPrecisionRecall(Result);
+					Pattern.UpdateCounters(Result, Pattern);
+					
+					ownerClassPredictionValues.ComputePredictionValues(ownerClassPredictionValues, methodTrace.getPrediction().PredictionValue.trim());
+					UpdateCategoryCounters(Result, methodTrace, Pattern, ownerClassPredictionValues, mykey, logInfoHashMap); 
+
+
+				}
+
+			}
 
 //			System.out.println(logInfoHashMap.get(mykey).PredictionSummaryPrecisionRecall);
 
@@ -1790,7 +1824,8 @@ public class LogInfo {
 
 					+ "PrecisionRecall,"
 					+ "PredictionSummary,"
-					+ "GoldSummary,"
+					+ "MethodGoldSummary,"
+					+ "ClassGeneralizedPredictionSummary,"
 
 					+"IterationValues"
 					);
@@ -1828,7 +1863,8 @@ public class LogInfo {
 					+ "PrecisionRecall,"
 					
 					+ "PredictionSummary,"
-					+ "GoldSummary,"
+					+ "MethodGoldSummary,"
+					+ "ClassGeneralizedPredictionSummary,"
 
 					+"IterationValues"
 					);
@@ -1889,7 +1925,8 @@ public class LogInfo {
 					+ "PrecisionRecall,"
 					
 					+ "PredictionSummary,"
-					+ "GoldSummary,"
+					+ "MethodGoldSummary,"
+					+ "ClassGeneralizedPredictionSummary,"
 
 					+"IterationValues"
 					);
@@ -1926,7 +1963,8 @@ public class LogInfo {
 					+ "PrecisionRecall,"
 					
 					+ "PredictionSummary,"
-					+ "GoldSummary,"
+					+ "MethodGoldSummary,"
+					+ "ClassGeneralizedPredictionSummary,"
 
 					+"IterationValues"
 					);
@@ -2188,7 +2226,7 @@ public class LogInfo {
 	}
 	
 	
-	public static void updateRunResults(List<MethodTrace> methodtraces, int runNumber, int errorSeedingPercentage, String requirementID, BufferedWriter mybufferWriter) throws IOException {
+	public static void updateRunMethodResults(List<MethodTrace> methodtraces, int runNumber, int errorSeedingPercentage, String requirementID, BufferedWriter mybufferWriter) throws IOException {
 
 			ALGO.Prediction.Matrix= reinitializeMatrix(ALGO.Prediction.Matrix); 
 
@@ -2248,6 +2286,65 @@ public class LogInfo {
 	}
 	
 	
+	
+	
+	public static void updateRunClassResults(List<MethodTrace> methodtraces, int runNumber, int errorSeedingPercentage, String requirementID, BufferedWriter mybufferWriter) throws IOException {
+
+		ALGO.Prediction.Matrix= reinitializeMatrix(ALGO.Prediction.Matrix); 
+
+		for(MethodTrace methodTrace: methodtraces) {
+			String reqMethod = methodTrace.Requirement.ID+"-"+methodTrace.Method.ID; 
+			ENTGoldValues GoldValues=ALGO.Prediction.Matrix.get(methodTrace.getPatternAndType());  
+			
+				
+			
+			if(methodTrace.getClassLevelGold().equals("E")) {
+				int E=GoldValues.getE(); 
+				E=E+1; 
+				GoldValues.setE(E);
+				ALGO.Prediction.Matrix.put(methodTrace.getPatternAndType(),GoldValues);
+
+			}else if(methodTrace.getClassLevelGold().equals("N")) {
+				int N=GoldValues.getN(); 
+				N=N+1; 
+				GoldValues.setN(N);
+				ALGO.Prediction.Matrix.put(methodTrace.getPatternAndType(),GoldValues);
+
+			}else if(methodTrace.getClassLevelGold().equals("T")) {
+				int T=GoldValues.getT(); 
+				T=T+1; 
+				GoldValues.setT(T);
+				ALGO.Prediction.Matrix.put(methodTrace.getPatternAndType(),GoldValues);
+			}
+		}
+		
+//		String headers="Run#, %Seeding, Requirement, "; 
+		String line= runNumber+","+AlgoFinal.ErrorSeedingPercentages.get(runNumber+"-"+requirementID)+","+requirementID+","; 
+		
+			
+		
+		for(String mykey: ALGO.Prediction.Matrix.keySet()) {
+//			headers=headers+mykey+"/GoldE"+","+mykey+"/GoldN"+","+mykey+"/GoldT"+","; 
+			line=line+ALGO.Prediction.Matrix.get(mykey).getE()+","+ALGO.Prediction.Matrix.get(mykey).getN()+","+ALGO.Prediction.Matrix.get(mykey).getT()+","; 
+			
+
+			}
+//		mybufferWriter.write(headers);
+//		mybufferWriter.newLine();
+		mybufferWriter.write(line);
+
+
+		mybufferWriter.newLine();
+
+	
+	
+	if(AlgoFinal.NoSeeding) {
+		
+			mybufferWriter.close();
+		
+
+	}
+}
 	public static void updateRunResultsHeaders(List<MethodTrace> methodtraces, int runNumber, int errorSeedingPercentage, String requirementID, BufferedWriter mybufferWriter) throws IOException {
 
 		ALGO.Prediction.Matrix= reinitializeMatrix(ALGO.Prediction.Matrix); 
