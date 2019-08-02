@@ -742,6 +742,12 @@ public class LogInfo {
 	public static BufferedWriter bwGANTTMethodCallsWriter =null; 
 	public static BufferedWriter bwiTrustMethodCallsWriter =null; 
 	public static BufferedWriter bwJHotDrawMethodCallsWriter =null; 
+	
+	public static BufferedWriter bwChessClassTracesWriter =null; 
+	public static BufferedWriter bwGanttClassTracesWriter =null; 
+	public static BufferedWriter bwiTrustClassTracesWriter =null; 
+	public static BufferedWriter bwJHotDrawClassTracesWriter =null; 
+
 
 	public static BufferedWriter bwfile1 = null;
 	public static BufferedWriter bwMatrix = null;
@@ -1270,7 +1276,10 @@ public class LogInfo {
 				FileOutputStream myFileOutputStream3 = new FileOutputStream(myfile3);
 				 bwchessMethodCallsWriter = new BufferedWriter(new OutputStreamWriter(myFileOutputStream3));
 //				System.out.println("yes");
-				
+				 
+				 bwChessClassTracesWriter = new BufferedWriter( new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\TraceClassesChess.txt", true));  //Set true for append mode
+
+					
 				
 //				File myfile4 = new File("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\RunResultsChess.txt");
 //				FileOutputStream myFileOutputStream4 = new FileOutputStream(myfile4);
@@ -1312,6 +1321,9 @@ public class LogInfo {
 				 
 				 bwGanttRunResultsWriter = new BufferedWriter(new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\RunResultsGantt.txt", true));
 
+				 bwGanttClassTracesWriter = new BufferedWriter( new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\TraceClassesGantt.txt", true));  //Set true for append mode
+
+				
 		}
 
 		if (ProgramName.equals("itrust")) {
@@ -1347,6 +1359,12 @@ public class LogInfo {
 			 
 			 bwiTrustRunResultsWriter = new BufferedWriter(new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\RunResultsiTrust.txt", true));
 
+			
+				 
+				 
+				 bwiTrustClassTracesWriter = new BufferedWriter( new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\TraceClassesiTrust.txt", true));  //Set true for append mode
+
+		
 		}
 
 		if (ProgramName.equals("jhotdraw")) {
@@ -1383,6 +1401,13 @@ public class LogInfo {
 				 
 				 bwJHotDrawRunResultsWriter = new BufferedWriter(new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\RunResultsJHotDraw.txt", true));
 
+				 
+			
+					 
+					 
+					 
+					 bwJHotDrawClassTracesWriter = new BufferedWriter( new FileWriter("C:\\Users\\mouna\\ownCloud\\Mouna Hammoudi\\dumps\\LatestLogFiles\\TraceClassesJHotDraw.txt", true));  //Set true for append mode
+
 				
 		}
 		// bwfile2.newLine();
@@ -1409,6 +1434,9 @@ public class LogInfo {
 	
 		for (String mykey : methodTraceHashMap.keySet()) {
 			MethodTrace methodTrace = methodTraceHashMap.get(mykey);
+			String reqClass=methodTrace.Requirement.ID+"-"+ methodTrace.Method.Owner.ID; 
+			ClassTrace2 entry = DatabaseInput.classTraceHashMap.get(reqClass); 
+
 			/**********************************************************************************************/
 			/**********************************************************************************************/
 			//GENERALIZE THE METHOD TO REQUIREMENT PREDICTIONS INTO CLASS TO REQUIREMENT PREDICTIONS 
@@ -1429,8 +1457,11 @@ public class LogInfo {
 			  }
 				/**********************************************************************************************/
 				/**********************************************************************************************/
-
-			  
+				ClassTrace2 myclasstrace = DatabaseInput.classTraceHashMap.get(methodTrace.Requirement.ID+"-"+methodTrace.Method.Owner.ID); 
+				myclasstrace.setClassPredictionGeneralization(methodTrace.getClassPredictionGeneralized().trim());
+				
+				entry.ClassPredictionGeneralization=methodTrace.getClassPredictionGeneralized().trim();
+				
 					
 			if((ProgramName.equals("gantt")|| ProgramName.equals("jhotdraw") )&& AlgoFinal.MethodLevelTraces==true){
 				
@@ -1503,6 +1534,7 @@ public class LogInfo {
 				
 				if (methodTrace.getGold() != null && methodTrace.getPrediction() != null 
 						) {
+//					System.out.println("here");
 //					String Result = Pattern.ComparePredictionToGold(methodTrace.getClassLevelGold(),methodTrace.getClassPredictionGeneralized().trim());
 					String Result = Pattern.ComparePredictionToGold(methodTrace.getGold().trim(),methodTrace.getPrediction().PredictionValue);
 
@@ -2870,6 +2902,79 @@ public class LogInfo {
 //
 //
 //mybufferWriter.newLine();
+	}
+	public static void ComputeTraceClasses(BufferedWriter bwClassTracesWriter, int errorSeedingPercentage, int runNumber, String requirementID) throws IOException {
+		// TODO Auto-generated method stub
+		int completenessBefore=0; 
+		int completenessAfter=0; 
+		int TP=0; 
+		int FP=0; 
+		int TN=0; 
+		int FN=0; 
+
+		for(String mykey: DatabaseInput.classTraceHashMap.keySet()) {
+//			System.out.println("here2");
+			MethodTrace methodTrace = AlgoFinal.methodtraces2HashMap.get(mykey);
+			String reqClass=methodTrace.Requirement.ID+"-"+ methodTrace.Method.Owner.ID; 
+			ClassTrace2 entry = DatabaseInput.classTraceHashMap.get(reqClass); 
+
+			/**********************************************************************************************/
+			/**********************************************************************************************/
+			//GENERALIZE THE METHOD TO REQUIREMENT PREDICTIONS INTO CLASS TO REQUIREMENT PREDICTIONS 
+				HashMap<String, MethodTrace> methodsList = DatabaseInput.OwnerClassestoMethodsHashMap.get(methodTrace.Requirement.ID+"-"+methodTrace.Method.Owner.ID); 
+			  Collection<MethodTrace> methodtraces = methodsList.values();
+			  if(methodtraces.stream().filter(o -> o.getPrediction().PredictionValue.equals("T")).findFirst().isPresent()) {
+				  methodTrace.setClassPredictionGeneralized("T");
+				  AlgoFinal.LogInfoHashMap.get(mykey).setPredictionGeneralization("T");
+			  
+			  }else if(methodtraces.stream().filter(o -> o.getPrediction().PredictionValue.equals("E")).findFirst().isPresent()) {
+				  methodTrace.setClassPredictionGeneralized("E");
+				  AlgoFinal.LogInfoHashMap.get(mykey).setPredictionGeneralization("E");
+
+			  }else {
+				  methodTrace.setClassPredictionGeneralized("N");
+				  AlgoFinal.LogInfoHashMap.get(mykey).setPredictionGeneralization("N");
+
+			  }
+				/**********************************************************************************************/
+				/**********************************************************************************************/
+				ClassTrace2 myclasstrace = DatabaseInput.classTraceHashMap.get(methodTrace.Requirement.ID+"-"+methodTrace.Method.Owner.ID); 
+				myclasstrace.setClassPredictionGeneralization(methodTrace.getClassPredictionGeneralized().trim());
+				
+				entry.ClassPredictionGeneralization=methodTrace.getClassPredictionGeneralized().trim();
+			
+			
+			 myclasstrace = DatabaseInput.classTraceHashMap.get(mykey); 
+			if(myclasstrace.getGoldfinal().equals("T")|| myclasstrace.getGoldfinal().equals("N")) {
+				completenessBefore++; 
+			}
+			if(myclasstrace.ClassPredictionGeneralization.equals("T")|| myclasstrace.ClassPredictionGeneralization.equals("N")) {
+				completenessAfter++; 
+			}
+			
+			if(myclasstrace.ClassPredictionGeneralization.equals("T") && myclasstrace.getGoldfinal().equals("T")) {
+				TP++; 
+			}else if(myclasstrace.ClassPredictionGeneralization.equals("N") && myclasstrace.getGoldfinal().equals("N")) {
+				TN++; 
+			}else if(myclasstrace.ClassPredictionGeneralization.equals("T") && myclasstrace.getGoldfinal().equals("N")) {
+				FP++; 
+			}else if(myclasstrace.ClassPredictionGeneralization.equals("N") && myclasstrace.getGoldfinal().equals("T")) {
+				FN++; 
+			}
+		}
+		
+		bwClassTracesWriter.write(runNumber+","+requirementID+","+errorSeedingPercentage+","+completenessBefore+","+completenessAfter+","+TP+","+TN+","+FP+","+FN);
+		bwClassTracesWriter.newLine();
+		System.out.println(" TP "+TP+" FP "+FP+" TN "+TN+" FN "+FN);
+		System.out.println("yes");
+		if(AlgoFinal.NoSeeding) {
+			bwClassTracesWriter.close();
+		}
+	}
+	public static void WriteHeadersTraceClasses(BufferedWriter bwClassTracesWriter) throws IOException {
+		// TODO Auto-generated method stub
+		bwClassTracesWriter.write("Run#, RequirementID, IncompletenessSeeding, CompletenessBefore, CompletenessAfter, TP, TN, FP, FN");
+		bwClassTracesWriter.newLine();
 	}
 	
 

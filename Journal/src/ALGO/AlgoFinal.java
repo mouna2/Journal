@@ -59,12 +59,14 @@ import mypackage.Requirement;
 public class AlgoFinal  {
 	static HashMap<String, List<MethodTrace>> TNMethodTracesHashMap = new HashMap<String, List<MethodTrace>> ();
 	public static HashMap<String, Integer> ErrorSeedingPercentages = new HashMap<String, Integer> ();
+	public static  LinkedHashMap<String, LogInfo> LogInfoHashMap = new LinkedHashMap<String, LogInfo>();
 
 	public static String ProgramName=""; 
 	public static boolean InheritanceFlag=true; 
 	public static boolean InterfaceImplementationFlag=true; 
 	public static boolean RecursiveDescent=false; 
 
+	
 
 
 	PredictionValues zeroPred= new PredictionValues(0,0,0); 
@@ -84,8 +86,8 @@ public class AlgoFinal  {
 	
 	
 	
-	public static boolean IncompletenessSeeding=false; 
-	public static boolean NoSeeding=true; 
+	public static boolean IncompletenessSeeding=true; 
+	public static boolean NoSeeding=false; 
 
 	public static boolean ExecutedCallsTechnique=false; 
 	public static boolean BasicTechnique=false; 
@@ -170,6 +172,11 @@ public class AlgoFinal  {
 	}
 
 	public AlgoFinal(String ProgramName, int i) throws Exception {
+		TNMethodTracesHashMap = new HashMap<String, List<MethodTrace>> ();
+		ErrorSeedingPercentages = new HashMap<String, Integer> ();
+		 LogInfoHashMap = new LinkedHashMap<String, LogInfo>();
+	    methodtraces2HashMap = new LinkedHashMap<String, MethodTrace>();
+		methodtraces2HashMap = new LinkedHashMap<String, MethodTrace>();
 
 		AlgoFinal.ProgramName=ProgramName; 
 		//		List<MethodTrace> methodtracesNew = InitializePredictionsHashMap2(methodtraces2);
@@ -235,7 +242,6 @@ public class AlgoFinal  {
 
 
 
-		LinkedHashMap<String, LogInfo> LogInfoHashMap = new LinkedHashMap<String, LogInfo>();
 
 
 		Collection<MethodTrace> MethodTracesHashmapValues = methodtraces2HashMap.values();
@@ -287,17 +293,17 @@ public class AlgoFinal  {
 		}
 		else if(AlgoFinal.IncompletenessSeeding==true) {
 							if(AlgoFinal.ProgramName.equals("chess")){
-								LogInfoHashMap=InitializeInputHashMapIncompleteness(MethodTracesList, LogInfoHashMap, i, LogInfo.bwchessRunResultsWriter);
+								LogInfoHashMap=InitializeInputHashMapIncompleteness(MethodTracesList, LogInfoHashMap, i, LogInfo.bwchessRunResultsWriter, LogInfo.bwChessClassTracesWriter);
 				
 							}else if(AlgoFinal.ProgramName.equals("gantt")) {
-								LogInfoHashMap=InitializeInputHashMapIncompleteness(MethodTracesList, LogInfoHashMap, i, LogInfo.bwGanttRunResultsWriter);
+								LogInfoHashMap=InitializeInputHashMapIncompleteness(MethodTracesList, LogInfoHashMap, i, LogInfo.bwGanttRunResultsWriter, LogInfo.bwGanttClassTracesWriter);
 				
 							}
 							else if(AlgoFinal.ProgramName.equals("itrust")) {
-								LogInfoHashMap=InitializeInputHashMapIncompleteness(MethodTracesList, LogInfoHashMap, i, LogInfo.bwiTrustRunResultsWriter);
+								LogInfoHashMap=InitializeInputHashMapIncompleteness(MethodTracesList, LogInfoHashMap, i, LogInfo.bwiTrustRunResultsWriter, LogInfo.bwiTrustClassTracesWriter);
 					
 							}else if(AlgoFinal.ProgramName.equals("jhotdraw")) {
-								LogInfoHashMap=InitializeInputHashMapIncompleteness(MethodTracesList, LogInfoHashMap, i, LogInfo.bwJHotDrawRunResultsWriter);
+								LogInfoHashMap=InitializeInputHashMapIncompleteness(MethodTracesList, LogInfoHashMap, i, LogInfo.bwJHotDrawRunResultsWriter, LogInfo.bwJHotDrawClassTracesWriter);
 					
 							}
 		}
@@ -338,17 +344,20 @@ public class AlgoFinal  {
 			TraceValidator.MakePredictions(MethodTracesList, LogInfoHashMap); 
 			LogInfo.ComputePrecisionAndRecallNONCUMULATIVE(methodtraces2HashMap,TotalPattern, ProgramName, CountPredictionValues, LogInfoHashMap);
 			
-			
 					if(ProgramName.equals("chess")) {
+						LogInfo.ComputeTraceClasses(LogInfo.bwChessClassTracesWriter, 0, 0, "0"); 
 						LogInfo.updateRunResultsHeaders(MethodTracesList, 0, 0, "",LogInfo.bwchessRunResultsWriter);
 						LogInfo.updateRunMethodResults(MethodTracesList, 0, 0, "NA", LogInfo.bwchessRunResultsWriter);
 					}else if(ProgramName.equals("gantt")) {
+						LogInfo.ComputeTraceClasses(LogInfo.bwGanttClassTracesWriter, 0, 0, "0"); 
 						LogInfo.updateRunResultsHeaders(MethodTracesList, 0, 0, "",LogInfo.bwGanttRunResultsWriter);
 						LogInfo.updateRunMethodResults(MethodTracesList, 0, 0, "NA", LogInfo.bwGanttRunResultsWriter);
 					}else if(ProgramName.equals("itrust")) {
+						LogInfo.ComputeTraceClasses(LogInfo.bwiTrustClassTracesWriter, 0, 0, "0"); 
 						LogInfo.updateRunResultsHeaders(MethodTracesList, 0, 0, "",LogInfo.bwiTrustRunResultsWriter);
 						LogInfo.updateRunMethodResults(MethodTracesList, 0, 0, "NA", LogInfo.bwiTrustRunResultsWriter);
 					}else if(ProgramName.equals("jhotdraw")) {
+						LogInfo.ComputeTraceClasses(LogInfo.bwJHotDrawClassTracesWriter, 0, 0, "0"); 
 						LogInfo.updateRunResultsHeaders(MethodTracesList, 0, 0, "",LogInfo.bwJHotDrawRunResultsWriter);
 						LogInfo.updateRunMethodResults(MethodTracesList, 0, 0, "NA", LogInfo.bwJHotDrawRunResultsWriter);
 					}
@@ -443,8 +452,8 @@ public class AlgoFinal  {
 
 
 
-
-		LogInfo.updateTableLog(ProgramName, MethodTracesHashmapValues, LogInfoHashMap);
+		//UNCOMMENT LATER 
+//		LogInfo.updateTableLog(ProgramName, MethodTracesHashmapValues, LogInfoHashMap);
 
 		System.out.println("YES6");
 		LogInfo.closeLogFile(); 
@@ -634,12 +643,13 @@ public class AlgoFinal  {
 //		return LogInfoHashMap;
 //	}
 	private LinkedHashMap<String, LogInfo> InitializeInputHashMapIncompleteness(
-			List<MethodTrace> methodTracesHashmapValues, LinkedHashMap<String, LogInfo> LogInfoHashMap, int runNumber, BufferedWriter bufferedWriter) throws Exception {
+			List<MethodTrace> methodTracesHashmapValues, LinkedHashMap<String, LogInfo> LogInfoHashMap, int runNumber, BufferedWriter bufferedWriter, BufferedWriter bwClassTracesWriter) throws Exception {
 		// TODO Auto-generated method stub
 
 		//CREATING A TRACE LIST OF METHODS THAT TRACE TO EACH REQUIREMENT
 		LogInfo.writeHeaders(bufferedWriter); 
 		for (MethodTrace methodtrace : methodTracesHashmapValues) {
+//			System.out.println("33333");
 			List<MethodTrace> TMethodTracesList = new ArrayList<MethodTrace>(); 
 
 			if(AlgoFinal.ClassLevelTraces) {
@@ -667,7 +677,8 @@ public class AlgoFinal  {
 
 
 		}
-			
+		LogInfo.updateRunResultsHeaders(methodTracesHashmapValues, runNumber, 0, "",bufferedWriter);
+	    LogInfo.WriteHeadersTraceClasses(bwClassTracesWriter);
 		
 		/***********************************************************************************/
 		/***********************************************************************************/
@@ -676,16 +687,18 @@ public class AlgoFinal  {
 		//SEEDING PROCESS 
 		
 		for(Requirement requirement: DatabaseInput.RequirementHashMap.values()) {
+//			System.out.println("44444");
+
 			Random r = new Random();
 			int ErrorSeedingPercentageTN=r.nextInt( (99 - 1) + 1) + 1;
 			AlgoFinal.ErrorSeedingPercentages.put(runNumber+"-"+ requirement.ID, ErrorSeedingPercentageTN); 
 
-		}
-
-		LogInfo.updateRunResultsHeaders(methodTracesHashmapValues, runNumber, 0, "",bufferedWriter);
-
-		for(Requirement requirement: DatabaseInput.RequirementHashMap.values()) {
-			Random r = new Random();
+//		}
+//
+//		
+//
+//		for(Requirement requirement: DatabaseInput.RequirementHashMap.values()) {
+//			Random r = new Random();
 			 List<MethodTrace> TNMethodTracesList = AlgoFinal.TNMethodTracesHashMap.get(requirement.ID+""); 
 			 if(TNMethodTracesList!=null) {
 				 int AmountofSeededTErrors= AlgoFinal.ErrorSeedingPercentages.get(runNumber+"-"+ requirement.ID)*TNMethodTracesList.size()/100; 
@@ -694,7 +707,7 @@ public class AlgoFinal  {
 					
 					int j=0; 
 					while(j<AmountofSeededTErrors) {
-						 
+
 						int low = 1;
 						int high = TNMethodTracesList.size()-1;
 						int randomTTrace = r.nextInt(high-low) + low;
@@ -712,19 +725,32 @@ public class AlgoFinal  {
 			 }
 			
 
-			LogInfo.ComputePrecisionAndRecallNONCUMULATIVE(methodtraces2HashMap,TotalPattern, ProgramName,  new PredictionValues(), LogInfoHashMap);
 
 			 TraceValidator.MakePredictions(methodTracesHashmapValues, LogInfoHashMap); 
+			 //UNCOMMENT LATER 
+//			 LogInfo.ComputePrecisionAndRecallNONCUMULATIVE(methodtraces2HashMap,TotalPattern, ProgramName,  new PredictionValues(), LogInfoHashMap);
+
 			 int ErrorSeedingPercentage=AlgoFinal.ErrorSeedingPercentages.get(runNumber+"-"+ requirement.ID); 
 			 String requirementID= requirement.ID+""; 
-			 LogInfo.updateRunMethodResults(methodTracesHashmapValues, runNumber, ErrorSeedingPercentage, requirementID,bufferedWriter);
+			 //UNCOMMENT LATER 
+			 
+//			 LogInfo.updateRunMethodResults(methodTracesHashmapValues, runNumber, ErrorSeedingPercentage, requirementID,bufferedWriter);
+			 LogInfo.ComputeTraceClasses(bwClassTracesWriter, ErrorSeedingPercentage, runNumber, requirement.ID); 
+			System.gc();
 
 			 System.out.println(k);
 			 k++; 
 		}
+		
+		 //UNCOMMENT LATER 
+
+//		for(MethodTrace methodtrace: methodTracesHashmapValues) {
+//			String reqMethod= methodtrace.Requirement.ID+"-"+methodtrace.Method.ID; 
+//				methodtrace.UpdateCallersCallees(LogInfoHashMap, reqMethod);			
+//	}
 	
 			bufferedWriter.close(); 
-
+			bwClassTracesWriter.close(); 
 		
 
 		
@@ -904,29 +930,35 @@ public class AlgoFinal  {
 	public static void main(String[] args) throws Exception {
 
 		
-		for(int i=0; i<1; i++) {
+		for(int i=0; i<10; i++) {
 			System.out.println("========================> RUN "+i);
+			
 			
 //			String ProgramName = "chess";
 //			AlgoFinal frame = new AlgoFinal(
 //					ProgramName, i);
-//			
+			
 //						String ProgramName2 = "gantt";
-//						AlgoFinal frame = new AlgoFinal(ProgramName2, i);
-			////			
-			////////			String ProgramName2 = "dummy";
-			////////			AlgoFinal	 frame = new AlgoFinal(ProgramName2, i);
-			//////	//
-//						String ProgramName3 = "itrust";
-//						AlgoFinal	 frame = new AlgoFinal(ProgramName3, i);
+//						AlgoFinal	 frame = new AlgoFinal(ProgramName2, i);
+//			//			
+			
+			String ProgramName3 = "itrust";
+			AlgoFinal	 frame = new AlgoFinal(ProgramName3, i);
+//			System.gc();
+//			//////			String ProgramName2 = "dummy";
+//			//////			AlgoFinal	 frame = new AlgoFinal(ProgramName2, i);
+//			////	//
+				
 //			
 //							 //ooo
 ////							 
-						String ProgramName4 = "jhotdraw";
-						AlgoFinal	frame = new AlgoFinal(ProgramName4, i);
+//						String ProgramName4 = "jhotdraw";
+//						AlgoFinal	frame = new AlgoFinal(ProgramName4, i);
 
 		}
 	}
+
+	
 
 
 

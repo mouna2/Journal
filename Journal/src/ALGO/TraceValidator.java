@@ -230,6 +230,7 @@ public class TraceValidator {
 				for (MethodTrace methodtrace : MethodTracesList) {
 
 	
+//					System.out.println("6666");
 
 //					
 

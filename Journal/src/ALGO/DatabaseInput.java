@@ -385,8 +385,9 @@ public static void CreateRequirementsHashMap(Connection conn) throws SQLExceptio
 			 myclasstrace.setRequirement(requirement);
 			 myclasstrace.DeveloperGold=myresults.getString("goldfinal"); 
 			 myclasstrace.SubjectGold=myresults.getString("SubjectGold"); 
+			 myclasstrace.setClassPredictionGeneralization("E");
 			 classTraceHashMap.put(requirement.ID.trim()+"-"+clazz.ID.trim(), myclasstrace); 
-			
+
 			
 		 }
 	

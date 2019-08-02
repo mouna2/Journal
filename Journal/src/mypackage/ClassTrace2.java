@@ -23,12 +23,21 @@ public class ClassTrace2 {
 		String trace6; 
 		String subject;
 		public String SubjectGold; 
-		
+		public String ClassPredictionGeneralization="E"; 
+
 		
 		
 	
 
 	
+		public String getClassPredictionGeneralization() {
+			return ClassPredictionGeneralization;
+		}
+
+		public void setClassPredictionGeneralization(String classPredictionGeneralization) {
+			ClassPredictionGeneralization = classPredictionGeneralization;
+		}
+
 		public String getGoldfinal() {
 			return DeveloperGold;
 		}
