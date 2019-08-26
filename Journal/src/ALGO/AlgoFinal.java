@@ -86,15 +86,15 @@ public class AlgoFinal  {
 	
 	
 	
-	public static boolean IncompletenessSeeding=true; 
-	public static boolean NoSeeding=false; 
+	public static boolean IncompletenessSeeding=false; 
+	public static boolean NoSeeding=true; 
 
 	public static boolean ExecutedCallsTechnique=false; 
 	public static boolean BasicTechnique=false; 
 	public static boolean XCallsTechnique=true; 
 
-	public static boolean ClassLevelTraces=true; 
-	public static boolean MethodLevelTraces=false; 
+	public static boolean ClassLevelTraces=false; 
+	public static boolean MethodLevelTraces=true; 
 
 	/**
 	 * Run a SQL command which does not return a recordset:
@@ -930,20 +930,20 @@ public class AlgoFinal  {
 	public static void main(String[] args) throws Exception {
 
 		
-		for(int i=0; i<10; i++) {
+		for(int i=0; i<1; i++) {
 			System.out.println("========================> RUN "+i);
 			
 			
-//			String ProgramName = "chess";
-//			AlgoFinal frame = new AlgoFinal(
-//					ProgramName, i);
+			String ProgramName = "chess";
+			AlgoFinal frame = new AlgoFinal(
+					ProgramName, i);
 			
-//						String ProgramName2 = "gantt";
-//						AlgoFinal	 frame = new AlgoFinal(ProgramName2, i);
+						String ProgramName2 = "gantt";
+							 frame = new AlgoFinal(ProgramName2, i);
 //			//			
-			
+//			
 			String ProgramName3 = "itrust";
-			AlgoFinal	 frame = new AlgoFinal(ProgramName3, i);
+				 frame = new AlgoFinal(ProgramName3, i);
 //			System.gc();
 //			//////			String ProgramName2 = "dummy";
 //			//////			AlgoFinal	 frame = new AlgoFinal(ProgramName2, i);
@@ -952,8 +952,8 @@ public class AlgoFinal  {
 //			
 //							 //ooo
 ////							 
-//						String ProgramName4 = "jhotdraw";
-//						AlgoFinal	frame = new AlgoFinal(ProgramName4, i);
+						String ProgramName4 = "jhotdraw";
+							frame = new AlgoFinal(ProgramName4, i);
 
 		}
 	}
